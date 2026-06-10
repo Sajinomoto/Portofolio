@@ -1,44 +1,55 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from 'vue';
 
 // Define greetings for 7 languages categorized by 4 times of day
 const greetingsByTime = {
-    morning: [
-        "Selamat Pagi", // Indonesian
-        "Good Morning", // English
-        "おはようございます", // Japanese (Ohayou Gozaimasu)
-        "좋은 아침", // Korean (Joeun Achim)
-        "صباح الخير", // Arabic (Sabah al-Khair)
-        "सुप्रभात", // Hindi (Suprabhat)
-        "早上好", // Mandarin (Zǎoshang Hǎo)
-    ],
-    siang: [
-        "Selamat Siang", // Indonesian
-        "Good Afternoon", // English
-        "こんにちは", // Japanese (Konnichiwa)
-        "안녕하세요", // Korean (Annyeonghaseyo)
-        "طاب يومك", // Arabic (Tab Yawmuk)
-        "नमस्कार", // Hindi (Namaskar)
-        "中午好", // Mandarin (Zhōngwǔ Hǎo)
-    ],
-    sore: [
-        "Selamat Sore", // Indonesian
-        "Good Afternoon", // English
-        "こんにちは", // Japanese (Konnichiwa)
-        "안녕하세요", // Korean (Annyeonghaseyo)
-        "مساء الخير", // Arabic (Masa al-Khair)
-        "नमस्कार", // Hindi (Namaskar)
-        "下午好", // Mandarin (Xiàwǔ Hǎo)
-    ],
-    malam: [
-        "Selamat Malam", // Indonesian
-        "Good Evening", // English
-        "こんばんは", // Japanese (Konbanwa)
-        "좋은 저녁입니다", // Korean (Joeun Ryeonyeok-imnida)
-        "مساء الخير", // Arabic (Masa al-Khair)
-        "शुभ संध्या", // Hindi (Shubh Sandhya)
-        "晚上好", // Mandarin (Wǎnshàng Hǎo)
-    ],
+  morning: [
+    'Selamat Pagi',         // Indonesian
+    'Good Morning',         // English
+    'おはようございます',       // Japanese (Ohayou Gozaimasu)
+    '좋은 아침',            // Korean (Joeun Achim)
+    'صباح الخير',           // Arabic (Sabah al-Khair)
+    'सुप्रभात',             // Hindi (Suprabhat)
+    '早上好'                // Mandarin (Zǎoshang Hǎo)
+  ],
+  siang: [
+    'Selamat Siang',        // Indonesian
+    'Good Afternoon',       // English
+    'こんにちは',            // Japanese (Konnichiwa)
+    '안녕하세요',            // Korean (Annyeonghaseyo)
+    'طاب يومك',             // Arabic (Tab Yawmuk)
+    'नमस्कार',             // Hindi (Namaskar)
+    '中午好'                // Mandarin (Zhōngwǔ Hǎo)
+  ],
+  sore: [
+    'Selamat Sore',         // Indonesian
+    'Good Afternoon',       // English
+    'こんにちは',            // Japanese (Konnichiwa)
+    '안녕하세요',            // Korean (Annyeonghaseyo)
+    'مساء الخير',           // Arabic (Masa al-Khair)
+    'नमस्कार',             // Hindi (Namaskar)
+    '下午好'                // Mandarin (Xiàwǔ Hǎo)
+  ],
+  malam: [
+    'Selamat Malam',        // Indonesian
+    'Good Evening',         // English
+    'こんばんは',            // Japanese (Konbanwa)
+    '좋은 저녁입니다',        // Korean (Joeun Ryeonyeok-imnida)
+    'مساء الخير',           // Arabic (Masa al-Khair)
+    'शुभ संध्या',           // Hindi (Shubh Sandhya)
+    '晚上好'                // Mandarin (Wǎnshàng Hǎo)
+  ]
+};
+
+// Define welcome sub-text translations
+const welcomeTexts = {
+  id: 'Selamat datang di portofolio saya!',
+  en: 'Welcome to my portfolio!',
+  ja: 'ポートフォリオへようこそ！',
+  ko: '포트폴리오에 오신 것을 환영합니다!',
+  ar: 'مرحباً بكم في معرض أعمالي!',
+  hi: 'मेरे पोर्टफोलियो में आपका स्वागत है!',
+  zh: '欢迎来到我的作品集！'
 };
 
 const langToIndex: Record<string, number> = {
@@ -53,6 +64,7 @@ const langToIndex: Record<string, number> = {
 
 const currentText = ref('');
 const isBlinking = ref(true);
+const systemLang = ref<'id' | 'en' | 'ja' | 'ko' | 'ar' | 'hi' | 'zh'>('en');
 let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
 onMounted(() => {
@@ -82,6 +94,12 @@ onMounted(() => {
   
   // Detect starting language index from system language
   const sysLang = navigator.language.split('-')[0];
+  if (sysLang in welcomeTexts) {
+    systemLang.value = sysLang as any;
+  } else {
+    systemLang.value = 'en';
+  }
+
   const startIndex = sysLang in langToIndex ? langToIndex[sysLang] : 1; // Default to English (1)
 
   // 2. Typewriter state variables
@@ -90,83 +108,76 @@ onMounted(() => {
   let isDeleting = false;
   let delay = 100;
 
-    function tick() {
-        const fullWord = greetings[wordIndex];
+  function tick() {
+    const fullWord = greetings[wordIndex];
 
-        if (isDeleting) {
-            // Deleting phase
-            currentText.value = fullWord.substring(0, charIndex - 1);
-            charIndex--;
-            delay = 40; // Erase faster than typing
-            isBlinking.value = false;
-        } else {
-            // Typing phase
-            currentText.value = fullWord.substring(0, charIndex + 1);
-            charIndex++;
-            // Natural variable typing speed
-            delay = 100 + Math.random() * 80;
-            isBlinking.value = false;
-        }
-
-        if (!isDeleting && charIndex === fullWord.length) {
-            // Fully typed: pause and start blinking caret
-            isDeleting = true;
-            isBlinking.value = true;
-            delay = 2000; // Pause for 2 seconds
-        } else if (isDeleting && charIndex === 0) {
-            // Fully erased: pause slightly, then switch to next word
-            isDeleting = false;
-            wordIndex = (wordIndex + 1) % greetings.length;
-            isBlinking.value = true;
-            delay = 500; // Short pause before next word
-        }
-
-        timeoutId = setTimeout(tick, delay);
+    if (isDeleting) {
+      // Deleting phase
+      currentText.value = fullWord.substring(0, charIndex - 1);
+      charIndex--;
+      delay = 40; // Erase faster than typing
+      isBlinking.value = false;
+    } else {
+      // Typing phase
+      currentText.value = fullWord.substring(0, charIndex + 1);
+      charIndex++;
+      // Natural variable typing speed
+      delay = 100 + Math.random() * 80;
+      isBlinking.value = false;
     }
 
-    // Start the typing cycle
-    tick();
+    if (!isDeleting && charIndex === fullWord.length) {
+      // Fully typed: pause and start blinking caret
+      isDeleting = true;
+      isBlinking.value = true;
+      delay = 2000; // Pause for 2 seconds
+    } else if (isDeleting && charIndex === 0) {
+      // Fully erased: pause slightly, then switch to next word
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % greetings.length;
+      isBlinking.value = true;
+      delay = 500; // Short pause before next word
+    }
+
+    timeoutId = setTimeout(tick, delay);
+  }
+
+  // Start the typing cycle
+  tick();
 });
 
 onUnmounted(() => {
-    if (timeoutId) {
-        clearTimeout(timeoutId);
-    }
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+  }
 });
 </script>
 
 <template>
-    <div
-        class="flex items-center justify-center min-h-screen bg-[#EFEEE8] text-black font-sans px-4 select-none"
-    >
-        <h1
-            class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-center relative leading-none flex items-center justify-center"
-        >
-            <!-- Direct wrapper for text -->
-            <span class="inline-block min-h-[1.1em] text-black">{{
-                currentText
-            }}</span>
-            <!-- Custom vertical caret/cursor -->
-            <span
-                class="inline-block w-[5px] h-[0.9em] ml-2 bg-black align-middle"
-                :class="{ 'animate-caret-blink': isBlinking }"
-            ></span>
-        </h1>
-    </div>
+  <div class="flex flex-col items-center justify-center min-h-screen bg-[#EFEEE8] text-black font-sans px-4 select-none text-center">
+    <!-- Main Typing Greeting -->
+    <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight relative leading-none flex items-center justify-center mb-6 sm:mb-8">
+      <span class="inline-block min-h-[1.1em] text-black">{{ currentText }}</span>
+      <span 
+        class="inline-block w-[5px] h-[0.9em] ml-2 bg-black align-middle"
+        :class="{ 'animate-caret-blink': isBlinking }"
+      ></span>
+    </h1>
+
+    <!-- Welcome Sub-text (Translated based on user's system language) -->
+    <p class="text-base sm:text-lg md:text-xl font-medium text-black/50 tracking-wide max-w-xl transition-all duration-500">
+      {{ welcomeTexts[systemLang] }}
+    </p>
+  </div>
 </template>
 
 <style scoped>
 @keyframes blink {
-    0%,
-    100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .animate-caret-blink {
-    animation: blink 1s step-end infinite;
+  animation: blink 1s step-end infinite;
 }
 </style>
