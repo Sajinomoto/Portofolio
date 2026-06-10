@@ -154,18 +154,18 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center min-h-screen bg-[#EFEEE8] text-black font-sans px-4 select-none text-center">
+  <div class="flex flex-col items-center justify-center min-h-screen bg-[#EFEEE8] dark:bg-[#0E0D0B] text-black dark:text-[#EFEEE8] font-sans px-4 select-none text-center transition-colors duration-300">
     <!-- Main Typing Greeting -->
     <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight relative leading-none flex items-center justify-center mb-6 sm:mb-8">
-      <span class="inline-block min-h-[1.1em] text-black">{{ currentText }}</span>
+      <span class="inline-block min-h-[1.1em] text-black dark:text-white">{{ currentText }}</span>
       <span 
-        class="inline-block w-[5px] h-[0.9em] ml-2 bg-black align-middle"
+        class="inline-block w-[5px] h-[0.9em] ml-2 bg-black dark:bg-white align-middle"
         :class="{ 'animate-caret-blink': isBlinking }"
       ></span>
     </h1>
 
     <!-- Welcome Sub-text (Translated based on user's system language) -->
-    <p class="text-base sm:text-lg md:text-xl font-medium text-black/50 tracking-wide max-w-xl transition-all duration-500">
+    <p class="text-base sm:text-lg md:text-xl font-medium text-black/50 dark:text-[#EFEEE8]/50 tracking-wide max-w-xl transition-colors duration-300">
       {{ welcomeTexts[systemLang] }}
     </p>
   </div>
