@@ -170,13 +170,21 @@ onUnmounted(() => {
   }
 });
 
-// Smooth scroll to the About section using GSAP ScrollToPlugin
+// Smooth scroll to the About section
 const scrollToAbout = () => {
-  gsap.to(window, { 
-    duration: 1, 
-    scrollTo: '#about', 
-    ease: 'power2.out' 
-  });
+  const lenis = (window as any).lenis;
+  if (lenis) {
+    lenis.scrollTo('#about', {
+      duration: 1.8,
+      easing: (t: number) => 1 - Math.pow(1 - t, 4), // Heavy easeOutQuart
+    });
+  } else {
+    gsap.to(window, { 
+      duration: 1.8, 
+      scrollTo: '#about', 
+      ease: 'power4.out' 
+    });
+  }
 };
 </script>
 

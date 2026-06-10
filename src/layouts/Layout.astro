@@ -30,6 +30,26 @@ import '../styles/global.css';
 	</head>
 	<body>
 		<slot />
+		<script>
+			import Lenis from 'lenis';
+
+			// Initialize Lenis smooth scroll globally
+			const lenis = new Lenis({
+				duration: 1.5,
+				lerp: 0.05, // Lower value = heavier, smoother scroll momentum
+				syncTouch: true,
+			});
+
+			function raf(time: number) {
+				lenis.raf(time);
+				requestAnimationFrame(raf);
+			}
+
+			requestAnimationFrame(raf);
+
+			// Expose lenis globally so Vue components can access it
+			(window as any).lenis = lenis;
+		</script>
 	</body>
 </html>
 
@@ -38,6 +58,7 @@ import '../styles/global.css';
 	body {
 		margin: 0;
 		width: 100%;
-		height: 100%;
+		height: auto;
+		min-height: 100%;
 	}
 </style>

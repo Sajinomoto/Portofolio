@@ -74,13 +74,21 @@ const toggleDarkMode = () => {
   }
 };
 
-// Smooth scroll to target section using GSAP
+// Smooth scroll to target section
 const scrollToSection = (selector: string) => {
-  gsap.to(window, { 
-    duration: 1, 
-    scrollTo: selector, 
-    ease: 'power2.out' 
-  });
+  const lenis = (window as any).lenis;
+  if (lenis) {
+    lenis.scrollTo(selector, {
+      duration: 1.8,
+      easing: (t: number) => 1 - Math.pow(1 - t, 4), // Heavy easeOutQuart
+    });
+  } else {
+    gsap.to(window, { 
+      duration: 1.8, 
+      scrollTo: selector, 
+      ease: 'power4.out' 
+    });
+  }
 };
 </script>
 
