@@ -49,6 +49,7 @@ const translations = {
 
 const currentLang = ref<'id' | 'en' | 'ja' | 'ko' | 'ar' | 'hi' | 'zh'>('en');
 const isDark = ref(false);
+const isSidebarOpen = ref(false);
 
 onMounted(() => {
   // Detect language
@@ -74,8 +75,14 @@ const toggleDarkMode = () => {
   }
 };
 
+const toggleSidebar = () => {
+  isSidebarOpen.value = !isSidebarOpen.value;
+};
+
 // Smooth scroll to target section
 const scrollToSection = (selector: string) => {
+  isSidebarOpen.value = false; // Close sidebar if navigating
+  
   const lenis = (window as any).lenis;
   if (lenis) {
     lenis.scrollTo(selector, {
@@ -94,28 +101,43 @@ const scrollToSection = (selector: string) => {
 
 <template>
   <header class="fixed top-0 left-0 w-full bg-[#EFEEE8] dark:bg-[#0E0D0B] text-black dark:text-[#EFEEE8] transition-colors duration-300 z-50">
-    <div class="max-w-7xl mx-auto px-6 py-5 md:px-12 flex items-center justify-between">
-      <!-- Brand Name (Left) with CSS Tooltip -->
-      <div class="relative group">
+    <div class="max-w-7xl mx-auto px-6 py-5 md:px-12 flex items-center justify-between relative">
+      
+      <!-- Mobile Burger Menu (Left, hidden on desktop) -->
+      <button 
+        @click="toggleSidebar" 
+        class="block md:hidden p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors focus:outline-none z-50 cursor-pointer text-black dark:text-white"
+        aria-label="Toggle Menu"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" x2="20" y1="12" y2="12"></line>
+          <line x1="4" x2="20" y1="6" y2="6"></line>
+          <line x1="4" x2="20" y1="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Brand Name (Centered on mobile, Left on desktop) -->
+      <div class="absolute md:relative group left-1/2 md:left-auto -translate-x-1/2 md:translate-x-0 z-50">
         <a 
           href="https://github.com/Sajinomoto" 
           target="_blank" 
           rel="noopener noreferrer" 
-          class="text-xl font-bold tracking-tight text-black dark:text-white hover:opacity-75 transition-opacity duration-200 block"
+          class="text-xl font-bold tracking-tight text-black dark:text-white hover:opacity-75 transition-opacity duration-200 block whitespace-nowrap"
         >
           Sajinomoto
         </a>
-        <!-- Bubble Text (Tooltip) -->
-        <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 bg-black dark:bg-[#EFEEE8] text-white dark:text-black text-xs font-semibold rounded-md opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg z-50">
+        <!-- Bubble Text (Tooltip - Desktop Only) -->
+        <div class="hidden md:block absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 bg-black dark:bg-[#EFEEE8] text-white dark:text-black text-xs font-semibold rounded-md opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg z-50">
           <!-- Arrow pointing up -->
           <div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-black dark:bg-[#EFEEE8] rotate-45"></div>
           {{ translations[currentLang].tooltip }}
         </div>
       </div>
 
-      <!-- Navigation & Dark Mode Toggle (Right) -->
-      <nav class="flex items-center gap-6">
-        <div class="flex items-center gap-4 sm:gap-6">
+      <!-- Navigation & Dark Mode (Right) -->
+      <div class="flex items-center gap-6">
+        <!-- Desktop Navigation (Hidden on mobile) -->
+        <nav class="hidden md:flex items-center gap-6">
           <!-- Home Link -->
           <a 
             href="#home" 
@@ -133,16 +155,16 @@ const scrollToSection = (selector: string) => {
           >
             {{ translations[currentLang].about }}
           </a>
-        </div>
+        </nav>
 
-        <!-- Dark Mode Toggle Button -->
+        <!-- Dark Mode Toggle Button (Visible on both) -->
         <button 
           @click="toggleDarkMode" 
-          class="p-2 rounded-full text-black hover:bg-black/5 dark:text-[#EFEEE8] dark:hover:bg-white/5 transition-all duration-200 focus:outline-none flex items-center justify-center cursor-pointer"
+          class="p-2 rounded-full text-black hover:bg-black/5 dark:text-[#EFEEE8] dark:hover:bg-white/5 transition-all duration-200 focus:outline-none flex items-center justify-center cursor-pointer z-50"
           :aria-label="isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
         >
           <!-- Sun Icon (shown in Light Mode) -->
-          <svg v-if="!isDark" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg v-if="!isDark" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="4"></circle>
             <path d="M12 2v2"></path>
             <path d="M12 20v2"></path>
@@ -158,7 +180,75 @@ const scrollToSection = (selector: string) => {
             <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
           </svg>
         </button>
-      </nav>
+      </div>
+    </div>
+
+    <!-- Mobile Sidebar Menu Backdrop -->
+    <div 
+      v-if="isSidebarOpen"
+      @click="toggleSidebar"
+      class="md:hidden fixed inset-0 bg-black/20 dark:bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300"
+    ></div>
+
+    <!-- Mobile Sidebar Menu Panel -->
+    <div 
+      class="md:hidden fixed top-0 left-0 h-full w-[280px] bg-[#EFEEE8] dark:bg-[#0E0D0B] shadow-2xl z-50 p-6 flex flex-col justify-between transition-transform duration-300 ease-in-out border-r border-black/5 dark:border-white/5"
+      :class="isSidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+    >
+      <div>
+        <!-- Sidebar Header -->
+        <div class="flex items-center justify-between mb-8">
+          <span class="text-lg font-bold tracking-tight text-black dark:text-white">Menu</span>
+          <button 
+            @click="toggleSidebar" 
+            class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors focus:outline-none cursor-pointer text-black dark:text-white"
+            aria-label="Close Menu"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" x2="6" y1="6" y2="18"></line>
+              <line x1="6" x2="18" y1="6" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Sidebar Navigation List -->
+        <nav class="flex flex-col gap-6">
+          <!-- Home Link -->
+          <a 
+            href="#home" 
+            @click.prevent="scrollToSection('#home')"
+            class="text-xl font-semibold text-black dark:text-[#EFEEE8] hover:opacity-60 transition-opacity"
+          >
+            {{ translations[currentLang].home }}
+          </a>
+
+          <!-- About Me Link -->
+          <a 
+            href="#about" 
+            @click.prevent="scrollToSection('#about')"
+            class="text-xl font-semibold text-black dark:text-[#EFEEE8] hover:opacity-60 transition-opacity"
+          >
+            {{ translations[currentLang].about }}
+          </a>
+        </nav>
+      </div>
+
+      <!-- Sidebar Footer (GitHub Link) -->
+      <div class="mt-auto border-t border-black/5 dark:border-white/5 pt-6">
+        <a 
+          href="https://github.com/Sajinomoto" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="text-sm font-semibold text-black/50 dark:text-[#EFEEE8]/50 hover:text-black dark:hover:text-white transition-colors duration-200 flex items-center justify-between"
+        >
+          <span>GitHub</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" x2="21" y1="14" y2="3"></line>
+          </svg>
+        </a>
+      </div>
     </div>
   </header>
 </template>

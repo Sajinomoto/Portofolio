@@ -1,10 +1,12 @@
 ---
+import LoadingScreen from '../components/LoadingScreen.vue';
 import Header from '../components/Header.vue';
 import Greeting from '../components/Greeting.vue';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
+	<LoadingScreen client:load />
 	<Header client:load />
 	<main>
 		<section id="home">
