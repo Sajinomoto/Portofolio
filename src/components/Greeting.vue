@@ -52,6 +52,17 @@ const welcomeTexts = {
   zh: '欢迎来到我的作品集！'
 };
 
+// Define scroll down translations
+const scrollTexts = {
+  id: 'Scroll ke bawah',
+  en: 'Scroll down',
+  ja: '下にスクロール',
+  ko: '아래로 스크롤',
+  ar: 'مرر للأسفل',
+  hi: 'नीचे स्क्रॉल करें',
+  zh: '向下滚动'
+};
+
 const langToIndex: Record<string, number> = {
   id: 0,
   en: 1,
@@ -154,7 +165,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center min-h-screen bg-[#EFEEE8] dark:bg-[#0E0D0B] text-black dark:text-[#EFEEE8] font-sans px-4 select-none text-center transition-colors duration-300">
+  <div class="flex flex-col items-center justify-center min-h-screen bg-[#EFEEE8] dark:bg-[#0E0D0B] text-black dark:text-[#EFEEE8] font-sans px-4 select-none text-center transition-colors duration-300 relative">
     <!-- Main Typing Greeting -->
     <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight relative leading-none flex items-center justify-center mb-6 sm:mb-8">
       <span class="inline-block min-h-[1.1em] text-black dark:text-white">{{ currentText }}</span>
@@ -168,6 +179,17 @@ onUnmounted(() => {
     <p class="text-base sm:text-lg md:text-xl font-medium text-black/50 dark:text-[#EFEEE8]/50 tracking-wide max-w-xl transition-colors duration-300">
       {{ welcomeTexts[systemLang] }}
     </p>
+
+    <!-- Scroll Down Indicator (Bottom Right) -->
+    <div class="fixed bottom-8 right-8 md:bottom-12 md:right-12 z-40 flex items-center gap-2 animate-bounce-gentle text-black/40 dark:text-[#EFEEE8]/40 hover:text-black dark:hover:text-white transition-colors duration-300 cursor-pointer">
+      <span class="text-[10px] md:text-xs font-bold tracking-widest uppercase">
+        {{ scrollTexts[systemLang] }}
+      </span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <polyline points="19 12 12 19 5 12"></polyline>
+      </svg>
+    </div>
   </div>
 </template>
 
@@ -177,7 +199,20 @@ onUnmounted(() => {
   50% { opacity: 0; }
 }
 
+@keyframes bounce-gentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
 .animate-caret-blink {
   animation: blink 1s step-end infinite;
+}
+
+.animate-bounce-gentle {
+  animation: bounce-gentle 2s ease-in-out infinite;
 }
 </style>
