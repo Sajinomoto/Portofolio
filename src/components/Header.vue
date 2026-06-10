@@ -1,34 +1,48 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { gsap } from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+
+// Register GSAP plugin in the browser environment
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollToPlugin);
+}
 
 // Define UI translations for the Header
 const translations = {
   id: {
     home: 'Beranda',
+    about: 'Tentang Saya',
     tooltip: 'Kunjungi Github Saya :)'
   },
   en: {
     home: 'Home',
+    about: 'About Me',
     tooltip: 'Visit My Github :)'
   },
   ja: {
     home: 'ホーム',
+    about: '自己紹介',
     tooltip: 'GitHubを訪ねる :)'
   },
   ko: {
     home: '홈',
+    about: '자기소개',
     tooltip: 'GitHub 방문하기 :)'
   },
   ar: {
     home: 'الرئيسية',
+    about: 'عني',
     tooltip: 'تفضل بزيارة حسابي على جيت هاب :)'
   },
   hi: {
     home: 'होम',
+    about: 'मेरे बारे में',
     tooltip: 'मेरे गिटहब पर जाएँ :)'
   },
   zh: {
     home: '首页',
+    about: '关于我',
     tooltip: '访问我的 GitHub :)'
   }
 };
@@ -59,6 +73,15 @@ const toggleDarkMode = () => {
     localStorage.setItem('theme', 'light');
   }
 };
+
+// Smooth scroll to target section using GSAP
+const scrollToSection = (selector: string) => {
+  gsap.to(window, { 
+    duration: 1, 
+    scrollTo: selector, 
+    ease: 'power2.out' 
+  });
+};
 </script>
 
 <template>
@@ -83,19 +106,31 @@ const toggleDarkMode = () => {
       </div>
 
       <!-- Navigation & Dark Mode Toggle (Right) -->
-      <nav class="flex items-center">
-        <!-- Home Link -->
-        <a 
-          href="/" 
-          class="text-base font-semibold text-black dark:text-[#EFEEE8] hover:opacity-60 transition-opacity duration-200"
-        >
-          {{ translations[currentLang].home }}
-        </a>
+      <nav class="flex items-center gap-6">
+        <div class="flex items-center gap-4 sm:gap-6">
+          <!-- Home Link -->
+          <a 
+            href="#home" 
+            @click.prevent="scrollToSection('#home')"
+            class="text-base font-semibold text-black dark:text-[#EFEEE8] hover:opacity-60 transition-opacity duration-200"
+          >
+            {{ translations[currentLang].home }}
+          </a>
+
+          <!-- About Me Link -->
+          <a 
+            href="#about" 
+            @click.prevent="scrollToSection('#about')"
+            class="text-base font-semibold text-black dark:text-[#EFEEE8] hover:opacity-60 transition-opacity duration-200 whitespace-nowrap"
+          >
+            {{ translations[currentLang].about }}
+          </a>
+        </div>
 
         <!-- Dark Mode Toggle Button -->
         <button 
           @click="toggleDarkMode" 
-          class="ml-6 p-2 rounded-full text-black hover:bg-black/5 dark:text-[#EFEEE8] dark:hover:bg-white/5 transition-all duration-200 focus:outline-none flex items-center justify-center cursor-pointer"
+          class="p-2 rounded-full text-black hover:bg-black/5 dark:text-[#EFEEE8] dark:hover:bg-white/5 transition-all duration-200 focus:outline-none flex items-center justify-center cursor-pointer"
           :aria-label="isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
         >
           <!-- Sun Icon (shown in Light Mode) -->

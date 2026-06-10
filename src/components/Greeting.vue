@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
+import { gsap } from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+
+// Register GSAP ScrollToPlugin in browser environment
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollToPlugin);
+}
 
 // Define greetings for 7 languages categorized by 4 times of day
 const greetingsByTime = {
@@ -162,6 +169,15 @@ onUnmounted(() => {
     clearTimeout(timeoutId);
   }
 });
+
+// Smooth scroll to the About section using GSAP ScrollToPlugin
+const scrollToAbout = () => {
+  gsap.to(window, { 
+    duration: 1, 
+    scrollTo: '#about', 
+    ease: 'power2.out' 
+  });
+};
 </script>
 
 <template>
@@ -181,7 +197,7 @@ onUnmounted(() => {
     </p>
 
     <!-- Scroll Down Indicator (Bottom Right) -->
-    <div class="fixed bottom-8 right-8 md:bottom-12 md:right-12 z-40 flex items-center gap-2 animate-bounce-gentle text-black/40 dark:text-[#EFEEE8]/40 hover:text-black dark:hover:text-white transition-colors duration-300 cursor-pointer">
+    <div @click="scrollToAbout" class="fixed bottom-8 right-8 md:bottom-12 md:right-12 z-40 flex items-center gap-2 animate-bounce-gentle text-black/40 dark:text-[#EFEEE8]/40 hover:text-black dark:hover:text-white transition-colors duration-300 cursor-pointer">
       <span class="text-[10px] md:text-xs font-bold tracking-widest uppercase">
         {{ scrollTexts[systemLang] }}
       </span>
