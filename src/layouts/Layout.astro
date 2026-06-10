@@ -41,7 +41,7 @@ import '../styles/global.css';
 			const lenis = new Lenis({
 				duration: 1.5,
 				lerp: 0.05, // Lower value = heavier, smoother scroll momentum
-				syncTouch: true,
+				syncTouch: false, // Use native scroll on mobile for buttery-smooth performance
 			});
 
 			function raf(time: number) {

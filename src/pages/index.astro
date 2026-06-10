@@ -109,6 +109,8 @@ import Layout from "../layouts/Layout.astro";
 		}
 
 		if (homeSection) {
+			const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
 			// Zoom out, fade, and blur #home as user scrolls down naturally (via CSS sticky)
 			gsap.to(homeSection, {
 				scrollTrigger: {
@@ -119,7 +121,7 @@ import Layout from "../layouts/Layout.astro";
 				},
 				scale: 0.82,
 				opacity: 0.25,
-				filter: 'blur(8px)',
+				...(isMobile ? {} : { filter: 'blur(8px)' }), // Skip heavy blur filter on mobile to ensure smooth scrolling
 				ease: 'power1.inOut',
 			});
 		}
@@ -151,6 +153,11 @@ import Layout from "../layouts/Layout.astro";
 	html.dark body {
 		background-color: #0E0D0B !important;
 		color: #EFEEE8 !important;
+	}
+
+	/* Optimize layout performance during scroll animations */
+	#home {
+		will-change: transform, opacity;
 	}
 
 	/* Fade-in animation for main page content */
