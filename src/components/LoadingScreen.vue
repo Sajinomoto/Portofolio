@@ -21,6 +21,7 @@ onMounted(() => {
   if (typeof window !== 'undefined') {
     if (sessionStorage.getItem('visited') === 'true') {
       showLoader.value = false;
+      document.documentElement.classList.add('is-loaded');
       return;
     }
   }
@@ -33,19 +34,21 @@ onMounted(() => {
     systemLang.value = 'en';
   }
 
-  // 3. Loading screen duration (slides up after 1.5 seconds)
+  // 3. Loading screen duration (slides up after 2.5 seconds)
   setTimeout(() => {
     // 4. Slide up animation using GSAP
     gsap.to('#loading-screen', {
       yPercent: -100,
-      duration: 1.2,
+      duration: 1.8,
       ease: 'power4.inOut',
       onComplete: () => {
         showLoader.value = false;
         sessionStorage.setItem('visited', 'true');
+        // Trigger the fade-in animation for the main content only after loader clears
+        document.documentElement.classList.add('is-loaded');
       }
     });
-  }, 1500);
+  }, 2500);
 });
 </script>
 

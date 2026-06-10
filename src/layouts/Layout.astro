@@ -6,10 +6,9 @@ import '../styles/global.css';
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href="/icons/Icon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>Saji - Portofolio</title>
 		<script is:inline>
 			const theme = (() => {
 				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
@@ -25,6 +24,11 @@ import '../styles/global.css';
 				document.documentElement.classList.add('dark');
 			} else {
 				document.documentElement.classList.remove('dark');
+			}
+
+			// Add is-loaded class if the loading screen has already run in this session
+			if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('visited') === 'true') {
+				document.documentElement.classList.add('is-loaded');
 			}
 		</script>
 	</head>
