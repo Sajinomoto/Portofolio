@@ -1,11 +1,17 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import Header from '../components/Header.vue';
+import Greeting from '../components/Greeting.vue';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Welcome />
+	<Header client:load />
+	<Greeting client:load />
 </Layout>
+
+<style is:global>
+	body {
+		background-color: #EFEEE8 !important;
+		color: #000000 !important;
+	}
+</style>
