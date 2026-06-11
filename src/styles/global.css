@@ -129,31 +129,6 @@
     }
 }
 
-/* Custom DOM-based Cursor */
-.custom-mouse-pointer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 24px;
-  height: 24px;
-  background-image: url('/images/mouse_cursor_black.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  pointer-events: none;
-  z-index: 99999999;
-  will-change: transform;
-  transform: translate3d(var(--mx, -50px), var(--my, -50px), 0);
-  transition: scale 0.15s ease, filter 0.15s ease;
-}
-
-html.dark .custom-mouse-pointer {
-  background-image: url('/images/mouse_cursor_white.png');
-}
-
-.custom-mouse-pointer.custom-cursor-pointer {
-  transform: translate3d(var(--mx, -50px), var(--my, -50px), 0) scale(1.25);
-  filter: drop-shadow(0 0 5px rgba(0, 255, 204, 0.6));
-}
 
 /* Custom Selection Marquee */
 .selection-marquee {
@@ -236,10 +211,6 @@ html.dark .selection-marquee .corner-bracket {
   right: -3px;
 }
 
-/* Hide native cursor globally to resolve OS layers overlap bugs */
-*, *::before, *::after {
-  cursor: none !important;
-}
 
 /* Nanotech Particle Scatter (Data Burst) */
 .nanotech-container {

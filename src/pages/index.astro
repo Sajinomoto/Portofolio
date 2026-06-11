@@ -3,6 +3,7 @@ import LoadingScreen from "../components/LoadingScreen.vue";
 import Header from "../components/Header.vue";
 import Greeting from "../components/Greeting.vue";
 import Layout from "../layouts/Layout.astro";
+import AsciiBox from "../components/AsciiBox.vue";
 ---
 
 <Layout>
@@ -14,12 +15,13 @@ import Layout from "../layouts/Layout.astro";
 				<Greeting client:load />
 			</section>
 			<div id="scroll-content" class="relative z-10 bg-[#EFEEE8] dark:bg-[#0E0D0B] transition-colors duration-300 w-full">
+				<!-- Glassmorphism Top Transition Bar -->
+				<div class="absolute top-0 left-0 w-full h-24 bg-[#EFEEE8]/70 dark:bg-[#0E0D0B]/70 backdrop-blur-md pointer-events-none glass-fade transition-colors duration-300" style="transform: translateZ(0); will-change: transform;"></div>
+
 				<section 
 					id="about" 
 					class="relative min-h-screen flex flex-col items-start justify-start pt-32 pb-16 px-8 sm:px-12 md:px-24 max-w-7xl mx-auto text-black dark:text-[#EFEEE8] transition-colors duration-300 w-full"
 				>
-					<!-- Glassmorphism Top Transition Bar -->
-					<div class="absolute top-0 left-0 w-full h-24 bg-[#EFEEE8]/70 dark:bg-[#0E0D0B]/70 backdrop-blur-md pointer-events-none glass-fade transition-colors duration-300" style="transform: translateZ(0); will-change: transform;"></div>
 
 					<!-- Technical Bar (Gambar 1, Reversed) -->
 					<div class="mb-6 ml-1 pointer-events-none select-none">
@@ -79,8 +81,8 @@ import Layout from "../layouts/Layout.astro";
 
 				</section>
 
-				<!-- Technical Bottom Accent (Full Screen Width) -->
-				<div class="absolute bottom-0 left-0 w-full h-8 pointer-events-none select-none flex items-stretch gap-2.5 overflow-hidden">
+				<!-- Technical Accent Divider (Under About Me section) -->
+				<div class="relative w-full h-8 pointer-events-none select-none flex items-stretch gap-2.5 overflow-hidden">
 					<!-- 1. Solid vertical block (Left edge) -->
 					<div class="w-2.5 bg-black dark:bg-[#EFEEE8] transition-colors duration-300"></div>
 
@@ -89,6 +91,14 @@ import Layout from "../layouts/Layout.astro";
 						<div class="absolute inset-0 opacity-85 text-black dark:text-[#EFEEE8] transition-colors duration-300 about-diagonal-stripes"></div>
 					</div>
 				</div>
+
+				<!-- Section: 3D ASCII Sandbox -->
+				<section 
+					id="ascii-sandbox" 
+					class="relative h-screen w-full overflow-hidden flex items-center justify-center bg-transparent"
+				>
+					<AsciiBox client:load />
+				</section>
 			</div>
 		</main>
 	</div>

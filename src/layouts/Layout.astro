@@ -33,14 +33,13 @@ import '../styles/global.css';
 		</script>
 	</head>
 	<body>
-		<div id="custom-mouse-pointer" class="custom-mouse-pointer"></div>
+		<slot />
 		<div id="selection-marquee" class="selection-marquee">
 			<div class="corner-bracket tl"></div>
 			<div class="corner-bracket tr"></div>
 			<div class="corner-bracket bl"></div>
 			<div class="corner-bracket br"></div>
 		</div>
-		<slot />
 		<script>
 			import Lenis from 'lenis';
 
@@ -61,37 +60,6 @@ import '../styles/global.css';
 			// Expose lenis globally so Vue components can access it
 			(window as any).lenis = lenis;
 
-			// 1. Custom DOM cursor positioning & state handlers
-			const cursorEl = document.getElementById('custom-mouse-pointer');
-			if (cursorEl) {
-				// Follow mouse pointer instantly
-				window.addEventListener('mousemove', (e) => {
-					cursorEl.style.setProperty('--mx', `${e.clientX}px`);
-					cursorEl.style.setProperty('--my', `${e.clientY}px`);
-				});
-
-				// Hide custom cursor when mouse leaves viewport
-				document.addEventListener('mouseleave', () => {
-					cursorEl.style.opacity = '0';
-				});
-				document.addEventListener('mouseenter', () => {
-					cursorEl.style.opacity = '1';
-				});
-
-				// Check hover state globally for clickable elements to trigger scales and cyber glow
-				window.addEventListener('mouseover', (e) => {
-					const target = e.target as HTMLElement;
-					if (!target) return;
-					
-					// Detect if target is links, buttons, theme toggles, inputs, or has cursor-pointer
-					const isClickable = target.closest('a, button, [role="button"], input, textarea, select, .cursor-pointer');
-					if (isClickable) {
-						cursorEl.classList.add('custom-cursor-pointer');
-					} else {
-						cursorEl.classList.remove('custom-cursor-pointer');
-					}
-				});
-			}
 
 			// 2. Drag Selection Marquee (Windows-style) with corner brackets
 			const marqueeEl = document.getElementById('selection-marquee');
@@ -107,7 +75,7 @@ import '../styles/global.css';
 
 					// Do not start selection marquee if clicking on interactive elements
 					const target = e.target as HTMLElement;
-					if (target && target.closest('a, button, [role="button"], input, textarea, select, .cursor-pointer')) {
+					if (target && target.closest('a, button, [role="button"], input, textarea, select, .cursor-pointer, #ascii-sandbox')) {
 						return;
 					}
 
