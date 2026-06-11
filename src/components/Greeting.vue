@@ -100,6 +100,10 @@ const currentDate = ref("");
 const currentDay = ref("");
 let timeIntervalId: ReturnType<typeof setInterval> | null = null;
 let handleGridParallax: ((e: MouseEvent) => void) | null = null;
+let handleDeviceOrientation: ((e: DeviceOrientationEvent) => void) | null = null;
+let triggerPermission: (() => void) | null = null;
+let lastNx = 0;
+let lastNy = 0;
 const tickingTimecode = ref("00:00:00:00");
 let timecodeIntervalId: ReturnType<typeof setInterval> | null = null;
 let lastMouseX = 0;
@@ -230,27 +234,17 @@ onMounted(() => {
         ".greeting-content",
     ) as HTMLElement;
 
+    let targetNx = 0;
+    let targetNy = 0;
+    let currentNx = 0;
+    let currentNy = 0;
+
     handleGridParallax = (e: MouseEvent) => {
         const w = window.innerWidth;
         const h = window.innerHeight;
         // Normalize coordinates to [-1, 1] relative to viewport center
-        const nx = (e.clientX - w / 2) / (w / 2);
-        const ny = (e.clientY - h / 2) / (h / 2);
-
-        // Camera tilt / rotation limits
-        const rx = -ny * 6;
-        const ry = nx * 6;
-
-        // Camera pan / translation limits
-        const tx = nx * -18;
-        const ty = ny * -18;
-
-        if (gridEl) {
-            gridEl.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translate3d(${tx}px, ${ty}px, 0) scale(1.08)`;
-        }
-        if (glowEl) {
-            glowEl.style.transform = `translate3d(${tx * -0.4}px, ${ty * -0.4}px, 0) scale(1.05)`;
-        }
+        targetNx = (e.clientX - w / 2) / (w / 2);
+        targetNy = (e.clientY - h / 2) / (h / 2);
 
         // Velocity tracking for chromatic aberration
         const now = performance.now();
@@ -268,23 +262,94 @@ onMounted(() => {
         lastMouseX = e.clientX;
         lastMouseY = e.clientY;
         lastTime = now;
+    };
 
-        const chromaticOffset = Math.min(velocity * 8.0, 12); // Reduced sensitivity, max 12px
-        if (hudEl) {
-            hudEl.style.setProperty("--c-offset", `${chromaticOffset}px`);
+    handleDeviceOrientation = (e: DeviceOrientationEvent) => {
+        const beta = e.beta || 0;
+        const gamma = e.gamma || 0;
+
+        // Calibrate angles for natural holding position (beta ~45 deg, gamma ~0 deg)
+        const betaCenter = 45;
+        const betaRange = 22; // max tilt +/- 22 degrees
+        let normBeta = (beta - betaCenter) / betaRange;
+        normBeta = Math.max(-1, Math.min(1, normBeta));
+
+        const gammaRange = 22; // max tilt +/- 22 degrees
+        let normGamma = gamma / gammaRange;
+        normGamma = Math.max(-1, Math.min(1, normGamma));
+
+        targetNx = normGamma;
+        targetNy = normBeta;
+
+        // Velocity tracking for chromatic aberration based on gyroscope change
+        const now = performance.now();
+        if (lastTime > 0) {
+            const dt = now - lastTime;
+            if (dt > 0) {
+                const dx = (targetNx - lastNx) * 350; // map back to virtual pixel speed
+                const dy = (targetNy - lastNy) * 350;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                const speed = dist / dt;
+                velocity = velocity * 0.85 + speed * 0.15;
+            }
         }
-        if (contentEl) {
-            contentEl.style.setProperty(
-                "--c-offset",
-                `${chromaticOffset * 0.3}px`,
-            ); // Subtly split center text for readability (max 3.6px)
-        }
+        lastNx = targetNx;
+        lastNy = targetNy;
+        lastTime = now;
     };
 
     window.addEventListener("mousemove", handleGridParallax);
 
-    // Decay loop for velocity to smooth back to 0 when mouse stops moving
+    // Device orientation initialization with user permission request on touch/click
+    const initDeviceOrientation = () => {
+        const DeviceEvent = window.DeviceOrientationEvent as any;
+        if (DeviceEvent && typeof DeviceEvent.requestPermission === "function") {
+            DeviceEvent.requestPermission()
+                .then((permissionState: string) => {
+                    if (permissionState === "granted" && handleDeviceOrientation) {
+                        window.addEventListener("deviceorientation", handleDeviceOrientation);
+                    }
+                })
+                .catch((err: any) => {
+                    console.warn("DeviceOrientation permission denied:", err);
+                });
+        } else if (handleDeviceOrientation) {
+            window.addEventListener("deviceorientation", handleDeviceOrientation);
+        }
+    };
+
+    triggerPermission = () => {
+        initDeviceOrientation();
+        if (triggerPermission) {
+            window.removeEventListener("click", triggerPermission);
+            window.removeEventListener("touchstart", triggerPermission);
+        }
+    };
+    window.addEventListener("click", triggerPermission);
+    window.addEventListener("touchstart", triggerPermission);
+
+    // Smooth loop for parallax updates and velocity decay
     const tickParallaxDecay = () => {
+        // Interpolate coordinates (lerp) for smooth parallax damping
+        currentNx += (targetNx - currentNx) * 0.08;
+        currentNy += (targetNy - currentNy) * 0.08;
+
+        // Camera tilt / rotation limits
+        const rx = -currentNy * 6;
+        const ry = currentNx * 6;
+
+        // Camera pan / translation limits
+        const tx = currentNx * -18;
+        const ty = currentNy * -18;
+
+        if (gridEl) {
+            gridEl.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translate3d(${tx}px, ${ty}px, 0) scale(1.08)`;
+        }
+        if (glowEl) {
+            glowEl.style.transform = `translate3d(${tx * -0.4}px, ${ty * -0.4}px, 0) scale(1.05)`;
+        }
+
+        // Chromatic aberration update based on velocity
         if (velocity > 0.01) {
             velocity *= 0.92;
             const chromaticOffset = Math.min(velocity * 8.0, 12);
@@ -345,6 +410,13 @@ onUnmounted(() => {
     }
     if (handleGridParallax) {
         window.removeEventListener("mousemove", handleGridParallax);
+    }
+    if (handleDeviceOrientation) {
+        window.removeEventListener("deviceorientation", handleDeviceOrientation);
+    }
+    if (triggerPermission) {
+        window.removeEventListener("click", triggerPermission);
+        window.removeEventListener("touchstart", triggerPermission);
     }
     if (timecodeIntervalId) {
         clearInterval(timecodeIntervalId);
