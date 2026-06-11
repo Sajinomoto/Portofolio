@@ -89,6 +89,7 @@ const langToIndex: Record<string, number> = {
     zh: 6,
 };
 
+const gridCanvas = ref<HTMLCanvasElement | null>(null);
 const currentText = ref("");
 const isBlinking = ref(true);
 const systemLang = ref<"id" | "en" | "ja" | "ko" | "ar" | "hi" | "zh">("en");
@@ -100,7 +101,8 @@ const currentDate = ref("");
 const currentDay = ref("");
 let timeIntervalId: ReturnType<typeof setInterval> | null = null;
 let handleGridParallax: ((e: MouseEvent) => void) | null = null;
-let handleDeviceOrientation: ((e: DeviceOrientationEvent) => void) | null = null;
+let handleDeviceOrientation: ((e: DeviceOrientationEvent) => void) | null =
+    null;
 let triggerPermission: (() => void) | null = null;
 let lastNx = 0;
 let lastNy = 0;
@@ -113,9 +115,145 @@ let velocity = 0;
 let rafId = 0;
 let handleLanguageChange: ((e: Event) => void) | null = null;
 
-
-
 onMounted(() => {
+    // Canvas grid setup
+    const canvas = gridCanvas.value;
+    if (canvas) {
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+            let width = (canvas.width = window.innerWidth);
+            let height = (canvas.height = window.innerHeight);
+
+            const handleResize = () => {
+                if (!canvas) return;
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            };
+            window.addEventListener("resize", handleResize);
+
+            const cols = 80;
+            const rows = 80;
+            const gridW = 2000;
+            const gridH = 1450;
+
+            const camera = {
+                fov: 460,
+                pitch: 0.0,
+                yaw: 0.0,
+            };
+
+            function project(
+                x: number,
+                y: number,
+                z: number,
+                w: number,
+                h: number,
+            ) {
+                const cosY = Math.cos(camera.yaw);
+                const sinY = Math.sin(camera.yaw);
+                const x1 = x * cosY - y * sinY;
+                const y1 = x * sinY + y * cosY;
+
+                const cosP = Math.cos(camera.pitch);
+                const sinP = Math.sin(camera.pitch);
+                const y2 = y1 * cosP - z * sinP;
+                const z2 = y1 * sinP + z * cosP;
+
+                const dist = 520;
+                const sz = z2 + dist;
+                if (sz <= 50) return null;
+
+                const scale = camera.fov / sz;
+                const px = w / 2 + x1 * scale;
+                const py = h / 2 + y2 * scale + 80;
+
+                return { x: px, y: py, scale };
+            }
+
+            const draw3DGrid = () => {
+                ctx.clearRect(0, 0, width, height);
+
+                camera.pitch = 0.0 + currentNy * 0.06;
+                camera.yaw = 0.0 + currentNx * 0.05;
+
+                const time = performance.now() * 0.0007;
+                const points: Array<
+                    Array<{ x: number; y: number; scale: number } | null>
+                > = [];
+
+                for (let r = 0; r <= rows; r++) {
+                    points[r] = [];
+                    for (let c = 0; c <= cols; c++) {
+                        const gx = (c / cols - 0.5) * gridW;
+                        const gy = (r / rows - 0.5) * gridH;
+
+                        let gz =
+                            Math.sin(gx * 0.0025 - time * 1.0) *
+                            Math.cos(gy * 0.0025 + time * 0.7) *
+                            25;
+                        gz +=
+                            Math.sin(
+                                Math.sqrt(gx * gx + gy * gy) * 0.0018 -
+                                    time * 0.5,
+                            ) * 5;
+
+                        let p = project(gx, gy, gz, width, height);
+
+                        points[r][c] = p;
+                    }
+                }
+
+                ctx.beginPath();
+                const isDark =
+                    document.documentElement.classList.contains("dark");
+                ctx.strokeStyle = isDark
+                    ? "rgba(239, 238, 232, 0.14)"
+                    : "rgba(14, 13, 11, 0.07)";
+                ctx.lineWidth = 1;
+
+                for (let r = 0; r <= rows; r++) {
+                    for (let c = 0; c <= cols; c++) {
+                        const p1 = points[r][c];
+                        if (!p1) continue;
+
+                        if (c < cols) {
+                            const p2 = points[r][c + 1];
+                            if (p2) {
+                                ctx.moveTo(p1.x, p1.y);
+                                ctx.lineTo(p2.x, p2.y);
+                            }
+                        }
+                        if (r < rows) {
+                            const p2 = points[r + 1][c];
+                            if (p2) {
+                                ctx.moveTo(p1.x, p1.y);
+                                ctx.lineTo(p2.x, p2.y);
+                            }
+                        }
+                    }
+                }
+                ctx.stroke();
+
+                ctx.fillStyle = isDark
+                    ? "rgba(239, 238, 232, 0.45)"
+                    : "rgba(14, 13, 11, 0.22)";
+                for (let r = 0; r <= rows; r += 2) {
+                    for (let c = 0; c <= cols; c += 2) {
+                        const p = points[r][c];
+                        if (!p) continue;
+                        ctx.fillRect(p.x - 2, p.y, 5, 1);
+                        ctx.fillRect(p.x, p.y - 2, 1, 5);
+                    }
+                }
+            };
+
+            (window as any)._draw3DGrid = draw3DGrid;
+            (window as any)._cleanup3DGrid = () => {
+                window.removeEventListener("resize", handleResize);
+            };
+        }
+    }
+
     // 1. Detect user time of day in minutes
     const now = new Date();
     const hours = now.getHours();
@@ -199,7 +337,9 @@ onMounted(() => {
         timeoutId = setTimeout(tick, delay);
     }
 
-    function resetTypewriter(newLang: "id" | "en" | "ja" | "ko" | "ar" | "hi" | "zh") {
+    function resetTypewriter(
+        newLang: "id" | "en" | "ja" | "ko" | "ar" | "hi" | "zh",
+    ) {
         const newIndex = langToIndex[newLang];
         if (newIndex !== undefined) {
             if (timeoutId) {
@@ -247,7 +387,9 @@ onMounted(() => {
 
     // 4. Language Change Event Listener
     handleLanguageChange = (e: Event) => {
-        const customEvent = e as CustomEvent<"id" | "en" | "ja" | "ko" | "ar" | "hi" | "zh">;
+        const customEvent = e as CustomEvent<
+            "id" | "en" | "ja" | "ko" | "ar" | "hi" | "zh"
+        >;
         const newLang = customEvent.detail;
         if (newLang && newLang in welcomeTexts) {
             systemLang.value = newLang;
@@ -257,10 +399,7 @@ onMounted(() => {
     };
     window.addEventListener("language-changed", handleLanguageChange);
 
-
-
     // 5. 3D Camera Parallax Effect on Grid Background & Glow
-    const gridEl = document.querySelector(".grid-pattern") as HTMLElement;
     const glowEl = document.querySelector(".radial-glow") as HTMLElement;
     const hudEl = document.querySelector(".viewfinder-hud") as HTMLElement;
     const contentEl = document.querySelector(
@@ -331,7 +470,8 @@ onMounted(() => {
         lastTime = now;
     };
 
-    const isMobileViewport = typeof window !== "undefined" && window.innerWidth < 768;
+    const isMobileViewport =
+        typeof window !== "undefined" && window.innerWidth < 768;
 
     if (!isMobileViewport) {
         window.addEventListener("mousemove", handleGridParallax);
@@ -340,18 +480,30 @@ onMounted(() => {
     // Device orientation initialization with user permission request on touch/click
     const initDeviceOrientation = () => {
         const DeviceEvent = window.DeviceOrientationEvent as any;
-        if (DeviceEvent && typeof DeviceEvent.requestPermission === "function") {
+        if (
+            DeviceEvent &&
+            typeof DeviceEvent.requestPermission === "function"
+        ) {
             DeviceEvent.requestPermission()
                 .then((permissionState: string) => {
-                    if (permissionState === "granted" && handleDeviceOrientation) {
-                        window.addEventListener("deviceorientation", handleDeviceOrientation);
+                    if (
+                        permissionState === "granted" &&
+                        handleDeviceOrientation
+                    ) {
+                        window.addEventListener(
+                            "deviceorientation",
+                            handleDeviceOrientation,
+                        );
                     }
                 })
                 .catch((err: any) => {
                     console.warn("DeviceOrientation permission denied:", err);
                 });
         } else if (handleDeviceOrientation) {
-            window.addEventListener("deviceorientation", handleDeviceOrientation);
+            window.addEventListener(
+                "deviceorientation",
+                handleDeviceOrientation,
+            );
         }
     };
 
@@ -381,8 +533,8 @@ onMounted(() => {
         const tx = currentNx * -18;
         const ty = currentNy * -18;
 
-        if (gridEl) {
-            gridEl.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translate3d(${tx}px, ${ty}px, 0) scale(1.08)`;
+        if ((window as any)._draw3DGrid) {
+            (window as any)._draw3DGrid();
         }
         if (glowEl) {
             glowEl.style.transform = `translate3d(${tx * -0.4}px, ${ty * -0.4}px, 0) scale(1.05)`;
@@ -445,6 +597,11 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
+    if ((window as any)._cleanup3DGrid) {
+        (window as any)._cleanup3DGrid();
+        delete (window as any)._draw3DGrid;
+        delete (window as any)._cleanup3DGrid;
+    }
     if (timeoutId) {
         clearTimeout(timeoutId);
     }
@@ -455,7 +612,10 @@ onUnmounted(() => {
         window.removeEventListener("mousemove", handleGridParallax);
     }
     if (handleDeviceOrientation) {
-        window.removeEventListener("deviceorientation", handleDeviceOrientation);
+        window.removeEventListener(
+            "deviceorientation",
+            handleDeviceOrientation,
+        );
     }
     if (triggerPermission) {
         window.removeEventListener("click", triggerPermission);
@@ -494,10 +654,11 @@ const scrollToAbout = () => {
     <div
         class="flex flex-col items-center justify-center min-h-screen bg-[#EFEEE8] dark:bg-[#0E0D0B] text-black dark:text-[#EFEEE8] font-sans px-4 select-none text-center transition-colors duration-300 relative overflow-hidden"
     >
-        <!-- Plus Grid Pattern Overlay -->
-        <div
-            class="absolute inset-0 pointer-events-none grid-pattern z-0"
-        ></div>
+        <!-- Interactive 3D Wave Grid Canvas -->
+        <canvas
+            ref="gridCanvas"
+            class="absolute inset-0 pointer-events-none z-0 transition-colors duration-300 radial-mask"
+        ></canvas>
         <!-- Radial Glow Overlay -->
         <div class="absolute inset-0 pointer-events-none radial-glow z-0"></div>
 
@@ -507,10 +668,10 @@ const scrollToAbout = () => {
         >
             <!-- Top Left: REC + Timecode -->
             <div
-                class="absolute top-6 left-6 sm:top-10 sm:left-10 flex items-center gap-2"
+                class="absolute top-6 left-6 sm:top-10 sm:left-10 lg:top-14 lg:left-14 flex items-center gap-2"
             >
                 <span
-                    class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500 animate-pulse-fast"
+                    class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-current animate-pulse-fast"
                 ></span>
                 <span>REC</span>
                 <span class="ml-1.5 opacity-80">{{ tickingTimecode }}</span>
@@ -518,7 +679,7 @@ const scrollToAbout = () => {
 
             <!-- Top Right: Battery + Quality -->
             <div
-                class="absolute top-6 right-6 sm:top-10 sm:right-10 flex items-center gap-4"
+                class="absolute top-6 right-6 sm:top-10 sm:right-10 lg:top-14 lg:right-14 flex items-center gap-4"
             >
                 <span class="hidden xs:inline">RAW 4K 60FPS</span>
                 <span class="flex items-center gap-1.5">
@@ -537,14 +698,18 @@ const scrollToAbout = () => {
 
             <!-- Bottom Left: AF & Specs -->
             <div
-                class="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 flex flex-col gap-1 text-left"
+                class="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 lg:bottom-14 lg:left-14 flex flex-col gap-1 text-left"
             >
                 <!-- Clock (HH:MM:SS) -->
-                <div class="font-mono text-xs sm:text-sm font-bold tracking-wider leading-none mb-0.5">
+                <div
+                    class="font-mono text-xs sm:text-sm font-bold tracking-wider leading-none mb-0.5"
+                >
                     {{ currentTime }}
                 </div>
                 <!-- Day and Date -->
-                <div class="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest leading-none mb-2.5 opacity-80">
+                <div
+                    class="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest leading-none mb-2.5 opacity-80"
+                >
                     {{ currentDay }}, {{ currentDate }}
                 </div>
                 <div>AF-C [TRACKING]</div>
@@ -553,7 +718,7 @@ const scrollToAbout = () => {
 
             <!-- Bottom Right: Audio Level Meter -->
             <div
-                class="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 flex flex-col gap-1 text-right"
+                class="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 lg:bottom-14 lg:right-14 flex flex-col gap-1 text-right"
             >
                 <div class="flex items-center gap-1.5 justify-end">
                     <span>CH1</span>
@@ -622,9 +787,357 @@ const scrollToAbout = () => {
             </div>
         </div>
 
+        <!-- Cyber Bezel and Brackets Border Overlay (Desktop Only) -->
+        <div
+            class="absolute inset-0 pointer-events-none z-20 hidden lg:block text-[#0E0D0B] dark:text-[#EFEEE8]"
+        >
+            <!-- Corner Brackets -->
+            <!-- Top-Left Corner Bracket -->
+            <svg
+                class="absolute top-8 left-8 w-24 h-24"
+                viewBox="0 0 96 96"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M 0 72 V 24 L 24 0 H 72"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    class="opacity-80"
+                />
+                <path
+                    d="M 8 64 V 28 L 28 8 H 64"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    class="opacity-30"
+                    stroke-dasharray="4 2"
+                />
+                <path
+                    d="M 7 21 L 21 7"
+                    stroke="currentColor"
+                    stroke-width="3.5"
+                    class="opacity-95"
+                />
+                <line
+                    x1="0"
+                    y1="40"
+                    x2="6"
+                    y2="40"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    class="opacity-50"
+                />
+                <line
+                    x1="40"
+                    y1="0"
+                    x2="40"
+                    y2="6"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    class="opacity-50"
+                />
+                <circle
+                    cx="16"
+                    cy="16"
+                    r="1.5"
+                    fill="currentColor"
+                    class="opacity-60"
+                />
+                <circle
+                    cx="22"
+                    cy="22"
+                    r="1"
+                    fill="currentColor"
+                    class="opacity-30"
+                />
+            </svg>
+
+            <!-- Top-Right Corner Bracket -->
+            <svg
+                class="absolute top-8 right-8 w-24 h-24"
+                viewBox="0 0 96 96"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M 96 72 V 24 L 72 0 H 24"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    class="opacity-80"
+                />
+                <path
+                    d="M 88 64 V 28 L 68 8 H 32"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    class="opacity-30"
+                    stroke-dasharray="4 2"
+                />
+                <path
+                    d="M 89 21 L 75 7"
+                    stroke="currentColor"
+                    stroke-width="3.5"
+                    class="opacity-95"
+                />
+                <line
+                    x1="96"
+                    y1="40"
+                    x2="90"
+                    y2="40"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    class="opacity-50"
+                />
+                <line
+                    x1="56"
+                    y1="0"
+                    x2="56"
+                    y2="6"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    class="opacity-50"
+                />
+                <circle
+                    cx="80"
+                    cy="16"
+                    r="1.5"
+                    fill="currentColor"
+                    class="opacity-60"
+                />
+                <circle
+                    cx="74"
+                    cy="22"
+                    r="1"
+                    fill="currentColor"
+                    class="opacity-30"
+                />
+            </svg>
+
+            <!-- Bottom-Left Corner Bracket -->
+            <svg
+                class="absolute bottom-8 left-8 w-24 h-24"
+                viewBox="0 0 96 96"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M 0 24 V 72 L 24 96 H 72"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    class="opacity-80"
+                />
+                <path
+                    d="M 8 32 V 68 L 28 88 H 64"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    class="opacity-30"
+                    stroke-dasharray="4 2"
+                />
+                <path
+                    d="M 7 75 L 21 89"
+                    stroke="currentColor"
+                    stroke-width="3.5"
+                    class="opacity-95"
+                />
+                <line
+                    x1="0"
+                    y1="56"
+                    x2="6"
+                    y2="56"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    class="opacity-50"
+                />
+                <line
+                    x1="40"
+                    y1="96"
+                    x2="40"
+                    y2="90"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    class="opacity-50"
+                />
+                <circle
+                    cx="16"
+                    cy="80"
+                    r="1.5"
+                    fill="currentColor"
+                    class="opacity-60"
+                />
+                <circle
+                    cx="22"
+                    cy="74"
+                    r="1"
+                    fill="currentColor"
+                    class="opacity-30"
+                />
+            </svg>
+
+            <!-- Bottom-Right Corner Bracket -->
+            <svg
+                class="absolute bottom-8 right-8 w-24 h-24"
+                viewBox="0 0 96 96"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M 96 24 V 72 L 72 96 H 24"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    class="opacity-80"
+                />
+                <path
+                    d="M 88 32 V 68 L 68 88 H 32"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    class="opacity-30"
+                    stroke-dasharray="4 2"
+                />
+                <path
+                    d="M 89 75 L 75 89"
+                    stroke="currentColor"
+                    stroke-width="3.5"
+                    class="opacity-95"
+                />
+                <line
+                    x1="96"
+                    y1="56"
+                    x2="90"
+                    y2="56"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    class="opacity-50"
+                />
+                <line
+                    x1="56"
+                    y1="96"
+                    x2="56"
+                    y2="90"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    class="opacity-50"
+                />
+                <circle
+                    cx="80"
+                    cy="80"
+                    r="1.5"
+                    fill="currentColor"
+                    class="opacity-60"
+                />
+                <circle
+                    cx="74"
+                    cy="74"
+                    r="1"
+                    fill="currentColor"
+                    class="opacity-30"
+                />
+            </svg>
+
+            <!-- Outer Frame Connecting Lines -->
+            <div
+                class="absolute top-8 left-[104px] right-[104px] border-t border-current opacity-15"
+            ></div>
+            <div
+                class="absolute bottom-8 left-[104px] right-[104px] border-b border-current opacity-15"
+            ></div>
+            <div
+                class="absolute left-8 top-[104px] bottom-[104px] border-l border-current opacity-15"
+            ></div>
+            <div
+                class="absolute right-8 top-[104px] bottom-[104px] border-r border-current opacity-15"
+            ></div>
+
+            <!-- Top Center HUD Label (Masks the top border) -->
+            <div
+                class="absolute top-8 left-1/2 -translate-x-1/2 -translate-y-1/2 px-3 bg-[#EFEEE8] dark:bg-[#0E0D0B] font-mono text-[9px] tracking-[0.25em] opacity-60 transition-colors duration-300 select-none"
+            >
+                SYS.VIEWPORT: ACTIVE
+            </div>
+
+            <!-- Bottom Center Alignment Scale (Masks the bottom border) -->
+            <div
+                class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-end gap-1.5 h-3.5 pb-px bg-[#EFEEE8] dark:bg-[#0E0D0B] px-4 transition-colors duration-300"
+            >
+                <div class="w-[1px] h-3 bg-current opacity-40"></div>
+                <div class="w-[1px] h-1.5 bg-current opacity-25"></div>
+                <div class="w-[1px] h-1.5 bg-current opacity-25"></div>
+                <div class="w-[1px] h-1.5 bg-current opacity-25"></div>
+                <div class="w-[1px] h-2.5 bg-current opacity-35"></div>
+                <div class="w-[1px] h-1.5 bg-current opacity-25"></div>
+                <div class="w-[1px] h-1.5 bg-current opacity-25"></div>
+                <div class="w-[1px] h-1.5 bg-current opacity-25"></div>
+                <div class="w-[1px] h-3.5 bg-current opacity-55"></div>
+                <div class="w-[1px] h-1.5 bg-current opacity-25"></div>
+                <div class="w-[1px] h-1.5 bg-current opacity-25"></div>
+                <div class="w-[1px] h-1.5 bg-current opacity-25"></div>
+                <div class="w-[1px] h-2.5 bg-current opacity-35"></div>
+                <div class="w-[1px] h-1.5 bg-current opacity-25"></div>
+                <div class="w-[1px] h-1.5 bg-current opacity-25"></div>
+                <div class="w-[1px] h-1.5 bg-current opacity-25"></div>
+                <div class="w-[1px] h-3 bg-current opacity-40"></div>
+            </div>
+
+            <!-- Left Side Vertical Focus Scale (Masks the left border) -->
+            <div
+                class="absolute left-8 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-[#EFEEE8] dark:bg-[#0E0D0B] py-3 px-1 transition-colors duration-300"
+            >
+                <svg
+                    class="w-4 h-32 opacity-35"
+                    viewBox="0 0 16 128"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M 0 0 V 128"
+                        stroke="currentColor"
+                        stroke-width="1"
+                    />
+                    <path
+                        d="M 0 16 H 8 M 0 32 H 4 M 0 48 H 4 M 0 64 H 12 M 0 80 H 4 M 0 96 H 4 M 0 112 H 8"
+                        stroke="currentColor"
+                        stroke-width="1"
+                    />
+                </svg>
+            </div>
+            <div
+                class="absolute left-10 top-1/2 -translate-y-1/2 font-mono text-[8px] uppercase tracking-widest text-current opacity-35 select-none"
+                style="writing-mode: vertical-lr; transform: rotate(180deg)"
+            >
+                [ELEVATION_MTR]
+            </div>
+
+            <!-- Right Side Vertical Focus Scale (Masks the right border) -->
+            <div
+                class="absolute right-8 top-1/2 -translate-y-1/2 translate-x-1/2 bg-[#EFEEE8] dark:bg-[#0E0D0B] py-3 px-1 transition-colors duration-300"
+            >
+                <svg
+                    class="w-4 h-32 opacity-35"
+                    viewBox="0 0 16 128"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M 16 0 V 128"
+                        stroke="currentColor"
+                        stroke-width="1"
+                    />
+                    <path
+                        d="M 8 16 H 16 M 12 32 H 16 M 12 48 H 16 M 4 64 H 16 M 12 80 H 16 M 12 96 H 16 M 8 112 H 16"
+                        stroke="currentColor"
+                        stroke-width="1"
+                    />
+                </svg>
+            </div>
+            <div
+                class="absolute right-10 top-1/2 -translate-y-1/2 font-mono text-[8px] uppercase tracking-widest text-current opacity-35 select-none"
+                style="writing-mode: vertical-lr"
+            >
+                [EXPOSURE_VAL]
+            </div>
+        </div>
+
         <!-- Main Content Container with Technical Frame -->
         <div
-            class="z-10 relative px-8 py-6 sm:px-12 sm:py-9 md:px-20 md:py-14 flex flex-col items-center justify-center max-w-4xl mx-auto greeting-content"
+            class="z-10 relative px-8 py-6 sm:px-12 sm:py-9 md:px-20 md:py-14 flex flex-col items-center justify-center max-w-4xl mx-auto greeting-content bg-white/[0.00] dark:bg-white/[0.00] backdrop-blur-[2px] border border-black/10 dark:border-white/[0.08] rounded-lg shadow-sm"
         >
             <!-- Top-Left Corner Bracket -->
             <svg
@@ -743,8 +1256,6 @@ const scrollToAbout = () => {
                 <polyline points="19 12 12 19 5 12"></polyline>
             </svg>
         </div>
-
-
     </div>
 </template>
 
@@ -769,14 +1280,13 @@ const scrollToAbout = () => {
     }
 }
 
-@keyframes grid-breath {
-    0%,
-    100% {
-        opacity: 0.15;
-    }
-    50% {
-        opacity: 1;
-    }
+.radial-mask {
+    mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 85%);
+    -webkit-mask-image: radial-gradient(
+        circle at 50% 50%,
+        black 30%,
+        transparent 85%
+    );
 }
 
 .animate-caret-blink {
@@ -785,25 +1295,6 @@ const scrollToAbout = () => {
 
 .animate-bounce-gentle {
     animation: bounce-gentle 2s ease-in-out infinite;
-}
-
-/* Plus Grid Pattern (Light Mode) */
-.grid-pattern {
-    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 40 0 L 40 80 M 0 40 L 80 40' stroke='rgba(0,0,0,0.08)' stroke-width='1'/%3E%3Cpath d='M 37 40 L 43 40 M 40 37 L 40 43' stroke='rgba(0,0,0,0.22)' stroke-width='1'/%3E%3C/svg%3E");
-    background-size: 80px 80px;
-    background-position: center;
-    mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
-    -webkit-mask-image: radial-gradient(
-        circle at center,
-        black 40%,
-        transparent 90%
-    );
-    animation: grid-breath 8s ease-in-out infinite;
-    transform: scale(
-        1.08
-    ); /* Start scaled to prevent showing blank viewport edges */
-    will-change: transform;
-    transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1); /* Physical camera damping inertia */
 }
 
 /* Radial Glow Background */
@@ -818,14 +1309,13 @@ const scrollToAbout = () => {
     transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-
-
 /* Viewfinder Chromatic Aberration HUD styling */
 .viewfinder-hud {
     --c-offset: 0px;
-    /* Split overlay details into red and cyan drop shadows based on dynamic offset */
-    filter: drop-shadow(var(--c-offset) 0px 0px rgba(255, 0, 80, 0.45))
-        drop-shadow(calc(-1 * var(--c-offset)) 0px 0px rgba(0, 240, 255, 0.45));
+    --shadow-color-1: rgba(14, 13, 11, 0.15);
+    --shadow-color-2: rgba(14, 13, 11, 0.08);
+    filter: drop-shadow(var(--c-offset) 0.5px 0px var(--shadow-color-1))
+        drop-shadow(calc(-1 * var(--c-offset)) -0.5px 0px var(--shadow-color-2));
     will-change: filter;
     transition: filter 0.08s ease-out; /* Super quick response to mouse motion */
 }
@@ -833,11 +1323,18 @@ const scrollToAbout = () => {
 /* Greeting Content Chromatic Aberration styling */
 .greeting-content {
     --c-offset: 0px;
-    /* Split greeting content text and brackets into red and cyan drop shadows */
-    filter: drop-shadow(var(--c-offset) 0px 0px rgba(255, 0, 80, 0.4))
-        drop-shadow(calc(-1 * var(--c-offset)) 0px 0px rgba(0, 240, 255, 0.4));
+    --shadow-color-1: rgba(14, 13, 11, 0.15);
+    --shadow-color-2: rgba(14, 13, 11, 0.08);
+    filter: drop-shadow(var(--c-offset) 0.5px 0px var(--shadow-color-1))
+        drop-shadow(calc(-1 * var(--c-offset)) -0.5px 0px var(--shadow-color-2));
     will-change: filter;
     transition: filter 0.08s ease-out;
+}
+
+:global(.dark) .viewfinder-hud,
+:global(.dark) .greeting-content {
+    --shadow-color-1: rgba(239, 238, 232, 0.15);
+    --shadow-color-2: rgba(239, 238, 232, 0.08);
 }
 
 /* Viewfinder Animations */
@@ -899,10 +1396,6 @@ const scrollToAbout = () => {
 
 <style>
 /* Global overrides for Dark Mode */
-.dark .grid-pattern {
-    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 40 0 L 40 80 M 0 40 L 80 40' stroke='rgba(255,255,255,0.18)' stroke-width='1'/%3E%3Cpath d='M 37 40 L 43 40 M 40 37 L 40 43' stroke='rgba(255,255,255,0.45)' stroke-width='1'/%3E%3C/svg%3E") !important;
-}
-
 .dark .radial-glow {
     background: radial-gradient(
         circle at 50% 40%,

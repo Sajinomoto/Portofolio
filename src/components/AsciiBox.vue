@@ -134,12 +134,13 @@ const renderFrame = (timestamp: number = 0) => {
 
     // Detect mobile viewport width
     const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const aspectCorrection = isMobile ? 1.2 : 2.6;
 
     // Rectangular grid parameters - significantly reduced complexity on mobile to save resource
     const numX = isMobile ? 70 : 140; // 50% fewer grid points horizontally
     const numZ = isMobile ? 32 : 60;  // 46% fewer grid points vertically
-    const spacingX = isMobile ? 4.8 : 2.4; // Wider spacing to maintain viewport span
-    const spacingZ = isMobile ? 2.6 : 1.4; // Wider spacing to maintain viewport depth
+    const spacingX = isMobile ? 1.6 : 2.4; // Narrower spacing on mobile
+    const spacingZ = isMobile ? 1.2 : 1.4; // Narrower spacing on mobile
 
     // Camera configuration for a wide, elevated view of the terrain
     const pitch = 0.52;
@@ -180,7 +181,7 @@ const renderFrame = (timestamp: number = 0) => {
             if (transZ <= 0) continue;
 
             // Perspective Projection with monospace aspect correction
-            const screenX = Math.floor(w / 2 + (transX * fov * 2.6) / transZ);
+            const screenX = Math.floor(w / 2 + (transX * fov * aspectCorrection) / transZ);
             const screenY = Math.floor(h / 2 + (transY * fov) / transZ);
 
             if (screenX >= 0 && screenX < w && screenY >= 0 && screenY < h) {
@@ -245,7 +246,7 @@ const renderFrame = (timestamp: number = 0) => {
 
                 // Perspective Projection
                 const screenX = Math.floor(
-                    w / 2 + (transX * fov * 2.6) / transZ,
+                    w / 2 + (transX * fov * aspectCorrection) / transZ,
                 );
                 const screenY = Math.floor(h / 2 + (transY * fov) / transZ);
 
@@ -307,7 +308,7 @@ const renderFrame = (timestamp: number = 0) => {
         if (transZ <= 0) continue;
 
         // Perspective Projection
-        const screenX = Math.floor(w / 2 + (transX * fov * 2.6) / transZ);
+        const screenX = Math.floor(w / 2 + (transX * fov * aspectCorrection) / transZ);
         const screenY = Math.floor(h / 2 + (transY * fov) / transZ);
 
         if (screenX >= 0 && screenX < w && screenY >= 0 && screenY < h) {
@@ -357,7 +358,7 @@ const renderFrame = (timestamp: number = 0) => {
         if (transZ <= 0) continue;
 
         // Perspective Projection
-        const screenX = Math.floor(w / 2 + (transX * fov * 2.6) / transZ);
+        const screenX = Math.floor(w / 2 + (transX * fov * aspectCorrection) / transZ);
         const screenY = Math.floor(h / 2 + (transY * fov) / transZ);
 
         if (screenX >= 0 && screenX < w && screenY >= 0 && screenY < h) {
