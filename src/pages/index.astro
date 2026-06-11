@@ -217,7 +217,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                             class="md:col-span-7 flex flex-col justify-start max-w-5xl"
                         >
                             <h2
-                                class="about-title text-3xl sm:text-5xl font-bold tracking-tight mb-4 text-black dark:text-white transition-colors duration-300"
+                                class="about-title font-display text-3xl sm:text-5xl font-bold tracking-tight mb-4 text-black dark:text-white transition-colors duration-300"
                             >
                                 Saji | <span
                                     id="about-role-text"
@@ -228,7 +228,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                             </h2>
                             <p
                                 id="about-desc"
-                                class="about-desc text-lg sm:text-xl text-black/50 dark:text-[#EFEEE8]/50 font-medium leading-relaxed transition-colors duration-300 text-justify"
+                                class="about-desc font-mono text-xs sm:text-sm text-black/50 dark:text-[#EFEEE8]/50 leading-relaxed transition-colors duration-300 text-justify"
                             >
                                 Under Development 🚧
                             </p>
@@ -466,10 +466,10 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                             Tech Stacks & Tools
                         </h3>
                         <p
+                            id="tech-subtitle"
                             class="text-[10px] sm:text-xs text-center text-black/50 dark:text-[#EFEEE8]/50 font-medium tracking-widest max-w-lg mb-12 uppercase font-mono"
                         >
-                            Technologies and tools i've been use to build my
-                            projects
+                            Technologies and tools I've used to build my projects.
                         </p>
 
                         <!-- Grid of Cards -->
@@ -1360,17 +1360,70 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                     <div
                         class="absolute top-6 right-8 font-mono text-[9px] opacity-65 select-none"
                     >
-                        [STATUS: UNDER_DEV]
+                        [STATUS: ACTIVE]
                     </div>
 
                     <div
-                        class="relative flex flex-col items-center justify-center"
+                        class="relative flex flex-col items-center justify-center max-w-2xl w-full text-center"
                     >
                         <h2
-                            class="text-3xl sm:text-5xl md:text-6xl font-normal tracking-tight uppercase relative font-mono text-center select-none cursor-pointer"
+                            id="contact-title"
+                            class="text-3xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight uppercase mb-8 select-none"
                         >
-                            Contact Me - [Under Development]
+                            Let's Get in Touch
                         </h2>
+
+                        <!-- Hologram Social Buttons -->
+                        <div class="flex flex-wrap justify-center gap-4 sm:gap-6 mt-4">
+                            <!-- WhatsApp -->
+                            <a
+                                href="https://wa.me/6285174354574"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hologram-btn flex items-center justify-center gap-2.5 px-5 py-3 rounded-md font-mono text-xs font-bold uppercase tracking-wider text-black dark:text-[#EFEEE8] transition-all duration-300"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="w-4 h-4"><path fill="currentColor" d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.5-5.739-1.453L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.968C16.528 2.01 14.07 1.01 11.996 1.01c-5.438 0-9.866 4.372-9.87 9.802 0 1.63.43 3.22 1.25 4.625l-1.005 3.68 3.78-.992zm10.702-4.715c-.29-.146-1.727-.856-1.996-.954-.269-.098-.465-.148-.659.146-.195.295-.756.953-.927 1.149-.17.197-.341.221-.63.074-.29-.147-1.227-.452-2.337-1.446-.864-.771-1.447-1.724-1.617-2.019-.17-.295-.019-.455.128-.601.133-.13.29-.34.436-.51.145-.17.194-.291.291-.485.097-.194.048-.364-.025-.51-.073-.146-.66-1.597-.903-2.18-.237-.57-.479-.493-.66-.502-.17-.008-.365-.01-.56-.01-.196 0-.514.073-.784.37-.27.295-1.03 1.007-1.03 2.457 0 1.45 1.054 2.85 1.202 3.048.147.197 2.074 3.167 5.025 4.44.702.304 1.25.486 1.677.622.705.224 1.346.193 1.854.117.564-.084 1.727-.707 1.972-1.39.245-.683.245-1.27.172-1.39-.074-.12-.27-.194-.56-.341z"/></svg>
+                                <span>WhatsApp</span>
+                            </a>
+                            <!-- Instagram -->
+                            <a
+                                href="https://instagram.com/saji.6787"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hologram-btn flex items-center justify-center gap-2.5 px-5 py-3 rounded-md font-mono text-xs font-bold uppercase tracking-wider text-black dark:text-[#EFEEE8] transition-all duration-300"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="w-4 h-4"><path fill="currentColor" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051C.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                                <span>Instagram</span>
+                            </a>
+                            <!-- GitHub -->
+                            <a
+                                href="https://github.com/Sajinomoto"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hologram-btn flex items-center justify-center gap-2.5 px-5 py-3 rounded-md font-mono text-xs font-bold uppercase tracking-wider text-black dark:text-[#EFEEE8] transition-all duration-300"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="w-4 h-4"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                                <span>GitHub</span>
+                            </a>
+                            <!-- Email -->
+                            <a
+                                href="mailto:saji6787@gmail.com"
+                                class="hologram-btn flex items-center justify-center gap-2.5 px-5 py-3 rounded-md font-mono text-xs font-bold uppercase tracking-wider text-black dark:text-[#EFEEE8] transition-all duration-300"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="w-4 h-4"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                                <span>Email</span>
+                            </a>
+                            <!-- LinkedIn -->
+                            <a
+                                href="https://www.linkedin.com/in/satrio-aji-pamungkas-843a87340/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hologram-btn flex items-center justify-center gap-2.5 px-5 py-3 rounded-md font-mono text-xs font-bold uppercase tracking-wider text-black dark:text-[#EFEEE8] transition-all duration-300"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="w-4 h-4"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+                                <span>LinkedIn</span>
+                            </a>
+                        </div>
                     </div>
                 </section>
 
@@ -1380,7 +1433,11 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                     class="relative min-h-[45vh] flex flex-col items-center justify-center py-20 px-8 sm:px-12 md:px-24 max-w-7xl mx-auto text-black dark:text-[#EFEEE8] transition-colors duration-300 w-full z-10 overflow-hidden"
                 >
                     <!-- Container for floating ASCII text -->
-                    <div id="quotes-ascii-container" class="absolute inset-0 pointer-events-none overflow-hidden z-0"></div>
+                    <div
+                        id="quotes-ascii-container"
+                        class="absolute inset-0 pointer-events-none overflow-hidden z-0"
+                    >
+                    </div>
 
                     <blockquote
                         class="text-xl sm:text-3xl md:text-4xl font-normal tracking-tight font-serif italic text-center max-w-3xl leading-relaxed text-black/85 dark:text-white/90 relative z-10"
@@ -1430,19 +1487,129 @@ import imgCatGlitched from "../assets/glitched-cat.png";
         ko: "두려움은 실패보다 더 많은 꿈을 죽인다.",
         ja: "恐れは失敗よりも多くの夢を殺す。",
         ar: "الخوف يقتل من الأحلام أكثر مما يفعله الفشل.",
-        hi: "डर ने विफलता से कहीं अधिक सपनों को मारा है।"
+        hi: "डर ने विफलता से कहीं अधिक सपनों को मारा है।",
+    };
+
+    // Translations for Tech Stacks Subtitle
+    const techTranslations = {
+        id: "Teknologi dan alat yang saya gunakan untuk membangun proyek saya.",
+        en: "Technologies and tools I've used to build my projects.",
+        zh: "我用于构建项目的技术和工具。",
+        ko: "프로젝트 구축에 사용한 기술 및 도구입니다.",
+        ar: "التقنيات والأدوات التي استخدمتها لبناء مشاريعي.",
+        ja: "プロジェクトの構築に使用した技術とツールです。",
+        hi: "तकनीक और उपकरण जिनका उपयोग मैंने अपने प्रोजेक्ट बनाने के लिए किया है।"
+    };
+
+    // Decrypt / Encrypt helper functions for About Me text scroll effects
+    const decryptText = (
+        element: HTMLElement,
+        targetText: string,
+        duration = 1.4,
+    ) => {
+        const chars = "01o*.!@#$%^&*()_+{}|:<>?`-=[];',./";
+        const length = targetText.length;
+        const obj = { progress: 0 };
+
+        gsap.to(obj, {
+            progress: 1,
+            duration: duration,
+            ease: "power2.out",
+            overwrite: "auto",
+            onUpdate: () => {
+                const currentProgress = obj.progress;
+                const revealCount = Math.floor(currentProgress * length);
+                let output = "";
+                for (let i = 0; i < length; i++) {
+                    if (i < revealCount) {
+                        output += targetText[i];
+                    } else if (targetText[i] === " ") {
+                        output += " ";
+                    } else {
+                        output +=
+                            chars[Math.floor(Math.random() * chars.length)];
+                    }
+                }
+                element.textContent = output;
+            },
+        });
+    };
+
+    const encryptText = (
+        element: HTMLElement,
+        targetText: string,
+        duration = 0.8,
+    ) => {
+        const chars = "01o*.!@#$%^&*()_+{}|:<>?`-=[];',./";
+        const length = targetText.length;
+        const obj = { progress: 0 };
+
+        gsap.to(obj, {
+            progress: 1,
+            duration: duration,
+            ease: "power2.in",
+            overwrite: "auto",
+            onUpdate: () => {
+                const currentProgress = obj.progress;
+                const hideCount = Math.floor(currentProgress * length);
+                let output = "";
+                for (let i = 0; i < length; i++) {
+                    if (i < hideCount) {
+                        if (targetText[i] === " ") {
+                            output += " ";
+                        } else {
+                            output +=
+                                chars[Math.floor(Math.random() * chars.length)];
+                        }
+                    } else {
+                        output += targetText[i];
+                    }
+                }
+                element.textContent = output;
+            },
+            onComplete: () => {
+                element.textContent = "Under Development 🚧";
+            },
+        });
     };
 
     const initAboutText = () => {
         const aboutDescEl = document.getElementById("about-desc");
         if (aboutDescEl) {
-            const preferredLang = localStorage.getItem("preferred-language");
-            const sysLang =
-                preferredLang || navigator.language.split("-")[0].toLowerCase();
-            const text =
-                aboutTranslations[sysLang as keyof typeof aboutTranslations] ||
-                aboutTranslations.en;
-            aboutDescEl.textContent = text;
+            const getActiveText = () => {
+                const preferredLang =
+                    localStorage.getItem("preferred-language");
+                const sysLang =
+                    preferredLang ||
+                    navigator.language.split("-")[0].toLowerCase();
+                return (
+                    aboutTranslations[
+                        sysLang as keyof typeof aboutTranslations
+                    ] || aboutTranslations.en
+                );
+            };
+
+            // Set initial state
+            aboutDescEl.textContent = "Under Development 🚧";
+
+            // Create ScrollTrigger to decrypt on enter, encrypt on leave
+            ScrollTrigger.create({
+                trigger: "#about",
+                start: "top 70%",
+                end: "bottom 15%",
+                onEnter: () => {
+                    decryptText(aboutDescEl, getActiveText(), 3);
+                },
+                onLeave: () => {
+                    encryptText(aboutDescEl, getActiveText(), 1);
+                },
+                onEnterBack: () => {
+                    decryptText(aboutDescEl, getActiveText(), 2);
+                },
+                onLeaveBack: () => {
+                    encryptText(aboutDescEl, getActiveText(), 0.8);
+                },
+            });
         }
 
         // Listen to language changes dispatched from Header.vue
@@ -1453,8 +1620,38 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                 const text =
                     aboutTranslations[lang as keyof typeof aboutTranslations] ||
                     aboutTranslations.en;
-                aboutDescEl.textContent = text;
+                // If the section is in view, decrypt it
+                const rect = document
+                    .getElementById("about")
+                    ?.getBoundingClientRect();
+                const isInViewport =
+                    rect && rect.top < window.innerHeight && rect.bottom > 0;
+                if (isInViewport) {
+                    decryptText(aboutDescEl, text, 1.4);
+                } else {
+                    aboutDescEl.textContent = text;
+                }
             }
+        });
+    };
+
+    const initTechSubtitle = () => {
+        const subtitleEl = document.getElementById("tech-subtitle");
+        if (!subtitleEl) return;
+
+        const getActiveText = () => {
+            const preferredLang = localStorage.getItem("preferred-language");
+            const sysLang = preferredLang || navigator.language.split("-")[0].toLowerCase();
+            return techTranslations[sysLang as keyof typeof techTranslations] || techTranslations.en;
+        };
+
+        // Set initial translation
+        subtitleEl.textContent = getActiveText();
+
+        // Listen to language changes
+        window.addEventListener("language-changed", (e: any) => {
+            const lang = e.detail;
+            subtitleEl.textContent = techTranslations[lang as keyof typeof techTranslations] || techTranslations.en;
         });
     };
 
@@ -1839,15 +2036,48 @@ import imgCatGlitched from "../assets/glitched-cat.png";
 
         // Let's spawn 28 characters in 4 distinct zones surrounding the quote
         const zones = [
-            { name: "top", count: 8, minL: 12, maxL: 88, minT: 6, maxT: 22, classes: "" },
-            { name: "bottom", count: 8, minL: 12, maxL: 88, minT: 78, maxT: 94, classes: "" },
-            { name: "left", count: 6, minL: 6, maxL: 16, minT: 25, maxT: 75, classes: "hidden sm:block" },
-            { name: "right", count: 6, minL: 84, maxL: 94, minT: 25, maxT: 75, classes: "hidden sm:block" }
+            {
+                name: "top",
+                count: 8,
+                minL: 12,
+                maxL: 88,
+                minT: 6,
+                maxT: 22,
+                classes: "",
+            },
+            {
+                name: "bottom",
+                count: 8,
+                minL: 12,
+                maxL: 88,
+                minT: 78,
+                maxT: 94,
+                classes: "",
+            },
+            {
+                name: "left",
+                count: 6,
+                minL: 6,
+                maxL: 16,
+                minT: 25,
+                maxT: 75,
+                classes: "hidden sm:block",
+            },
+            {
+                name: "right",
+                count: 6,
+                minL: 84,
+                maxL: 94,
+                minT: 25,
+                maxT: 75,
+                classes: "hidden sm:block",
+            },
         ];
 
         zones.forEach((zone) => {
             for (let i = 0; i < zone.count; i++) {
-                const left = zone.minL + Math.random() * (zone.maxL - zone.minL);
+                const left =
+                    zone.minL + Math.random() * (zone.maxL - zone.minL);
                 const top = zone.minT + Math.random() * (zone.maxT - zone.minT);
 
                 const wrapper = document.createElement("div");
@@ -1856,12 +2086,16 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                 wrapper.style.top = `${top}%`;
 
                 const el = document.createElement("div");
-                el.className = "quotes-ascii font-mono text-[11px] sm:text-[13px] opacity-0 text-black/45 dark:text-[#EFEEE8]/30 font-bold transition-opacity duration-500 animate-ascii-drift";
-                el.textContent = asciiTexts[Math.floor(Math.random() * asciiTexts.length)];
-                
+                el.className =
+                    "quotes-ascii font-mono text-[11px] sm:text-[13px] opacity-0 text-black/45 dark:text-[#EFEEE8]/30 font-bold transition-opacity duration-500 animate-ascii-drift";
+                el.textContent =
+                    asciiTexts[Math.floor(Math.random() * asciiTexts.length)];
+
                 // Set random CSS variables for the native CSS keyframe animation
-                const dx = (Math.random() > 0.5 ? 1 : -1) * (6 + Math.random() * 10); // 6px to 16px drift range
-                const dy = (Math.random() > 0.5 ? 1 : -1) * (6 + Math.random() * 10);
+                const dx =
+                    (Math.random() > 0.5 ? 1 : -1) * (6 + Math.random() * 10); // 6px to 16px drift range
+                const dy =
+                    (Math.random() > 0.5 ? 1 : -1) * (6 + Math.random() * 10);
                 const duration = 5 + Math.random() * 4; // 5s to 9s drift duration
                 const delay = -Math.random() * 5; // Negative delay to prevent in-sync start
 
@@ -1883,16 +2117,18 @@ import imgCatGlitched from "../assets/glitched-cat.png";
         const quoteEl = document.querySelector("#quotes blockquote");
         if (!quoteEl) return;
 
-        const text = quoteTranslations[lang as keyof typeof quoteTranslations] || quoteTranslations.en;
+        const text =
+            quoteTranslations[lang as keyof typeof quoteTranslations] ||
+            quoteTranslations.en;
         const words = text.trim().split(/\s+/);
-        
+
         // Handle Right-to-Left text direction for Arabic
         quoteEl.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
 
         quoteEl.innerHTML = words
             .map(
                 (word) =>
-                    `<span class="reveal-word inline-block ${quoteRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}">${word}</span>`,
+                    `<span class="reveal-word inline-block ${quoteRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}">${word}</span>`,
             )
             .join(" ");
     };
@@ -1906,7 +2142,8 @@ import imgCatGlitched from "../assets/glitched-cat.png";
 
         // Get initial language and render
         const preferredLang = localStorage.getItem("preferred-language");
-        const sysLang = preferredLang || navigator.language.split("-")[0].toLowerCase();
+        const sysLang =
+            preferredLang || navigator.language.split("-")[0].toLowerCase();
         setQuoteContent(sysLang);
 
         // Listen to language changes
@@ -1930,7 +2167,8 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                         onComplete: () => {
                             quoteRevealed = true;
                             quoteTween = null;
-                            const asciiElements = document.querySelectorAll(".quotes-ascii");
+                            const asciiElements =
+                                document.querySelectorAll(".quotes-ascii");
                             gsap.to(asciiElements, {
                                 opacity: 1,
                                 duration: 1.0,
@@ -1948,7 +2186,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
             start: "top 80%",
             onEnter: () => {
                 if (quoteRevealed) return;
-                
+
                 const wordSpans = quoteEl.querySelectorAll(".reveal-word");
                 if (quoteTween) quoteTween.kill();
 
@@ -1962,7 +2200,8 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                         quoteRevealed = true;
                         quoteTween = null;
                         // Fade in the ASCII elements
-                        const asciiElements = document.querySelectorAll(".quotes-ascii");
+                        const asciiElements =
+                            document.querySelectorAll(".quotes-ascii");
                         gsap.to(asciiElements, {
                             opacity: 1,
                             duration: 1.0,
@@ -1970,7 +2209,71 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                         });
                     },
                 });
-            }
+            },
+        });
+    };
+
+    const initContactAnimations = () => {
+        const titleEl = document.getElementById("contact-title");
+        const buttons = document.querySelectorAll(".hologram-btn") as NodeListOf<HTMLElement>;
+        if (!titleEl || buttons.length === 0) return;
+
+        // Set initial state
+        titleEl.textContent = "-----------------";
+        buttons.forEach((btn) => {
+            btn.style.opacity = "0";
+        });
+
+        ScrollTrigger.create({
+            trigger: "#contact",
+            start: "top 75%",
+            end: "bottom 15%",
+            onEnter: () => {
+                decryptText(titleEl, "Let's Get in Touch", 1.8);
+                buttons.forEach((btn, index) => {
+                    btn.classList.remove("hologram-shutdown");
+                    btn.classList.remove("hologram-booting");
+                    void btn.offsetWidth;
+                    setTimeout(() => {
+                        btn.style.opacity = "";
+                        btn.classList.add("hologram-booting");
+                    }, index * 120);
+                });
+            },
+            onLeave: () => {
+                encryptText(titleEl, "Let's Get in Touch", 1.0);
+                buttons.forEach((btn, index) => {
+                    btn.classList.remove("hologram-booting");
+                    btn.classList.remove("hologram-shutdown");
+                    void btn.offsetWidth;
+                    setTimeout(() => {
+                        btn.classList.add("hologram-shutdown");
+                    }, (buttons.length - 1 - index) * 80);
+                });
+            },
+            onEnterBack: () => {
+                decryptText(titleEl, "Let's Get in Touch", 1.5);
+                buttons.forEach((btn, index) => {
+                    btn.classList.remove("hologram-shutdown");
+                    btn.classList.remove("hologram-booting");
+                    void btn.offsetWidth;
+                    setTimeout(() => {
+                        btn.style.opacity = "";
+                        btn.classList.add("hologram-booting");
+                    }, index * 100);
+                });
+            },
+            onLeaveBack: () => {
+                encryptText(titleEl, "Let's Get in Touch", 0.8);
+                buttons.forEach((btn, index) => {
+                    btn.classList.remove("hologram-booting");
+                    btn.classList.remove("hologram-shutdown");
+                    void btn.offsetWidth;
+                    setTimeout(() => {
+                        btn.classList.add("hologram-shutdown");
+                    }, (buttons.length - 1 - index) * 60);
+                });
+            },
         });
     };
 
@@ -1978,12 +2281,14 @@ import imgCatGlitched from "../assets/glitched-cat.png";
     const init = () => {
         initScrollAnimations();
         initAboutText();
+        initTechSubtitle();
         initCyberCoords();
         initCyberImageSwitcher();
         initAsciiStar();
         initRoleSwitcher();
         initCardGlow();
         initQuotesReveal();
+        initContactAnimations();
     };
 
     if (
@@ -2024,7 +2329,8 @@ import imgCatGlitched from "../assets/glitched-cat.png";
     }
 
     .animate-ascii-drift {
-        animation: ascii-drift var(--drift-duration, 6s) ease-in-out var(--drift-delay, 0s) infinite;
+        animation: ascii-drift var(--drift-duration, 6s) ease-in-out
+            var(--drift-delay, 0s) infinite;
     }
 
     :root {
@@ -2570,5 +2876,152 @@ import imgCatGlitched from "../assets/glitched-cat.png";
             text-shadow: none;
             transform: translate(0);
         }
+    }
+
+    /* Hologram Button Styles */
+    .hologram-btn {
+        position: relative;
+        overflow: hidden;
+        background: rgba(14, 13, 11, 0.01);
+        border: 1px solid rgba(14, 13, 11, 0.15);
+        box-shadow: 0 0 5px rgba(14, 13, 11, 0.03);
+        animation: holo-flicker 8s linear infinite;
+    }
+    .hologram-btn:hover {
+        background: rgba(14, 13, 11, 0.06);
+        border-color: rgba(14, 13, 11, 0.5);
+        box-shadow: 0 0 15px rgba(14, 13, 11, 0.2);
+        transform: translateY(-2px);
+    }
+    
+    html.dark .hologram-btn {
+        background: rgba(239, 238, 232, 0.015);
+        border: 1px solid rgba(239, 238, 232, 0.15);
+        box-shadow: 0 0 8px rgba(239, 238, 232, 0.04);
+    }
+    html.dark .hologram-btn:hover {
+        background: rgba(239, 238, 232, 0.08);
+        border-color: rgba(239, 238, 232, 0.5);
+        box-shadow: 0 0 18px rgba(239, 238, 232, 0.25);
+        text-shadow: 0 0 4px rgba(239, 238, 232, 0.35);
+    }
+
+    /* Subtle hologram scanning swipe line overlay */
+    .hologram-btn::after {
+        content: "";
+        position: absolute;
+        top: -100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            to bottom,
+            transparent,
+            rgba(14, 13, 11, 0.08) 50%,
+            transparent
+        );
+        pointer-events: none;
+        animation: holo-scan 4s linear infinite;
+    }
+    html.dark .hologram-btn::after {
+        background: linear-gradient(
+            to bottom,
+            transparent,
+            rgba(239, 238, 232, 0.12) 50%,
+            transparent
+        );
+    }
+
+    @keyframes holo-scan {
+        0% {
+            top: -100%;
+        }
+        100% {
+            top: 100%;
+        }
+    }
+
+    @keyframes holo-flicker {
+        0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+            opacity: 0.99;
+        }
+        20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+            opacity: 0.85;
+        }
+    }
+
+    /* Hologram Projection Boot-up and Shutdown animations */
+    @keyframes holo-boot {
+        0% {
+            opacity: 0;
+            transform: translateY(15px) scale(0.85) skewX(-8deg);
+            filter: brightness(3) contrast(1.5);
+        }
+        15% {
+            opacity: 0.7;
+            transform: translateY(-2px) scale(1.03) skewX(4deg);
+            filter: brightness(2) contrast(1.2);
+        }
+        35% {
+            opacity: 0.15;
+            transform: translateY(2px) scale(0.95) skewX(-3deg);
+            filter: brightness(1.5);
+        }
+        55% {
+            opacity: 0.9;
+            transform: translateY(-1px) scale(1.01) skewX(1deg);
+            filter: brightness(1.8);
+        }
+        70% {
+            opacity: 0.4;
+            transform: translateY(0) scale(0.98) skewX(0);
+            filter: brightness(1.2);
+        }
+        85% {
+            opacity: 1;
+            transform: translateY(0) scale(1.01);
+            filter: brightness(1.5);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: brightness(1);
+        }
+    }
+
+    @keyframes holo-shutdown {
+        0% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: brightness(1);
+        }
+        20% {
+            opacity: 0.8;
+            transform: translateY(-2px) scale(1.02) skewX(4deg);
+            filter: brightness(2.5);
+        }
+        40% {
+            opacity: 0.1;
+            transform: translateY(4px) scale(0.9) skewX(-8deg);
+            filter: brightness(3);
+        }
+        60% {
+            opacity: 0.4;
+            transform: translateY(1px) scale(0.95);
+            filter: brightness(1.5);
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(15px) scale(0.8) skewX(12deg);
+            filter: brightness(0);
+        }
+    }
+
+    .hologram-booting {
+        animation: holo-boot 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    .hologram-shutdown {
+        animation: holo-shutdown 0.45s ease-in forwards;
     }
 </style>
