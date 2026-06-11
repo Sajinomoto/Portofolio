@@ -10,970 +10,2527 @@ import imgCatGlitched from "../assets/glitched-cat.png";
 ---
 
 <Layout>
-	<LoadingScreen client:load />
-	<div id="app-content">
-		<Header client:load />
-		<main>
-			<section id="home" class="sticky top-0 z-0 h-screen w-full overflow-hidden">
-				<Greeting client:load />
-			</section>
-			<!-- Transparent spacer to lengthen Home scroll duration -->
-			<div class="h-[45vh] bg-transparent pointer-events-none relative z-0"></div>
-			<div id="scroll-content" class="relative z-10 bg-[#EFEEE8] dark:bg-[#0E0D0B] transition-colors duration-300 w-full">
-				<!-- Glassmorphism Top Transition Bar -->
-				<div class="absolute top-0 left-0 w-full h-24 bg-[#EFEEE8]/70 dark:bg-[#0E0D0B]/70 backdrop-blur-md pointer-events-none glass-fade transition-colors duration-300" style="transform: translateZ(0); will-change: transform;"></div>
+    <LoadingScreen client:load />
+    <div id="app-content">
+        <Header client:load />
+        <main>
+            <section
+                id="home"
+                class="sticky top-0 z-0 h-screen w-full overflow-hidden"
+            >
+                <Greeting client:load />
+            </section>
+            <!-- Transparent spacer to lengthen Home scroll duration -->
+            <div
+                class="h-[45vh] bg-transparent pointer-events-none relative z-0"
+            >
+            </div>
+            <div
+                id="scroll-content"
+                class="relative z-10 bg-[#EFEEE8] dark:bg-[#0E0D0B] transition-colors duration-300 w-full"
+            >
+                <!-- Glassmorphism Top Transition Bar -->
+                <div
+                    class="absolute top-0 left-0 w-full h-24 bg-[#EFEEE8]/70 dark:bg-[#0E0D0B]/70 backdrop-blur-md pointer-events-none glass-fade transition-colors duration-300"
+                    style="transform: translateZ(0); will-change: transform;"
+                >
+                </div>
 
-				<section 
-					id="about" 
-					class="relative min-h-screen flex flex-col items-start justify-start pt-32 pb-16 px-8 sm:px-12 md:px-24 max-w-7xl mx-auto text-black dark:text-[#EFEEE8] transition-colors duration-300 w-full"
-				>
-					<!-- Dot Matrix background panel (Matrix 'x' kecil di Kanan Atas) -->
-					<div class="absolute top-32 right-8 sm:right-12 md:right-24 w-[150px] h-[90px] pointer-events-none dot-matrix-bg z-0 opacity-75"></div>
+                <section
+                    id="about"
+                    class="relative min-h-screen flex flex-col items-start justify-start pt-32 pb-16 px-8 sm:px-12 md:px-24 max-w-7xl mx-auto text-black dark:text-[#EFEEE8] transition-colors duration-300 w-full"
+                >
+                    <!-- Dot Matrix background panel (Matrix 'x' kecil di Kanan Atas) -->
+                    <div
+                        class="absolute top-32 right-8 sm:right-12 md:right-24 w-[150px] h-[90px] pointer-events-none dot-matrix-bg z-0 opacity-75"
+                    >
+                    </div>
 
-					<!-- Tech schematic lines background (1-2 clean lines with bends and labels) -->
-					<div class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden select-none opacity-25 dark:opacity-15 transition-opacity duration-300">
-						<svg class="w-full h-full stroke-black/30 dark:stroke-[#EFEEE8]/20 fill-none text-black dark:text-[#EFEEE8] transition-colors duration-300" stroke-width="1" xmlns="http://www.w3.org/2000/svg">
-							<!-- Line 1: Top line starting left, bending down, running across to right -->
-							<path d="M 0 150 H 150 L 190 190 H 700 L 730 220 H 2000" />
-							<circle cx="150" cy="150" r="2" fill="currentColor" class="opacity-50" />
-							<text x="210" y="185" font-family="monospace" font-size="8" fill="currentColor" class="opacity-40" letter-spacing="1">SYS_TRACE.01</text>
-							
-							<!-- Line 2: Bottom line starting right, bending up, running across to left -->
-							<path d="M 2000 580 H 780 L 740 540 H 400 L 360 500 H 0" />
-							<circle cx="780" cy="580" r="2" fill="currentColor" class="opacity-50" />
-							<text x="420" y="535" font-family="monospace" font-size="8" fill="currentColor" class="opacity-40" letter-spacing="1">NET.SYS_LINK</text>
-						</svg>
-					</div>
+                    <!-- Tech schematic lines background (1-2 clean lines with bends and labels) -->
+                    <div
+                        class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden select-none opacity-25 dark:opacity-15 transition-opacity duration-300"
+                    >
+                        <svg
+                            class="w-full h-full stroke-black/30 dark:stroke-[#EFEEE8]/20 fill-none text-black dark:text-[#EFEEE8] transition-colors duration-300"
+                            stroke-width="1"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <!-- Line 1: Top line starting left, bending down, running across to right -->
+                            <path
+                                d="M 0 150 H 150 L 190 190 H 700 L 730 220 H 2000"
+                            ></path>
+                            <circle
+                                cx="150"
+                                cy="150"
+                                r="2"
+                                fill="currentColor"
+                                class="opacity-50"></circle>
+                            <text
+                                x="210"
+                                y="185"
+                                font-family="monospace"
+                                font-size="8"
+                                fill="currentColor"
+                                class="opacity-40"
+                                letter-spacing="1">SYS_TRACE.01</text
+                            >
 
-					<!-- Technical Bar (Gambar 1, Reversed) -->
-					<div class="mb-6 ml-1 pointer-events-none select-none">
-						<svg width="236" height="40" viewBox="0 0 236 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-black dark:text-white transition-colors duration-300">
-							<defs>
-								<!-- Pattern 1: Dot Matrix -->
-								<pattern id="dots-holes" width="4" height="4" patternUnits="userSpaceOnUse">
-									<circle cx="2" cy="2" r="0.75" fill="var(--bg-color)" />
-								</pattern>
-								<!-- Pattern 2: Cross Hatch -->
-								<pattern id="cross-hatch" width="6" height="6" patternUnits="userSpaceOnUse">
-									<path d="M 0 0 L 6 6 M 6 0 L 0 6" stroke="currentColor" stroke-width="0.8" />
-								</pattern>
-								<!-- Pattern 3: Dense Hatch -->
-								<pattern id="dense-hatch" width="4" height="4" patternUnits="userSpaceOnUse">
-									<path d="M -1 1 L 5 -5 M 0 4 L 4 0 M 3 5 L 5 3" stroke="currentColor" stroke-width="0.8" />
-								</pattern>
-								<!-- Pattern 4: Thin Hatch -->
-								<pattern id="thin-hatch" width="8" height="8" patternUnits="userSpaceOnUse">
-									<path d="M -2 2 L 10 -2 M 0 8 L 8 0 M 6 10 L 10 6" stroke="currentColor" stroke-width="0.8" />
-								</pattern>
-							</defs>
+                            <!-- Line 2: Bottom line starting right, bending up, running across to left -->
+                            <path
+                                d="M 2000 580 H 780 L 740 540 H 400 L 360 500 H 0"
+                            ></path>
+                            <circle
+                                cx="780"
+                                cy="580"
+                                r="2"
+                                fill="currentColor"
+                                class="opacity-50"></circle>
+                            <text
+                                x="420"
+                                y="535"
+                                font-family="monospace"
+                                font-size="8"
+                                fill="currentColor"
+                                class="opacity-40"
+                                letter-spacing="1">NET.SYS_LINK</text
+                            >
+                        </svg>
+                    </div>
 
-							<!-- 1. Solid vertical block (Left) -->
-							<rect x="0" y="0" width="10" height="40" fill="currentColor" />
+                    <!-- Technical Bar (Gambar 1, Reversed) -->
+                    <div class="mb-6 ml-1 pointer-events-none select-none">
+                        <svg
+                            width="236"
+                            height="40"
+                            viewBox="0 0 236 40"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="text-black dark:text-white transition-colors duration-300"
+                        >
+                            <defs>
+                                <!-- Pattern 1: Dot Matrix -->
+                                <pattern
+                                    id="dots-holes"
+                                    width="4"
+                                    height="4"
+                                    patternUnits="userSpaceOnUse"
+                                >
+                                    <circle
+                                        cx="2"
+                                        cy="2"
+                                        r="0.75"
+                                        fill="var(--bg-color)"></circle>
+                                </pattern>
+                                <!-- Pattern 2: Cross Hatch -->
+                                <pattern
+                                    id="cross-hatch"
+                                    width="6"
+                                    height="6"
+                                    patternUnits="userSpaceOnUse"
+                                >
+                                    <path
+                                        d="M 0 0 L 6 6 M 6 0 L 0 6"
+                                        stroke="currentColor"
+                                        stroke-width="0.8"></path>
+                                </pattern>
+                                <!-- Pattern 3: Dense Hatch -->
+                                <pattern
+                                    id="dense-hatch"
+                                    width="4"
+                                    height="4"
+                                    patternUnits="userSpaceOnUse"
+                                >
+                                    <path
+                                        d="M -1 1 L 5 -5 M 0 4 L 4 0 M 3 5 L 5 3"
+                                        stroke="currentColor"
+                                        stroke-width="0.8"></path>
+                                </pattern>
+                                <!-- Pattern 4: Thin Hatch -->
+                                <pattern
+                                    id="thin-hatch"
+                                    width="8"
+                                    height="8"
+                                    patternUnits="userSpaceOnUse"
+                                >
+                                    <path
+                                        d="M -2 2 L 10 -2 M 0 8 L 8 0 M 6 10 L 10 6"
+                                        stroke="currentColor"
+                                        stroke-width="0.8"></path>
+                                </pattern>
+                            </defs>
 
-							<!-- 2. Dark block with background-colored dots -->
-							<rect x="16" y="0" width="50" height="40" fill="currentColor" />
-							<rect x="16" y="0" width="50" height="40" fill="url(#dots-holes)" />
+                            <!-- 1. Solid vertical block (Left) -->
+                            <rect
+                                x="0"
+                                y="0"
+                                width="10"
+                                height="40"
+                                fill="currentColor"></rect>
 
-							<!-- 3. Cross hatch block -->
-							<rect x="72" y="0" width="50" height="40" fill="url(#cross-hatch)" />
+                            <!-- 2. Dark block with background-colored dots -->
+                            <rect
+                                x="16"
+                                y="0"
+                                width="50"
+                                height="40"
+                                fill="currentColor"></rect>
+                            <rect
+                                x="16"
+                                y="0"
+                                width="50"
+                                height="40"
+                                fill="url(#dots-holes)"></rect>
 
-							<!-- 4. Dense hatch block -->
-							<rect x="128" y="0" width="50" height="40" fill="url(#dense-hatch)" />
+                            <!-- 3. Cross hatch block -->
+                            <rect
+                                x="72"
+                                y="0"
+                                width="50"
+                                height="40"
+                                fill="url(#cross-hatch)"></rect>
 
-							<!-- 5. Thin hatch block (Right) -->
-							<rect x="184" y="0" width="50" height="40" fill="url(#thin-hatch)" />
-						</svg>
-					</div>
+                            <!-- 4. Dense hatch block -->
+                            <rect
+                                x="128"
+                                y="0"
+                                width="50"
+                                height="40"
+                                fill="url(#dense-hatch)"></rect>
 
-					<!-- Grid Container -->
-					<div class="relative z-10 w-full grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start mt-4">
-						<!-- Left Column: Text Content (cols 1 to 7) -->
-						<div class="md:col-span-7 flex flex-col justify-start max-w-5xl">
-							<h2 class="about-title text-3xl sm:text-5xl font-bold tracking-tight mb-4 text-black dark:text-white transition-colors duration-300">
-								About Me
-							</h2>
-							<p id="about-desc" class="about-desc text-lg sm:text-xl text-black/50 dark:text-[#EFEEE8]/50 font-medium leading-relaxed transition-colors duration-300 text-justify">
-								Under Development 🚧
-							</p>
-						</div>
+                            <!-- 5. Thin hatch block (Right) -->
+                            <rect
+                                x="184"
+                                y="0"
+                                width="50"
+                                height="40"
+                                fill="url(#thin-hatch)"></rect>
+                        </svg>
+                    </div>
 
-						<!-- Right Column: Cyber Profile Picture (cols 8 to 12) -->
-						<div class="md:col-span-5 flex justify-center md:justify-end w-full">
-							<div 
-								id="cyber-pic-frame" 
-								class="relative w-full max-w-[320px] aspect-square bg-[#0E0D0B]/5 dark:bg-[#EFEEE8]/5 border border-black/20 dark:border-white/20 p-4 select-none group transition-all duration-300 hover:border-black dark:hover:border-white cursor-crosshair"
-							>
-								<!-- Corner Brackets -->
-								<div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-black/40 dark:border-white/40 group-hover:border-black dark:group-hover:border-white group-hover:scale-105 transition-all duration-300"></div>
-								<div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-black/40 dark:border-white/40 group-hover:border-black dark:group-hover:border-white group-hover:scale-105 transition-all duration-300"></div>
-								<div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-black/40 dark:border-white/40 group-hover:border-black dark:group-hover:border-white group-hover:scale-105 transition-all duration-300"></div>
-								<div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-black/40 dark:border-white/40 group-hover:border-black dark:group-hover:border-white group-hover:scale-105 transition-all duration-300"></div>
+                    <!-- Grid Container -->
+                    <div
+                        class="relative z-10 w-full grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start mt-4"
+                    >
+                        <!-- Left Column: Text Content (cols 1 to 7) -->
+                        <div
+                            class="md:col-span-7 flex flex-col justify-start max-w-5xl"
+                        >
+                            <h2
+                                class="about-title text-3xl sm:text-5xl font-bold tracking-tight mb-4 text-black dark:text-white transition-colors duration-300"
+                            >
+                                Saji | <span
+                                    id="about-role-text"
+                                    class="text-change-glitch inline-block"
+                                    data-text="FullStack Developer"
+                                    >FullStack Developer</span
+                                >
+                            </h2>
+                            <p
+                                id="about-desc"
+                                class="about-desc text-lg sm:text-xl text-black/50 dark:text-[#EFEEE8]/50 font-medium leading-relaxed transition-colors duration-300 text-justify"
+                            >
+                                Under Development 🚧
+                            </p>
+                        </div>
 
-								<!-- Top Readouts -->
-								<div class="absolute top-2 left-4 right-4 flex justify-between text-[9px] font-mono tracking-wider opacity-60 group-hover:opacity-100 transition-opacity duration-300">
-									<span class="flex items-center gap-1.5">
-										<span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
-										SYS.RUNNING
-									</span>
-									<span id="cyber-pic-coords">X: 000 // Y: 000</span>
-								</div>
+                        <!-- Right Column: Cyber Profile Picture (cols 8 to 12) -->
+                        <div
+                            class="md:col-span-5 flex flex-col items-center md:items-end w-full"
+                        >
+                            <div
+                                id="cyber-pic-frame"
+                                class="relative w-full max-w-[320px] aspect-square bg-[#0E0D0B]/5 dark:bg-[#EFEEE8]/5 border border-black/20 dark:border-white/20 p-4 select-none group transition-all duration-300 hover:border-black dark:hover:border-white cursor-crosshair"
+                            >
+                                <!-- Corner Brackets -->
+                                <div
+                                    class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-black/40 dark:border-white/40 group-hover:border-black dark:group-hover:border-white group-hover:scale-105 transition-all duration-300"
+                                >
+                                </div>
+                                <div
+                                    class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-black/40 dark:border-white/40 group-hover:border-black dark:group-hover:border-white group-hover:scale-105 transition-all duration-300"
+                                >
+                                </div>
+                                <div
+                                    class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-black/40 dark:border-white/40 group-hover:border-black dark:group-hover:border-white group-hover:scale-105 transition-all duration-300"
+                                >
+                                </div>
+                                <div
+                                    class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-black/40 dark:border-white/40 group-hover:border-black dark:group-hover:border-white group-hover:scale-105 transition-all duration-300"
+                                >
+                                </div>
 
-								<!-- Inner Viewport -->
-								<div id="cyber-viewport" class="relative w-full h-full border border-black/10 dark:border-white/10 overflow-hidden flex items-center justify-center bg-black/[0.03] dark:bg-white/[0.03]">
-									
-									<!-- Image Wrapper 0: Cat -->
-									<div class="cyber-slide absolute inset-0 w-full h-full opacity-100 z-10 transition-opacity duration-200">
-										<!-- Main Image -->
-										<img 
-											src={imgCat.src} 
-											alt="Satrio Aji Profile Cat" 
-											class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
-										/>
-										<!-- Glitch Layer 1 -->
-										<img 
-											src={imgCat.src} 
-											alt="Glitch Layer 1" 
-											class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-1 filter hue-rotate-[90deg] pointer-events-none"
-										/>
-										<!-- Glitch Layer 2 -->
-										<img 
-											src={imgCat.src} 
-											alt="Glitch Layer 2" 
-											class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-2 filter hue-rotate-[240deg] pointer-events-none"
-										/>
-									</div>
+                                <!-- Top Readouts -->
+                                <div
+                                    class="absolute top-2 left-4 right-4 flex justify-between text-[9px] font-mono tracking-wider opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+                                >
+                                    <span class="flex items-center gap-1.5">
+                                        <span
+                                            class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"
+                                        ></span>
+                                        SYS.RUNNING
+                                    </span>
+                                    <span id="cyber-pic-coords"
+                                        >X: 000 // Y: 000</span
+                                    >
+                                </div>
 
-									<!-- Image Wrapper 1: Bird -->
-									<div class="cyber-slide absolute inset-0 w-full h-full opacity-0 z-0 transition-opacity duration-200">
-										<!-- Main Image -->
-										<img 
-											src={imgBird.src} 
-											alt="Satrio Aji Glitched Bird" 
-											class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
-										/>
-										<!-- Glitch Layer 1 -->
-										<img 
-											src={imgBird.src} 
-											alt="Glitch Layer 1" 
-											class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-1 filter hue-rotate-[90deg] pointer-events-none"
-										/>
-										<!-- Glitch Layer 2 -->
-										<img 
-											src={imgBird.src} 
-											alt="Glitch Layer 2" 
-											class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-2 filter hue-rotate-[240deg] pointer-events-none"
-										/>
-									</div>
+                                <!-- Inner Viewport -->
+                                <div
+                                    id="cyber-viewport"
+                                    class="relative w-full h-full border border-black/10 dark:border-white/10 overflow-hidden flex items-center justify-center bg-black/[0.03] dark:bg-white/[0.03]"
+                                >
+                                    <!-- Image Wrapper 0: Cat -->
+                                    <div
+                                        class="cyber-slide absolute inset-0 w-full h-full opacity-100 z-10 transition-opacity duration-200"
+                                    >
+                                        <!-- Main Image -->
+                                        <img
+                                            src={imgCat.src}
+                                            alt="Satrio Aji Profile Cat"
+                                            class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                                        />
+                                        <!-- Glitch Layer 1 -->
+                                        <img
+                                            src={imgCat.src}
+                                            alt="Glitch Layer 1"
+                                            class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-1 filter hue-rotate-[90deg] pointer-events-none"
+                                        />
+                                        <!-- Glitch Layer 2 -->
+                                        <img
+                                            src={imgCat.src}
+                                            alt="Glitch Layer 2"
+                                            class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-2 filter hue-rotate-[240deg] pointer-events-none"
+                                        />
+                                    </div>
 
-									<!-- Image Wrapper 2: Glitched Cat -->
-									<div class="cyber-slide absolute inset-0 w-full h-full opacity-0 z-0 transition-opacity duration-200">
-										<!-- Main Image -->
-										<img 
-											src={imgCatGlitched.src} 
-											alt="Satrio Aji Glitched Cat" 
-											class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
-										/>
-										<!-- Glitch Layer 1 -->
-										<img 
-											src={imgCatGlitched.src} 
-											alt="Glitch Layer 1" 
-											class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-1 filter hue-rotate-[90deg] pointer-events-none"
-										/>
-										<!-- Glitch Layer 2 -->
-										<img 
-											src={imgCatGlitched.src} 
-											alt="Glitch Layer 2" 
-											class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-2 filter hue-rotate-[240deg] pointer-events-none"
-										/>
-									</div>
+                                    <!-- Image Wrapper 1: Bird -->
+                                    <div
+                                        class="cyber-slide absolute inset-0 w-full h-full opacity-0 z-0 transition-opacity duration-200"
+                                    >
+                                        <!-- Main Image -->
+                                        <img
+                                            src={imgBird.src}
+                                            alt="Satrio Aji Glitched Bird"
+                                            class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                                        />
+                                        <!-- Glitch Layer 1 -->
+                                        <img
+                                            src={imgBird.src}
+                                            alt="Glitch Layer 1"
+                                            class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-1 filter hue-rotate-[90deg] pointer-events-none"
+                                        />
+                                        <!-- Glitch Layer 2 -->
+                                        <img
+                                            src={imgBird.src}
+                                            alt="Glitch Layer 2"
+                                            class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-2 filter hue-rotate-[240deg] pointer-events-none"
+                                        />
+                                    </div>
 
-									<!-- Glitch Bars (Visible & animated during transition) -->
-									<div class="absolute left-0 w-full h-[3px] bg-red-500 opacity-0 pointer-events-none z-30 cyber-glitch-bar cyber-glitch-bar-1"></div>
-									<div class="absolute left-0 w-full h-[6px] bg-cyan-400 opacity-0 pointer-events-none z-30 cyber-glitch-bar cyber-glitch-bar-2"></div>
-									<div class="absolute left-0 w-full h-[2px] bg-yellow-300 opacity-0 pointer-events-none z-30 cyber-glitch-bar cyber-glitch-bar-3"></div>
+                                    <!-- Image Wrapper 2: Glitched Cat -->
+                                    <div
+                                        class="cyber-slide absolute inset-0 w-full h-full opacity-0 z-0 transition-opacity duration-200"
+                                    >
+                                        <!-- Main Image -->
+                                        <img
+                                            src={imgCatGlitched.src}
+                                            alt="Satrio Aji Glitched Cat"
+                                            class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                                        />
+                                        <!-- Glitch Layer 1 -->
+                                        <img
+                                            src={imgCatGlitched.src}
+                                            alt="Glitch Layer 1"
+                                            class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-1 filter hue-rotate-[90deg] pointer-events-none"
+                                        />
+                                        <!-- Glitch Layer 2 -->
+                                        <img
+                                            src={imgCatGlitched.src}
+                                            alt="Glitch Layer 2"
+                                            class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-2 filter hue-rotate-[240deg] pointer-events-none"
+                                        />
+                                    </div>
 
-									<!-- Retro CRT Scanlines Overlay -->
-									<div class="crt-scanlines absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.15)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[size:100%_4px,6px_100%] z-20 opacity-80 group-hover:opacity-50 transition-opacity duration-300"></div>
-								</div>
+                                    <!-- Glitch Bars (Visible & animated during transition) -->
+                                    <div
+                                        class="absolute left-0 w-full h-[3px] bg-red-500 opacity-0 pointer-events-none z-30 cyber-glitch-bar cyber-glitch-bar-1"
+                                    >
+                                    </div>
+                                    <div
+                                        class="absolute left-0 w-full h-[6px] bg-cyan-400 opacity-0 pointer-events-none z-30 cyber-glitch-bar cyber-glitch-bar-2"
+                                    >
+                                    </div>
+                                    <div
+                                        class="absolute left-0 w-full h-[2px] bg-yellow-300 opacity-0 pointer-events-none z-30 cyber-glitch-bar cyber-glitch-bar-3"
+                                    >
+                                    </div>
 
-								<!-- Bottom Readouts -->
-								<div class="absolute bottom-2 left-4 right-4 flex justify-between text-[9px] font-mono tracking-wider opacity-60 group-hover:opacity-100 transition-opacity duration-300">
-									<span id="cyber-pic-unit">UNIT: IMG_SET_01</span>
-									<span>SYS.LOC // ID_IDN</span>
-								</div>
-							</div>
-						</div>
-					</div>
+                                    <!-- Retro CRT Scanlines Overlay -->
+                                    <div
+                                        class="crt-scanlines absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.15)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[size:100%_4px,6px_100%] z-20 opacity-80 group-hover:opacity-50 transition-opacity duration-300"
+                                    >
+                                    </div>
+                                </div>
 
-					<!-- ASCII Floating Stars (Interactive wandering easter eggs - 3 instances) -->
-					<div 
-						id="ascii-floating-star-0" 
-						class="ascii-star absolute pointer-events-auto z-20 cursor-pointer select-none opacity-0 transition-opacity duration-500 font-mono text-[10px] font-bold text-black/45 dark:text-[#EFEEE8]/35 hover:text-black dark:hover:text-white"
-						style="top: 50%; left: 50%;"
-					>
-						<pre class="m-0 p-0 leading-[9px] tracking-normal font-mono select-none pointer-events-none">    │    
+                                <!-- Bottom Readouts -->
+                                <div
+                                    class="absolute bottom-2 left-4 right-4 flex justify-between text-[9px] font-mono tracking-wider opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+                                >
+                                    <span id="cyber-pic-unit"
+                                        >UNIT: IMG_SET_01</span
+                                    >
+                                    <span>SYS.LOC // ID_IDN</span>
+                                </div>
+                            </div>
+
+                            <!-- Name Label underneath -->
+                            <div
+                                class="mt-4 w-full max-w-[320px] text-center font-mono text-xs sm:text-sm font-bold tracking-wider text-black dark:text-white select-none"
+                            >
+                                [Satrio Aji Pamungkas]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ASCII Floating Stars (Interactive wandering easter eggs - 3 instances) -->
+                    <div
+                        id="ascii-floating-star-0"
+                        class="ascii-star absolute pointer-events-auto z-20 cursor-pointer select-none opacity-0 transition-opacity duration-500 font-mono text-[10px] font-bold text-black/45 dark:text-[#EFEEE8]/35 hover:text-black dark:hover:text-white"
+                        style="top: 50%; left: 50%;"
+                    >
+                        <pre
+                            class="m-0 p-0 leading-[9px] tracking-normal font-mono select-none pointer-events-none">    │
 ─── ✦ ───
     │    </pre>
-					</div>
+                    </div>
 
-					<div 
-						id="ascii-floating-star-1" 
-						class="ascii-star absolute pointer-events-auto z-20 cursor-pointer select-none opacity-0 transition-opacity duration-500 font-mono text-[10px] font-bold text-black/45 dark:text-[#EFEEE8]/35 hover:text-black dark:hover:text-white"
-						style="top: 50%; left: 50%;"
-					>
-						<pre class="m-0 p-0 leading-[9px] tracking-normal font-mono select-none pointer-events-none">    │    
+                    <div
+                        id="ascii-floating-star-1"
+                        class="ascii-star absolute pointer-events-auto z-20 cursor-pointer select-none opacity-0 transition-opacity duration-500 font-mono text-[10px] font-bold text-black/45 dark:text-[#EFEEE8]/35 hover:text-black dark:hover:text-white"
+                        style="top: 50%; left: 50%;"
+                    >
+                        <pre
+                            class="m-0 p-0 leading-[9px] tracking-normal font-mono select-none pointer-events-none">    │
 ─── ✦ ───
     │    </pre>
-					</div>
+                    </div>
 
-					<div 
-						id="ascii-floating-star-2" 
-						class="ascii-star absolute pointer-events-auto z-20 cursor-pointer select-none opacity-0 transition-opacity duration-500 font-mono text-[10px] font-bold text-black/45 dark:text-[#EFEEE8]/35 hover:text-black dark:hover:text-white"
-						style="top: 50%; left: 50%;"
-					>
-						<pre class="m-0 p-0 leading-[9px] tracking-normal font-mono select-none pointer-events-none">    │    
+                    <div
+                        id="ascii-floating-star-2"
+                        class="ascii-star absolute pointer-events-auto z-20 cursor-pointer select-none opacity-0 transition-opacity duration-500 font-mono text-[10px] font-bold text-black/45 dark:text-[#EFEEE8]/35 hover:text-black dark:hover:text-white"
+                        style="top: 50%; left: 50%;"
+                    >
+                        <pre
+                            class="m-0 p-0 leading-[9px] tracking-normal font-mono select-none pointer-events-none">    │
 ─── ✦ ───
     │    </pre>
-					</div>
+                    </div>
 
-				</section>
+                    <!-- Technical Divider inside About Me -->
+                    <div
+                        class="w-full h-[1px] bg-black/10 dark:bg-white/10 mt-20 mb-16 relative flex items-center justify-center select-none pointer-events-none"
+                    >
+                        <div
+                            class="absolute bg-[#EFEEE8] dark:bg-[#0E0D0B] px-4 font-mono text-[9px] uppercase tracking-widest text-black/45 dark:text-[#EFEEE8]/35 transition-colors duration-300"
+                        >
+                            [SYS.STATUS: DATA_STREAM: SKILLS_SET]
+                        </div>
+                    </div>
 
-				<!-- Technical Accent Divider (Under About Me section) -->
-				<div class="relative w-full h-8 pointer-events-none select-none flex items-stretch gap-2.5 overflow-hidden">
-					<!-- 1. Solid vertical block (Left edge) -->
-					<div class="w-2.5 bg-black dark:bg-[#EFEEE8] transition-colors duration-300"></div>
+                    <!-- Part 2: Tech Stacks & Tools -->
+                    <div
+                        class="w-full flex flex-col items-center justify-center mt-4 z-10"
+                    >
+                        <h3
+                            class="text-2xl sm:text-4xl font-bold tracking-tight text-center uppercase font-mono mb-2 text-black dark:text-white"
+                        >
+                            Tech Stacks & Tools
+                        </h3>
+                        <p
+                            class="text-[10px] sm:text-xs text-center text-black/50 dark:text-[#EFEEE8]/50 font-medium tracking-widest max-w-lg mb-12 uppercase font-mono"
+                        >
+                            Technologies and tools i've been use to build my
+                            projects
+                        </p>
 
-					<!-- 2. Block with repeating diagonal stripes (Rest of screen) -->
-					<div class="flex-grow border-y border-black/10 dark:border-white/10 relative overflow-hidden transition-colors duration-300">
-						<div class="absolute inset-0 opacity-85 text-black dark:text-[#EFEEE8] transition-colors duration-300 about-diagonal-stripes"></div>
-					</div>
-				</div>
+                        <!-- Grid of Cards -->
+                        <div
+                            class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 items-stretch"
+                        >
+                            <!-- Card 1: Frontend (Glassmorphic Style) -->
+                            <div
+                                class="tech-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none min-h-[460px] lg:min-h-[500px]"
+                            >
+                                <div
+                                    class="relative z-10 flex flex-col justify-between h-full flex-grow"
+                                >
+                                    <!-- Header -->
+                                    <h4
+                                        class="tech-card-title font-mono text-[10px] font-bold text-black/40 dark:text-white/35 uppercase tracking-widest leading-none mb-3"
+                                    >
+                                        01_FRONTEND.sys
+                                    </h4>
 
-				<!-- Section: Projects -->
-				<section 
-					id="projects" 
-					class="relative min-h-screen flex flex-col items-center justify-center py-32 px-8 sm:px-12 md:px-24 max-w-7xl mx-auto text-black dark:text-[#EFEEE8] transition-colors duration-300 w-full z-10"
-				>
-					<!-- Subtle top border/accent -->
-					<div class="absolute top-0 left-8 right-8 h-[1px] bg-black/10 dark:bg-white/10"></div>
+                                    <!-- Card Body (Vertical list layout) -->
+                                    <div
+                                        class="flex flex-col gap-2.5 mt-3.5 flex-grow justify-start"
+                                    >
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- JS Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-yellow-500 dark:text-yellow-400"
+                                                ><path
+                                                    d="M16 18l6-6-6-6M8 6L2 12l6 6"
+                                                ></path></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >JAVASCRIPT</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- TS Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-blue-500"
+                                                ><path
+                                                    d="M16 18l6-6-6-6M8 6L2 12l6 6"
+                                                ></path><path d="M12 2v20"
+                                                ></path></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >TYPESCRIPT</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- Vue Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-emerald-500"
+                                                ><path
+                                                    d="M12 21 2 3h4l6 11 6-11h4L12 21z"
+                                                ></path></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >VUE</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- React Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-cyan-500"
+                                                ><ellipse
+                                                    cx="12"
+                                                    cy="12"
+                                                    rx="10"
+                                                    ry="4"
+                                                    transform="rotate(30 12 12)"
+                                                ></ellipse><ellipse
+                                                    cx="12"
+                                                    cy="12"
+                                                    rx="10"
+                                                    ry="4"
+                                                    transform="rotate(90 12 12)"
+                                                ></ellipse><ellipse
+                                                    cx="12"
+                                                    cy="12"
+                                                    rx="10"
+                                                    ry="4"
+                                                    transform="rotate(150 12 12)"
+                                                ></ellipse><circle
+                                                    cx="12"
+                                                    cy="12"
+                                                    r="1"></circle></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >REACTJS</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- Tailwind Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-sky-400"
+                                                ><polygon
+                                                    points="12 2 2 7 12 12 22 7 12 2"
+                                                ></polygon><polyline
+                                                    points="2 17 12 22 22 17"
+                                                ></polyline><polyline
+                                                    points="2 12 12 17 22 12"
+                                                ></polyline></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >TAILWIND</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- ThreeJS Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-purple-400"
+                                                ><path d="M12 2L2 22h20L12 2z"
+                                                ></path><path d="M12 2v20"
+                                                ></path><path
+                                                    d="M2 22l10-10 10 10"
+                                                ></path></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >THREEJS</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- GSAP Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-green-500"
+                                                ><polygon
+                                                    points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
+                                                ></polygon></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >GSAP</span
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-					<!-- Plus markers/grid dots for premium styling -->
-					<div class="absolute top-6 left-8 font-mono text-[9px] opacity-40 select-none">SYS.PRJ_SECTION</div>
-					<div class="absolute top-6 right-8 font-mono text-[9px] opacity-40 select-none">[STATUS: UNDER_DEV]</div>
-					
-					<div class="relative flex flex-col items-center justify-center">
-						<h2 
-							class="text-3xl sm:text-5xl md:text-6xl font-normal tracking-tight uppercase relative font-mono text-center select-none cursor-pointer"
-						>
-							My Projects - [Under Development]
-						</h2>
-					</div>
-				</section>
+                            <!-- Card 2: Backend (Glassmorphic Style) -->
+                            <div
+                                class="tech-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none min-h-[460px] lg:min-h-[500px]"
+                            >
+                                <div
+                                    class="relative z-10 flex flex-col justify-between h-full flex-grow"
+                                >
+                                    <!-- Header -->
+                                    <h4
+                                        class="tech-card-title font-mono text-[10px] font-bold text-black/40 dark:text-white/35 uppercase tracking-widest leading-none mb-3"
+                                    >
+                                        02_BACKEND.sys
+                                    </h4>
 
-				<!-- Cyber Separator Line -->
-				<div class="relative w-full h-8 pointer-events-none select-none flex items-center justify-between px-8 sm:px-12 md:px-24 max-w-7xl mx-auto my-2">
-					<!-- The thin border line itself -->
-					<div class="absolute left-8 right-8 h-[1px] bg-black/10 dark:bg-white/10"></div>
-					
-					<!-- Left Corner cross marker -->
-					<div class="z-10 font-mono text-[9px] text-black/30 dark:text-white/20 bg-[#EFEEE8] dark:bg-[#0E0D0B] px-1.5 transition-colors duration-300">
-						[┼] SYS.LOC_0x7B
-					</div>
-					
-					<!-- Center dotted marker -->
-					<div class="z-10 bg-[#EFEEE8] dark:bg-[#0E0D0B] px-3 font-mono text-[8px] tracking-widest text-black/20 dark:text-white/10 transition-colors duration-300">
-						••••• SEC_DIVIDER •••••
-					</div>
+                                    <!-- Card Body (Vertical list layout) -->
+                                    <div
+                                        class="flex flex-col gap-2.5 mt-3.5 flex-grow justify-start"
+                                    >
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- Laravel Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-red-500"
+                                                ><rect
+                                                    x="3"
+                                                    y="3"
+                                                    width="18"
+                                                    height="18"
+                                                    rx="2"
+                                                    ry="2"></rect><path
+                                                    d="M9 3v18M15 3v18M3 9h18M3 15h18"
+                                                ></path></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >LARAVEL</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- NodeJS Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-green-600"
+                                                ><polygon
+                                                    points="12 2 22 7.5 22 18.5 12 24 2 18.5 2 7.5 12 2"
+                                                ></polygon></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >NODEJS</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- ExpressJS Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-gray-400"
+                                                ><polyline
+                                                    points="4 17 10 11 4 5"
+                                                ></polyline><line
+                                                    x1="12"
+                                                    y1="19"
+                                                    x2="20"
+                                                    y2="19"></line></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >EXPRESSJS</span
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-					<!-- Right Corner cross marker -->
-					<div class="z-10 font-mono text-[9px] text-black/30 dark:text-white/20 bg-[#EFEEE8] dark:bg-[#0E0D0B] px-1.5 transition-colors duration-300">
-						[┼] 00:00:00:FE
-					</div>
-				</div>
+                            <!-- Card 3: Database (Glassmorphic Style) -->
+                            <div
+                                class="tech-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none min-h-[460px] lg:min-h-[500px]"
+                            >
+                                <div
+                                    class="relative z-10 flex flex-col justify-between h-full flex-grow"
+                                >
+                                    <!-- Header -->
+                                    <h4
+                                        class="tech-card-title font-mono text-[10px] font-bold text-black/40 dark:text-white/35 uppercase tracking-widest leading-none mb-3"
+                                    >
+                                        03_DATABASE.sys
+                                    </h4>
 
-				<!-- Section: Contact -->
-				<section 
-					id="contact" 
-					class="relative min-h-screen flex flex-col items-center justify-center py-32 px-8 sm:px-12 md:px-24 max-w-7xl mx-auto text-black dark:text-[#EFEEE8] transition-colors duration-300 w-full z-10"
-				>
-					<!-- Plus markers/grid dots for premium styling -->
-					<div class="absolute top-6 left-8 font-mono text-[9px] opacity-40 select-none">SYS.CON_SECTION</div>
-					<div class="absolute top-6 right-8 font-mono text-[9px] opacity-40 select-none">[STATUS: UNDER_DEV]</div>
-					
-					<div class="relative flex flex-col items-center justify-center">
-						<h2 
-							class="text-3xl sm:text-5xl md:text-6xl font-normal tracking-tight uppercase relative font-mono text-center select-none cursor-pointer"
-						>
-							Contact Me - [Under Development]
-						</h2>
-						
-						<!-- Visitor Counter HUD Box -->
-						<div id="visitor-counter-container" class="mt-8 font-mono text-xs sm:text-sm tracking-widest text-black/50 dark:text-[#EFEEE8]/40 border border-black/10 dark:border-white/10 px-4 py-2.5 bg-black/[0.02] dark:bg-white/[0.02] transition-colors duration-300 select-none">
-							SYS. VISITORS: <span id="visitor-count" class="text-black dark:text-white font-bold">LOADING...</span>
-						</div>
-					</div>
-				</section>
+                                    <!-- Card Body (Vertical list layout) -->
+                                    <div
+                                        class="flex flex-col gap-2.5 mt-3.5 flex-grow justify-start"
+                                    >
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- MongoDB Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-green-500"
+                                                ><path
+                                                    d="M12 2C8 6 6 12 6 17c0 3.3 2.7 6 6 6s6-2.7 6-6c0-5-2-11-6-15z"
+                                                ></path><path d="M12 2v21"
+                                                ></path></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >MONGODB</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- Firebase Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-amber-500"
+                                                ><path
+                                                    d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 1.5 2 2.5 3 4 1.333 2 1 4.5-.5 6-1.5 1.5-3.5 2.5-5 2.5a4 4 0 0 1-1-.083z"
+                                                ></path><path
+                                                    d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
+                                                    class="opacity-30"
+                                                ></path></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >FIREBASE</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- Firestore Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-orange-500"
+                                                ><rect
+                                                    x="3"
+                                                    y="3"
+                                                    width="7"
+                                                    height="9"
+                                                    rx="1"></rect><rect
+                                                    x="14"
+                                                    y="3"
+                                                    width="7"
+                                                    height="5"
+                                                    rx="1"></rect><rect
+                                                    x="14"
+                                                    y="12"
+                                                    width="7"
+                                                    height="9"
+                                                    rx="1"></rect><rect
+                                                    x="3"
+                                                    y="16"
+                                                    width="7"
+                                                    height="5"
+                                                    rx="1"></rect></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >FIRESTORE</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- Google Cloud Base Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-blue-400"
+                                                ><path
+                                                    d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                                                ></path></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >GOOGLE CLOUD</span
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-				<!-- Section: 3D ASCII Sandbox -->
-				<section 
-					id="ascii-sandbox" 
-					class="relative h-[160vh] w-full bg-transparent"
-				>
-					<div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-						<AsciiBox client:load />
-					</div>
-				</section>
-			</div>
-		</main>
-	</div>
+                            <!-- Card 4: Gamedev (Glassmorphic Style) -->
+                            <div
+                                class="tech-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none min-h-[460px] lg:min-h-[500px]"
+                            >
+                                <div
+                                    class="relative z-10 flex flex-col justify-between h-full flex-grow"
+                                >
+                                    <!-- Header -->
+                                    <h4
+                                        class="tech-card-title font-mono text-[10px] font-bold text-black/40 dark:text-white/35 uppercase tracking-widest leading-none mb-3"
+                                    >
+                                        04_GAMEDEV.sys
+                                    </h4>
+
+                                    <!-- Card Body (Vertical list layout) -->
+                                    <div
+                                        class="flex flex-col gap-2.5 mt-3.5 flex-grow justify-start"
+                                    >
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- Unity Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-black dark:text-white"
+                                                ><path
+                                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                                                ></path><polyline
+                                                    points="3.27 6.96 12 12.01 20.73 6.96"
+                                                ></polyline><line
+                                                    x1="12"
+                                                    y1="22.08"
+                                                    x2="12"
+                                                    y2="12"></line></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >UNITY</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- Aseprite Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-pink-500"
+                                                ><path
+                                                    d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19C5.35857 19.5 5.5 20 5 21C4.5 22 5.5 22 6 22H12Z"
+                                                ></path><circle
+                                                    cx="7.5"
+                                                    cy="10.5"
+                                                    r="1.5"
+                                                    fill="currentColor"
+                                                ></circle><circle
+                                                    cx="11.5"
+                                                    cy="7.5"
+                                                    r="1.5"
+                                                    fill="currentColor"
+                                                ></circle><circle
+                                                    cx="16.5"
+                                                    cy="9.5"
+                                                    r="1.5"
+                                                    fill="currentColor"
+                                                ></circle><circle
+                                                    cx="15.5"
+                                                    cy="14.5"
+                                                    r="1.5"
+                                                    fill="currentColor"
+                                                ></circle></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >ASEPRITE</span
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 5: Tools & AI (Glassmorphic Style) -->
+                            <div
+                                class="tech-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none min-h-[460px] lg:min-h-[500px]"
+                            >
+                                <div
+                                    class="relative z-10 flex flex-col justify-between h-full flex-grow"
+                                >
+                                    <!-- Header -->
+                                    <h4
+                                        class="tech-card-title font-mono text-[10px] font-bold text-black/40 dark:text-white/35 uppercase tracking-widest leading-none mb-3"
+                                    >
+                                        05_TOOLS.sys
+                                    </h4>
+
+                                    <!-- Card Body (Vertical list layout) -->
+                                    <div
+                                        class="flex flex-col gap-2.5 mt-3.5 flex-grow justify-start"
+                                    >
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- Git Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-orange-600"
+                                                ><circle cx="18" cy="18" r="3"
+                                                ></circle><circle
+                                                    cx="6"
+                                                    cy="6"
+                                                    r="3"></circle><circle
+                                                    cx="6"
+                                                    cy="18"
+                                                    r="3"></circle><path
+                                                    d="M18 15V9a4 4 0 0 0-4-4H9"
+                                                ></path><path d="M6 9v6"
+                                                ></path></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >GIT</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- GitHub Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-black dark:text-white"
+                                                ><path
+                                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                                                ></path></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >GITHUB</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- Postman Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-orange-500"
+                                                ><path
+                                                    d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"
+                                                ></path></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >POSTMAN</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- Docker Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-blue-500"
+                                                ><rect
+                                                    x="2"
+                                                    y="3"
+                                                    width="20"
+                                                    height="14"
+                                                    rx="2"
+                                                    ry="2"></rect><line
+                                                    x1="6"
+                                                    y1="3"
+                                                    x2="6"
+                                                    y2="17"></line><line
+                                                    x1="12"
+                                                    y1="3"
+                                                    x2="12"
+                                                    y2="17"></line><line
+                                                    x1="18"
+                                                    y1="3"
+                                                    x2="18"
+                                                    y2="17"></line><line
+                                                    x1="2"
+                                                    y1="10"
+                                                    x2="22"
+                                                    y2="10"></line></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >DOCKER</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- Gemini Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-indigo-400"
+                                                ><path
+                                                    d="M12 3v18M3 12h18M12 3l4 4-4 4-4-4 4-4zm0 10l3 3-3 3-3-3 3-3z"
+                                                ></path></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >GEMINI</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- Claude Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-amber-700 dark:text-amber-600"
+                                                ><path
+                                                    d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 3a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"
+                                                ></path><circle
+                                                    cx="12"
+                                                    cy="12"
+                                                    r="2"></circle></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >CLAUDE</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="border border-black/10 dark:border-white/10 p-2.5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                                        >
+                                            <!-- Qwen Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="text-purple-500"
+                                                ><path
+                                                    d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                                                ></path><circle
+                                                    cx="12"
+                                                    cy="10"
+                                                    r="1"></circle></svg
+                                            >
+                                            <span
+                                                class="font-mono text-xs font-bold tracking-wider text-black/70 dark:text-white/70"
+                                                >QWEN</span
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Technical Accent Divider (Under About Me section) -->
+                <div
+                    class="relative w-full h-8 pointer-events-none select-none flex items-stretch gap-2.5 overflow-hidden"
+                >
+                    <!-- 1. Solid vertical block (Left edge) -->
+                    <div
+                        class="w-2.5 bg-black dark:bg-[#EFEEE8] transition-colors duration-300"
+                    >
+                    </div>
+
+                    <!-- 2. Block with repeating diagonal stripes (Rest of screen) -->
+                    <div
+                        class="flex-grow border-y border-black/10 dark:border-white/10 relative overflow-hidden transition-colors duration-300"
+                    >
+                        <div
+                            class="absolute inset-0 opacity-85 text-black dark:text-[#EFEEE8] transition-colors duration-300 about-diagonal-stripes"
+                        >
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: Projects -->
+                <section
+                    id="projects"
+                    class="relative min-h-screen flex flex-col items-center justify-center py-32 px-8 sm:px-12 md:px-24 max-w-7xl mx-auto text-black dark:text-[#EFEEE8] transition-colors duration-300 w-full z-10"
+                >
+                    <!-- Subtle top border/accent -->
+                    <div
+                        class="absolute top-0 left-8 right-8 h-[1px] bg-black/10 dark:bg-white/10"
+                    >
+                    </div>
+
+                    <!-- Plus markers/grid dots for premium styling -->
+                    <div
+                        class="absolute top-6 left-8 font-mono text-[9px] opacity-40 select-none"
+                    >
+                        SYS.PRJ_SECTION
+                    </div>
+                    <div
+                        class="absolute top-6 right-8 font-mono text-[9px] opacity-40 select-none"
+                    >
+                        [STATUS: UNDER_DEV]
+                    </div>
+
+                    <div
+                        class="relative flex flex-col items-center justify-center"
+                    >
+                        <h2
+                            class="text-3xl sm:text-5xl md:text-6xl font-normal tracking-tight uppercase relative font-mono text-center select-none cursor-pointer"
+                        >
+                            My Projects - [Under Development]
+                        </h2>
+                    </div>
+                </section>
+
+                <!-- Cyber Separator Line -->
+                <div
+                    class="relative w-full h-8 pointer-events-none select-none flex items-center justify-between px-8 sm:px-12 md:px-24 max-w-7xl mx-auto my-2"
+                >
+                    <!-- The thin border line itself -->
+                    <div
+                        class="absolute left-8 right-8 h-[1px] bg-black/10 dark:bg-white/10"
+                    >
+                    </div>
+
+                    <!-- Left Corner cross marker -->
+                    <div
+                        class="z-10 font-mono text-[9px] text-black/30 dark:text-white/20 bg-[#EFEEE8] dark:bg-[#0E0D0B] px-1.5 transition-colors duration-300"
+                    >
+                        [┼] SYS.LOC_0x7B
+                    </div>
+
+                    <!-- Center dotted marker -->
+                    <div
+                        class="z-10 bg-[#EFEEE8] dark:bg-[#0E0D0B] px-3 font-mono text-[8px] tracking-widest text-black/20 dark:text-white/10 transition-colors duration-300"
+                    >
+                        ••••• SEC_DIVIDER •••••
+                    </div>
+
+                    <!-- Right Corner cross marker -->
+                    <div
+                        class="z-10 font-mono text-[9px] text-black/30 dark:text-white/20 bg-[#EFEEE8] dark:bg-[#0E0D0B] px-1.5 transition-colors duration-300"
+                    >
+                        [┼] 00:00:00:FE
+                    </div>
+                </div>
+
+                <!-- Section: Contact -->
+                <section
+                    id="contact"
+                    class="relative min-h-screen flex flex-col items-center justify-center py-32 px-8 sm:px-12 md:px-24 max-w-7xl mx-auto text-black dark:text-[#EFEEE8] transition-colors duration-300 w-full z-10"
+                >
+                    <!-- Plus markers/grid dots for premium styling -->
+                    <div
+                        class="absolute top-6 left-8 font-mono text-[9px] opacity-40 select-none"
+                    >
+                        SYS.CON_SECTION
+                    </div>
+                    <div
+                        class="absolute top-6 right-8 font-mono text-[9px] opacity-40 select-none"
+                    >
+                        [STATUS: UNDER_DEV]
+                    </div>
+
+                    <div
+                        class="relative flex flex-col items-center justify-center"
+                    >
+                        <h2
+                            class="text-3xl sm:text-5xl md:text-6xl font-normal tracking-tight uppercase relative font-mono text-center select-none cursor-pointer"
+                        >
+                            Contact Me - [Under Development]
+                        </h2>
+                    </div>
+                </section>
+
+                <!-- Section: Quotes -->
+                <section
+                    id="quotes"
+                    class="relative min-h-[45vh] flex flex-col items-center justify-center py-20 px-8 sm:px-12 md:px-24 max-w-7xl mx-auto text-black dark:text-[#EFEEE8] transition-colors duration-300 w-full z-10 overflow-hidden"
+                >
+                    <!-- Container for floating ASCII text -->
+                    <div id="quotes-ascii-container" class="absolute inset-0 pointer-events-none overflow-hidden z-0"></div>
+
+                    <blockquote
+                        class="text-xl sm:text-3xl md:text-4xl font-normal tracking-tight font-serif italic text-center max-w-3xl leading-relaxed text-black/85 dark:text-white/90 relative z-10"
+                    >
+                        "Fear has killed more dreams than failure ever did."
+                    </blockquote>
+                </section>
+
+                <!-- Section: 3D ASCII Sandbox -->
+                <section
+                    id="ascii-sandbox"
+                    class="relative h-[160vh] w-full bg-transparent"
+                >
+                    <div
+                        class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center"
+                    >
+                        <AsciiBox client:load />
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
 </Layout>
 
 <script>
-	import { gsap } from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-	gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger);
 
-	// Translations for About Me section based on user system language
-	const aboutTranslations = {
-		id: "Halo! Aku Satrio Aji, seorang Fullstack Web Developer dan mahasiswa Teknik Informatika di Universitas Sebelas Maret. Ketertarikanku pada teknologi berawal dari video game masa kecil, yang memicu rasa penasaranku untuk memahami bagaimana segala sesuatu bekerja di balik layar. Saat ini aku aktif membangun berbagai karya untuk web, namun tujuan utamaku adalah menjadi seorang Game Developer. Aku juga sedang aktif mengeksplorasi AI dan selalu bersemangat untuk belajar, berkarya, dan membangun koneksi!",
-		en: "Hi! I'm Satrio Aji, a Fullstack Web Developer and Informatics Engineering student at Universitas Sebelas Maret. My passion for tech began with childhood video games, which sparked my drive to understand how things work behind the screen. Currently building for the web, my ultimate goal is to become a Game Developer. I'm also actively exploring AI and always eager to learn, build, and connect!",
-		zh: "你好！我是 Satrio Aji，一名全栈 Web 开发者（Fullstack Web Developer），也是 Universitas Sebelas Maret（三一一大学）信息工程专业的学生。我对科技的热爱始于童年时期的电子游戏，这激发了我去了解屏幕背后运作原理的动力。目前我主要致力于 Web 开发，但我最终的目标是成为一名游戏开发者。同时，我也在积极探索人工智能（AI），并始终渴望学习新知、创造项目和结识新朋友！",
-		ko: "안녕하세요! 저는 풀스택 웹 개발자이자 Universitas Sebelas Maret에서 정보공학을 전공하고 있는 Satrio Aji입니다. 기술에 대한 제 열정은 어린 시절 즐기던 비디오 게임에서 시작되었고, 이는 화면 뒤에서 시스템이 어떻게 작동하는지 이해하고 싶다는 원동력이 되었습니다. 현재는 웹 개발에 집중하고 있지만, 제 최종 목표는 게임 개발자가 되는 것입니다. 또한 AI 분야도 적극적으로 탐구하고 있으며, 언제나 배우고, 만들고, 소통하는 데 열정을 쏟고 있습니다!",
-		ar: "مرحباً! أنا ساتريو آجي (Satrio Aji)، مطور ويب شامل (Fullstack Web Developer) وطالب في هندسة المعلوماتية في جامعة سيبيلاس ماريت (Universitas Sebelas Maret). بدأ شغفي بالتكنولوجيا من ألعاب الفيديو في مرحلة الطفولة، مما أثار دافعي لفهم كيف تعمل الأشياء خلف الشاشة. أعمل حالياً على بناء مشاريع للويب، ولكن هدفي النهائي هو أن أصبح مطور ألعاب. أنا أيضاً أستكشف الذكاء الاصطناعي بنشاط، ودائماً متحمس للتعلم والابتكار والتواصل!",
-		ja: "こんにちは！Universitas Sebelas Maret で情報工学を学んでいる、フルスタックウェブ開発者の Satrio Aji です。テクノロジーへの情熱は、子供の頃のビデオゲームから始まり、画面の裏側で何がどう動いているのかを理解したいという探求心のきっかけになりました。現在はウェブ開発に取り組んでいますが、最終的な目標はゲーム開発者になることです。また、AI についても積極的に探求しており、学ぶこと、創り出すこと、そして繋がることに常に意欲を持っています！",
-		hi: "नमस्ते! मैं Satrio Aji हूँ, एक फुलस्टैक वेब डेवलपर (Fullstack Web Developer) और Universitas Sebelas Maret में इंफॉर्मेटिक्स इंजीनियरिंग का छात्र। तकनीक के प्रति मेरा जुनून बचपन के वीडियो गेम्स से शुरू हुआ, जिसने मुझे यह समझने के लिए प्रेरित किया कि स्क्रीन के पीछे चीजें कैसे काम करती हैं। वर्तमान में मैं वेब के लिए डेवलपमेंट कर रहा हूँ, लेकिन मेरा अंतिम लक्ष्य एक गेम डेवलपर (Game Developer) बनना है। मैं सक्रिय रूप से AI के बारे में भी सीख रहा हूँ और हमेशा कुछ नया सीखने, बनाने और लोगों से जुड़ने के लिए उत्सुक रहता हूँ!"
-	};
+    // Translations for About Me section based on user system language
+    const aboutTranslations = {
+        id: "Halo! Aku Satrio Aji, seorang Fullstack Web Developer dan mahasiswa Teknik Informatika di Universitas Sebelas Maret. Ketertarikanku pada teknologi berawal dari video game masa kecil, yang memicu rasa penasaranku untuk memahami bagaimana segala sesuatu bekerja di balik layar. Saat ini aku aktif membangun berbagai karya untuk web, namun tujuan utamaku adalah menjadi seorang Game Developer. Aku juga sedang aktif mengeksplorasi AI dan selalu bersemangat untuk belajar, berkarya, dan membangun koneksi!",
+        en: "Hi! I'm Satrio Aji, a Fullstack Web Developer and Informatics Engineering student at Universitas Sebelas Maret. My passion for tech began with childhood video games, which sparked my drive to understand how things work behind the screen. Currently building for the web, my ultimate goal is to become a Game Developer. I'm also actively exploring AI and always eager to learn, build, and connect!",
+        zh: "你好！我是 Satrio Aji，一名全栈 Web 开发者（Fullstack Web Developer），也是 Universitas Sebelas Maret（三一一大学）信息工程专业的学生。我对科技的热爱始于童年时期的电子游戏，这激发了我去了解屏幕背后运作原理的动力。目前我主要致力于 Web 开发，但我最终的目标是成为一名游戏开发者。同时，我也在积极探索人工智能（AI），并始终渴望学习新知、创造项目和结识新朋友！",
+        ko: "안녕하세요! 저는 풀스택 웹 개발자이자 Universitas Sebelas Maret에서 정보공학을 전공하고 있는 Satrio Aji입니다. 기술에 대한 제 열정은 어린 시절 즐기던 비디오 게임에서 시작되었고, 이는 화면 뒤에서 시스템이 어떻게 작동하는지 이해하고 싶다는 원동력이 되었습니다. 현재는 웹 개발에 집중하고 있지만, 제 최종 목표는 게임 개발자가 되는 것입니다. 또한 AI 분야도 적극적으로 탐구하고 있으며, 언제나 배우고, 만들고, 소통하는 데 열정을 쏟고 있습니다!",
+        ar: "مرحباً! أنا ساتريو آجي (Satrio Aji)، مطور ويب شامل (Fullstack Web Developer) وطالب في هندسة المعلوماتية في جامعة سيبيلاس ماريت (Universitas Sebelas Maret). بدأ شغفي بالتكنولوجيا من ألعاب الفيديو في مرحلة الطفولة، مما أثار دافعي لفهم كيف تعمل الأشياء خلف الشاشة. أعمل حالياً على بناء مشاريع للويب، ولكن هدفي النهائي هو أن أصبح مطور ألعاب. أنا أيضاً أستكشف الذكاء الاصطناعي بنشاط، ودائماً متحمس للتعلم والابتكار والتواصل!",
+        ja: "こんにちは！Universitas Sebelas Maret で情報工学を学んでいる、フルスタックウェブ開発者の Satrio Aji です。テクノロジーへの情熱は、子供の頃のビデオゲームから始まり、画面の裏側で何がどう動いているのかを理解したいという探求心のきっかけになりました。現在はウェブ開発に取り組んでいますが、最終的な目標はゲーム開発者になることです。また、AI についても積極的に探求しており、学ぶこと、創り出すこと、そして繋がることに常に意欲を持っています！",
+        hi: "नमस्ते! मैं Satrio Aji हूँ, एक फुलस्टैक वेब डेवलपर (Fullstack Web Developer) और Universitas Sebelas Maret में इंफॉर्मेटिक्स इंजीनियरिंग का छात्र। तकनीक के प्रति मेरा जुनून बचपन के वीडियो गेम्स से शुरू हुआ, जिसने मुझे यह समझने के लिए प्रेरित किया कि स्क्रीन के पीछे चीजें कैसे काम करती हैं। वर्तमान में मैं वेब के लिए डेवलपमेंट कर रहा हूँ, लेकिन मेरा अंतिम लक्ष्य एक गेम डेवलपर (Game Developer) बनना है। मैं सक्रिय रूप से AI के बारे में भी सीख रहा हूँ और हमेशा कुछ नया सीखने, बनाने और लोगों से जुड़ने के लिए उत्सुक रहता हूँ!",
+    };
 
-	const initAboutText = () => {
-		const aboutDescEl = document.getElementById("about-desc");
-		if (aboutDescEl) {
-			const preferredLang = localStorage.getItem("preferred-language");
-			const sysLang = preferredLang || navigator.language.split("-")[0].toLowerCase();
-			const text = aboutTranslations[sysLang as keyof typeof aboutTranslations] || aboutTranslations.en;
-			aboutDescEl.textContent = text;
-		}
+    // Translations for Quotes section
+    const quoteTranslations = {
+        id: "Ketakutan membunuh lebih banyak mimpi daripada kegagalan.",
+        en: "Fear has killed more dreams than failure ever did.",
+        zh: "恐惧扼杀的梦想，远多于失败。",
+        ko: "두려움은 실패보다 더 많은 꿈을 죽인다.",
+        ja: "恐れは失敗よりも多くの夢を殺す。",
+        ar: "الخوف يقتل من الأحلام أكثر مما يفعله الفشل.",
+        hi: "डर ने विफलता से कहीं अधिक सपनों को मारा है।"
+    };
 
-		// Listen to language changes dispatched from Header.vue
-		window.addEventListener("language-changed", (e: any) => {
-			const lang = e.detail;
-			const aboutDescEl = document.getElementById("about-desc");
-			if (aboutDescEl) {
-				const text = aboutTranslations[lang as keyof typeof aboutTranslations] || aboutTranslations.en;
-				aboutDescEl.textContent = text;
-			}
-		});
-	};
+    const initAboutText = () => {
+        const aboutDescEl = document.getElementById("about-desc");
+        if (aboutDescEl) {
+            const preferredLang = localStorage.getItem("preferred-language");
+            const sysLang =
+                preferredLang || navigator.language.split("-")[0].toLowerCase();
+            const text =
+                aboutTranslations[sysLang as keyof typeof aboutTranslations] ||
+                aboutTranslations.en;
+            aboutDescEl.textContent = text;
+        }
 
-	const initScrollAnimations = () => {
-		const homeSection = document.getElementById('home');
-		const lenis = (window as any).lenis;
+        // Listen to language changes dispatched from Header.vue
+        window.addEventListener("language-changed", (e: any) => {
+            const lang = e.detail;
+            const aboutDescEl = document.getElementById("about-desc");
+            if (aboutDescEl) {
+                const text =
+                    aboutTranslations[lang as keyof typeof aboutTranslations] ||
+                    aboutTranslations.en;
+                aboutDescEl.textContent = text;
+            }
+        });
+    };
 
-		if (lenis) {
-			lenis.on('scroll', ScrollTrigger.update);
-		}
+    const initScrollAnimations = () => {
+        const homeSection = document.getElementById("home");
+        const lenis = (window as any).lenis;
 
-		if (homeSection) {
-			const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        if (lenis) {
+            lenis.on("scroll", ScrollTrigger.update);
+        }
 
-			// Zoom out, fade, and blur #home as user scrolls down naturally (via CSS sticky)
-			gsap.to(homeSection, {
-				scrollTrigger: {
-					trigger: homeSection,
-					start: 'top top',
-					end: '+=175%', // Increased scroll distance (1.75x viewport height) to match transparent spacer
-					scrub: true,
-				},
-				scale: 0.82,
-				opacity: 0.25,
-				...(isMobile ? {} : { filter: 'blur(8px)' }), // Skip heavy blur filter on mobile to ensure smooth scrolling
-				ease: 'power1.inOut',
-			});
-		}
-	};
-	const initCyberCoords = () => {
-		const frame = document.getElementById("cyber-pic-frame");
-		const coordsText = document.getElementById("cyber-pic-coords");
-		if (frame && coordsText) {
-			frame.addEventListener("mousemove", (e: MouseEvent) => {
-				const rect = frame.getBoundingClientRect();
-				const x = Math.floor(e.clientX - rect.left);
-				const y = Math.floor(e.clientY - rect.top);
-				const padX = String(x).padStart(3, '0');
-				const padY = String(y).padStart(3, '0');
-				coordsText.textContent = `X: ${padX} // Y: ${padY}`;
-			});
+        if (homeSection) {
+            const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-			frame.addEventListener("mouseleave", () => {
-				coordsText.textContent = "X: 000 // Y: 000";
-			});
-		}
-	};
+            // Zoom out, fade, and blur #home as user scrolls down naturally (via CSS sticky)
+            gsap.to(homeSection, {
+                scrollTrigger: {
+                    trigger: homeSection,
+                    start: "top top",
+                    end: "+=175%", // Increased scroll distance (1.75x viewport height) to match transparent spacer
+                    scrub: true,
+                },
+                scale: 0.82,
+                opacity: 0.25,
+                ...(isMobile ? {} : { filter: "blur(8px)" }), // Skip heavy blur filter on mobile to ensure smooth scrolling
+                ease: "power1.inOut",
+            });
+        }
+    };
+    const initCyberCoords = () => {
+        const frame = document.getElementById("cyber-pic-frame");
+        const coordsText = document.getElementById("cyber-pic-coords");
+        if (frame && coordsText) {
+            frame.addEventListener("mousemove", (e: MouseEvent) => {
+                const rect = frame.getBoundingClientRect();
+                const x = Math.floor(e.clientX - rect.left);
+                const y = Math.floor(e.clientY - rect.top);
+                const padX = String(x).padStart(3, "0");
+                const padY = String(y).padStart(3, "0");
+                coordsText.textContent = `X: ${padX} // Y: ${padY}`;
+            });
 
-	const initCyberImageSwitcher = () => {
-		const frame = document.getElementById("cyber-pic-frame");
-		const viewport = document.getElementById("cyber-viewport");
-		const unitText = document.getElementById("cyber-pic-unit");
-		const slides = document.querySelectorAll(".cyber-slide");
+            frame.addEventListener("mouseleave", () => {
+                coordsText.textContent = "X: 000 // Y: 000";
+            });
+        }
+    };
 
-		if (!frame || !viewport || slides.length === 0) return;
+    const initCyberImageSwitcher = () => {
+        const frame = document.getElementById("cyber-pic-frame");
+        const viewport = document.getElementById("cyber-viewport");
+        const unitText = document.getElementById("cyber-pic-unit");
+        const slides = document.querySelectorAll(".cyber-slide");
 
-		let currentIndex = 0;
-		let isSwitching = false;
-		let switchInterval: any = null;
+        if (!frame || !viewport || slides.length === 0) return;
 
-		const showSlide = (nextIndex: number) => {
-			if (isSwitching) return;
-			isSwitching = true;
+        let currentIndex = 0;
+        let isSwitching = false;
+        let switchInterval: any = null;
 
-			// Add intense transition glitch class
-			viewport.classList.add("is-switching");
+        const showSlide = (nextIndex: number) => {
+            if (isSwitching) return;
+            isSwitching = true;
 
-			// Midway through transition (200ms), swap active images
-			setTimeout(() => {
-				slides.forEach((slide, idx) => {
-					if (idx === nextIndex) {
-						slide.classList.remove("opacity-0", "z-0");
-						slide.classList.add("opacity-100", "z-10");
-					} else {
-						slide.classList.remove("opacity-100", "z-10");
-						slide.classList.add("opacity-0", "z-0");
-					}
-				});
+            // Add intense transition glitch class
+            viewport.classList.add("is-switching");
 
-				// Update indicator
-				if (unitText) {
-					unitText.textContent = `UNIT: IMG_SET_0${nextIndex + 1}`;
-				}
-				currentIndex = nextIndex;
-			}, 200);
+            // Midway through transition (200ms), swap active images
+            setTimeout(() => {
+                slides.forEach((slide, idx) => {
+                    if (idx === nextIndex) {
+                        slide.classList.remove("opacity-0", "z-0");
+                        slide.classList.add("opacity-100", "z-10");
+                    } else {
+                        slide.classList.remove("opacity-100", "z-10");
+                        slide.classList.add("opacity-0", "z-0");
+                    }
+                });
 
-			// Remove intense transition glitch class
-			setTimeout(() => {
-				viewport.classList.remove("is-switching");
-				isSwitching = false;
-			}, 400);
-		};
+                // Update indicator
+                if (unitText) {
+                    unitText.textContent = `UNIT: IMG_SET_0${nextIndex + 1}`;
+                }
+                currentIndex = nextIndex;
+            }, 200);
 
-		const nextSlide = () => {
-			const nextIndex = (currentIndex + 1) % slides.length;
-			showSlide(nextIndex);
-		};
+            // Remove intense transition glitch class
+            setTimeout(() => {
+                viewport.classList.remove("is-switching");
+                isSwitching = false;
+            }, 400);
+        };
 
-		// Auto cycle every 6 seconds
-		const startInterval = () => {
-			if (switchInterval) clearInterval(switchInterval);
-			switchInterval = setInterval(nextSlide, 6000);
-		};
+        const nextSlide = () => {
+            const nextIndex = (currentIndex + 1) % slides.length;
+            showSlide(nextIndex);
+        };
 
-		// Click to switch immediately
-		frame.addEventListener("click", () => {
-			if (isSwitching) return;
-			nextSlide();
-			startInterval(); // Reset timer
-		});
+        // Auto cycle every 6 seconds
+        const startInterval = () => {
+            if (switchInterval) clearInterval(switchInterval);
+            switchInterval = setInterval(nextSlide, 6000);
+        };
 
-		startInterval();
-	};
+        // Click to switch immediately
+        frame.addEventListener("click", () => {
+            if (isSwitching) return;
+            nextSlide();
+            startInterval(); // Reset timer
+        });
 
-	const initAsciiStar = () => {
-		const aboutSec = document.getElementById("about");
-		const starEls = document.querySelectorAll(".ascii-star");
-		if (!aboutSec || starEls.length === 0) return;
+        startInterval();
+    };
 
-		const frames = [
-			// Frame 0: Normal Star
-			"    │    \n─── ✦ ───\n    │    ",
-			// Frame 1: Exploding 1
-			"    ·    \n  · o ·  \n    ·    ",
-			// Frame 2: Exploding 2
-			"  ·   ·  \n·       ·\n  ·   ·  ",
-			// Frame 3: Exploding 3
-			".       .\n         \n.       .",
-			// Frame 4: Empty (Disappeared)
-			"         \n         \n         "
-		];
+    const initAsciiStar = () => {
+        const aboutSec = document.getElementById("about");
+        const starEls = document.querySelectorAll(".ascii-star");
+        if (!aboutSec || starEls.length === 0) return;
 
-		// Calculate the boundary coordinates of the profile photo frame relative to the #about container
-		const getExclusionZone = () => {
-			const frame = document.getElementById("cyber-pic-frame");
-			if (!frame) return null;
-			const aboutRect = aboutSec.getBoundingClientRect();
-			const frameRect = frame.getBoundingClientRect();
-			
-			return {
-				left: frameRect.left - aboutRect.left,
-				right: frameRect.right - aboutRect.left,
-				top: frameRect.top - aboutRect.top,
-				bottom: frameRect.bottom - aboutRect.top
-			};
-		};
+        const frames = [
+            // Frame 0: Normal Star
+            "    │    \n─── ✦ ───\n    │    ",
+            // Frame 1: Exploding 1
+            "    ·    \n  · o ·  \n    ·    ",
+            // Frame 2: Exploding 2
+            "  ·   ·  \n·       ·\n  ·   ·  ",
+            // Frame 3: Exploding 3
+            ".       .\n         \n.       .",
+            // Frame 4: Empty (Disappeared)
+            "         \n         \n         ",
+        ];
 
-		// Check if target coordinates fall inside the profile photo frame boundaries (with safety margin)
-		const isOverlapping = (tx: number, ty: number, zone: any) => {
-			if (!zone) return false;
-			const safety = 35; // px safety margin around frame border
-			return (tx >= zone.left - safety && tx <= zone.right + safety &&
-					ty >= zone.top - safety && ty <= zone.bottom + safety);
-		};
+        // Calculate the boundary coordinates of the profile photo frame relative to the #about container
+        const getExclusionZone = () => {
+            const frame = document.getElementById("cyber-pic-frame");
+            if (!frame) return null;
+            const aboutRect = aboutSec.getBoundingClientRect();
+            const frameRect = frame.getBoundingClientRect();
 
-		// Initialize each star individually
-		starEls.forEach((star: any, index: number) => {
-			const pre = star.querySelector("pre");
-			if (!pre) return;
+            return {
+                left: frameRect.left - aboutRect.left,
+                right: frameRect.right - aboutRect.left,
+                top: frameRect.top - aboutRect.top,
+                bottom: frameRect.bottom - aboutRect.top,
+            };
+        };
 
-			let x = 0;
-			let y = 0;
-			let targetX = 0;
-			let targetY = 0;
-			let isExploding = false;
-			let animationId: number | null = null;
+        // Check if target coordinates fall inside the profile photo frame boundaries (with safety margin)
+        const isOverlapping = (tx: number, ty: number, zone: any) => {
+            if (!zone) return false;
+            const safety = 35; // px safety margin around frame border
+            return (
+                tx >= zone.left - safety &&
+                tx <= zone.right + safety &&
+                ty >= zone.top - safety &&
+                ty <= zone.bottom + safety
+            );
+        };
 
-			// Set random target coordinates inside the bounds of the #about section, avoiding the text area and photo frame
-			const setRandomTarget = () => {
-				const rect = aboutSec.getBoundingClientRect();
-				const margin = 80;
-				const isMobile = window.innerWidth < 768;
-				const zone = getExclusionZone();
+        // Initialize each star individually
+        starEls.forEach((star: any, index: number) => {
+            const pre = star.querySelector("pre");
+            if (!pre) return;
 
-				let tx = 0;
-				let ty = 0;
-				let attempts = 0;
+            let x = 0;
+            let y = 0;
+            let targetX = 0;
+            let targetY = 0;
+            let isExploding = false;
+            let animationId: number | null = null;
 
-				do {
-					if (isMobile) {
-						// On mobile: text is at the top, profile pic at the bottom. Float in bottom half.
-						const topLimit = rect.height * 0.52;
-						tx = margin + Math.random() * (rect.width - margin * 2 - 100);
-						ty = topLimit + Math.random() * (rect.height - topLimit - margin - 40);
-					} else {
-						// On desktop: text is on left (col-span-7), profile pic on right (col-span-5).
-						// Float strictly in the right 40% area of the section.
-						const leftLimit = rect.width * 0.58;
-						tx = leftLimit + Math.random() * (rect.width - leftLimit - margin - 100);
-						ty = margin + Math.random() * (rect.height - margin * 2 - 60);
-					}
-					attempts++;
-				} while (isOverlapping(tx, ty, zone) && attempts < 25);
+            // Set random target coordinates inside the bounds of the #about section, avoiding the text area and photo frame
+            const setRandomTarget = () => {
+                const rect = aboutSec.getBoundingClientRect();
+                const margin = 80;
+                const isMobile = window.innerWidth < 768;
+                const zone = getExclusionZone();
 
-				targetX = tx;
-				targetY = ty;
-			};
+                let tx = 0;
+                let ty = 0;
+                let attempts = 0;
 
-			// Floating wandering animation loop using Lerp with subtle offset speeds
-			const update = () => {
-				if (isExploding) return;
+                do {
+                    if (isMobile) {
+                        // On mobile: text is at the top, profile pic at the bottom. Float in bottom half.
+                        const topLimit = rect.height * 0.52;
+                        tx =
+                            margin +
+                            Math.random() * (rect.width - margin * 2 - 100);
+                        ty =
+                            topLimit +
+                            Math.random() *
+                                (rect.height - topLimit - margin - 40);
+                    } else {
+                        // On desktop: text is on left (col-span-7), profile pic on right (col-span-5).
+                        // Float strictly in the right 40% area of the section.
+                        const leftLimit = rect.width * 0.58;
+                        tx =
+                            leftLimit +
+                            Math.random() *
+                                (rect.width - leftLimit - margin - 100);
+                        ty =
+                            margin +
+                            Math.random() * (rect.height - margin * 2 - 60);
+                    }
+                    attempts++;
+                } while (isOverlapping(tx, ty, zone) && attempts < 25);
 
-				const dx = targetX - x;
-				const dy = targetY - y;
-				// Vary speed slightly for each star so they wander asynchronously
-				const speed = 0.012 + (index * 0.003);
-				x += dx * speed;
-				y += dy * speed;
+                targetX = tx;
+                targetY = ty;
+            };
 
-				star.style.left = `${x}px`;
-				star.style.top = `${y}px`;
+            // Floating wandering animation loop using Lerp with subtle offset speeds
+            const update = () => {
+                if (isExploding) return;
 
-				if (Math.abs(dx) < 5 && Math.abs(dy) < 5) {
-					setRandomTarget();
-				}
+                const dx = targetX - x;
+                const dy = targetY - y;
+                // Vary speed slightly for each star so they wander asynchronously
+                const speed = 0.012 + index * 0.003;
+                x += dx * speed;
+                y += dy * speed;
 
-				animationId = requestAnimationFrame(update);
-			};
+                star.style.left = `${x}px`;
+                star.style.top = `${y}px`;
 
-			// Spawn the star at a random location (following the same safety boundaries)
-			const spawn = () => {
-				isExploding = false;
-				pre.textContent = frames[0];
-				
-				const rect = aboutSec.getBoundingClientRect();
-				const margin = 100;
-				const isMobile = window.innerWidth < 768;
-				const zone = getExclusionZone();
+                if (Math.abs(dx) < 5 && Math.abs(dy) < 5) {
+                    setRandomTarget();
+                }
 
-				let tx = 0;
-				let ty = 0;
-				let attempts = 0;
+                animationId = requestAnimationFrame(update);
+            };
 
-				do {
-					if (isMobile) {
-						const topLimit = rect.height * 0.52;
-						tx = margin + Math.random() * (rect.width - margin * 2 - 100);
-						ty = topLimit + Math.random() * (rect.height - topLimit - margin - 40);
-					} else {
-						const leftLimit = rect.width * 0.58;
-						tx = leftLimit + Math.random() * (rect.width - leftLimit - margin - 100);
-						ty = margin + Math.random() * (rect.height - margin * 2 - 60);
-					}
-					attempts++;
-				} while (isOverlapping(tx, ty, zone) && attempts < 25);
+            // Spawn the star at a random location (following the same safety boundaries)
+            const spawn = () => {
+                isExploding = false;
+                pre.textContent = frames[0];
 
-				x = tx;
-				y = ty;
-				targetX = x;
-				targetY = y;
+                const rect = aboutSec.getBoundingClientRect();
+                const margin = 100;
+                const isMobile = window.innerWidth < 768;
+                const zone = getExclusionZone();
 
-				star.style.left = `${x}px`;
-				star.style.top = `${y}px`;
-				star.style.display = "block";
-				
-				setTimeout(() => {
-					star.classList.remove("opacity-0");
-					star.classList.add("opacity-100");
-				}, 50 + index * 200); // Stagger fade-in slightly
+                let tx = 0;
+                let ty = 0;
+                let attempts = 0;
 
-				setRandomTarget();
-				update();
-			};
+                do {
+                    if (isMobile) {
+                        const topLimit = rect.height * 0.52;
+                        tx =
+                            margin +
+                            Math.random() * (rect.width - margin * 2 - 100);
+                        ty =
+                            topLimit +
+                            Math.random() *
+                                (rect.height - topLimit - margin - 40);
+                    } else {
+                        const leftLimit = rect.width * 0.58;
+                        tx =
+                            leftLimit +
+                            Math.random() *
+                                (rect.width - leftLimit - margin - 100);
+                        ty =
+                            margin +
+                            Math.random() * (rect.height - margin * 2 - 60);
+                    }
+                    attempts++;
+                } while (isOverlapping(tx, ty, zone) && attempts < 25);
 
-			// Explode animation on click
-			const explode = () => {
-				if (isExploding) return;
-				isExploding = true;
-				if (animationId) cancelAnimationFrame(animationId);
+                x = tx;
+                y = ty;
+                targetX = x;
+                targetY = y;
 
-				let frameIdx = 0;
-				const playExplosion = () => {
-					if (frameIdx < frames.length) {
-						pre.textContent = frames[frameIdx];
-						frameIdx++;
-						setTimeout(playExplosion, 80);
-					} else {
-						star.classList.remove("opacity-100");
-						star.classList.add("opacity-0");
-						setTimeout(() => {
-							star.style.display = "none";
-							// Respawn at a random location after 3 seconds
-							setTimeout(spawn, 3000);
-						}, 500);
-					}
-				};
+                star.style.left = `${x}px`;
+                star.style.top = `${y}px`;
+                star.style.display = "block";
 
-				playExplosion();
-			};
+                setTimeout(
+                    () => {
+                        star.classList.remove("opacity-0");
+                        star.classList.add("opacity-100");
+                    },
+                    50 + index * 200,
+                ); // Stagger fade-in slightly
 
-			star.addEventListener("click", explode);
-			// Stagger initial spawn to spread stars out
-			setTimeout(spawn, 500 + index * 500);
-		});
-	};
+                setRandomTarget();
+                update();
+            };
 
-	const initVisitorCounter = () => {
-		const countEl = document.getElementById("visitor-count");
-		if (!countEl) return;
+            // Explode animation on click
+            const explode = () => {
+                if (isExploding) return;
+                isExploding = true;
+                if (animationId) cancelAnimationFrame(animationId);
 
-		fetch("https://api.counterapi.dev/v1/sajinomoto-portfolio/visitors/up")
-			.then(res => {
-				if (!res.ok) throw new Error("HTTP error " + res.status);
-				return res.json();
-			})
-			.then(data => {
-				if (data && typeof data.count === "number") {
-					countEl.textContent = data.count.toLocaleString();
-				} else {
-					countEl.textContent = "OFFLINE";
-				}
-			})
-			.catch(err => {
-				console.error("Failed to fetch visitor count:", err);
-				countEl.textContent = "OFFLINE";
-			});
-	};
+                let frameIdx = 0;
+                const playExplosion = () => {
+                    if (frameIdx < frames.length) {
+                        pre.textContent = frames[frameIdx];
+                        frameIdx++;
+                        setTimeout(playExplosion, 80);
+                    } else {
+                        star.classList.remove("opacity-100");
+                        star.classList.add("opacity-0");
+                        setTimeout(() => {
+                            star.style.display = "none";
+                            // Respawn at a random location after 3 seconds
+                            setTimeout(spawn, 3000);
+                        }, 500);
+                    }
+                };
 
-	// Initialize scroll animations and translations
-	const init = () => {
-		initScrollAnimations();
-		initAboutText();
-		initCyberCoords();
-		initCyberImageSwitcher();
-		initAsciiStar();
-		initVisitorCounter();
-	};
+                playExplosion();
+            };
 
-	if (document.readyState === 'complete' || document.readyState === 'interactive') {
-		setTimeout(init, 100);
-	} else {
-		document.addEventListener('DOMContentLoaded', () => {
-			setTimeout(init, 100);
-		});
-	}
+            star.addEventListener("click", explode);
+            // Stagger initial spawn to spread stars out
+            setTimeout(spawn, 500 + index * 500);
+        });
+    };
+
+    const initRoleSwitcher = () => {
+        const roleEl = document.getElementById("about-role-text");
+        if (!roleEl) return;
+
+        const roles = [
+            "FullStack Developer",
+            "Indie Game Developer",
+            "Graphic Designer",
+        ];
+        let currentIndex = 0;
+
+        const switchRole = () => {
+            const nextIndex = (currentIndex + 1) % roles.length;
+            const nextRole = roles[nextIndex];
+
+            roleEl.classList.add("is-glitching");
+            roleEl.setAttribute("data-text", nextRole);
+
+            setTimeout(() => {
+                roleEl.textContent = nextRole;
+            }, 150);
+
+            setTimeout(() => {
+                roleEl.classList.remove("is-glitching");
+                currentIndex = nextIndex;
+            }, 350);
+        };
+
+        setInterval(switchRole, 4000);
+    };
+
+    const initCardGlow = () => {
+        const cards = document.querySelectorAll(".tech-card");
+        cards.forEach((card: any) => {
+            card.addEventListener("mousemove", (e: MouseEvent) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty("--mouse-x", `${x}px`);
+                card.style.setProperty("--mouse-y", `${y}px`);
+            });
+        });
+    };
+
+    const spawnQuotesAscii = () => {
+        const container = document.getElementById("quotes-ascii-container");
+        if (!container) return;
+
+        container.innerHTML = "";
+
+        // Text ASCII sama seperti pada section end: "0", "1", "o", "*", "."
+        const asciiTexts = ["0", "1", "o", "*", "."];
+
+        // Let's spawn 28 characters in 4 distinct zones surrounding the quote
+        const zones = [
+            { name: "top", count: 8, minL: 12, maxL: 88, minT: 6, maxT: 22, classes: "" },
+            { name: "bottom", count: 8, minL: 12, maxL: 88, minT: 78, maxT: 94, classes: "" },
+            { name: "left", count: 6, minL: 6, maxL: 16, minT: 25, maxT: 75, classes: "hidden sm:block" },
+            { name: "right", count: 6, minL: 84, maxL: 94, minT: 25, maxT: 75, classes: "hidden sm:block" }
+        ];
+
+        zones.forEach((zone) => {
+            for (let i = 0; i < zone.count; i++) {
+                const left = zone.minL + Math.random() * (zone.maxL - zone.minL);
+                const top = zone.minT + Math.random() * (zone.maxT - zone.minT);
+
+                const wrapper = document.createElement("div");
+                wrapper.className = `absolute select-none pointer-events-none ${zone.classes}`;
+                wrapper.style.left = `${left}%`;
+                wrapper.style.top = `${top}%`;
+
+                const el = document.createElement("div");
+                el.className = "quotes-ascii font-mono text-[11px] sm:text-[13px] opacity-0 text-black/45 dark:text-[#EFEEE8]/30 font-bold transition-opacity duration-500 animate-ascii-drift";
+                el.textContent = asciiTexts[Math.floor(Math.random() * asciiTexts.length)];
+                
+                // Set random CSS variables for the native CSS keyframe animation
+                const dx = (Math.random() > 0.5 ? 1 : -1) * (6 + Math.random() * 10); // 6px to 16px drift range
+                const dy = (Math.random() > 0.5 ? 1 : -1) * (6 + Math.random() * 10);
+                const duration = 5 + Math.random() * 4; // 5s to 9s drift duration
+                const delay = -Math.random() * 5; // Negative delay to prevent in-sync start
+
+                el.style.setProperty("--drift-x", `${dx}px`);
+                el.style.setProperty("--drift-y", `${dy}px`);
+                el.style.setProperty("--drift-duration", `${duration}s`);
+                el.style.setProperty("--drift-delay", `${delay}s`);
+
+                wrapper.appendChild(el);
+                container.appendChild(wrapper);
+            }
+        });
+    };
+
+    let quoteRevealed = false;
+    let quoteTween: gsap.core.Tween | null = null;
+
+    const setQuoteContent = (lang: string) => {
+        const quoteEl = document.querySelector("#quotes blockquote");
+        if (!quoteEl) return;
+
+        const text = quoteTranslations[lang as keyof typeof quoteTranslations] || quoteTranslations.en;
+        const words = text.trim().split(/\s+/);
+        
+        // Handle Right-to-Left text direction for Arabic
+        quoteEl.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+
+        quoteEl.innerHTML = words
+            .map(
+                (word) =>
+                    `<span class="reveal-word inline-block ${quoteRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}">${word}</span>`,
+            )
+            .join(" ");
+    };
+
+    const initQuotesReveal = () => {
+        const quoteEl = document.querySelector("#quotes blockquote");
+        if (!quoteEl) return;
+
+        // Initialize ASCII elements on setup
+        spawnQuotesAscii();
+
+        // Get initial language and render
+        const preferredLang = localStorage.getItem("preferred-language");
+        const sysLang = preferredLang || navigator.language.split("-")[0].toLowerCase();
+        setQuoteContent(sysLang);
+
+        // Listen to language changes
+        window.addEventListener("language-changed", (e: any) => {
+            const lang = e.detail;
+            setQuoteContent(lang);
+
+            // If the quote has entered viewport but not fully finished animating yet,
+            // restart the tween for the new words.
+            const quoteEl = document.querySelector("#quotes blockquote");
+            if (quoteEl && !quoteRevealed) {
+                const wordSpans = quoteEl.querySelectorAll(".reveal-word");
+                if (wordSpans.length > 0 && quoteTween) {
+                    quoteTween.kill();
+                    quoteTween = gsap.to(wordSpans, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1.2,
+                        stagger: 0.08,
+                        ease: "power2.out",
+                        onComplete: () => {
+                            quoteRevealed = true;
+                            quoteTween = null;
+                            const asciiElements = document.querySelectorAll(".quotes-ascii");
+                            gsap.to(asciiElements, {
+                                opacity: 1,
+                                duration: 1.0,
+                                stagger: 0.1,
+                            });
+                        },
+                    });
+                }
+            }
+        });
+
+        // Trigger dynamic ScrollTrigger animation on entering the viewport
+        ScrollTrigger.create({
+            trigger: "#quotes",
+            start: "top 80%",
+            onEnter: () => {
+                if (quoteRevealed) return;
+                
+                const wordSpans = quoteEl.querySelectorAll(".reveal-word");
+                if (quoteTween) quoteTween.kill();
+
+                quoteTween = gsap.to(wordSpans, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    stagger: 0.08,
+                    ease: "power2.out",
+                    onComplete: () => {
+                        quoteRevealed = true;
+                        quoteTween = null;
+                        // Fade in the ASCII elements
+                        const asciiElements = document.querySelectorAll(".quotes-ascii");
+                        gsap.to(asciiElements, {
+                            opacity: 1,
+                            duration: 1.0,
+                            stagger: 0.1,
+                        });
+                    },
+                });
+            }
+        });
+    };
+
+    // Initialize scroll animations and translations
+    const init = () => {
+        initScrollAnimations();
+        initAboutText();
+        initCyberCoords();
+        initCyberImageSwitcher();
+        initAsciiStar();
+        initRoleSwitcher();
+        initCardGlow();
+        initQuotesReveal();
+    };
+
+    if (
+        document.readyState === "complete" ||
+        document.readyState === "interactive"
+    ) {
+        setTimeout(init, 100);
+    } else {
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(init, 100);
+        });
+    }
 </script>
 
 <style is:global>
-	:root {
-		--bg-color: #EFEEE8;
-	}
-	html.dark {
-		--bg-color: #0E0D0B;
-	}
+    /* Native CSS drift animation for quotes ASCII elements (runs on compositor thread) */
+    @keyframes ascii-drift {
+        0% {
+            transform: translate(0, 0);
+        }
+        50% {
+            transform: translate(var(--drift-x, 10px), var(--drift-y, -10px));
+        }
+        100% {
+            transform: translate(0, 0);
+        }
+    }
 
-	body {
-		background-color: #EFEEE8 !important;
-		color: #000000 !important;
-		transition: background-color 0.3s ease, color 0.3s ease;
-	}
-	html.dark body {
-		background-color: #0E0D0B !important;
-		color: #EFEEE8 !important;
-	}
+    .animate-ascii-drift {
+        animation: ascii-drift var(--drift-duration, 6s) ease-in-out var(--drift-delay, 0s) infinite;
+    }
 
-	/* Optimize layout performance during scroll animations */
-	#home {
-		will-change: transform, opacity;
-	}
+    :root {
+        --bg-color: #efeee8;
+    }
+    html.dark {
+        --bg-color: #0e0d0b;
+    }
 
-	/* Fade-in animation for main page content */
-	#app-content {
-		opacity: 0;
-		transition: opacity 2.0s cubic-bezier(0.25, 1, 0.5, 1);
-		will-change: opacity;
-	}
-	html.is-loaded #app-content {
-		opacity: 1 !important;
-	}
+    body {
+        background-color: #efeee8 !important;
+        color: #000000 !important;
+        transition:
+            background-color 0.3s ease,
+            color 0.3s ease;
+    }
+    html.dark body {
+        background-color: #0e0d0b !important;
+        color: #efeee8 !important;
+    }
 
-	/* Fade-out effect for the top glass transition bar */
-	.glass-fade {
-		mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
-		-webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
-	}
+    /* Optimize layout performance during scroll animations */
+    #home {
+        will-change: transform, opacity;
+    }
 
-	/* Dot Matrix background panel (Tiny repeating 'x' matrix) */
-	.dot-matrix-bg {
-		background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.5 3.5 L6.5 6.5 M6.5 3.5 L3.5 6.5' stroke='rgba(0,0,0,0.35)' stroke-width='1'/%3E%3C/svg%3E");
-		background-size: 10px 10px;
-	}
-	html.dark .dot-matrix-bg {
-		background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.5 3.5 L6.5 6.5 M6.5 3.5 L3.5 6.5' stroke='rgba(255,255,255,0.35)' stroke-width='1'/%3E%3C/svg%3E");
-	}
+    /* Fade-in animation for main page content */
+    #app-content {
+        opacity: 0;
+        transition: opacity 2s cubic-bezier(0.25, 1, 0.5, 1);
+        will-change: opacity;
+    }
+    html.is-loaded #app-content {
+        opacity: 1 !important;
+    }
 
-	/* Text stroke masking for About Me title */
-	.about-title {
-		-webkit-text-stroke: 12px #EFEEE8;
-		paint-order: stroke fill;
-		transition: -webkit-text-stroke-color 0.3s ease, color 0.3s ease;
-	}
-	html.dark .about-title {
-		-webkit-text-stroke-color: #0E0D0B;
-	}
+    /* Fade-out effect for the top glass transition bar */
+    .glass-fade {
+        mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+        -webkit-mask-image: linear-gradient(
+            to bottom,
+            black 30%,
+            transparent 100%
+        );
+    }
 
-	/* Text stroke masking for About Me description */
-	.about-desc {
-		transition: color 0.3s ease;
-	}
+    /* Dot Matrix background panel (Tiny repeating 'x' matrix) */
+    .dot-matrix-bg {
+        background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.5 3.5 L6.5 6.5 M6.5 3.5 L3.5 6.5' stroke='rgba(0,0,0,0.35)' stroke-width='1'/%3E%3C/svg%3E");
+        background-size: 10px 10px;
+    }
+    html.dark .dot-matrix-bg {
+        background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.5 3.5 L6.5 6.5 M6.5 3.5 L3.5 6.5' stroke='rgba(255,255,255,0.35)' stroke-width='1'/%3E%3C/svg%3E");
+    }
 
-	/* Diagonal stripes pattern for About Me bottom accent */
-	.about-diagonal-stripes {
-		background: repeating-linear-gradient(
-			-45deg,
-			currentColor,
-			currentColor 8px,
-			transparent 8px,
-			transparent 16px
-		);
-		background-size: 22.63px 22.63px; /* Seamless tile repeat */
-		animation: scroll-stripes-right 1.5s linear infinite;
-	}
+    /* Text stroke masking for About Me title */
+    .about-title {
+        -webkit-text-stroke: 12px #efeee8;
+        paint-order: stroke fill;
+        transition:
+            -webkit-text-stroke-color 0.3s ease,
+            color 0.3s ease;
+    }
+    html.dark .about-title {
+        -webkit-text-stroke-color: #0e0d0b;
+    }
 
-	@keyframes scroll-stripes-right {
-		from {
-			background-position-x: 0;
-		}
-		to {
-			background-position-x: 22.63px;
-		}
-	}
+    /* Text stroke masking for About Me description */
+    .about-desc {
+        transition: color 0.3s ease;
+    }
 
-	/* Cyber avatar glitch animations */
-	@keyframes glitch-anim-1 {
-		0% {
-			clip-path: inset(20% 0 30% 0);
-			transform: translate(-2px, -1px);
-		}
-		10% {
-			clip-path: inset(10% 0 80% 0);
-			transform: translate(2px, 1px);
-		}
-		20% {
-			clip-path: inset(50% 0 5% 0);
-			transform: translate(-1px, 2px);
-		}
-		30% {
-			clip-path: inset(80% 0 10% 0);
-			transform: translate(1px, -2px);
-		}
-		40% {
-			clip-path: inset(5% 0 90% 0);
-			transform: translate(-2px, 1px);
-		}
-		50% {
-			clip-path: inset(70% 0 15% 0);
-			transform: translate(2px, -1px);
-		}
-		60% {
-			clip-path: inset(30% 0 45% 0);
-			transform: translate(-1px, 2px);
-		}
-		70% {
-			clip-path: inset(90% 0 2% 0);
-			transform: translate(1px, -1px);
-		}
-		80% {
-			clip-path: inset(15% 0 75% 0);
-			transform: translate(-2px, 1px);
-		}
-		90% {
-			clip-path: inset(60% 0 25% 0);
-			transform: translate(1px, -1px);
-		}
-		100% {
-			clip-path: inset(40% 0 35% 0);
-			transform: translate(-1px, 1px);
-		}
-	}
+    /* Diagonal stripes pattern for About Me bottom accent */
+    .about-diagonal-stripes {
+        background: repeating-linear-gradient(
+            -45deg,
+            currentColor,
+            currentColor 8px,
+            transparent 8px,
+            transparent 16px
+        );
+        background-size: 22.63px 22.63px; /* Seamless tile repeat */
+        animation: scroll-stripes-right 1.5s linear infinite;
+    }
 
-	@keyframes glitch-anim-2 {
-		0% {
-			clip-path: inset(15% 0 65% 0);
-			transform: translate(1px, 2px);
-		}
-		10% {
-			clip-path: inset(85% 0 5% 0);
-			transform: translate(-1px, -2px);
-		}
-		20% {
-			clip-path: inset(35% 0 45% 0);
-			transform: translate(2px, 1px);
-		}
-		30% {
-			clip-path: inset(5% 0 85% 0);
-			transform: translate(-2px, 1px);
-		}
-		40% {
-			clip-path: inset(75% 0 10% 0);
-			transform: translate(1px, -1px);
-		}
-		50% {
-			clip-path: inset(45% 0 35% 0);
-			transform: translate(-1px, 2px);
-		}
-		60% {
-			clip-path: inset(10% 0 80% 0);
-			transform: translate(2px, -1px);
-		}
-		70% {
-			clip-path: inset(65% 0 20% 0);
-			transform: translate(-1px, 1px);
-		}
-		80% {
-			clip-path: inset(25% 0 55% 0);
-			transform: translate(1px, -2px);
-		}
-		90% {
-			clip-path: inset(95% 0 2% 0);
-			transform: translate(-2px, 1px);
-		}
-		100% {
-			clip-path: inset(55% 0 25% 0);
-			transform: translate(1px, -1px);
-		}
-	}
+    @keyframes scroll-stripes-right {
+        from {
+            background-position-x: 0;
+        }
+        to {
+            background-position-x: 22.63px;
+        }
+    }
 
-	.group:hover .group-hover\:animate-glitch-1 {
-		animation: glitch-anim-1 1s infinite linear alternate-reverse;
-	}
-	.group:hover .group-hover\:animate-glitch-2 {
-		animation: glitch-anim-2 1s infinite linear alternate-reverse;
-	}
+    /* Cyber avatar glitch animations */
+    @keyframes glitch-anim-1 {
+        0% {
+            clip-path: inset(20% 0 30% 0);
+            transform: translate(-2px, -1px);
+        }
+        10% {
+            clip-path: inset(10% 0 80% 0);
+            transform: translate(2px, 1px);
+        }
+        20% {
+            clip-path: inset(50% 0 5% 0);
+            transform: translate(-1px, 2px);
+        }
+        30% {
+            clip-path: inset(80% 0 10% 0);
+            transform: translate(1px, -2px);
+        }
+        40% {
+            clip-path: inset(5% 0 90% 0);
+            transform: translate(-2px, 1px);
+        }
+        50% {
+            clip-path: inset(70% 0 15% 0);
+            transform: translate(2px, -1px);
+        }
+        60% {
+            clip-path: inset(30% 0 45% 0);
+            transform: translate(-1px, 2px);
+        }
+        70% {
+            clip-path: inset(90% 0 2% 0);
+            transform: translate(1px, -1px);
+        }
+        80% {
+            clip-path: inset(15% 0 75% 0);
+            transform: translate(-2px, 1px);
+        }
+        90% {
+            clip-path: inset(60% 0 25% 0);
+            transform: translate(1px, -1px);
+        }
+        100% {
+            clip-path: inset(40% 0 35% 0);
+            transform: translate(-1px, 1px);
+        }
+    }
 
-	/* Intense transition glitch animation */
-	@keyframes intense-glitch-anim {
-		0% {
-			clip-path: inset(80% 0 10% 0);
-			transform: scale(1.05) skew(3deg);
-			filter: hue-rotate(90deg) contrast(200%) saturate(150%);
-		}
-		20% {
-			clip-path: inset(10% 0 70% 0);
-			transform: scale(0.95) skew(-3deg) translate(-5px, 3px);
-			filter: hue-rotate(180deg) invert(100%);
-		}
-		40% {
-			clip-path: inset(40% 0 40% 0);
-			transform: scale(1.1) skew(5deg) translate(5px, -3px);
-			filter: hue-rotate(0deg) contrast(150%);
-		}
-		50% {
-			clip-path: inset(5% 0 90% 0);
-			transform: scale(1.0) skew(-5deg) translate(-2px, -2px);
-			filter: invert(100%) hue-rotate(270deg);
-		}
-		60% {
-			clip-path: inset(60% 0 15% 0);
-			transform: scale(1.05) skew(2deg) translate(3px, 2px);
-			filter: hue-rotate(120deg) contrast(300%);
-		}
-		80% {
-			clip-path: inset(20% 0 55% 0);
-			transform: scale(0.9) skew(-2deg) translate(-3px, -1px);
-			filter: hue-rotate(240deg) invert(0%);
-		}
-		100% {
-			clip-path: inset(0% 0 0% 0);
-			transform: scale(1) skew(0deg) translate(0, 0);
-			filter: none;
-		}
-	}
+    @keyframes glitch-anim-2 {
+        0% {
+            clip-path: inset(15% 0 65% 0);
+            transform: translate(1px, 2px);
+        }
+        10% {
+            clip-path: inset(85% 0 5% 0);
+            transform: translate(-1px, -2px);
+        }
+        20% {
+            clip-path: inset(35% 0 45% 0);
+            transform: translate(2px, 1px);
+        }
+        30% {
+            clip-path: inset(5% 0 85% 0);
+            transform: translate(-2px, 1px);
+        }
+        40% {
+            clip-path: inset(75% 0 10% 0);
+            transform: translate(1px, -1px);
+        }
+        50% {
+            clip-path: inset(45% 0 35% 0);
+            transform: translate(-1px, 2px);
+        }
+        60% {
+            clip-path: inset(10% 0 80% 0);
+            transform: translate(2px, -1px);
+        }
+        70% {
+            clip-path: inset(65% 0 20% 0);
+            transform: translate(-1px, 1px);
+        }
+        80% {
+            clip-path: inset(25% 0 55% 0);
+            transform: translate(1px, -2px);
+        }
+        90% {
+            clip-path: inset(95% 0 2% 0);
+            transform: translate(-2px, 1px);
+        }
+        100% {
+            clip-path: inset(55% 0 25% 0);
+            transform: translate(1px, -1px);
+        }
+    }
 
-	.is-switching {
-		animation: intense-glitch-anim 0.4s steps(4) forwards;
-	}
+    .group:hover .group-hover\:animate-glitch-1 {
+        animation: glitch-anim-1 1s infinite linear alternate-reverse;
+    }
+    .group:hover .group-hover\:animate-glitch-2 {
+        animation: glitch-anim-2 1s infinite linear alternate-reverse;
+    }
 
-	/* Flicker effect for scanlines on hover */
-	@keyframes scanline-flicker-anim {
-		0% { opacity: 0.85; }
-		50% { opacity: 0.35; }
-		100% { opacity: 0.75; }
-	}
-	.group:hover .crt-scanlines {
-		animation: scanline-flicker-anim 0.15s infinite;
-	}
+    /* Intense transition glitch animation */
+    @keyframes intense-glitch-anim {
+        0% {
+            clip-path: inset(80% 0 10% 0);
+            transform: scale(1.05) skew(3deg);
+            filter: hue-rotate(90deg) contrast(200%) saturate(150%);
+        }
+        20% {
+            clip-path: inset(10% 0 70% 0);
+            transform: scale(0.95) skew(-3deg) translate(-5px, 3px);
+            filter: hue-rotate(180deg) invert(100%);
+        }
+        40% {
+            clip-path: inset(40% 0 40% 0);
+            transform: scale(1.1) skew(5deg) translate(5px, -3px);
+            filter: hue-rotate(0deg) contrast(150%);
+        }
+        50% {
+            clip-path: inset(5% 0 90% 0);
+            transform: scale(1) skew(-5deg) translate(-2px, -2px);
+            filter: invert(100%) hue-rotate(270deg);
+        }
+        60% {
+            clip-path: inset(60% 0 15% 0);
+            transform: scale(1.05) skew(2deg) translate(3px, 2px);
+            filter: hue-rotate(120deg) contrast(300%);
+        }
+        80% {
+            clip-path: inset(20% 0 55% 0);
+            transform: scale(0.9) skew(-2deg) translate(-3px, -1px);
+            filter: hue-rotate(240deg) invert(0%);
+        }
+        100% {
+            clip-path: inset(0% 0 0% 0);
+            transform: scale(1) skew(0deg) translate(0, 0);
+            filter: none;
+        }
+    }
 
-	/* Glitch bars animations */
-	@keyframes glitch-bar-1-anim {
-		0% { top: 0%; opacity: 0.8; height: 3px; }
-		20% { top: 30%; opacity: 0; }
-		40% { top: 75%; opacity: 0.9; height: 1px; }
-		60% { top: 15%; opacity: 0.4; height: 4px; }
-		80% { top: 90%; opacity: 0.8; height: 2px; }
-		100% { top: 45%; opacity: 0; }
-	}
-	@keyframes glitch-bar-2-anim {
-		0% { top: 95%; opacity: 0.9; height: 6px; }
-		30% { top: 10%; opacity: 0; }
-		50% { top: 50%; opacity: 0.8; height: 2px; }
-		70% { top: 25%; opacity: 0.9; height: 5px; }
-		90% { top: 80%; opacity: 0.4; height: 1px; }
-		100% { top: 60%; opacity: 0; }
-	}
-	@keyframes glitch-bar-3-anim {
-		0% { top: 40%; opacity: 0; }
-		20% { top: 85%; opacity: 0.85; height: 2px; }
-		40% { top: 15%; opacity: 0.9; height: 3px; }
-		65% { top: 60%; opacity: 0; }
-		85% { top: 5%; opacity: 0.75; height: 1px; }
-		100% { top: 95%; opacity: 0.9; height: 4px; }
-	}
+    .is-switching {
+        animation: intense-glitch-anim 0.4s steps(4) forwards;
+    }
 
-	.is-switching .cyber-glitch-bar-1 {
-		animation: glitch-bar-1-anim 0.4s steps(6) infinite;
-	}
-	.is-switching .cyber-glitch-bar-2 {
-		animation: glitch-bar-2-anim 0.4s steps(5) infinite;
-	}
-	.is-switching .cyber-glitch-bar-3 {
-		animation: glitch-bar-3-anim 0.4s steps(7) infinite;
-	}
+    /* Flicker effect for scanlines on hover */
+    @keyframes scanline-flicker-anim {
+        0% {
+            opacity: 0.85;
+        }
+        50% {
+            opacity: 0.35;
+        }
+        100% {
+            opacity: 0.75;
+        }
+    }
+    .group:hover .crt-scanlines {
+        animation: scanline-flicker-anim 0.15s infinite;
+    }
 
+    /* Glitch bars animations */
+    @keyframes glitch-bar-1-anim {
+        0% {
+            top: 0%;
+            opacity: 0.8;
+            height: 3px;
+        }
+        20% {
+            top: 30%;
+            opacity: 0;
+        }
+        40% {
+            top: 75%;
+            opacity: 0.9;
+            height: 1px;
+        }
+        60% {
+            top: 15%;
+            opacity: 0.4;
+            height: 4px;
+        }
+        80% {
+            top: 90%;
+            opacity: 0.8;
+            height: 2px;
+        }
+        100% {
+            top: 45%;
+            opacity: 0;
+        }
+    }
+    @keyframes glitch-bar-2-anim {
+        0% {
+            top: 95%;
+            opacity: 0.9;
+            height: 6px;
+        }
+        30% {
+            top: 10%;
+            opacity: 0;
+        }
+        50% {
+            top: 50%;
+            opacity: 0.8;
+            height: 2px;
+        }
+        70% {
+            top: 25%;
+            opacity: 0.9;
+            height: 5px;
+        }
+        90% {
+            top: 80%;
+            opacity: 0.4;
+            height: 1px;
+        }
+        100% {
+            top: 60%;
+            opacity: 0;
+        }
+    }
+    @keyframes glitch-bar-3-anim {
+        0% {
+            top: 40%;
+            opacity: 0;
+        }
+        20% {
+            top: 85%;
+            opacity: 0.85;
+            height: 2px;
+        }
+        40% {
+            top: 15%;
+            opacity: 0.9;
+            height: 3px;
+        }
+        65% {
+            top: 60%;
+            opacity: 0;
+        }
+        85% {
+            top: 5%;
+            opacity: 0.75;
+            height: 1px;
+        }
+        100% {
+            top: 95%;
+            opacity: 0.9;
+            height: 4px;
+        }
+    }
 
+    .is-switching .cyber-glitch-bar-1 {
+        animation: glitch-bar-1-anim 0.4s steps(6) infinite;
+    }
+    .is-switching .cyber-glitch-bar-2 {
+        animation: glitch-bar-2-anim 0.4s steps(5) infinite;
+    }
+    .is-switching .cyber-glitch-bar-3 {
+        animation: glitch-bar-3-anim 0.4s steps(7) infinite;
+    }
+
+    /* About Section Role Glitch Text Style */
+    .text-change-glitch {
+        position: relative;
+    }
+    .text-change-glitch::before,
+    .text-change-glitch::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #efeee8;
+        clip-path: inset(100% 0 0 0);
+        transition: background-color 0.3s ease;
+    }
+    html.dark .text-change-glitch::before,
+    html.dark .text-change-glitch::after {
+        background: #0e0d0b;
+    }
+
+    .text-change-glitch.is-glitching {
+        animation: text-shake-anim 0.35s steps(2) infinite;
+    }
+    .text-change-glitch.is-glitching::before {
+        text-shadow: -2px 0 #ff0050;
+        animation: text-glitch-clip-1 0.35s steps(3) infinite;
+    }
+    .text-change-glitch.is-glitching::after {
+        text-shadow: 2px 0 #00f0ff;
+        animation: text-glitch-clip-2 0.35s steps(3) infinite;
+    }
+
+    @keyframes text-shake-anim {
+        0%,
+        100% {
+            transform: none;
+        }
+        20% {
+            transform: skewX(-5deg) scaleY(1.03);
+        }
+        40% {
+            transform: skewX(4deg) scaleY(0.97) translate(-2px);
+        }
+        60% {
+            transform: skewX(-2deg) translate(1px);
+        }
+        80% {
+            transform: skewX(3deg);
+        }
+    }
+
+    @keyframes text-glitch-clip-1 {
+        0%,
+        100% {
+            clip-path: inset(100% 0 0 0);
+            opacity: 0;
+        }
+        10% {
+            clip-path: inset(20% 0 50% 0);
+            opacity: 1;
+            transform: translate(-2px, -1px);
+        }
+        30% {
+            clip-path: inset(60% 0 10% 0);
+            opacity: 1;
+            transform: translate(2px, 1px);
+        }
+        50% {
+            clip-path: inset(10% 0 80% 0);
+            opacity: 1;
+            transform: translate(-1px, 2px);
+        }
+        70% {
+            clip-path: inset(45% 0 35% 0);
+            opacity: 1;
+            transform: translate(1px, -2px);
+        }
+        90% {
+            clip-path: inset(75% 0 15% 0);
+            opacity: 1;
+            transform: translate(-2px, 1px);
+        }
+    }
+
+    @keyframes text-glitch-clip-2 {
+        0%,
+        100% {
+            clip-path: inset(100% 0 0 0);
+            opacity: 0;
+        }
+        15% {
+            clip-path: inset(40% 0 40% 0);
+            opacity: 1;
+            transform: translate(2px, 2px);
+        }
+        35% {
+            clip-path: inset(10% 0 70% 0);
+            opacity: 1;
+            transform: translate(-2px, -2px);
+        }
+        55% {
+            clip-path: inset(80% 0 5% 0);
+            opacity: 1;
+            transform: translate(1px, 1px);
+        }
+        75% {
+            clip-path: inset(25% 0 60% 0);
+            opacity: 1;
+            transform: translate(-1px, 2px);
+        }
+        90% {
+            clip-path: inset(50% 0 25% 0);
+            opacity: 1;
+            transform: translate(2px, -1px);
+        }
+    }
+
+    /* Tech Cards Interactive Effects */
+    .tech-card {
+        position: relative;
+    }
+    .tech-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            250px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+            rgba(0, 0, 0, 0.035),
+            transparent 80%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+        z-index: 1;
+    }
+    html.dark .tech-card::before {
+        background: radial-gradient(
+            250px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+            rgba(255, 255, 255, 0.05),
+            transparent 80%
+        );
+    }
+    .tech-card:hover::before {
+        opacity: 1;
+    }
+
+    /* Header Glitch Effect */
+    .tech-card:hover .tech-card-title {
+        animation: header-glitch 0.3s steps(2) 1;
+    }
+
+    @keyframes header-glitch {
+        0% {
+            text-shadow: none;
+            transform: translate(0);
+        }
+        20% {
+            text-shadow:
+                -1.5px 0 #ff0050,
+                1.5px 0 #00f0ff;
+            transform: translate(-1px, 1px);
+        }
+        40% {
+            text-shadow:
+                1.5px 0 #ff0050,
+                -1.5px 0 #00f0ff;
+            transform: translate(1px, -1px);
+        }
+        60% {
+            text-shadow:
+                -1px 0 #ff0050,
+                1px 0 #00f0ff;
+            transform: translate(-0.5px, 0.5px);
+        }
+        80% {
+            text-shadow: none;
+            transform: translate(0);
+        }
+        100% {
+            text-shadow: none;
+            transform: translate(0);
+        }
+    }
 </style>
