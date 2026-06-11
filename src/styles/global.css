@@ -128,3 +128,155 @@
     @apply font-sans;
     }
 }
+
+/* Custom DOM-based Cursor */
+.custom-mouse-pointer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  background-image: url('/images/mouse_cursor_black.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 99999999;
+  will-change: transform;
+  transform: translate3d(var(--mx, -50px), var(--my, -50px), 0);
+  transition: scale 0.15s ease, filter 0.15s ease;
+}
+
+html.dark .custom-mouse-pointer {
+  background-image: url('/images/mouse_cursor_white.png');
+}
+
+.custom-mouse-pointer.custom-cursor-pointer {
+  transform: translate3d(var(--mx, -50px), var(--my, -50px), 0) scale(1.25);
+  filter: drop-shadow(0 0 5px rgba(0, 255, 204, 0.6));
+}
+
+/* Custom Selection Marquee */
+.selection-marquee {
+  position: fixed;
+  pointer-events: none;
+  z-index: 999998; /* Just below custom cursor pointer */
+  background-color: rgba(14, 13, 11, 0.05);
+  border: 1px solid rgba(14, 13, 11, 0.12);
+  opacity: 0;
+  display: none;
+  will-change: top, left, width, height, opacity;
+  transition: opacity 0.15s ease;
+}
+
+html.dark .selection-marquee {
+  background-color: rgba(239, 238, 232, 0.04);
+  border: 1px solid rgba(239, 238, 232, 0.08);
+}
+
+.selection-marquee .corner-bracket {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  color: #000000;
+}
+
+html.dark .selection-marquee .corner-bracket {
+  color: #ffffff;
+}
+
+.selection-marquee .corner-bracket::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background-color: currentColor;
+}
+
+.selection-marquee .corner-bracket.tl {
+  top: 0;
+  left: 0;
+  border-top: 2px solid currentColor;
+  border-left: 2px solid currentColor;
+}
+.selection-marquee .corner-bracket.tl::before {
+  top: -3px;
+  left: -3px;
+}
+
+.selection-marquee .corner-bracket.tr {
+  top: 0;
+  right: 0;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+}
+.selection-marquee .corner-bracket.tr::before {
+  top: -3px;
+  right: -3px;
+}
+
+.selection-marquee .corner-bracket.bl {
+  bottom: 0;
+  left: 0;
+  border-bottom: 2px solid currentColor;
+  border-left: 2px solid currentColor;
+}
+.selection-marquee .corner-bracket.bl::before {
+  bottom: -3px;
+  left: -3px;
+}
+
+.selection-marquee .corner-bracket.br {
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+}
+.selection-marquee .corner-bracket.br::before {
+  bottom: -3px;
+  right: -3px;
+}
+
+/* Hide native cursor globally to resolve OS layers overlap bugs */
+*, *::before, *::after {
+  cursor: none !important;
+}
+
+/* Nanotech Particle Scatter (Data Burst) */
+.nanotech-container {
+  position: fixed;
+  pointer-events: none;
+  z-index: 999999;
+  width: 0;
+  height: 0;
+  overflow: visible;
+}
+
+.nanotech-particle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  opacity: 0;
+  will-change: transform, opacity;
+  background-color: #000000; /* Black in light mode */
+  animation: nanotech-burst 0.7s cubic-bezier(0.08, 0.8, 0.15, 1) forwards;
+}
+
+html.dark .nanotech-particle {
+  background-color: #ffffff; /* White in dark mode */
+}
+
+@keyframes nanotech-burst {
+  0% {
+    transform: translate(0, 0) scale(1.6);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0.1);
+    opacity: 0;
+  }
+}

@@ -33,6 +33,13 @@ import '../styles/global.css';
 		</script>
 	</head>
 	<body>
+		<div id="custom-mouse-pointer" class="custom-mouse-pointer"></div>
+		<div id="selection-marquee" class="selection-marquee">
+			<div class="corner-bracket tl"></div>
+			<div class="corner-bracket tr"></div>
+			<div class="corner-bracket bl"></div>
+			<div class="corner-bracket br"></div>
+		</div>
 		<slot />
 		<script>
 			import Lenis from 'lenis';
@@ -53,6 +60,166 @@ import '../styles/global.css';
 
 			// Expose lenis globally so Vue components can access it
 			(window as any).lenis = lenis;
+
+			// 1. Custom DOM cursor positioning & state handlers
+			const cursorEl = document.getElementById('custom-mouse-pointer');
+			if (cursorEl) {
+				// Follow mouse pointer instantly
+				window.addEventListener('mousemove', (e) => {
+					cursorEl.style.setProperty('--mx', `${e.clientX}px`);
+					cursorEl.style.setProperty('--my', `${e.clientY}px`);
+				});
+
+				// Hide custom cursor when mouse leaves viewport
+				document.addEventListener('mouseleave', () => {
+					cursorEl.style.opacity = '0';
+				});
+				document.addEventListener('mouseenter', () => {
+					cursorEl.style.opacity = '1';
+				});
+
+				// Check hover state globally for clickable elements to trigger scales and cyber glow
+				window.addEventListener('mouseover', (e) => {
+					const target = e.target as HTMLElement;
+					if (!target) return;
+					
+					// Detect if target is links, buttons, theme toggles, inputs, or has cursor-pointer
+					const isClickable = target.closest('a, button, [role="button"], input, textarea, select, .cursor-pointer');
+					if (isClickable) {
+						cursorEl.classList.add('custom-cursor-pointer');
+					} else {
+						cursorEl.classList.remove('custom-cursor-pointer');
+					}
+				});
+			}
+
+			// 2. Drag Selection Marquee (Windows-style) with corner brackets
+			const marqueeEl = document.getElementById('selection-marquee');
+			if (marqueeEl) {
+				let startX = 0;
+				let startY = 0;
+				let isMouseDown = false;
+				let isSelecting = false;
+				const dragThreshold = 15; // Increased threshold to 15px to avoid triggering on simple clicks
+
+				window.addEventListener('mousedown', (e) => {
+					if (e.button !== 0) return; // Only left-click triggers selection
+
+					// Do not start selection marquee if clicking on interactive elements
+					const target = e.target as HTMLElement;
+					if (target && target.closest('a, button, [role="button"], input, textarea, select, .cursor-pointer')) {
+						return;
+					}
+
+					startX = e.clientX;
+					startY = e.clientY;
+					isMouseDown = true;
+					isSelecting = false;
+				});
+
+				window.addEventListener('mousemove', (e) => {
+					if (!isMouseDown) return;
+
+					const currentX = e.clientX;
+					const currentY = e.clientY;
+
+					// Check if drag threshold is crossed to start selection marquee
+					if (!isSelecting) {
+						const dist = Math.sqrt(Math.pow(currentX - startX, 2) + Math.pow(currentY - startY, 2));
+						if (dist >= dragThreshold) {
+							isSelecting = true;
+							marqueeEl.style.left = `${startX}px`;
+							marqueeEl.style.top = `${startY}px`;
+							marqueeEl.style.width = '0px';
+							marqueeEl.style.height = '0px';
+							marqueeEl.style.display = 'block';
+
+							requestAnimationFrame(() => {
+								if (isSelecting) {
+									marqueeEl.style.opacity = '1';
+								}
+							});
+						}
+					}
+
+					if (isSelecting) {
+						const left = Math.min(startX, currentX);
+						const top = Math.min(startY, currentY);
+						const width = Math.abs(currentX - startX);
+						const height = Math.abs(currentY - startY);
+
+						marqueeEl.style.left = `${left}px`;
+						marqueeEl.style.top = `${top}px`;
+						marqueeEl.style.width = `${width}px`;
+						marqueeEl.style.height = `${height}px`;
+					}
+				});
+
+				const endSelection = (e: MouseEvent) => {
+					if (!isMouseDown) return;
+					
+					const wasSelecting = isSelecting;
+					isMouseDown = false;
+					isSelecting = false;
+
+					if (wasSelecting) {
+						// Fade out selection marquee using CSS transitions
+						marqueeEl.style.opacity = '0';
+						setTimeout(() => {
+							if (!isSelecting) {
+								marqueeEl.style.display = 'none';
+							}
+						}, 150);
+					}
+
+					// Spawn particle click/release effect on every left mouse release
+					const x = e.clientX;
+					const y = e.clientY;
+
+					const container = document.createElement('div');
+					container.className = 'nanotech-container';
+					container.style.left = `${x}px`;
+					container.style.top = `${y}px`;
+
+					const particleCount = 18; 
+
+					for (let i = 0; i < particleCount; i++) {
+						const particle = document.createElement('div');
+						particle.className = 'nanotech-particle';
+						
+						const angle = Math.random() * Math.PI * 2;
+						const distance = 20 + Math.random() * 55;
+						const tx = Math.cos(angle) * distance;
+						const ty = Math.sin(angle) * distance;
+						
+						particle.style.setProperty('--tx', `${tx}px`);
+						particle.style.setProperty('--ty', `${ty}px`);
+
+						container.appendChild(particle);
+					}
+
+					document.body.appendChild(container);
+
+					setTimeout(() => {
+						container.remove();
+					}, 850);
+				};
+
+				window.addEventListener('mouseup', endSelection);
+
+				document.addEventListener('mouseleave', () => {
+					isMouseDown = false;
+					if (isSelecting) {
+						isSelecting = false;
+						marqueeEl.style.opacity = '0';
+						setTimeout(() => {
+							if (!isSelecting) {
+								marqueeEl.style.display = 'none';
+							}
+						}, 150);
+					}
+				});
+			}
 		</script>
 	</body>
 </html>
