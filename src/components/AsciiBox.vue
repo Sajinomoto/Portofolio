@@ -273,6 +273,107 @@ const renderFrame = (timestamp: number = 0) => {
         }
     }
 
+    // --- FLYING BIRDS GENERATION & RENDERING ---
+    // A small flock of 3 birds flying from right to left across the sky
+    const flockSpeed = 2.4;
+    const xFlock = 60.0 - ((time * flockSpeed) % 120.0); // Loops from 60 to -60
+    const yFlock = isMobile ? -6.0 : -10.0; // Positioned higher in the sky (projected upper-screen)
+    const zFlock = 43.0; // Behind the waves, in front of the sun (zSun = 45.0)
+
+    const birdOffsets = [
+        { dx: 0.0, dy: 0.0, dz: 0.0 },      // Leader bird
+        { dx: 3.5, dy: 1.2, dz: 0.5 },      // Follower 1 (higher and behind)
+        { dx: 6.0, dy: -0.8, dz: -0.5 }     // Follower 2 (lower and further behind)
+    ];
+
+    for (let k = 0; k < birdOffsets.length; k++) {
+        const offset = birdOffsets[k];
+        const x = xFlock + offset.dx;
+        // Individual vertical bobbing based on time + index for natural flap motion
+        const y = yFlock + offset.dy + Math.sin(time * 6.0 + k * 1.5) * 0.25;
+        const z = zFlock + offset.dz;
+
+        // Project bird to screen coordinates
+        const xRot = x * cosY - z * sinY;
+        const zRotY = x * sinY + z * cosY;
+
+        const yRot = y * cosP - zRotY * sinP;
+        const zRot = y * sinP + zRotY * cosP;
+
+        const transX = xRot;
+        const transY = yRot + camY;
+        const transZ = zRot + camZ;
+
+        if (transZ <= 0) continue;
+
+        // Perspective Projection
+        const screenX = Math.floor(w / 2 + (transX * fov * 2.6) / transZ);
+        const screenY = Math.floor(h / 2 + (transY * fov) / transZ);
+
+        if (screenX >= 0 && screenX < w && screenY >= 0 && screenY < h) {
+            // Render bird only if it is closer than current Z-buffer (so waves can occlude it)
+            if (transZ < zBuffer[screenY][screenX]) {
+                zBuffer[screenY][screenX] = transZ;
+
+                // Simple 3-frame flapping animation based on time
+                const flap = Math.floor(time * 20.0 + k * 2.0) % 3;
+                let birdChar = "~"; // Default wings flat
+                if (flap === 0) birdChar = "v"; // Wings up
+                else if (flap === 2) birdChar = "^"; // Wings down
+
+                screen[screenY][screenX] = birdChar;
+            }
+        }
+    }
+
+    // --- FLOCK 2 (Distant, higher up, flying left to right) ---
+    const flockSpeed2 = 1.9;
+    const xFlock2 = ((time * flockSpeed2) % 130.0) - 65.0; // Loops from -65 to 65
+    const yFlock2 = isMobile ? -9.0 : -15.0; // Positioned even higher in the sky (further up-screen)
+    const zFlock2 = 44.5; // Slightly further back (appears smaller)
+
+    const birdOffsets2 = [
+        { dx: 0.0, dy: 0.0, dz: 0.0 },      // Leader bird 2
+        { dx: -4.0, dy: 1.0, dz: -0.3 }     // Follower bird 2 (behind in left-to-right flight)
+    ];
+
+    for (let k = 0; k < birdOffsets2.length; k++) {
+        const offset = birdOffsets2[k];
+        const x = xFlock2 + offset.dx;
+        const y = yFlock2 + offset.dy + Math.sin(time * 7.0 + k * 2.0) * 0.2;
+        const z = zFlock2 + offset.dz;
+
+        // Project to screen coordinates
+        const xRot = x * cosY - z * sinY;
+        const zRotY = x * sinY + z * cosY;
+
+        const yRot = y * cosP - zRotY * sinP;
+        const zRot = y * sinP + zRotY * cosP;
+
+        const transX = xRot;
+        const transY = yRot + camY;
+        const transZ = zRot + camZ;
+
+        if (transZ <= 0) continue;
+
+        // Perspective Projection
+        const screenX = Math.floor(w / 2 + (transX * fov * 2.6) / transZ);
+        const screenY = Math.floor(h / 2 + (transY * fov) / transZ);
+
+        if (screenX >= 0 && screenX < w && screenY >= 0 && screenY < h) {
+            if (transZ < zBuffer[screenY][screenX]) {
+                zBuffer[screenY][screenX] = transZ;
+
+                const flap = Math.floor(time * 24.0 + k * 1.5) % 3;
+                let birdChar = "~";
+                if (flap === 0) birdChar = "v";
+                else if (flap === 2) birdChar = "^";
+
+                screen[screenY][screenX] = birdChar;
+            }
+        }
+    }
+
     let result = "";
     for (let r = 0; r < h; r++) {
         result += screen[r].join("") + "\n";

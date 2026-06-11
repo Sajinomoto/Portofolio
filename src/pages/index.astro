@@ -4,6 +4,9 @@ import Header from "../components/Header.vue";
 import Greeting from "../components/Greeting.vue";
 import Layout from "../layouts/Layout.astro";
 import AsciiBox from "../components/AsciiBox.vue";
+import imgCat from "../assets/cat.jpg";
+import imgBird from "../assets/glitched-bird.png";
+import imgCatGlitched from "../assets/glitched-cat.png";
 ---
 
 <Layout>
@@ -14,6 +17,8 @@ import AsciiBox from "../components/AsciiBox.vue";
 			<section id="home" class="sticky top-0 z-0 h-screen w-full overflow-hidden">
 				<Greeting client:load />
 			</section>
+			<!-- Transparent spacer to lengthen Home scroll duration -->
+			<div class="h-[45vh] bg-transparent pointer-events-none relative z-0"></div>
 			<div id="scroll-content" class="relative z-10 bg-[#EFEEE8] dark:bg-[#0E0D0B] transition-colors duration-300 w-full">
 				<!-- Glassmorphism Top Transition Bar -->
 				<div class="absolute top-0 left-0 w-full h-24 bg-[#EFEEE8]/70 dark:bg-[#0E0D0B]/70 backdrop-blur-md pointer-events-none glass-fade transition-colors duration-300" style="transform: translateZ(0); will-change: transform;"></div>
@@ -24,6 +29,21 @@ import AsciiBox from "../components/AsciiBox.vue";
 				>
 					<!-- Dot Matrix background panel (Matrix 'x' kecil di Kanan Atas) -->
 					<div class="absolute top-32 right-8 sm:right-12 md:right-24 w-[150px] h-[90px] pointer-events-none dot-matrix-bg z-0 opacity-75"></div>
+
+					<!-- Tech schematic lines background (1-2 clean lines with bends and labels) -->
+					<div class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden select-none opacity-25 dark:opacity-15 transition-opacity duration-300">
+						<svg class="w-full h-full stroke-black/30 dark:stroke-[#EFEEE8]/20 fill-none text-black dark:text-[#EFEEE8] transition-colors duration-300" stroke-width="1" xmlns="http://www.w3.org/2000/svg">
+							<!-- Line 1: Top line starting left, bending down, running across to right -->
+							<path d="M 0 150 H 150 L 190 190 H 700 L 730 220 H 2000" />
+							<circle cx="150" cy="150" r="2" fill="currentColor" class="opacity-50" />
+							<text x="210" y="185" font-family="monospace" font-size="8" fill="currentColor" class="opacity-40" letter-spacing="1">SYS_TRACE.01</text>
+							
+							<!-- Line 2: Bottom line starting right, bending up, running across to left -->
+							<path d="M 2000 580 H 780 L 740 540 H 400 L 360 500 H 0" />
+							<circle cx="780" cy="580" r="2" fill="currentColor" class="opacity-50" />
+							<text x="420" y="535" font-family="monospace" font-size="8" fill="currentColor" class="opacity-40" letter-spacing="1">NET.SYS_LINK</text>
+						</svg>
+					</div>
 
 					<!-- Technical Bar (Gambar 1, Reversed) -->
 					<div class="mb-6 ml-1 pointer-events-none select-none">
@@ -65,11 +85,10 @@ import AsciiBox from "../components/AsciiBox.vue";
 						</svg>
 					</div>
 
-					<!-- Text Container -->
-					<div class="relative z-10 text-left p-4 pl-0 max-w-5xl">
-						
-						<!-- Teks content -->
-						<div class="relative z-10">
+					<!-- Grid Container -->
+					<div class="relative z-10 w-full grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start mt-4">
+						<!-- Left Column: Text Content (cols 1 to 7) -->
+						<div class="md:col-span-7 flex flex-col justify-start max-w-5xl">
 							<h2 class="about-title text-3xl sm:text-5xl font-bold tracking-tight mb-4 text-black dark:text-white transition-colors duration-300">
 								About Me
 							</h2>
@@ -77,6 +96,144 @@ import AsciiBox from "../components/AsciiBox.vue";
 								Under Development 🚧
 							</p>
 						</div>
+
+						<!-- Right Column: Cyber Profile Picture (cols 8 to 12) -->
+						<div class="md:col-span-5 flex justify-center md:justify-end w-full">
+							<div 
+								id="cyber-pic-frame" 
+								class="relative w-full max-w-[320px] aspect-square bg-[#0E0D0B]/5 dark:bg-[#EFEEE8]/5 border border-black/20 dark:border-white/20 p-4 select-none group transition-all duration-300 hover:border-black dark:hover:border-white cursor-crosshair"
+							>
+								<!-- Corner Brackets -->
+								<div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-black/40 dark:border-white/40 group-hover:border-black dark:group-hover:border-white group-hover:scale-105 transition-all duration-300"></div>
+								<div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-black/40 dark:border-white/40 group-hover:border-black dark:group-hover:border-white group-hover:scale-105 transition-all duration-300"></div>
+								<div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-black/40 dark:border-white/40 group-hover:border-black dark:group-hover:border-white group-hover:scale-105 transition-all duration-300"></div>
+								<div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-black/40 dark:border-white/40 group-hover:border-black dark:group-hover:border-white group-hover:scale-105 transition-all duration-300"></div>
+
+								<!-- Top Readouts -->
+								<div class="absolute top-2 left-4 right-4 flex justify-between text-[9px] font-mono tracking-wider opacity-60 group-hover:opacity-100 transition-opacity duration-300">
+									<span class="flex items-center gap-1.5">
+										<span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+										SYS.RUNNING
+									</span>
+									<span id="cyber-pic-coords">X: 000 // Y: 000</span>
+								</div>
+
+								<!-- Inner Viewport -->
+								<div id="cyber-viewport" class="relative w-full h-full border border-black/10 dark:border-white/10 overflow-hidden flex items-center justify-center bg-black/[0.03] dark:bg-white/[0.03]">
+									
+									<!-- Image Wrapper 0: Cat -->
+									<div class="cyber-slide absolute inset-0 w-full h-full opacity-100 z-10 transition-opacity duration-200">
+										<!-- Main Image -->
+										<img 
+											src={imgCat.src} 
+											alt="Satrio Aji Profile Cat" 
+											class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
+										/>
+										<!-- Glitch Layer 1 -->
+										<img 
+											src={imgCat.src} 
+											alt="Glitch Layer 1" 
+											class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-1 filter hue-rotate-[90deg] pointer-events-none"
+										/>
+										<!-- Glitch Layer 2 -->
+										<img 
+											src={imgCat.src} 
+											alt="Glitch Layer 2" 
+											class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-2 filter hue-rotate-[240deg] pointer-events-none"
+										/>
+									</div>
+
+									<!-- Image Wrapper 1: Bird -->
+									<div class="cyber-slide absolute inset-0 w-full h-full opacity-0 z-0 transition-opacity duration-200">
+										<!-- Main Image -->
+										<img 
+											src={imgBird.src} 
+											alt="Satrio Aji Glitched Bird" 
+											class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
+										/>
+										<!-- Glitch Layer 1 -->
+										<img 
+											src={imgBird.src} 
+											alt="Glitch Layer 1" 
+											class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-1 filter hue-rotate-[90deg] pointer-events-none"
+										/>
+										<!-- Glitch Layer 2 -->
+										<img 
+											src={imgBird.src} 
+											alt="Glitch Layer 2" 
+											class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-2 filter hue-rotate-[240deg] pointer-events-none"
+										/>
+									</div>
+
+									<!-- Image Wrapper 2: Glitched Cat -->
+									<div class="cyber-slide absolute inset-0 w-full h-full opacity-0 z-0 transition-opacity duration-200">
+										<!-- Main Image -->
+										<img 
+											src={imgCatGlitched.src} 
+											alt="Satrio Aji Glitched Cat" 
+											class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
+										/>
+										<!-- Glitch Layer 1 -->
+										<img 
+											src={imgCatGlitched.src} 
+											alt="Glitch Layer 1" 
+											class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-1 filter hue-rotate-[90deg] pointer-events-none"
+										/>
+										<!-- Glitch Layer 2 -->
+										<img 
+											src={imgCatGlitched.src} 
+											alt="Glitch Layer 2" 
+											class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-2 filter hue-rotate-[240deg] pointer-events-none"
+										/>
+									</div>
+
+									<!-- Glitch Bars (Visible & animated during transition) -->
+									<div class="absolute left-0 w-full h-[3px] bg-red-500 opacity-0 pointer-events-none z-30 cyber-glitch-bar cyber-glitch-bar-1"></div>
+									<div class="absolute left-0 w-full h-[6px] bg-cyan-400 opacity-0 pointer-events-none z-30 cyber-glitch-bar cyber-glitch-bar-2"></div>
+									<div class="absolute left-0 w-full h-[2px] bg-yellow-300 opacity-0 pointer-events-none z-30 cyber-glitch-bar cyber-glitch-bar-3"></div>
+
+									<!-- Retro CRT Scanlines Overlay -->
+									<div class="crt-scanlines absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.15)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[size:100%_4px,6px_100%] z-20 opacity-80 group-hover:opacity-50 transition-opacity duration-300"></div>
+								</div>
+
+								<!-- Bottom Readouts -->
+								<div class="absolute bottom-2 left-4 right-4 flex justify-between text-[9px] font-mono tracking-wider opacity-60 group-hover:opacity-100 transition-opacity duration-300">
+									<span id="cyber-pic-unit">UNIT: IMG_SET_01</span>
+									<span>SYS.LOC // ID_IDN</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- ASCII Floating Stars (Interactive wandering easter eggs - 3 instances) -->
+					<div 
+						id="ascii-floating-star-0" 
+						class="ascii-star absolute pointer-events-auto z-20 cursor-pointer select-none opacity-0 transition-opacity duration-500 font-mono text-[10px] font-bold text-black/45 dark:text-[#EFEEE8]/35 hover:text-black dark:hover:text-white"
+						style="top: 50%; left: 50%;"
+					>
+						<pre class="m-0 p-0 leading-[9px] tracking-normal font-mono select-none pointer-events-none">    │    
+─── ✦ ───
+    │    </pre>
+					</div>
+
+					<div 
+						id="ascii-floating-star-1" 
+						class="ascii-star absolute pointer-events-auto z-20 cursor-pointer select-none opacity-0 transition-opacity duration-500 font-mono text-[10px] font-bold text-black/45 dark:text-[#EFEEE8]/35 hover:text-black dark:hover:text-white"
+						style="top: 50%; left: 50%;"
+					>
+						<pre class="m-0 p-0 leading-[9px] tracking-normal font-mono select-none pointer-events-none">    │    
+─── ✦ ───
+    │    </pre>
+					</div>
+
+					<div 
+						id="ascii-floating-star-2" 
+						class="ascii-star absolute pointer-events-auto z-20 cursor-pointer select-none opacity-0 transition-opacity duration-500 font-mono text-[10px] font-bold text-black/45 dark:text-[#EFEEE8]/35 hover:text-black dark:hover:text-white"
+						style="top: 50%; left: 50%;"
+					>
+						<pre class="m-0 p-0 leading-[9px] tracking-normal font-mono select-none pointer-events-none">    │    
+─── ✦ ───
+    │    </pre>
 					</div>
 
 				</section>
@@ -92,12 +249,76 @@ import AsciiBox from "../components/AsciiBox.vue";
 					</div>
 				</div>
 
+				<!-- Section: Projects -->
+				<section 
+					id="projects" 
+					class="relative min-h-screen flex flex-col items-center justify-center py-32 px-8 sm:px-12 md:px-24 max-w-7xl mx-auto text-black dark:text-[#EFEEE8] transition-colors duration-300 w-full z-10"
+				>
+					<!-- Subtle top border/accent -->
+					<div class="absolute top-0 left-8 right-8 h-[1px] bg-black/10 dark:bg-white/10"></div>
+
+					<!-- Plus markers/grid dots for premium styling -->
+					<div class="absolute top-6 left-8 font-mono text-[9px] opacity-40 select-none">SYS.PRJ_SECTION</div>
+					<div class="absolute top-6 right-8 font-mono text-[9px] opacity-40 select-none">[STATUS: UNDER_DEV]</div>
+					
+					<div class="relative flex flex-col items-center justify-center">
+						<h2 
+							class="text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight uppercase relative font-mono text-center glitch-text select-none cursor-pointer"
+							data-text="My Projects - [Under Development]"
+						>
+							My Projects - [Under Development]
+						</h2>
+					</div>
+				</section>
+
+				<!-- Cyber Separator Line -->
+				<div class="relative w-full h-8 pointer-events-none select-none flex items-center justify-between px-8 sm:px-12 md:px-24 max-w-7xl mx-auto my-2">
+					<!-- The thin border line itself -->
+					<div class="absolute left-8 right-8 h-[1px] bg-black/10 dark:bg-white/10"></div>
+					
+					<!-- Left Corner cross marker -->
+					<div class="z-10 font-mono text-[9px] text-black/30 dark:text-white/20 bg-[#EFEEE8] dark:bg-[#0E0D0B] px-1.5 transition-colors duration-300">
+						[┼] SYS.LOC_0x7B
+					</div>
+					
+					<!-- Center dotted marker -->
+					<div class="z-10 bg-[#EFEEE8] dark:bg-[#0E0D0B] px-3 font-mono text-[8px] tracking-widest text-black/20 dark:text-white/10 transition-colors duration-300">
+						••••• SEC_DIVIDER •••••
+					</div>
+
+					<!-- Right Corner cross marker -->
+					<div class="z-10 font-mono text-[9px] text-black/30 dark:text-white/20 bg-[#EFEEE8] dark:bg-[#0E0D0B] px-1.5 transition-colors duration-300">
+						[┼] 00:00:00:FE
+					</div>
+				</div>
+
+				<!-- Section: Contact -->
+				<section 
+					id="contact" 
+					class="relative min-h-screen flex flex-col items-center justify-center py-32 px-8 sm:px-12 md:px-24 max-w-7xl mx-auto text-black dark:text-[#EFEEE8] transition-colors duration-300 w-full z-10"
+				>
+					<!-- Plus markers/grid dots for premium styling -->
+					<div class="absolute top-6 left-8 font-mono text-[9px] opacity-40 select-none">SYS.CON_SECTION</div>
+					<div class="absolute top-6 right-8 font-mono text-[9px] opacity-40 select-none">[STATUS: UNDER_DEV]</div>
+					
+					<div class="relative flex flex-col items-center justify-center">
+						<h2 
+							class="text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight uppercase relative font-mono text-center glitch-text select-none cursor-pointer"
+							data-text="Contact Me - [Under Development]"
+						>
+							Contact Me - [Under Development]
+						</h2>
+					</div>
+				</section>
+
 				<!-- Section: 3D ASCII Sandbox -->
 				<section 
 					id="ascii-sandbox" 
-					class="relative h-screen w-full overflow-hidden flex items-center justify-center bg-transparent"
+					class="relative h-[160vh] w-full bg-transparent"
 				>
-					<AsciiBox client:load />
+					<div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+						<AsciiBox client:load />
+					</div>
 				</section>
 			</div>
 		</main>
@@ -112,22 +333,33 @@ import AsciiBox from "../components/AsciiBox.vue";
 
 	// Translations for About Me section based on user system language
 	const aboutTranslations = {
-		id: "Halo! Aku Satrio Aji Pamungkas, seorang Web Developer dan mahasiswa Teknik Informatika di Universitas Sebelas Maret. Aku mulai suka dengan teknologi karena hobi main video game waktu kecil. Menurutku 'keajaiban' di balik game itu keren banget! Sekarang, aku menyalurkan passion itu ke web development, tapi ambisi terbesarku adalah terjun langsung ke dunia Game Development. Aku juga sangat tertarik dengan AI dan bagaimana teknologi ini membentuk masa depan kita. Selalu semangat untuk membangun koneksi, belajar hal baru, dan berkarya!",
-		en: "Hi there! I'm Satrio Aji, an Informatics Engineering student at Universitas Sebelas Maret and a passionate Web Developer. My love for tech started in the most classic way possible: spending countless hours playing video games as a kid and thinking, 'Wow, this is incredibly cool.' That childhood curiosity naturally grew into a drive to understand how things work behind the screen. While I love building things for the web, my ultimate dream is to become a Game Developer and bring my own virtual worlds to life. Lately, I've also been exploring the fascinating world of Artificial Intelligence. I'm always excited to learn new things, build cool projects, and chat about games or the future of tech!",
-		zh: "你好！我是 Satrio Aji，一名 Web 开发者，也是 Universitas Sebelas Maret（三一一大学）信息工程专业的学生。我爱上科技是因为小时候对电子游戏的痴迷——我单纯觉得游戏背后的魔法简直酷毙了。现在，我把这份热情倾注到了 Web 开发中，但我最大的梦想是进军游戏开发领域。同时，我也对人工智能 (AI) 及其如何塑造我们的未来非常着迷。我总是渴望结识新朋友、学习新知识并创造很棒的东西！",
-		ko: "안녕하세요! 저는 Universitas Sebelas Maret(UNS)에서 정보공학을 전공하고 있는 웹 개발자 Satrio Aji입니다. 어릴 적 비디오 게임에 푹 빠졌던 것이 계기가 되어 기술을 사랑하게 되었어요. 게임 뒤에 숨겨진 마법 같은 기술이 정말 멋지다고 생각했거든요. 지금은 그 열정을 웹 개발에 쏟고 있지만, 제 가장 큰 꿈은 게임 개발자가 되는 것입니다. 또한 AI와 그것이 만들어갈 미래에도 큰 관심을 가지고 있어요. 새로운 사람들과 소통하고, 배우고, 무언가를 만들어내는 것은 언제나 환영입니다!",
-		ar: "مرحباً! أنا ساتريو آجي (Satrio Aji)، مطور ويب وطالب في هندسة المعلوماتية في جامعة سيبيلاس ماريت (Universitas Sebelas Maret). وقعت في حب التكنولوجيا بسبب هوسي في طفولتي بألعاب الفيديو — كنت أرى أن السحر الكامن وراءها هو أروع شيء على الإطلاق. اليوم، أوجه هذا الشغف نحو تطوير الويب، ولكن طموحي الأكبر هو الغوص في عالم تطوير الألعاب. أنا أيضاً مفتون جداً بالذكاء الاصطناعي (AI) وكيف يشكل مستقبلنا. دائماً متحمس للتواصل، والتعلم، والابتكار!",
-		ja: "こんにちは！Universitas Sebelas Maret で情報工学を学んでいる、ウェブ開発者の Satrio Aji です。子どもの頃にビデオゲームに夢中になったことがきっかけで、テクノロジーの虜になりました。ゲームの裏側にある魔法のような仕組みが、とにかくカッコいいと思ったんです。今はその情熱をウェブ開発に注いでいますが、最大の目標はゲーム開発の世界に飛び込むことです。また、AI とそれが創り出す未来にもすごく興味があります。新しい繋がりを作ったり、学んだり、モノづくりをすることが大好きです！",
-		hi: "नमस्ते! मैं Satrio Aji हूँ, एक वेब डेवलपर और Universitas Sebelas Maret में इंफॉर्मेटिक्स इंजीनियरिंग का छात्र। बचपन में वीडियो गेम्स के प्रति मेरे जुनून ने मुझे टेक्नोलॉजी का दीवाना बना दिया—मुझे लगता था कि इसके पीछे का जादू दुनिया की सबसे शानदार चीज़ है। आज, मैं अपना वो जुनून वेब डेवलपमेंट में लगा रहा हूँ, लेकिन मेरा सबसे बड़ा सपना गेम डेवलपमेंट (Game Development) की दुनिया में कदम रखना है। मैं AI और यह हमारे भविष्य को कैसे आकार दे रहा है, इसे लेकर भी काफी उत्साहित हूँ। मैं हमेशा नए लोगों से जुड़ने, सीखने और कुछ नया बनाने के लिए तैयार रहता हूँ!"
+		id: "Halo! Aku Satrio Aji, seorang Fullstack Web Developer dan mahasiswa Teknik Informatika di Universitas Sebelas Maret. Ketertarikanku pada teknologi berawal dari video game masa kecil, yang memicu rasa penasaranku untuk memahami bagaimana segala sesuatu bekerja di balik layar. Saat ini aku aktif membangun berbagai karya untuk web, namun tujuan utamaku adalah menjadi seorang Game Developer. Aku juga sedang aktif mengeksplorasi AI dan selalu bersemangat untuk belajar, berkarya, dan membangun koneksi!",
+		en: "Hi! I'm Satrio Aji, a Fullstack Web Developer and Informatics Engineering student at Universitas Sebelas Maret. My passion for tech began with childhood video games, which sparked my drive to understand how things work behind the screen. Currently building for the web, my ultimate goal is to become a Game Developer. I'm also actively exploring AI and always eager to learn, build, and connect!",
+		zh: "你好！我是 Satrio Aji，一名全栈 Web 开发者（Fullstack Web Developer），也是 Universitas Sebelas Maret（三一一大学）信息工程专业的学生。我对科技的热爱始于童年时期的电子游戏，这激发了我去了解屏幕背后运作原理的动力。目前我主要致力于 Web 开发，但我最终的目标是成为一名游戏开发者。同时，我也在积极探索人工智能（AI），并始终渴望学习新知、创造项目和结识新朋友！",
+		ko: "안녕하세요! 저는 풀스택 웹 개발자이자 Universitas Sebelas Maret에서 정보공학을 전공하고 있는 Satrio Aji입니다. 기술에 대한 제 열정은 어린 시절 즐기던 비디오 게임에서 시작되었고, 이는 화면 뒤에서 시스템이 어떻게 작동하는지 이해하고 싶다는 원동력이 되었습니다. 현재는 웹 개발에 집중하고 있지만, 제 최종 목표는 게임 개발자가 되는 것입니다. 또한 AI 분야도 적극적으로 탐구하고 있으며, 언제나 배우고, 만들고, 소통하는 데 열정을 쏟고 있습니다!",
+		ar: "مرحباً! أنا ساتريو آجي (Satrio Aji)، مطور ويب شامل (Fullstack Web Developer) وطالب في هندسة المعلوماتية في جامعة سيبيلاس ماريت (Universitas Sebelas Maret). بدأ شغفي بالتكنولوجيا من ألعاب الفيديو في مرحلة الطفولة، مما أثار دافعي لفهم كيف تعمل الأشياء خلف الشاشة. أعمل حالياً على بناء مشاريع للويب، ولكن هدفي النهائي هو أن أصبح مطور ألعاب. أنا أيضاً أستكشف الذكاء الاصطناعي بنشاط، ودائماً متحمس للتعلم والابتكار والتواصل!",
+		ja: "こんにちは！Universitas Sebelas Maret で情報工学を学んでいる、フルスタックウェブ開発者の Satrio Aji です。テクノロジーへの情熱は、子供の頃のビデオゲームから始まり、画面の裏側で何がどう動いているのかを理解したいという探求心のきっかけになりました。現在はウェブ開発に取り組んでいますが、最終的な目標はゲーム開発者になることです。また、AI についても積極的に探求しており、学ぶこと、創り出すこと、そして繋がることに常に意欲を持っています！",
+		hi: "नमस्ते! मैं Satrio Aji हूँ, एक फुलस्टैक वेब डेवलपर (Fullstack Web Developer) और Universitas Sebelas Maret में इंफॉर्मेटिक्स इंजीनियरिंग का छात्र। तकनीक के प्रति मेरा जुनून बचपन के वीडियो गेम्स से शुरू हुआ, जिसने मुझे यह समझने के लिए प्रेरित किया कि स्क्रीन के पीछे चीजें कैसे काम करती हैं। वर्तमान में मैं वेब के लिए डेवलपमेंट कर रहा हूँ, लेकिन मेरा अंतिम लक्ष्य एक गेम डेवलपर (Game Developer) बनना है। मैं सक्रिय रूप से AI के बारे में भी सीख रहा हूँ और हमेशा कुछ नया सीखने, बनाने और लोगों से जुड़ने के लिए उत्सुक रहता हूँ!"
 	};
 
 	const initAboutText = () => {
 		const aboutDescEl = document.getElementById("about-desc");
 		if (aboutDescEl) {
-			const sysLang = navigator.language.split("-")[0].toLowerCase();
+			const preferredLang = localStorage.getItem("preferred-language");
+			const sysLang = preferredLang || navigator.language.split("-")[0].toLowerCase();
 			const text = aboutTranslations[sysLang as keyof typeof aboutTranslations] || aboutTranslations.en;
 			aboutDescEl.textContent = text;
 		}
+
+		// Listen to language changes dispatched from Header.vue
+		window.addEventListener("language-changed", (e: any) => {
+			const lang = e.detail;
+			const aboutDescEl = document.getElementById("about-desc");
+			if (aboutDescEl) {
+				const text = aboutTranslations[lang as keyof typeof aboutTranslations] || aboutTranslations.en;
+				aboutDescEl.textContent = text;
+			}
+		});
 	};
 
 	const initScrollAnimations = () => {
@@ -146,7 +378,7 @@ import AsciiBox from "../components/AsciiBox.vue";
 				scrollTrigger: {
 					trigger: homeSection,
 					start: 'top top',
-					end: '+=130%', // Reduced scroll distance (1.3x viewport height)
+					end: '+=175%', // Increased scroll distance (1.75x viewport height) to match transparent spacer
 					scrub: true,
 				},
 				scale: 0.82,
@@ -156,11 +388,280 @@ import AsciiBox from "../components/AsciiBox.vue";
 			});
 		}
 	};
+	const initCyberCoords = () => {
+		const frame = document.getElementById("cyber-pic-frame");
+		const coordsText = document.getElementById("cyber-pic-coords");
+		if (frame && coordsText) {
+			frame.addEventListener("mousemove", (e: MouseEvent) => {
+				const rect = frame.getBoundingClientRect();
+				const x = Math.floor(e.clientX - rect.left);
+				const y = Math.floor(e.clientY - rect.top);
+				const padX = String(x).padStart(3, '0');
+				const padY = String(y).padStart(3, '0');
+				coordsText.textContent = `X: ${padX} // Y: ${padY}`;
+			});
+
+			frame.addEventListener("mouseleave", () => {
+				coordsText.textContent = "X: 000 // Y: 000";
+			});
+		}
+	};
+
+	const initCyberImageSwitcher = () => {
+		const frame = document.getElementById("cyber-pic-frame");
+		const viewport = document.getElementById("cyber-viewport");
+		const unitText = document.getElementById("cyber-pic-unit");
+		const slides = document.querySelectorAll(".cyber-slide");
+
+		if (!frame || !viewport || slides.length === 0) return;
+
+		let currentIndex = 0;
+		let isSwitching = false;
+		let switchInterval: any = null;
+
+		const showSlide = (nextIndex: number) => {
+			if (isSwitching) return;
+			isSwitching = true;
+
+			// Add intense transition glitch class
+			viewport.classList.add("is-switching");
+
+			// Midway through transition (200ms), swap active images
+			setTimeout(() => {
+				slides.forEach((slide, idx) => {
+					if (idx === nextIndex) {
+						slide.classList.remove("opacity-0", "z-0");
+						slide.classList.add("opacity-100", "z-10");
+					} else {
+						slide.classList.remove("opacity-100", "z-10");
+						slide.classList.add("opacity-0", "z-0");
+					}
+				});
+
+				// Update indicator
+				if (unitText) {
+					unitText.textContent = `UNIT: IMG_SET_0${nextIndex + 1}`;
+				}
+				currentIndex = nextIndex;
+			}, 200);
+
+			// Remove intense transition glitch class
+			setTimeout(() => {
+				viewport.classList.remove("is-switching");
+				isSwitching = false;
+			}, 400);
+		};
+
+		const nextSlide = () => {
+			const nextIndex = (currentIndex + 1) % slides.length;
+			showSlide(nextIndex);
+		};
+
+		// Auto cycle every 6 seconds
+		const startInterval = () => {
+			if (switchInterval) clearInterval(switchInterval);
+			switchInterval = setInterval(nextSlide, 6000);
+		};
+
+		// Click to switch immediately
+		frame.addEventListener("click", () => {
+			if (isSwitching) return;
+			nextSlide();
+			startInterval(); // Reset timer
+		});
+
+		startInterval();
+	};
+
+	const initAsciiStar = () => {
+		const aboutSec = document.getElementById("about");
+		const starEls = document.querySelectorAll(".ascii-star");
+		if (!aboutSec || starEls.length === 0) return;
+
+		const frames = [
+			// Frame 0: Normal Star
+			"    │    \n─── ✦ ───\n    │    ",
+			// Frame 1: Exploding 1
+			"    ·    \n  · o ·  \n    ·    ",
+			// Frame 2: Exploding 2
+			"  ·   ·  \n·       ·\n  ·   ·  ",
+			// Frame 3: Exploding 3
+			".       .\n         \n.       .",
+			// Frame 4: Empty (Disappeared)
+			"         \n         \n         "
+		];
+
+		// Calculate the boundary coordinates of the profile photo frame relative to the #about container
+		const getExclusionZone = () => {
+			const frame = document.getElementById("cyber-pic-frame");
+			if (!frame) return null;
+			const aboutRect = aboutSec.getBoundingClientRect();
+			const frameRect = frame.getBoundingClientRect();
+			
+			return {
+				left: frameRect.left - aboutRect.left,
+				right: frameRect.right - aboutRect.left,
+				top: frameRect.top - aboutRect.top,
+				bottom: frameRect.bottom - aboutRect.top
+			};
+		};
+
+		// Check if target coordinates fall inside the profile photo frame boundaries (with safety margin)
+		const isOverlapping = (tx: number, ty: number, zone: any) => {
+			if (!zone) return false;
+			const safety = 35; // px safety margin around frame border
+			return (tx >= zone.left - safety && tx <= zone.right + safety &&
+					ty >= zone.top - safety && ty <= zone.bottom + safety);
+		};
+
+		// Initialize each star individually
+		starEls.forEach((star: any, index: number) => {
+			const pre = star.querySelector("pre");
+			if (!pre) return;
+
+			let x = 0;
+			let y = 0;
+			let targetX = 0;
+			let targetY = 0;
+			let isExploding = false;
+			let animationId: number | null = null;
+
+			// Set random target coordinates inside the bounds of the #about section, avoiding the text area and photo frame
+			const setRandomTarget = () => {
+				const rect = aboutSec.getBoundingClientRect();
+				const margin = 80;
+				const isMobile = window.innerWidth < 768;
+				const zone = getExclusionZone();
+
+				let tx = 0;
+				let ty = 0;
+				let attempts = 0;
+
+				do {
+					if (isMobile) {
+						// On mobile: text is at the top, profile pic at the bottom. Float in bottom half.
+						const topLimit = rect.height * 0.52;
+						tx = margin + Math.random() * (rect.width - margin * 2 - 100);
+						ty = topLimit + Math.random() * (rect.height - topLimit - margin - 40);
+					} else {
+						// On desktop: text is on left (col-span-7), profile pic on right (col-span-5).
+						// Float strictly in the right 40% area of the section.
+						const leftLimit = rect.width * 0.58;
+						tx = leftLimit + Math.random() * (rect.width - leftLimit - margin - 100);
+						ty = margin + Math.random() * (rect.height - margin * 2 - 60);
+					}
+					attempts++;
+				} while (isOverlapping(tx, ty, zone) && attempts < 25);
+
+				targetX = tx;
+				targetY = ty;
+			};
+
+			// Floating wandering animation loop using Lerp with subtle offset speeds
+			const update = () => {
+				if (isExploding) return;
+
+				const dx = targetX - x;
+				const dy = targetY - y;
+				// Vary speed slightly for each star so they wander asynchronously
+				const speed = 0.012 + (index * 0.003);
+				x += dx * speed;
+				y += dy * speed;
+
+				star.style.left = `${x}px`;
+				star.style.top = `${y}px`;
+
+				if (Math.abs(dx) < 5 && Math.abs(dy) < 5) {
+					setRandomTarget();
+				}
+
+				animationId = requestAnimationFrame(update);
+			};
+
+			// Spawn the star at a random location (following the same safety boundaries)
+			const spawn = () => {
+				isExploding = false;
+				pre.textContent = frames[0];
+				
+				const rect = aboutSec.getBoundingClientRect();
+				const margin = 100;
+				const isMobile = window.innerWidth < 768;
+				const zone = getExclusionZone();
+
+				let tx = 0;
+				let ty = 0;
+				let attempts = 0;
+
+				do {
+					if (isMobile) {
+						const topLimit = rect.height * 0.52;
+						tx = margin + Math.random() * (rect.width - margin * 2 - 100);
+						ty = topLimit + Math.random() * (rect.height - topLimit - margin - 40);
+					} else {
+						const leftLimit = rect.width * 0.58;
+						tx = leftLimit + Math.random() * (rect.width - leftLimit - margin - 100);
+						ty = margin + Math.random() * (rect.height - margin * 2 - 60);
+					}
+					attempts++;
+				} while (isOverlapping(tx, ty, zone) && attempts < 25);
+
+				x = tx;
+				y = ty;
+				targetX = x;
+				targetY = y;
+
+				star.style.left = `${x}px`;
+				star.style.top = `${y}px`;
+				star.style.display = "block";
+				
+				setTimeout(() => {
+					star.classList.remove("opacity-0");
+					star.classList.add("opacity-100");
+				}, 50 + index * 200); // Stagger fade-in slightly
+
+				setRandomTarget();
+				update();
+			};
+
+			// Explode animation on click
+			const explode = () => {
+				if (isExploding) return;
+				isExploding = true;
+				if (animationId) cancelAnimationFrame(animationId);
+
+				let frameIdx = 0;
+				const playExplosion = () => {
+					if (frameIdx < frames.length) {
+						pre.textContent = frames[frameIdx];
+						frameIdx++;
+						setTimeout(playExplosion, 80);
+					} else {
+						star.classList.remove("opacity-100");
+						star.classList.add("opacity-0");
+						setTimeout(() => {
+							star.style.display = "none";
+							// Respawn at a random location after 3 seconds
+							setTimeout(spawn, 3000);
+						}, 500);
+					}
+				};
+
+				playExplosion();
+			};
+
+			star.addEventListener("click", explode);
+			// Stagger initial spawn to spread stars out
+			setTimeout(spawn, 500 + index * 500);
+		});
+	};
 
 	// Initialize scroll animations and translations
 	const init = () => {
 		initScrollAnimations();
 		initAboutText();
+		initCyberCoords();
+		initCyberImageSwitcher();
+		initAsciiStar();
 	};
 
 	if (document.readyState === 'complete' || document.readyState === 'interactive') {
@@ -254,6 +755,317 @@ import AsciiBox from "../components/AsciiBox.vue";
 		}
 		to {
 			background-position-x: 22.63px;
+		}
+	}
+
+	/* Cyber avatar glitch animations */
+	@keyframes glitch-anim-1 {
+		0% {
+			clip-path: inset(20% 0 30% 0);
+			transform: translate(-2px, -1px);
+		}
+		10% {
+			clip-path: inset(10% 0 80% 0);
+			transform: translate(2px, 1px);
+		}
+		20% {
+			clip-path: inset(50% 0 5% 0);
+			transform: translate(-1px, 2px);
+		}
+		30% {
+			clip-path: inset(80% 0 10% 0);
+			transform: translate(1px, -2px);
+		}
+		40% {
+			clip-path: inset(5% 0 90% 0);
+			transform: translate(-2px, 1px);
+		}
+		50% {
+			clip-path: inset(70% 0 15% 0);
+			transform: translate(2px, -1px);
+		}
+		60% {
+			clip-path: inset(30% 0 45% 0);
+			transform: translate(-1px, 2px);
+		}
+		70% {
+			clip-path: inset(90% 0 2% 0);
+			transform: translate(1px, -1px);
+		}
+		80% {
+			clip-path: inset(15% 0 75% 0);
+			transform: translate(-2px, 1px);
+		}
+		90% {
+			clip-path: inset(60% 0 25% 0);
+			transform: translate(1px, -1px);
+		}
+		100% {
+			clip-path: inset(40% 0 35% 0);
+			transform: translate(-1px, 1px);
+		}
+	}
+
+	@keyframes glitch-anim-2 {
+		0% {
+			clip-path: inset(15% 0 65% 0);
+			transform: translate(1px, 2px);
+		}
+		10% {
+			clip-path: inset(85% 0 5% 0);
+			transform: translate(-1px, -2px);
+		}
+		20% {
+			clip-path: inset(35% 0 45% 0);
+			transform: translate(2px, 1px);
+		}
+		30% {
+			clip-path: inset(5% 0 85% 0);
+			transform: translate(-2px, 1px);
+		}
+		40% {
+			clip-path: inset(75% 0 10% 0);
+			transform: translate(1px, -1px);
+		}
+		50% {
+			clip-path: inset(45% 0 35% 0);
+			transform: translate(-1px, 2px);
+		}
+		60% {
+			clip-path: inset(10% 0 80% 0);
+			transform: translate(2px, -1px);
+		}
+		70% {
+			clip-path: inset(65% 0 20% 0);
+			transform: translate(-1px, 1px);
+		}
+		80% {
+			clip-path: inset(25% 0 55% 0);
+			transform: translate(1px, -2px);
+		}
+		90% {
+			clip-path: inset(95% 0 2% 0);
+			transform: translate(-2px, 1px);
+		}
+		100% {
+			clip-path: inset(55% 0 25% 0);
+			transform: translate(1px, -1px);
+		}
+	}
+
+	.group:hover .group-hover\:animate-glitch-1 {
+		animation: glitch-anim-1 1s infinite linear alternate-reverse;
+	}
+	.group:hover .group-hover\:animate-glitch-2 {
+		animation: glitch-anim-2 1s infinite linear alternate-reverse;
+	}
+
+	/* Intense transition glitch animation */
+	@keyframes intense-glitch-anim {
+		0% {
+			clip-path: inset(80% 0 10% 0);
+			transform: scale(1.05) skew(3deg);
+			filter: hue-rotate(90deg) contrast(200%) saturate(150%);
+		}
+		20% {
+			clip-path: inset(10% 0 70% 0);
+			transform: scale(0.95) skew(-3deg) translate(-5px, 3px);
+			filter: hue-rotate(180deg) invert(100%);
+		}
+		40% {
+			clip-path: inset(40% 0 40% 0);
+			transform: scale(1.1) skew(5deg) translate(5px, -3px);
+			filter: hue-rotate(0deg) contrast(150%);
+		}
+		50% {
+			clip-path: inset(5% 0 90% 0);
+			transform: scale(1.0) skew(-5deg) translate(-2px, -2px);
+			filter: invert(100%) hue-rotate(270deg);
+		}
+		60% {
+			clip-path: inset(60% 0 15% 0);
+			transform: scale(1.05) skew(2deg) translate(3px, 2px);
+			filter: hue-rotate(120deg) contrast(300%);
+		}
+		80% {
+			clip-path: inset(20% 0 55% 0);
+			transform: scale(0.9) skew(-2deg) translate(-3px, -1px);
+			filter: hue-rotate(240deg) invert(0%);
+		}
+		100% {
+			clip-path: inset(0% 0 0% 0);
+			transform: scale(1) skew(0deg) translate(0, 0);
+			filter: none;
+		}
+	}
+
+	.is-switching {
+		animation: intense-glitch-anim 0.4s steps(4) forwards;
+	}
+
+	/* Flicker effect for scanlines on hover */
+	@keyframes scanline-flicker-anim {
+		0% { opacity: 0.85; }
+		50% { opacity: 0.35; }
+		100% { opacity: 0.75; }
+	}
+	.group:hover .crt-scanlines {
+		animation: scanline-flicker-anim 0.15s infinite;
+	}
+
+	/* Glitch bars animations */
+	@keyframes glitch-bar-1-anim {
+		0% { top: 0%; opacity: 0.8; height: 3px; }
+		20% { top: 30%; opacity: 0; }
+		40% { top: 75%; opacity: 0.9; height: 1px; }
+		60% { top: 15%; opacity: 0.4; height: 4px; }
+		80% { top: 90%; opacity: 0.8; height: 2px; }
+		100% { top: 45%; opacity: 0; }
+	}
+	@keyframes glitch-bar-2-anim {
+		0% { top: 95%; opacity: 0.9; height: 6px; }
+		30% { top: 10%; opacity: 0; }
+		50% { top: 50%; opacity: 0.8; height: 2px; }
+		70% { top: 25%; opacity: 0.9; height: 5px; }
+		90% { top: 80%; opacity: 0.4; height: 1px; }
+		100% { top: 60%; opacity: 0; }
+	}
+	@keyframes glitch-bar-3-anim {
+		0% { top: 40%; opacity: 0; }
+		20% { top: 85%; opacity: 0.85; height: 2px; }
+		40% { top: 15%; opacity: 0.9; height: 3px; }
+		65% { top: 60%; opacity: 0; }
+		85% { top: 5%; opacity: 0.75; height: 1px; }
+		100% { top: 95%; opacity: 0.9; height: 4px; }
+	}
+
+	.is-switching .cyber-glitch-bar-1 {
+		animation: glitch-bar-1-anim 0.4s steps(6) infinite;
+	}
+	.is-switching .cyber-glitch-bar-2 {
+		animation: glitch-bar-2-anim 0.4s steps(5) infinite;
+	}
+	.is-switching .cyber-glitch-bar-3 {
+		animation: glitch-bar-3-anim 0.4s steps(7) infinite;
+	}
+
+	/* Projects Glitch Text Style */
+	.glitch-text {
+		position: relative;
+		animation: glitch-container-anim 4s steps(2) infinite;
+	}
+	.glitch-text::before,
+	.glitch-text::after {
+		content: attr(data-text);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: #EFEEE8;
+		clip-path: inset(100% 0 0 0);
+		transition: background-color 0.3s ease;
+	}
+	html.dark .glitch-text::before,
+	html.dark .glitch-text::after {
+		background: #0E0D0B;
+	}
+
+	.glitch-text::before {
+		text-shadow: -0.8px 0 rgba(255, 0, 80, 0.7);
+		animation: glitch-anim-text-1 4s steps(3) infinite;
+	}
+	.glitch-text::after {
+		text-shadow: -0.8px 0 rgba(0, 240, 255, 0.7);
+		animation: glitch-anim-text-2 4s steps(3) infinite;
+	}
+
+	@keyframes glitch-container-anim {
+		0%, 80%, 100% {
+			transform: none;
+			filter: none;
+		}
+		81% {
+			transform: skewX(-1.5deg) scaleY(1.01);
+			filter: contrast(105%);
+		}
+		83% {
+			transform: skewX(1deg) scaleY(0.99) translate(-0.5px);
+			filter: contrast(105%);
+		}
+		85% {
+			transform: none;
+			filter: none;
+		}
+		87% {
+			transform: skewX(-2deg);
+		}
+		89% {
+			transform: skewX(1.5deg) translate(0.5px);
+		}
+	}
+
+	@keyframes glitch-anim-text-1 {
+		0%, 80%, 100% {
+			clip-path: inset(100% 0 0 0);
+			opacity: 0;
+		}
+		81% {
+			clip-path: inset(30% 0 60% 0);
+			opacity: 0.6;
+			transform: translate(-1.5px, -0.5px);
+		}
+		83% {
+			clip-path: inset(50% 0 40% 0);
+			opacity: 0.6;
+			transform: translate(1.5px, 0.5px);
+		}
+		85% {
+			clip-path: inset(65% 0 25% 0);
+			opacity: 0.6;
+			transform: translate(-0.5px, 1px);
+		}
+		87% {
+			clip-path: inset(40% 0 55% 0);
+			opacity: 0.6;
+			transform: translate(0.5px, -1px);
+		}
+		89% {
+			clip-path: inset(55% 0 35% 0);
+			opacity: 0.6;
+			transform: translate(-1px, 0.5px);
+		}
+	}
+
+	@keyframes glitch-anim-text-2 {
+		0%, 80%, 100% {
+			clip-path: inset(100% 0 0 0);
+			opacity: 0;
+		}
+		81% {
+			clip-path: inset(35% 0 50% 0);
+			opacity: 0.6;
+			transform: translate(1px, 1px);
+		}
+		83% {
+			clip-path: inset(70% 0 20% 0);
+			opacity: 0.6;
+			transform: translate(-1px, -1px);
+		}
+		85% {
+			clip-path: inset(45% 0 45% 0);
+			opacity: 0.6;
+			transform: translate(1.5px, 0.5px);
+		}
+		87% {
+			clip-path: inset(15% 0 75% 0);
+			opacity: 0.6;
+			transform: translate(-1.5px, 0.5px);
+		}
+		89% {
+			clip-path: inset(60% 0 30% 0);
+			opacity: 0.6;
+			transform: translate(0.5px, -0.5px);
 		}
 	}
 </style>

@@ -52,6 +52,36 @@ const isDark = ref(false);
 const isSidebarOpen = ref(false);
 const activeSection = ref("home");
 
+const isLangDropdownOpen = ref(false);
+
+const langNames = {
+    id: "Indonesia",
+    en: "English",
+    zh: "中文 (ZH)",
+    ko: "한국어 (KO)",
+    ja: "日本語 (JA)",
+    hi: "हिन्दी (HI)",
+    ar: "العربية (AR)"
+};
+
+const toggleLangDropdown = () => {
+    isLangDropdownOpen.value = !isLangDropdownOpen.value;
+};
+
+const selectLang = (lang: "id" | "en" | "ja" | "ko" | "ar" | "hi" | "zh") => {
+    currentLang.value = lang;
+    isLangDropdownOpen.value = false;
+    localStorage.setItem("preferred-language", lang);
+    window.dispatchEvent(new CustomEvent("language-changed", { detail: lang }));
+};
+
+const closeDropdown = (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest("#language-selector-container")) {
+        isLangDropdownOpen.value = false;
+    }
+};
+
 const handleScroll = () => {
     // Only calculate active section state on desktop viewports (>= 768px)
     if (typeof window !== "undefined" && window.innerWidth < 768) return;
@@ -69,12 +99,17 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
-    // Detect language
-    const sysLang = navigator.language.split("-")[0];
-    if (sysLang in translations) {
-        currentLang.value = sysLang as any;
+    // Detect language preference or fallback to system language
+    const preferredLang = localStorage.getItem("preferred-language");
+    if (preferredLang && preferredLang in translations) {
+        currentLang.value = preferredLang as any;
     } else {
-        currentLang.value = "en";
+        const sysLang = navigator.language.split("-")[0];
+        if (sysLang in translations) {
+            currentLang.value = sysLang as any;
+        } else {
+            currentLang.value = "en";
+        }
     }
 
     // Detect theme
@@ -82,12 +117,15 @@ onMounted(() => {
 
     // Listen to scroll to update active section
     window.addEventListener("scroll", handleScroll);
+    // Listen to click outside to close language dropdown
+    window.addEventListener("click", closeDropdown);
     // Initial call to set state
     handleScroll();
 });
 
 onUnmounted(() => {
     window.removeEventListener("scroll", handleScroll);
+    window.removeEventListener("click", closeDropdown);
 });
 
 const toggleDarkMode = () => {
@@ -260,6 +298,49 @@ const scrollToSection = (selector: string) => {
                         <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
                     </svg>
                 </button>
+
+                <!-- Language Selector Button (Visible next to dark mode toggle) -->
+                <div id="language-selector-container" class="relative">
+                    <button
+                        @click="toggleLangDropdown"
+                        class="p-2 rounded-full text-black hover:bg-black/5 dark:text-[#EFEEE8] dark:hover:bg-white/5 focus:outline-none flex items-center justify-center cursor-pointer z-10 transition-all duration-300"
+                        :class="isSidebarOpen ? 'opacity-0 pointer-events-none md:opacity-100' : 'opacity-100'"
+                        aria-label="Select Language"
+                    >
+                        <!-- Globe Icon -->
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                            <path d="M2 12h20"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Language Dropdown Menu (Brutalist style) -->
+                    <div
+                        v-if="isLangDropdownOpen"
+                        class="absolute right-0 mt-2 bg-[#EFEEE8] dark:bg-[#0E0D0B] border-2 border-black dark:border-white p-1 flex flex-col z-50 min-w-[135px] shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)]"
+                    >
+                        <button
+                            v-for="(langName, langCode) in langNames"
+                            :key="langCode"
+                            @click="selectLang(langCode)"
+                            class="px-3 py-1.5 text-[10px] font-mono font-bold uppercase transition-colors hover:bg-black hover:text-[#EFEEE8] dark:hover:bg-white dark:hover:text-[#0E0D0B] text-black dark:text-[#EFEEE8] text-left w-full flex items-center justify-between cursor-pointer border border-transparent rounded-none"
+                        >
+                            <span>{{ langName }}</span>
+                            <span v-if="currentLang === langCode" class="text-[8px] ml-1">●</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 

@@ -59,7 +59,7 @@ const greetingsByTime = {
 
 // Define welcome sub-text translations
 const welcomeTexts = {
-    id: "Selamat datang di portofolio saya!",
+    id: "Selamat datang di portofolio-ku!",
     en: "Welcome to my portfolio!",
     ja: "ポートフォリオへようこそ！",
     ko: "포트폴리오에 오신 것을 환영합니다!",
@@ -111,6 +111,7 @@ let lastMouseY = 0;
 let lastTime = 0;
 let velocity = 0;
 let rafId = 0;
+let handleLanguageChange: ((e: Event) => void) | null = null;
 
 
 
@@ -143,15 +144,20 @@ onMounted(() => {
 
     const greetings = greetingsByTime[timeOfDay];
 
-    // Detect starting language index from system language
-    const sysLang = navigator.language.split("-")[0].toLowerCase();
-    if (sysLang in welcomeTexts) {
-        systemLang.value = sysLang as any;
+    // Detect starting language index from preferred-language in localStorage or system language
+    const preferredLang = localStorage.getItem("preferred-language");
+    let activeLang = "en";
+    if (preferredLang && preferredLang in welcomeTexts) {
+        activeLang = preferredLang;
     } else {
-        systemLang.value = "en";
+        const sysLang = navigator.language.split("-")[0].toLowerCase();
+        if (sysLang in welcomeTexts) {
+            activeLang = sysLang;
+        }
     }
 
-    const startIndex = sysLang in langToIndex ? langToIndex[sysLang] : 1; // Default to English (1)
+    systemLang.value = activeLang as any;
+    const startIndex = activeLang in langToIndex ? langToIndex[activeLang] : 1; // Default to English (1)
 
     // 2. Typewriter state variables
     let wordIndex = startIndex;
@@ -193,6 +199,21 @@ onMounted(() => {
         timeoutId = setTimeout(tick, delay);
     }
 
+    function resetTypewriter(newLang: "id" | "en" | "ja" | "ko" | "ar" | "hi" | "zh") {
+        const newIndex = langToIndex[newLang];
+        if (newIndex !== undefined) {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+            wordIndex = newIndex;
+            charIndex = 0;
+            isDeleting = false;
+            currentText.value = "";
+            isBlinking.value = false;
+            tick();
+        }
+    }
+
     // Start the typing cycle
     tick();
 
@@ -223,6 +244,18 @@ onMounted(() => {
     };
     updateTime();
     timeIntervalId = setInterval(updateTime, 1000);
+
+    // 4. Language Change Event Listener
+    handleLanguageChange = (e: Event) => {
+        const customEvent = e as CustomEvent<"id" | "en" | "ja" | "ko" | "ar" | "hi" | "zh">;
+        const newLang = customEvent.detail;
+        if (newLang && newLang in welcomeTexts) {
+            systemLang.value = newLang;
+            updateTime();
+            resetTypewriter(newLang);
+        }
+    };
+    window.addEventListener("language-changed", handleLanguageChange);
 
 
 
@@ -433,6 +466,9 @@ onUnmounted(() => {
     }
     if (rafId) {
         cancelAnimationFrame(rafId);
+    }
+    if (handleLanguageChange) {
+        window.removeEventListener("language-changed", handleLanguageChange);
     }
 });
 
