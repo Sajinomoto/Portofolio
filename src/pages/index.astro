@@ -22,6 +22,8 @@ import AsciiBox from "../components/AsciiBox.vue";
 					id="about" 
 					class="relative min-h-screen flex flex-col items-start justify-start pt-32 pb-16 px-8 sm:px-12 md:px-24 max-w-7xl mx-auto text-black dark:text-[#EFEEE8] transition-colors duration-300 w-full"
 				>
+					<!-- Dot Matrix background panel (Matrix 'x' kecil di Kanan Atas) -->
+					<div class="absolute top-32 right-8 sm:right-12 md:right-24 w-[150px] h-[90px] pointer-events-none dot-matrix-bg z-0 opacity-75"></div>
 
 					<!-- Technical Bar (Gambar 1, Reversed) -->
 					<div class="mb-6 ml-1 pointer-events-none select-none">
@@ -63,17 +65,15 @@ import AsciiBox from "../components/AsciiBox.vue";
 						</svg>
 					</div>
 
-					<!-- Text Container with Dot Matrix background -->
-					<div class="relative z-10 text-left p-4 pl-0 max-w-md">
-						<!-- Dot Matrix background panel (Titik-titik) -->
-						<div class="absolute top-0 left-1 w-[272px] h-[163px] pointer-events-none dot-matrix-bg z-0 opacity-70"></div>
+					<!-- Text Container -->
+					<div class="relative z-10 text-left p-4 pl-0 max-w-5xl">
 						
 						<!-- Teks content -->
 						<div class="relative z-10">
 							<h2 class="about-title text-3xl sm:text-5xl font-bold tracking-tight mb-4 text-black dark:text-white transition-colors duration-300">
 								About Me
 							</h2>
-							<p class="about-desc text-lg sm:text-xl text-black/50 dark:text-[#EFEEE8]/50 font-medium leading-relaxed transition-colors duration-300">
+							<p id="about-desc" class="about-desc text-lg sm:text-xl text-black/50 dark:text-[#EFEEE8]/50 font-medium leading-relaxed transition-colors duration-300 text-justify">
 								Under Development 🚧
 							</p>
 						</div>
@@ -110,6 +110,26 @@ import AsciiBox from "../components/AsciiBox.vue";
 
 	gsap.registerPlugin(ScrollTrigger);
 
+	// Translations for About Me section based on user system language
+	const aboutTranslations = {
+		id: "Halo! Aku Satrio Aji Pamungkas, seorang Web Developer dan mahasiswa Teknik Informatika di Universitas Sebelas Maret. Aku mulai suka dengan teknologi karena hobi main video game waktu kecil. Menurutku 'keajaiban' di balik game itu keren banget! Sekarang, aku menyalurkan passion itu ke web development, tapi ambisi terbesarku adalah terjun langsung ke dunia Game Development. Aku juga sangat tertarik dengan AI dan bagaimana teknologi ini membentuk masa depan kita. Selalu semangat untuk membangun koneksi, belajar hal baru, dan berkarya!",
+		en: "Hi there! I'm Satrio Aji, an Informatics Engineering student at Universitas Sebelas Maret and a passionate Web Developer. My love for tech started in the most classic way possible: spending countless hours playing video games as a kid and thinking, 'Wow, this is incredibly cool.' That childhood curiosity naturally grew into a drive to understand how things work behind the screen. While I love building things for the web, my ultimate dream is to become a Game Developer and bring my own virtual worlds to life. Lately, I've also been exploring the fascinating world of Artificial Intelligence. I'm always excited to learn new things, build cool projects, and chat about games or the future of tech!",
+		zh: "你好！我是 Satrio Aji，一名 Web 开发者，也是 Universitas Sebelas Maret（三一一大学）信息工程专业的学生。我爱上科技是因为小时候对电子游戏的痴迷——我单纯觉得游戏背后的魔法简直酷毙了。现在，我把这份热情倾注到了 Web 开发中，但我最大的梦想是进军游戏开发领域。同时，我也对人工智能 (AI) 及其如何塑造我们的未来非常着迷。我总是渴望结识新朋友、学习新知识并创造很棒的东西！",
+		ko: "안녕하세요! 저는 Universitas Sebelas Maret(UNS)에서 정보공학을 전공하고 있는 웹 개발자 Satrio Aji입니다. 어릴 적 비디오 게임에 푹 빠졌던 것이 계기가 되어 기술을 사랑하게 되었어요. 게임 뒤에 숨겨진 마법 같은 기술이 정말 멋지다고 생각했거든요. 지금은 그 열정을 웹 개발에 쏟고 있지만, 제 가장 큰 꿈은 게임 개발자가 되는 것입니다. 또한 AI와 그것이 만들어갈 미래에도 큰 관심을 가지고 있어요. 새로운 사람들과 소통하고, 배우고, 무언가를 만들어내는 것은 언제나 환영입니다!",
+		ar: "مرحباً! أنا ساتريو آجي (Satrio Aji)، مطور ويب وطالب في هندسة المعلوماتية في جامعة سيبيلاس ماريت (Universitas Sebelas Maret). وقعت في حب التكنولوجيا بسبب هوسي في طفولتي بألعاب الفيديو — كنت أرى أن السحر الكامن وراءها هو أروع شيء على الإطلاق. اليوم، أوجه هذا الشغف نحو تطوير الويب، ولكن طموحي الأكبر هو الغوص في عالم تطوير الألعاب. أنا أيضاً مفتون جداً بالذكاء الاصطناعي (AI) وكيف يشكل مستقبلنا. دائماً متحمس للتواصل، والتعلم، والابتكار!",
+		ja: "こんにちは！Universitas Sebelas Maret で情報工学を学んでいる、ウェブ開発者の Satrio Aji です。子どもの頃にビデオゲームに夢中になったことがきっかけで、テクノロジーの虜になりました。ゲームの裏側にある魔法のような仕組みが、とにかくカッコいいと思ったんです。今はその情熱をウェブ開発に注いでいますが、最大の目標はゲーム開発の世界に飛び込むことです。また、AI とそれが創り出す未来にもすごく興味があります。新しい繋がりを作ったり、学んだり、モノづくりをすることが大好きです！",
+		hi: "नमस्ते! मैं Satrio Aji हूँ, एक वेब डेवलपर और Universitas Sebelas Maret में इंफॉर्मेटिक्स इंजीनियरिंग का छात्र। बचपन में वीडियो गेम्स के प्रति मेरे जुनून ने मुझे टेक्नोलॉजी का दीवाना बना दिया—मुझे लगता था कि इसके पीछे का जादू दुनिया की सबसे शानदार चीज़ है। आज, मैं अपना वो जुनून वेब डेवलपमेंट में लगा रहा हूँ, लेकिन मेरा सबसे बड़ा सपना गेम डेवलपमेंट (Game Development) की दुनिया में कदम रखना है। मैं AI और यह हमारे भविष्य को कैसे आकार दे रहा है, इसे लेकर भी काफी उत्साहित हूँ। मैं हमेशा नए लोगों से जुड़ने, सीखने और कुछ नया बनाने के लिए तैयार रहता हूँ!"
+	};
+
+	const initAboutText = () => {
+		const aboutDescEl = document.getElementById("about-desc");
+		if (aboutDescEl) {
+			const sysLang = navigator.language.split("-")[0].toLowerCase();
+			const text = aboutTranslations[sysLang as keyof typeof aboutTranslations] || aboutTranslations.en;
+			aboutDescEl.textContent = text;
+		}
+	};
+
 	const initScrollAnimations = () => {
 		const homeSection = document.getElementById('home');
 		const lenis = (window as any).lenis;
@@ -137,12 +157,17 @@ import AsciiBox from "../components/AsciiBox.vue";
 		}
 	};
 
-	// Initialize scroll animations
+	// Initialize scroll animations and translations
+	const init = () => {
+		initScrollAnimations();
+		initAboutText();
+	};
+
 	if (document.readyState === 'complete' || document.readyState === 'interactive') {
-		setTimeout(initScrollAnimations, 100);
+		setTimeout(init, 100);
 	} else {
 		document.addEventListener('DOMContentLoaded', () => {
-			setTimeout(initScrollAnimations, 100);
+			setTimeout(init, 100);
 		});
 	}
 </script>
@@ -186,13 +211,13 @@ import AsciiBox from "../components/AsciiBox.vue";
 		-webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
 	}
 
-	/* Dot Matrix background panel (Titik-titik) */
+	/* Dot Matrix background panel (Tiny repeating 'x' matrix) */
 	.dot-matrix-bg {
-		background-image: radial-gradient(rgba(0, 0, 0, 0.65) 3.4px, transparent 3.4px);
-		background-size: 17px 17px;
+		background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.5 3.5 L6.5 6.5 M6.5 3.5 L3.5 6.5' stroke='rgba(0,0,0,0.35)' stroke-width='1'/%3E%3C/svg%3E");
+		background-size: 10px 10px;
 	}
 	html.dark .dot-matrix-bg {
-		background-image: radial-gradient(rgba(255, 255, 255, 0.65) 3.4px, transparent 3.4px);
+		background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.5 3.5 L6.5 6.5 M6.5 3.5 L3.5 6.5' stroke='rgba(255,255,255,0.35)' stroke-width='1'/%3E%3C/svg%3E");
 	}
 
 	/* Text stroke masking for About Me title */
@@ -207,12 +232,7 @@ import AsciiBox from "../components/AsciiBox.vue";
 
 	/* Text stroke masking for About Me description */
 	.about-desc {
-		-webkit-text-stroke: 8px #EFEEE8;
-		paint-order: stroke fill;
-		transition: -webkit-text-stroke-color 0.3s ease, color 0.3s ease;
-	}
-	html.dark .about-desc {
-		-webkit-text-stroke-color: #0E0D0B;
+		transition: color 0.3s ease;
 	}
 
 	/* Diagonal stripes pattern for About Me bottom accent */

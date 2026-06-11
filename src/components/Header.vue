@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
@@ -50,6 +50,23 @@ const translations = {
 const currentLang = ref<"id" | "en" | "ja" | "ko" | "ar" | "hi" | "zh">("en");
 const isDark = ref(false);
 const isSidebarOpen = ref(false);
+const activeSection = ref("home");
+
+const handleScroll = () => {
+    // Only calculate active section state on desktop viewports (>= 768px)
+    if (typeof window !== "undefined" && window.innerWidth < 768) return;
+
+    const aboutEl = document.getElementById("about");
+    if (aboutEl) {
+        const rect = aboutEl.getBoundingClientRect();
+        // If the top of the #about section has scrolled past 50% of the viewport height, set active to "about"
+        if (rect.top <= window.innerHeight * 0.5) {
+            activeSection.value = "about";
+        } else {
+            activeSection.value = "home";
+        }
+    }
+};
 
 onMounted(() => {
     // Detect language
@@ -62,6 +79,15 @@ onMounted(() => {
 
     // Detect theme
     isDark.value = document.documentElement.classList.contains("dark");
+
+    // Listen to scroll to update active section
+    window.addEventListener("scroll", handleScroll);
+    // Initial call to set state
+    handleScroll();
+});
+
+onUnmounted(() => {
+    window.removeEventListener("scroll", handleScroll);
 });
 
 const toggleDarkMode = () => {
@@ -165,7 +191,10 @@ const scrollToSection = (selector: string) => {
                     <a
                         href="#home"
                         @click.prevent="scrollToSection('#home')"
-                        class="text-base font-semibold text-black dark:text-[#EFEEE8] hover:opacity-60 transition-opacity duration-200"
+                        class="px-5 py-2.5 text-xs font-bold tracking-widest uppercase transition-all duration-300 rounded-none border border-transparent whitespace-nowrap cursor-pointer select-none"
+                        :class="activeSection === 'home'
+                            ? 'bg-black text-[#EFEEE8] dark:bg-[#EFEEE8] dark:text-[#0E0D0B] border-black dark:border-[#EFEEE8]'
+                            : 'text-black/75 dark:text-[#EFEEE8]/75 hover:bg-black/5 dark:hover:bg-white/5 hover:border-black/15 dark:hover:border-white/15'"
                     >
                         {{ translations[currentLang].home }}
                     </a>
@@ -174,7 +203,10 @@ const scrollToSection = (selector: string) => {
                     <a
                         href="#about"
                         @click.prevent="scrollToSection('#about')"
-                        class="text-base font-semibold text-black dark:text-[#EFEEE8] hover:opacity-60 transition-opacity duration-200 whitespace-nowrap"
+                        class="px-5 py-2.5 text-xs font-bold tracking-widest uppercase transition-all duration-300 rounded-none border border-transparent whitespace-nowrap cursor-pointer select-none"
+                        :class="activeSection === 'about'
+                            ? 'bg-black text-[#EFEEE8] dark:bg-[#EFEEE8] dark:text-[#0E0D0B] border-black dark:border-[#EFEEE8]'
+                            : 'text-black/75 dark:text-[#EFEEE8]/75 hover:bg-black/5 dark:hover:bg-white/5 hover:border-black/15 dark:hover:border-white/15'"
                     >
                         {{ translations[currentLang].about }}
                     </a>

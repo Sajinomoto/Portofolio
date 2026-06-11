@@ -6,6 +6,11 @@ const asciiText = ref("");
 const width = ref(120);
 const height = ref(50);
 
+const isVisible = ref(false);
+let observer: IntersectionObserver | null = null;
+let lastFrameTime = 0;
+const fpsInterval = 1000 / 30; // Target 30 FPS for optimized CPU usage and retro low-fi aesthetic
+
 // --- KEN PERLIN 3D IMPROVED NOISE IMPLEMENTATION ---
 const p = new Uint8Array(512);
 const permutation = [
@@ -101,7 +106,19 @@ const updateGridSize = () => {
     height.value = Math.ceil(h / 9.0) + 4;
 };
 
-const renderFrame = () => {
+const renderFrame = (timestamp: number = 0) => {
+    if (!isVisible.value) return;
+
+    // Request next frame
+    animationFrameId = requestAnimationFrame(renderFrame);
+
+    const elapsed = timestamp - lastFrameTime;
+    // Cap calculation rate to 30 FPS to save device battery and CPU resources
+    if (elapsed < fpsInterval) return;
+
+    // Adjust last frame timestamp
+    lastFrameTime = timestamp - (elapsed % fpsInterval);
+
     time += 0.007; // Slower noise speed for a calmer wave
 
     const w = width.value;
@@ -115,11 +132,14 @@ const renderFrame = () => {
         .fill(null)
         .map(() => Array(w).fill(Infinity));
 
-    // Rectangular grid parameters - increased horizontal width and depth to fit screen
-    const numX = 140;
-    const numZ = 60;
-    const spacingX = 2.4; // Wider spacing horizontally
-    const spacingZ = 1.4; // Spacing in depth
+    // Detect mobile viewport width
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
+    // Rectangular grid parameters - significantly reduced complexity on mobile to save resource
+    const numX = isMobile ? 70 : 140; // 50% fewer grid points horizontally
+    const numZ = isMobile ? 32 : 60;  // 46% fewer grid points vertically
+    const spacingX = isMobile ? 4.8 : 2.4; // Wider spacing to maintain viewport span
+    const spacingZ = isMobile ? 2.6 : 1.4; // Wider spacing to maintain viewport depth
 
     // Camera configuration for a wide, elevated view of the terrain
     const pitch = 0.52;
@@ -182,9 +202,8 @@ const renderFrame = () => {
     }
 
     // --- SUNSET SUN GENERATION & RENDERING ---
-    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
     const sunRadius = isMobile ? 15.0 : 25.0;
-    const sunSpacing = 0.5;
+    const sunSpacing = isMobile ? 1.0 : 0.5; // Wider spacing on mobile to reduce rendering iterations by 90%
     const sunHeight = isMobile ? 3.0 : 0.5; // Slightly higher on mobile to keep it visible above the wave horizon
     const yBob = Math.sin(time * 1.2) * 0.7; // Gentle bobbing
     const spin = time * 0.12; // Slow rotation of ASCII characters
@@ -266,11 +285,37 @@ const renderFrame = () => {
 onMounted(() => {
     updateGridSize();
     window.addEventListener("resize", updateGridSize);
-    animationFrameId = requestAnimationFrame(renderFrame);
+
+    // Set up IntersectionObserver to play/pause the animation loop dynamically based on viewport visibility
+    observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                if (!isVisible.value) {
+                    isVisible.value = true;
+                    lastFrameTime = performance.now();
+                    cancelAnimationFrame(animationFrameId);
+                    animationFrameId = requestAnimationFrame(renderFrame);
+                }
+            } else {
+                isVisible.value = false;
+                cancelAnimationFrame(animationFrameId);
+            }
+        });
+    }, {
+        root: null,
+        threshold: 0.02, // Trigger when 2% of the container enters/leaves viewport
+    });
+
+    if (containerRef.value) {
+        observer.observe(containerRef.value);
+    }
 });
 
 onUnmounted(() => {
     window.removeEventListener("resize", updateGridSize);
+    if (observer) {
+        observer.disconnect();
+    }
     cancelAnimationFrame(animationFrameId);
 });
 </script>
