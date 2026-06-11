@@ -13,36 +13,50 @@ const translations = {
     id: {
         home: "Beranda",
         about: "Tentang Saya",
+        projects: "Proyek",
+        contact: "Kontak",
         tooltip: "Kunjungi Github Saya :)",
     },
     en: {
         home: "Home",
         about: "About Me",
+        projects: "Projects",
+        contact: "Contact",
         tooltip: "Visit My Github :)",
     },
     ja: {
         home: "ホーム",
         about: "自己紹介",
+        projects: "プロジェクト",
+        contact: "連絡先",
         tooltip: "GitHubを訪ねる :)",
     },
     ko: {
         home: "홈",
         about: "자기소개",
+        projects: "프로젝트",
+        contact: "연락처",
         tooltip: "GitHub 방문하기 :)",
     },
     ar: {
         home: "الرئيسية",
         about: "عني",
+        projects: "المشاريع",
+        contact: "اتصل بي",
         tooltip: "تفضل بزيارة حسابي على جيت هاب :)",
     },
     hi: {
         home: "होम",
         about: "मेरे बारे में",
+        projects: "परियोजनाएं",
+        contact: "संपर्क",
         tooltip: "मेरे गिटहब पर जाएँ :)",
     },
     zh: {
         home: "首页",
         about: "关于我",
+        projects: "项目",
+        contact: "联系",
         tooltip: "访问我的 GitHub :)",
     },
 };
@@ -84,18 +98,21 @@ const closeDropdown = (e: MouseEvent) => {
 
 const handleScroll = () => {
     // Only calculate active section state on desktop viewports (>= 768px)
-    if (typeof window !== "undefined" && window.innerWidth < 768) return;
+    if (typeof window === "undefined" || window.innerWidth < 768) return;
 
-    const aboutEl = document.getElementById("about");
-    if (aboutEl) {
-        const rect = aboutEl.getBoundingClientRect();
-        // If the top of the #about section has scrolled past 50% of the viewport height, set active to "about"
-        if (rect.top <= window.innerHeight * 0.5) {
-            activeSection.value = "about";
-        } else {
-            activeSection.value = "home";
+    const sections = ["home", "about", "projects", "contact"];
+    let currentActive = "home";
+
+    for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= window.innerHeight * 0.5 && rect.bottom >= window.innerHeight * 0.5) {
+                currentActive = section;
+            }
         }
     }
+    activeSection.value = currentActive;
 };
 
 onMounted(() => {
@@ -247,6 +264,30 @@ const scrollToSection = (selector: string) => {
                             : 'text-black/75 dark:text-[#EFEEE8]/75 hover:bg-black/5 dark:hover:bg-white/5 hover:border-black/15 dark:hover:border-white/15'"
                     >
                         {{ translations[currentLang].about }}
+                    </a>
+
+                    <!-- Projects Link -->
+                    <a
+                        href="#projects"
+                        @click.prevent="scrollToSection('#projects')"
+                        class="px-5 py-2.5 text-xs font-bold tracking-widest uppercase transition-all duration-300 rounded-none border border-transparent whitespace-nowrap cursor-pointer select-none"
+                        :class="activeSection === 'projects'
+                            ? 'bg-black text-[#EFEEE8] dark:bg-[#EFEEE8] dark:text-[#0E0D0B] border-black dark:border-[#EFEEE8]'
+                            : 'text-black/75 dark:text-[#EFEEE8]/75 hover:bg-black/5 dark:hover:bg-white/5 hover:border-black/15 dark:hover:border-white/15'"
+                    >
+                        {{ translations[currentLang].projects }}
+                    </a>
+
+                    <!-- Contact Link -->
+                    <a
+                        href="#contact"
+                        @click.prevent="scrollToSection('#contact')"
+                        class="px-5 py-2.5 text-xs font-bold tracking-widest uppercase transition-all duration-300 rounded-none border border-transparent whitespace-nowrap cursor-pointer select-none"
+                        :class="activeSection === 'contact'
+                            ? 'bg-black text-[#EFEEE8] dark:bg-[#EFEEE8] dark:text-[#0E0D0B] border-black dark:border-[#EFEEE8]'
+                            : 'text-black/75 dark:text-[#EFEEE8]/75 hover:bg-black/5 dark:hover:bg-white/5 hover:border-black/15 dark:hover:border-white/15'"
+                    >
+                        {{ translations[currentLang].contact }}
                     </a>
                 </nav>
 
@@ -405,6 +446,24 @@ const scrollToSection = (selector: string) => {
                         class="text-xl font-semibold text-black dark:text-white hover:opacity-60 transition-opacity tracking-tight py-1"
                     >
                         {{ translations[currentLang].about }}
+                    </a>
+
+                    <!-- Projects Link -->
+                    <a
+                        href="#projects"
+                        @click.prevent="scrollToSection('#projects')"
+                        class="text-xl font-semibold text-black dark:text-white hover:opacity-60 transition-opacity tracking-tight py-1"
+                    >
+                        {{ translations[currentLang].projects }}
+                    </a>
+
+                    <!-- Contact Link -->
+                    <a
+                        href="#contact"
+                        @click.prevent="scrollToSection('#contact')"
+                        class="text-xl font-semibold text-black dark:text-white hover:opacity-60 transition-opacity tracking-tight py-1"
+                    >
+                        {{ translations[currentLang].contact }}
                     </a>
                 </nav>
             </div>
