@@ -298,7 +298,11 @@ onMounted(() => {
         lastTime = now;
     };
 
-    window.addEventListener("mousemove", handleGridParallax);
+    const isMobileViewport = typeof window !== "undefined" && window.innerWidth < 768;
+
+    if (!isMobileViewport) {
+        window.addEventListener("mousemove", handleGridParallax);
+    }
 
     // Device orientation initialization with user permission request on touch/click
     const initDeviceOrientation = () => {
@@ -318,15 +322,17 @@ onMounted(() => {
         }
     };
 
-    triggerPermission = () => {
-        initDeviceOrientation();
-        if (triggerPermission) {
-            window.removeEventListener("click", triggerPermission);
-            window.removeEventListener("touchstart", triggerPermission);
-        }
-    };
-    window.addEventListener("click", triggerPermission);
-    window.addEventListener("touchstart", triggerPermission);
+    if (!isMobileViewport) {
+        triggerPermission = () => {
+            initDeviceOrientation();
+            if (triggerPermission) {
+                window.removeEventListener("click", triggerPermission);
+                window.removeEventListener("touchstart", triggerPermission);
+            }
+        };
+        window.addEventListener("click", triggerPermission);
+        window.addEventListener("touchstart", triggerPermission);
+    }
 
     // Smooth loop for parallax updates and velocity decay
     const tickParallaxDecay = () => {
@@ -371,9 +377,13 @@ onMounted(() => {
                 contentEl.style.setProperty("--c-offset", "0px");
             }
         }
-        rafId = requestAnimationFrame(tickParallaxDecay);
+        if (!isMobileViewport) {
+            rafId = requestAnimationFrame(tickParallaxDecay);
+        }
     };
-    rafId = requestAnimationFrame(tickParallaxDecay);
+    if (!isMobileViewport) {
+        rafId = requestAnimationFrame(tickParallaxDecay);
+    }
 
     // 6. Viewfinder ticking timecode update (60fps)
     let frameCount = 0;
