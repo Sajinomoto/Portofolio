@@ -562,13 +562,11 @@ onMounted(() => {
                 contentEl.style.setProperty("--c-offset", "0px");
             }
         }
+        if (!isVisible) return;
         if (!isMobileViewport) {
             rafId = requestAnimationFrame(tickParallaxDecay);
         }
     };
-    if (!isMobileViewport) {
-        rafId = requestAnimationFrame(tickParallaxDecay);
-    }
 
     // 6. Viewfinder ticking timecode update (60fps)
     let frameCount = 0;
@@ -593,10 +591,52 @@ onMounted(() => {
         const pad = (num: number) => String(num).padStart(2, "0");
         tickingTimecode.value = `${pad(timecodeHours)}:${pad(timecodeMinutes)}:${pad(timecodeSeconds)}:${pad(frameCount)}`;
     };
-    timecodeIntervalId = setInterval(updateTimecode, 1000 / 60);
+
+    // Loops start/stop controllers based on viewport visibility
+    let isVisible = true;
+    let observer: IntersectionObserver | null = null;
+
+    const startLoops = () => {
+        if (!isMobileViewport && !rafId) {
+            rafId = requestAnimationFrame(tickParallaxDecay);
+        }
+        if (!timecodeIntervalId) {
+            timecodeIntervalId = setInterval(updateTimecode, 1000 / 60);
+        }
+    };
+
+    const stopLoops = () => {
+        if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = 0;
+        }
+        if (timecodeIntervalId) {
+            clearInterval(timecodeIntervalId);
+            timecodeIntervalId = null;
+        }
+    };
+
+    if (canvas && canvas.parentElement) {
+        observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                isVisible = entry.isIntersecting;
+                if (isVisible) {
+                    startLoops();
+                } else {
+                    stopLoops();
+                }
+            });
+        }, { threshold: 0.01 });
+        observer.observe(canvas.parentElement);
+    } else {
+        startLoops();
+    }
 });
 
 onUnmounted(() => {
+    if (observer) {
+        observer.disconnect();
+    }
     if ((window as any)._cleanup3DGrid) {
         (window as any)._cleanup3DGrid();
         delete (window as any)._draw3DGrid;

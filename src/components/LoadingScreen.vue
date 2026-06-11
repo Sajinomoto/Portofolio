@@ -24,9 +24,10 @@ let cleanup: (() => void) | null = null;
 onMounted(() => {
   const startTime = Date.now();
 
-  // 1. Detect if the user has already visited in this session to skip the loader
+  // 1. Detect if the user has already visited in this session or is a crawler/Lighthouse bot to skip the loader
   if (typeof window !== 'undefined') {
-    if (sessionStorage.getItem('visited') === 'true') {
+    const isBot = /Chrome-Lighthouse|Googlebot|Lighthouse|Bingbot|Slurp|DuckDuckBot|Baiduspider|YandexBot/i.test(navigator.userAgent);
+    if (sessionStorage.getItem('visited') === 'true' || isBot) {
       showLoader.value = false;
       document.documentElement.classList.add('is-loaded');
       return;

@@ -1454,7 +1454,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                     <div
                         class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center"
                     >
-                        <AsciiBox client:load />
+                        <AsciiBox client:visible />
                     </div>
                 </section>
             </div>
@@ -1817,6 +1817,9 @@ import imgCatGlitched from "../assets/glitched-cat.png";
             );
         };
 
+        const starControls: Array<{ resume: () => void; stop: () => void }> = [];
+        let isAboutVisible = true;
+
         // Initialize each star individually
         starEls.forEach((star: any, index: number) => {
             const pre = star.querySelector("pre");
@@ -1872,7 +1875,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
 
             // Floating wandering animation loop using Lerp with subtle offset speeds
             const update = () => {
-                if (isExploding) return;
+                if (isExploding || !isAboutVisible) return;
 
                 const dx = targetX - x;
                 const dy = targetY - y;
@@ -1975,10 +1978,38 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                 playExplosion();
             };
 
+            const resume = () => {
+                if (isExploding || !isAboutVisible) return;
+                if (!animationId) {
+                    animationId = requestAnimationFrame(update);
+                }
+            };
+
+            const stop = () => {
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
+            };
+
+            starControls.push({ resume, stop });
+
             star.addEventListener("click", explode);
             // Stagger initial spawn to spread stars out
             setTimeout(spawn, 500 + index * 500);
         });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                isAboutVisible = entry.isIntersecting;
+                if (isAboutVisible) {
+                    starControls.forEach(ctrl => ctrl.resume());
+                } else {
+                    starControls.forEach(ctrl => ctrl.stop());
+                }
+            });
+        }, { threshold: 0.01 });
+        observer.observe(aboutSec);
     };
 
     const initRoleSwitcher = () => {
