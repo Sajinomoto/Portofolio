@@ -668,8 +668,8 @@ import imgCatGlitched from "../assets/glitched-cat.png";
 				return res.json();
 			})
 			.then(data => {
-				if (data && typeof data.value === "number") {
-					countEl.textContent = data.value.toLocaleString();
+				if (data && typeof data.count === "number") {
+					countEl.textContent = data.count.toLocaleString();
 				} else {
 					countEl.textContent = "OFFLINE";
 				}
