@@ -4,6 +4,7 @@ import Header from "../components/Header.vue";
 import Greeting from "../components/Greeting.vue";
 import Layout from "../layouts/Layout.astro";
 import AsciiBox from "../components/AsciiBox.vue";
+import { Image } from "astro:assets";
 import imgCat from "../assets/cat.jpg";
 import imgBird from "../assets/glitched-bird.png";
 import imgCatGlitched from "../assets/glitched-cat.png";
@@ -284,21 +285,27 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                                         class="cyber-slide absolute inset-0 w-full h-full opacity-100 z-10 transition-opacity duration-200"
                                     >
                                         <!-- Main Image -->
-                                        <img
-                                            src={imgCat.src}
+                                        <Image
+                                            src={imgCat}
                                             alt="Satrio Aji Profile Cat"
+                                            width={320}
+                                            height={320}
                                             class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
                                         />
                                         <!-- Glitch Layer 1 -->
-                                        <img
-                                            src={imgCat.src}
+                                        <Image
+                                            src={imgCat}
                                             alt="Glitch Layer 1"
+                                            width={320}
+                                            height={320}
                                             class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-1 filter hue-rotate-[90deg] pointer-events-none"
                                         />
                                         <!-- Glitch Layer 2 -->
-                                        <img
-                                            src={imgCat.src}
+                                        <Image
+                                            src={imgCat}
                                             alt="Glitch Layer 2"
+                                            width={320}
+                                            height={320}
                                             class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-2 filter hue-rotate-[240deg] pointer-events-none"
                                         />
                                     </div>
@@ -308,21 +315,27 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                                         class="cyber-slide absolute inset-0 w-full h-full opacity-0 z-0 transition-opacity duration-200"
                                     >
                                         <!-- Main Image -->
-                                        <img
-                                            src={imgBird.src}
+                                        <Image
+                                            src={imgBird}
                                             alt="Satrio Aji Glitched Bird"
+                                            width={320}
+                                            height={320}
                                             class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
                                         />
                                         <!-- Glitch Layer 1 -->
-                                        <img
-                                            src={imgBird.src}
+                                        <Image
+                                            src={imgBird}
                                             alt="Glitch Layer 1"
+                                            width={320}
+                                            height={320}
                                             class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-1 filter hue-rotate-[90deg] pointer-events-none"
                                         />
                                         <!-- Glitch Layer 2 -->
-                                        <img
-                                            src={imgBird.src}
+                                        <Image
+                                            src={imgBird}
                                             alt="Glitch Layer 2"
+                                            width={320}
+                                            height={320}
                                             class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-2 filter hue-rotate-[240deg] pointer-events-none"
                                         />
                                     </div>
@@ -332,21 +345,27 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                                         class="cyber-slide absolute inset-0 w-full h-full opacity-0 z-0 transition-opacity duration-200"
                                     >
                                         <!-- Main Image -->
-                                        <img
-                                            src={imgCatGlitched.src}
+                                        <Image
+                                            src={imgCatGlitched}
                                             alt="Satrio Aji Glitched Cat"
+                                            width={320}
+                                            height={320}
                                             class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
                                         />
                                         <!-- Glitch Layer 1 -->
-                                        <img
-                                            src={imgCatGlitched.src}
+                                        <Image
+                                            src={imgCatGlitched}
                                             alt="Glitch Layer 1"
+                                            width={320}
+                                            height={320}
                                             class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-1 filter hue-rotate-[90deg] pointer-events-none"
                                         />
                                         <!-- Glitch Layer 2 -->
-                                        <img
-                                            src={imgCatGlitched.src}
+                                        <Image
+                                            src={imgCatGlitched}
                                             alt="Glitch Layer 2"
+                                            width={320}
+                                            height={320}
                                             class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-2 filter hue-rotate-[240deg] pointer-events-none"
                                         />
                                     </div>
@@ -1274,12 +1293,12 @@ import imgCatGlitched from "../assets/glitched-cat.png";
 
                     <!-- Plus markers/grid dots for premium styling -->
                     <div
-                        class="absolute top-6 left-8 font-mono text-[9px] opacity-40 select-none"
+                        class="absolute top-6 left-8 font-mono text-[9px] opacity-65 select-none"
                     >
                         SYS.PRJ_SECTION
                     </div>
                     <div
-                        class="absolute top-6 right-8 font-mono text-[9px] opacity-40 select-none"
+                        class="absolute top-6 right-8 font-mono text-[9px] opacity-65 select-none"
                     >
                         [STATUS: UNDER_DEV]
                     </div>
@@ -1307,21 +1326,21 @@ import imgCatGlitched from "../assets/glitched-cat.png";
 
                     <!-- Left Corner cross marker -->
                     <div
-                        class="z-10 font-mono text-[9px] text-black/30 dark:text-white/20 bg-[#EFEEE8] dark:bg-[#0E0D0B] px-1.5 transition-colors duration-300"
+                        class="z-10 font-mono text-[9px] text-black/60 dark:text-white/50 bg-[#EFEEE8] dark:bg-[#0E0D0B] px-1.5 transition-colors duration-300"
                     >
                         [┼] SYS.LOC_0x7B
                     </div>
 
                     <!-- Center dotted marker -->
                     <div
-                        class="z-10 bg-[#EFEEE8] dark:bg-[#0E0D0B] px-3 font-mono text-[8px] tracking-widest text-black/20 dark:text-white/10 transition-colors duration-300"
+                        class="z-10 bg-[#EFEEE8] dark:bg-[#0E0D0B] px-3 font-mono text-[8px] tracking-widest text-black/55 dark:text-white/45 transition-colors duration-300"
                     >
                         ••••• SEC_DIVIDER •••••
                     </div>
 
                     <!-- Right Corner cross marker -->
                     <div
-                        class="z-10 font-mono text-[9px] text-black/30 dark:text-white/20 bg-[#EFEEE8] dark:bg-[#0E0D0B] px-1.5 transition-colors duration-300"
+                        class="z-10 font-mono text-[9px] text-black/60 dark:text-white/50 bg-[#EFEEE8] dark:bg-[#0E0D0B] px-1.5 transition-colors duration-300"
                     >
                         [┼] 00:00:00:FE
                     </div>
@@ -1334,12 +1353,12 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                 >
                     <!-- Plus markers/grid dots for premium styling -->
                     <div
-                        class="absolute top-6 left-8 font-mono text-[9px] opacity-40 select-none"
+                        class="absolute top-6 left-8 font-mono text-[9px] opacity-65 select-none"
                     >
                         SYS.CON_SECTION
                     </div>
                     <div
-                        class="absolute top-6 right-8 font-mono text-[9px] opacity-40 select-none"
+                        class="absolute top-6 right-8 font-mono text-[9px] opacity-65 select-none"
                     >
                         [STATUS: UNDER_DEV]
                     </div>
@@ -1568,13 +1587,19 @@ import imgCatGlitched from "../assets/glitched-cat.png";
             "         \n         \n         ",
         ];
 
+        // Cache layout measurements to avoid forced reflows during animation loops
+        let aboutRect = aboutSec.getBoundingClientRect();
+        const frameEl = document.getElementById("cyber-pic-frame");
+        let frameRect = frameEl ? frameEl.getBoundingClientRect() : null;
+
+        window.addEventListener("resize", () => {
+            aboutRect = aboutSec.getBoundingClientRect();
+            if (frameEl) frameRect = frameEl.getBoundingClientRect();
+        });
+
         // Calculate the boundary coordinates of the profile photo frame relative to the #about container
         const getExclusionZone = () => {
-            const frame = document.getElementById("cyber-pic-frame");
-            if (!frame) return null;
-            const aboutRect = aboutSec.getBoundingClientRect();
-            const frameRect = frame.getBoundingClientRect();
-
+            if (!frameRect) return null;
             return {
                 left: frameRect.left - aboutRect.left,
                 right: frameRect.right - aboutRect.left,
@@ -1609,7 +1634,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
 
             // Set random target coordinates inside the bounds of the #about section, avoiding the text area and photo frame
             const setRandomTarget = () => {
-                const rect = aboutSec.getBoundingClientRect();
+                const rect = aboutRect;
                 const margin = 80;
                 const isMobile = window.innerWidth < 768;
                 const zone = getExclusionZone();
@@ -1674,7 +1699,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                 isExploding = false;
                 pre.textContent = frames[0];
 
-                const rect = aboutSec.getBoundingClientRect();
+                const rect = aboutRect;
                 const margin = 100;
                 const isMobile = window.innerWidth < 768;
                 const zone = getExclusionZone();
