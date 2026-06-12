@@ -4,6 +4,7 @@ import Header from "../components/Header.vue";
 import Greeting from "../components/Greeting.vue";
 import Layout from "../layouts/Layout.astro";
 import AsciiBox from "../components/AsciiBox.vue";
+import GithubCalendar from "../components/GithubCalendar.vue";
 import { Image } from "astro:assets";
 import imgCat from "../assets/cat.jpg";
 import imgBird from "../assets/glitched-bird.png";
@@ -409,6 +410,11 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                                 [Satrio Aji Pamungkas]
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Github Contribution Calendar -->
+                    <div class="w-full mt-12 z-10">
+                        <GithubCalendar client:visible />
                     </div>
 
                     <!-- ASCII Floating Stars (Interactive wandering easter eggs - 3 instances) -->
