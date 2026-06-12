@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
 import { gsap } from "gsap";
+import FloatingCube from "./FloatingCube.vue";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 // Register GSAP ScrollToPlugin in browser environment
@@ -100,22 +101,24 @@ const currentTime = ref("");
 const currentDate = ref("");
 const currentDay = ref("");
 let timeIntervalId: ReturnType<typeof setInterval> | null = null;
-let handleGridParallax: ((e: MouseEvent) => void) | null = null;
-let handleDeviceOrientation: ((e: DeviceOrientationEvent) => void) | null =
-    null;
-let triggerPermission: (() => void) | null = null;
-let lastNx = 0;
-let lastNy = 0;
 const tickingTimecode = ref("00:00:00:00");
 let timecodeRafId = 0;
-let lastMouseX = 0;
-let lastMouseY = 0;
-let lastTime = 0;
-let velocity = 0;
 let rafId = 0;
 let handleLanguageChange: ((e: Event) => void) | null = null;
 
 onMounted(() => {
+    // Radial Water Ripple System
+    interface Ripple {
+        x: number;
+        y: number;
+        birthTime: number;
+        duration: number;
+        maxRadius: number;
+        amplitude: number;
+    }
+    let activeRipples: Ripple[] = [];
+    let lastHeartbeatTime = performance.now() - 2500; // spawn first ripple 500ms after load
+
     // Canvas grid setup
     const canvas = gridCanvas.value;
     if (canvas) {
@@ -173,10 +176,31 @@ onMounted(() => {
             const draw3DGrid = () => {
                 ctx.clearRect(0, 0, width, height);
 
-                camera.pitch = 0.0 + currentNy * 0.06;
-                camera.yaw = 0.0 + currentNx * 0.05;
+                // Static camera angles since cursor movement features are removed
+                camera.pitch = 0.0;
+                camera.yaw = 0.0;
 
-                const time = performance.now() * 0.0007;
+                const now = performance.now();
+
+                // 1. Spawn heartbeat ripple automatically (every 3 seconds)
+                if (now - lastHeartbeatTime >= 3000) {
+                    lastHeartbeatTime = now;
+                    activeRipples.push({
+                        x: 0,
+                        y: 0,
+                        birthTime: now,
+                        duration: 4000, // Slow and calm ripple (lasts 4 seconds)
+                        maxRadius: 1800, // Wide propagation
+                        amplitude: 12, // Gentle amplitude
+                    });
+                }
+
+                // 2. Clean up expired ripples
+                activeRipples = activeRipples.filter(
+                    (r) => now - r.birthTime < r.duration,
+                );
+
+                // 3. Project 3D points
                 const points: Array<
                     Array<{ x: number; y: number; scale: number } | null>
                 > = [];
@@ -187,28 +211,69 @@ onMounted(() => {
                         const gx = (c / cols - 0.5) * gridW;
                         const gy = (r / rows - 0.5) * gridH;
 
+                        // Ambient tiny background wave so it is never completely static
                         let gz =
-                            Math.sin(gx * 0.0025 - time * 1.0) *
-                            Math.cos(gy * 0.0025 + time * 0.7) *
-                            25;
-                        gz +=
-                            Math.sin(
-                                Math.sqrt(gx * gx + gy * gy) * 0.0018 -
-                                    time * 0.5,
-                            ) * 5;
+                            Math.sin(gx * 0.0015 - now * 0.0005) *
+                            Math.cos(gy * 0.0015 + now * 0.0003) *
+                            1.5;
+
+                        // Accumulate active ripple waves (water ripple physics)
+                        activeRipples.forEach((ripple) => {
+                            const age = now - ripple.birthTime;
+                            const progress = age / ripple.duration;
+
+                            const dx = gx - ripple.x;
+                            const dy = gy - ripple.y;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+
+                            // Wave front moves outward
+                            const currentRadius = progress * ripple.maxRadius;
+                            const distToWaveFront = Math.abs(
+                                dist - currentRadius,
+                            );
+                            const waveWidth = 250; // Width of the wave packet
+
+                            if (distToWaveFront < waveWidth) {
+                                // Fade factors: decay with distance/time + smooth envelope
+                                const envelope = Math.cos(
+                                    ((distToWaveFront / waveWidth) * Math.PI) /
+                                        2,
+                                );
+                                const ageFade = 1.0 - progress;
+
+                                // Wavelength of the ripples
+                                const wavelength = 180; // Smooth, wide wave
+                                const wave = Math.sin(
+                                    ((dist - currentRadius) / wavelength) *
+                                        Math.PI *
+                                        2,
+                                );
+                                gz +=
+                                    wave *
+                                    ripple.amplitude *
+                                    envelope *
+                                    ageFade;
+                            }
+                        });
 
                         let p = project(gx, gy, gz, width, height);
-
                         points[r][c] = p;
                     }
                 }
 
-                ctx.beginPath();
                 const isDark =
                     document.documentElement.classList.contains("dark");
-                ctx.strokeStyle = isDark
-                    ? "rgba(239, 238, 232, 0.14)"
-                    : "rgba(14, 13, 11, 0.07)";
+
+                // Base colors and alphas
+                const baseR = isDark ? 239 : 14;
+                const baseG = isDark ? 238 : 13;
+                const baseB = isDark ? 232 : 11;
+                const baseLineAlpha = isDark ? 0.14 : 0.07;
+                const baseDotAlpha = isDark ? 0.45 : 0.22;
+
+                // 4. Draw rendering passes (Single pass neutral color)
+                ctx.beginPath();
+                ctx.strokeStyle = `rgba(${baseR}, ${baseG}, ${baseB}, ${baseLineAlpha})`;
                 ctx.lineWidth = 1;
 
                 for (let r = 0; r <= rows; r++) {
@@ -234,9 +299,7 @@ onMounted(() => {
                 }
                 ctx.stroke();
 
-                ctx.fillStyle = isDark
-                    ? "rgba(239, 238, 232, 0.45)"
-                    : "rgba(14, 13, 11, 0.22)";
+                ctx.fillStyle = `rgba(${baseR}, ${baseG}, ${baseB}, ${baseDotAlpha})`;
                 for (let r = 0; r <= rows; r += 2) {
                     for (let c = 0; c <= cols; c += 2) {
                         const p = points[r][c];
@@ -399,170 +462,15 @@ onMounted(() => {
     };
     window.addEventListener("language-changed", handleLanguageChange);
 
-    // 5. 3D Camera Parallax Effect on Grid Background & Glow
-    const glowEl = document.querySelector(".radial-glow") as HTMLElement;
-    const hudEl = document.querySelector(".viewfinder-hud") as HTMLElement;
-    const contentEl = document.querySelector(
-        ".greeting-content",
-    ) as HTMLElement;
-
-    let targetNx = 0;
-    let targetNy = 0;
-    let currentNx = 0;
-    let currentNy = 0;
-
-    handleGridParallax = (e: MouseEvent) => {
-        const w = window.innerWidth;
-        const h = window.innerHeight;
-        // Normalize coordinates to [-1, 1] relative to viewport center
-        targetNx = (e.clientX - w / 2) / (w / 2);
-        targetNy = (e.clientY - h / 2) / (h / 2);
-
-        // Velocity tracking for chromatic aberration
-        const now = performance.now();
-        if (lastTime > 0) {
-            const dt = now - lastTime;
-            if (dt > 0) {
-                const dx = e.clientX - lastMouseX;
-                const dy = e.clientY - lastMouseY;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                const speed = dist / dt; // pixels per millisecond
-                // Smooth out spikes
-                velocity = velocity * 0.85 + speed * 0.15;
-            }
-        }
-        lastMouseX = e.clientX;
-        lastMouseY = e.clientY;
-        lastTime = now;
-    };
-
-    handleDeviceOrientation = (e: DeviceOrientationEvent) => {
-        const beta = e.beta || 0;
-        const gamma = e.gamma || 0;
-
-        // Calibrate angles for natural holding position (beta ~45 deg, gamma ~0 deg)
-        const betaCenter = 45;
-        const betaRange = 22; // max tilt +/- 22 degrees
-        let normBeta = (beta - betaCenter) / betaRange;
-        normBeta = Math.max(-1, Math.min(1, normBeta));
-
-        const gammaRange = 22; // max tilt +/- 22 degrees
-        let normGamma = gamma / gammaRange;
-        normGamma = Math.max(-1, Math.min(1, normGamma));
-
-        targetNx = normGamma;
-        targetNy = normBeta;
-
-        // Velocity tracking for chromatic aberration based on gyroscope change
-        const now = performance.now();
-        if (lastTime > 0) {
-            const dt = now - lastTime;
-            if (dt > 0) {
-                const dx = (targetNx - lastNx) * 350; // map back to virtual pixel speed
-                const dy = (targetNy - lastNy) * 350;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                const speed = dist / dt;
-                velocity = velocity * 0.85 + speed * 0.15;
-            }
-        }
-        lastNx = targetNx;
-        lastNy = targetNy;
-        lastTime = now;
-    };
-
     const isMobileViewport =
         typeof window !== "undefined" && window.innerWidth < 768;
 
-    if (!isMobileViewport) {
-        window.addEventListener("mousemove", handleGridParallax);
-    }
-
-    // Device orientation initialization with user permission request on touch/click
-    const initDeviceOrientation = () => {
-        const DeviceEvent = window.DeviceOrientationEvent as any;
-        if (
-            DeviceEvent &&
-            typeof DeviceEvent.requestPermission === "function"
-        ) {
-            DeviceEvent.requestPermission()
-                .then((permissionState: string) => {
-                    if (
-                        permissionState === "granted" &&
-                        handleDeviceOrientation
-                    ) {
-                        window.addEventListener(
-                            "deviceorientation",
-                            handleDeviceOrientation,
-                        );
-                    }
-                })
-                .catch((err: any) => {
-                    console.warn("DeviceOrientation permission denied:", err);
-                });
-        } else if (handleDeviceOrientation) {
-            window.addEventListener(
-                "deviceorientation",
-                handleDeviceOrientation,
-            );
-        }
-    };
-
-    if (!isMobileViewport) {
-        triggerPermission = () => {
-            initDeviceOrientation();
-            if (triggerPermission) {
-                window.removeEventListener("click", triggerPermission);
-                window.removeEventListener("touchstart", triggerPermission);
-            }
-        };
-        window.addEventListener("click", triggerPermission);
-        window.addEventListener("touchstart", triggerPermission);
-    }
-
-    // Smooth loop for parallax updates and velocity decay
+    // Smooth loop for grid updates and timecode
     const tickParallaxDecay = () => {
-        // Interpolate coordinates (lerp) for smooth parallax damping
-        currentNx += (targetNx - currentNx) * 0.08;
-        currentNy += (targetNy - currentNy) * 0.08;
-
-        // Camera tilt / rotation limits
-        const rx = -currentNy * 6;
-        const ry = currentNx * 6;
-
-        // Camera pan / translation limits
-        const tx = currentNx * -18;
-        const ty = currentNy * -18;
-
         if ((window as any)._draw3DGrid) {
             (window as any)._draw3DGrid();
         }
-        if (glowEl) {
-            glowEl.style.transform = `translate3d(${tx * -0.4}px, ${ty * -0.4}px, 0) scale(1.05)`;
-        }
 
-        // Chromatic aberration update based on velocity
-        if (velocity > 0.01) {
-            velocity *= 0.92;
-            const chromaticOffset = Math.min(velocity * 8.0, 12);
-            if (hudEl) {
-                hudEl.style.setProperty("--c-offset", `${chromaticOffset}px`);
-            }
-            if (contentEl) {
-                contentEl.style.setProperty(
-                    "--c-offset",
-                    `${chromaticOffset * 0.3}px`,
-                );
-            }
-        } else if (velocity !== 0) {
-            velocity = 0;
-            if (hudEl) {
-                hudEl.style.setProperty("--c-offset", "0px");
-            }
-            if (contentEl) {
-                contentEl.style.setProperty("--c-offset", "0px");
-            }
-        }
-        
         // Update timecode inside desktop animation loop
         updateTimecode();
 
@@ -631,16 +539,19 @@ onMounted(() => {
     };
 
     if (canvas && canvas.parentElement) {
-        observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                isVisible = entry.isIntersecting;
-                if (isVisible) {
-                    startLoops();
-                } else {
-                    stopLoops();
-                }
-            });
-        }, { threshold: 0.01 });
+        observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    isVisible = entry.isIntersecting;
+                    if (isVisible) {
+                        startLoops();
+                    } else {
+                        stopLoops();
+                    }
+                });
+            },
+            { threshold: 0.01 },
+        );
         observer.observe(canvas.parentElement);
     } else {
         startLoops();
@@ -662,19 +573,7 @@ onUnmounted(() => {
     if (timeIntervalId) {
         clearInterval(timeIntervalId);
     }
-    if (handleGridParallax) {
-        window.removeEventListener("mousemove", handleGridParallax);
-    }
-    if (handleDeviceOrientation) {
-        window.removeEventListener(
-            "deviceorientation",
-            handleDeviceOrientation,
-        );
-    }
-    if (triggerPermission) {
-        window.removeEventListener("click", triggerPermission);
-        window.removeEventListener("touchstart", triggerPermission);
-    }
+
     if (timecodeIntervalId) {
         clearInterval(timecodeIntervalId);
     }
@@ -713,6 +612,22 @@ const scrollToAbout = () => {
             ref="gridCanvas"
             class="absolute inset-0 pointer-events-none z-0 transition-colors duration-300 radial-mask"
         ></canvas>
+        <!-- Floating 3D Cubes -->
+        <FloatingCube
+            :initialXPercent="0.75"
+            :initialYPercent="0.25"
+            :sizeFactor="1.0"
+        />
+        <FloatingCube
+            :initialXPercent="0.15"
+            :initialYPercent="0.55"
+            :sizeFactor="0.65"
+        />
+        <FloatingCube
+            :initialXPercent="0.85"
+            :initialYPercent="0.65"
+            :sizeFactor="0.45"
+        />
         <!-- Radial Glow Overlay -->
         <div class="absolute inset-0 pointer-events-none radial-glow z-0"></div>
 
@@ -720,36 +635,6 @@ const scrollToAbout = () => {
         <div
             class="absolute inset-0 pointer-events-none z-10 font-mono text-[9px] sm:text-[10px] font-bold tracking-widest text-black/25 dark:text-[#EFEEE8]/25 select-none viewfinder-hud"
         >
-            <!-- Top Left: REC + Timecode -->
-            <div
-                class="absolute top-6 left-6 sm:top-10 sm:left-10 lg:top-14 lg:left-14 flex items-center gap-2"
-            >
-                <span
-                    class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-current animate-pulse-fast"
-                ></span>
-                <span>REC</span>
-                <span class="ml-1.5 opacity-80">{{ tickingTimecode }}</span>
-            </div>
-
-            <!-- Top Right: Battery + Quality -->
-            <div
-                class="absolute top-6 right-6 sm:top-10 sm:right-10 lg:top-14 lg:right-14 flex items-center gap-4"
-            >
-                <span class="hidden xs:inline">RAW 4K 60FPS</span>
-                <span class="flex items-center gap-1.5">
-                    <span>BAT</span>
-                    <span
-                        class="border border-current px-0.5 py-px rounded-xs text-[7px] flex gap-0.5 items-center"
-                    >
-                        <span class="w-1 h-1.5 bg-current"></span>
-                        <span class="w-1 h-1.5 bg-current"></span>
-                        <span class="w-1 h-1.5 bg-current"></span>
-                        <span class="w-1 h-1.5 bg-current/20"></span>
-                    </span>
-                    <span>78%</span>
-                </span>
-            </div>
-
             <!-- Bottom Left: AF & Specs -->
             <div
                 class="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 lg:bottom-14 lg:left-14 flex flex-col gap-1 text-left"
@@ -848,7 +733,7 @@ const scrollToAbout = () => {
             <!-- Corner Brackets -->
             <!-- Top-Left Corner Bracket -->
             <svg
-                class="absolute top-8 left-8 w-24 h-24"
+                class="absolute top-[112px] left-8 w-24 h-24"
                 viewBox="0 0 96 96"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -908,7 +793,7 @@ const scrollToAbout = () => {
 
             <!-- Top-Right Corner Bracket -->
             <svg
-                class="absolute top-8 right-8 w-24 h-24"
+                class="absolute top-[112px] right-8 w-24 h-24"
                 viewBox="0 0 96 96"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1088,23 +973,23 @@ const scrollToAbout = () => {
 
             <!-- Outer Frame Connecting Lines -->
             <div
-                class="absolute top-8 left-[104px] right-[104px] border-t border-current opacity-15"
+                class="absolute top-[112px] left-[104px] right-[104px] border-t border-current opacity-15"
             ></div>
             <div
                 class="absolute bottom-8 left-[104px] right-[104px] border-b border-current opacity-15"
             ></div>
             <div
-                class="absolute left-8 top-[104px] bottom-[104px] border-l border-current opacity-15"
+                class="absolute left-8 top-[184px] bottom-[104px] border-l border-current opacity-15"
             ></div>
             <div
-                class="absolute right-8 top-[104px] bottom-[104px] border-r border-current opacity-15"
+                class="absolute right-8 top-[184px] bottom-[104px] border-r border-current opacity-15"
             ></div>
 
             <!-- Top Center HUD Label (Masks the top border) -->
             <div
-                class="absolute top-8 left-1/2 -translate-x-1/2 -translate-y-1/2 px-3 bg-[#EFEEE8] dark:bg-[#0E0D0B] font-mono text-[9px] tracking-[0.25em] opacity-60 transition-colors duration-300 select-none"
+                class="absolute top-[112px] left-1/2 -translate-x-1/2 -translate-y-1/2 px-3 bg-[#EFEEE8] dark:bg-[#0E0D0B] font-mono text-[9px] tracking-[0.25em] opacity-60 transition-colors duration-300 select-none uppercase"
             >
-                SYS.VIEWPORT: ACTIVE
+                PORTOFOLIO
             </div>
 
             <!-- Bottom Center Alignment Scale (Masks the bottom border) -->
@@ -1363,32 +1248,12 @@ const scrollToAbout = () => {
     transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Viewfinder Chromatic Aberration HUD styling */
+/* Viewfinder HUD styling */
 .viewfinder-hud {
-    --c-offset: 0px;
-    --shadow-color-1: rgba(14, 13, 11, 0.15);
-    --shadow-color-2: rgba(14, 13, 11, 0.08);
-    filter: drop-shadow(var(--c-offset) 0.5px 0px var(--shadow-color-1))
-        drop-shadow(calc(-1 * var(--c-offset)) -0.5px 0px var(--shadow-color-2));
-    will-change: filter;
-    transition: filter 0.08s ease-out; /* Super quick response to mouse motion */
 }
 
-/* Greeting Content Chromatic Aberration styling */
+/* Greeting Content styling */
 .greeting-content {
-    --c-offset: 0px;
-    --shadow-color-1: rgba(14, 13, 11, 0.15);
-    --shadow-color-2: rgba(14, 13, 11, 0.08);
-    filter: drop-shadow(var(--c-offset) 0.5px 0px var(--shadow-color-1))
-        drop-shadow(calc(-1 * var(--c-offset)) -0.5px 0px var(--shadow-color-2));
-    will-change: filter;
-    transition: filter 0.08s ease-out;
-}
-
-:global(.dark) .viewfinder-hud,
-:global(.dark) .greeting-content {
-    --shadow-color-1: rgba(239, 238, 232, 0.15);
-    --shadow-color-2: rgba(239, 238, 232, 0.08);
 }
 
 /* Viewfinder Animations */

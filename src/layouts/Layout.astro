@@ -75,9 +75,12 @@ import Analytics from '@vercel/analytics/astro';
 				window.addEventListener('mousedown', (e) => {
 					if (e.button !== 0) return; // Only left-click triggers selection
 
-					// Do not start selection marquee if clicking on interactive elements
+					// Do not start selection marquee if clicking on interactive elements or inside the home section
 					const target = e.target as HTMLElement;
-					if (target && target.closest('a, button, [role="button"], input, textarea, select, .cursor-pointer, #ascii-sandbox')) {
+					if (target && (
+						target.closest('a, button, [role="button"], input, textarea, select, .cursor-pointer, #ascii-sandbox') ||
+						target.closest('#home')
+					)) {
 						return;
 					}
 
