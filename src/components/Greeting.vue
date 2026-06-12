@@ -107,7 +107,7 @@ let triggerPermission: (() => void) | null = null;
 let lastNx = 0;
 let lastNy = 0;
 const tickingTimecode = ref("00:00:00:00");
-let timecodeIntervalId: ReturnType<typeof setInterval> | null = null;
+let timecodeRafId = 0;
 let lastMouseX = 0;
 let lastMouseY = 0;
 let lastTime = 0;
@@ -562,10 +562,21 @@ onMounted(() => {
                 contentEl.style.setProperty("--c-offset", "0px");
             }
         }
+        
+        // Update timecode inside desktop animation loop
+        updateTimecode();
+
         if (!isVisible) return;
         if (!isMobileViewport) {
             rafId = requestAnimationFrame(tickParallaxDecay);
         }
+    };
+
+    // Lightweight loop for mobile viewport that only updates the timecode
+    const tickTimecodeOnly = () => {
+        if (!isVisible) return;
+        updateTimecode();
+        timecodeRafId = requestAnimationFrame(tickTimecodeOnly);
     };
 
     // 6. Viewfinder ticking timecode update (60fps)
@@ -597,11 +608,14 @@ onMounted(() => {
     let observer: IntersectionObserver | null = null;
 
     const startLoops = () => {
-        if (!isMobileViewport && !rafId) {
-            rafId = requestAnimationFrame(tickParallaxDecay);
-        }
-        if (!timecodeIntervalId) {
-            timecodeIntervalId = setInterval(updateTimecode, 1000 / 60);
+        if (!isMobileViewport) {
+            if (!rafId) {
+                rafId = requestAnimationFrame(tickParallaxDecay);
+            }
+        } else {
+            if (!timecodeRafId) {
+                timecodeRafId = requestAnimationFrame(tickTimecodeOnly);
+            }
         }
     };
 
@@ -610,9 +624,9 @@ onMounted(() => {
             cancelAnimationFrame(rafId);
             rafId = 0;
         }
-        if (timecodeIntervalId) {
-            clearInterval(timecodeIntervalId);
-            timecodeIntervalId = null;
+        if (timecodeRafId) {
+            cancelAnimationFrame(timecodeRafId);
+            timecodeRafId = 0;
         }
     };
 

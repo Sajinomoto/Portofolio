@@ -1790,24 +1790,29 @@ import imgCatGlitched from "../assets/glitched-cat.png";
             "         \n         \n         ",
         ];
 
-        // Cache layout measurements to avoid forced reflows during animation loops
-        let aboutRect = aboutSec.getBoundingClientRect();
+        // Cache layout measurements lazily to avoid forced synchronous layout during initial page load
+        let aboutRect: DOMRect | null = null;
         const frameEl = document.getElementById("cyber-pic-frame");
-        let frameRect = frameEl ? frameEl.getBoundingClientRect() : null;
+        let frameRect: DOMRect | null = null;
 
-        window.addEventListener("resize", () => {
+        const updateMeasurements = () => {
             aboutRect = aboutSec.getBoundingClientRect();
             if (frameEl) frameRect = frameEl.getBoundingClientRect();
+        };
+
+        window.addEventListener("resize", () => {
+            updateMeasurements();
         });
 
         // Calculate the boundary coordinates of the profile photo frame relative to the #about container
         const getExclusionZone = () => {
+            if (!aboutRect) updateMeasurements();
             if (!frameRect) return null;
             return {
-                left: frameRect.left - aboutRect.left,
-                right: frameRect.right - aboutRect.left,
-                top: frameRect.top - aboutRect.top,
-                bottom: frameRect.bottom - aboutRect.top,
+                left: frameRect.left - aboutRect!.left,
+                right: frameRect.right - aboutRect!.left,
+                top: frameRect.top - aboutRect!.top,
+                bottom: frameRect.bottom - aboutRect!.top,
             };
         };
 
@@ -1840,7 +1845,8 @@ import imgCatGlitched from "../assets/glitched-cat.png";
 
             // Set random target coordinates inside the bounds of the #about section, avoiding the text area and photo frame
             const setRandomTarget = () => {
-                const rect = aboutRect;
+                if (!aboutRect) updateMeasurements();
+                const rect = aboutRect!;
                 const margin = 80;
                 const isMobile = window.innerWidth < 768;
                 const zone = getExclusionZone();
@@ -1905,7 +1911,8 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                 isExploding = false;
                 pre.textContent = frames[0];
 
-                const rect = aboutRect;
+                if (!aboutRect) updateMeasurements();
+                const rect = aboutRect!;
                 const margin = 100;
                 const isMobile = window.innerWidth < 768;
                 const zone = getExclusionZone();
@@ -2270,11 +2277,14 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                 buttons.forEach((btn, index) => {
                     btn.classList.remove("hologram-shutdown");
                     btn.classList.remove("hologram-booting");
-                    void btn.offsetWidth;
-                    setTimeout(() => {
-                        btn.style.opacity = "";
-                        btn.classList.add("hologram-booting");
-                    }, index * 120);
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            setTimeout(() => {
+                                btn.style.opacity = "";
+                                btn.classList.add("hologram-booting");
+                            }, index * 120);
+                        });
+                    });
                 });
             },
             onLeave: () => {
@@ -2282,10 +2292,13 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                 buttons.forEach((btn, index) => {
                     btn.classList.remove("hologram-booting");
                     btn.classList.remove("hologram-shutdown");
-                    void btn.offsetWidth;
-                    setTimeout(() => {
-                        btn.classList.add("hologram-shutdown");
-                    }, (buttons.length - 1 - index) * 80);
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            setTimeout(() => {
+                                btn.classList.add("hologram-shutdown");
+                            }, (buttons.length - 1 - index) * 80);
+                        });
+                    });
                 });
             },
             onEnterBack: () => {
@@ -2293,11 +2306,14 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                 buttons.forEach((btn, index) => {
                     btn.classList.remove("hologram-shutdown");
                     btn.classList.remove("hologram-booting");
-                    void btn.offsetWidth;
-                    setTimeout(() => {
-                        btn.style.opacity = "";
-                        btn.classList.add("hologram-booting");
-                    }, index * 100);
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            setTimeout(() => {
+                                btn.style.opacity = "";
+                                btn.classList.add("hologram-booting");
+                            }, index * 100);
+                        });
+                    });
                 });
             },
             onLeaveBack: () => {
@@ -2305,10 +2321,13 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                 buttons.forEach((btn, index) => {
                     btn.classList.remove("hologram-booting");
                     btn.classList.remove("hologram-shutdown");
-                    void btn.offsetWidth;
-                    setTimeout(() => {
-                        btn.classList.add("hologram-shutdown");
-                    }, (buttons.length - 1 - index) * 60);
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            setTimeout(() => {
+                                btn.classList.add("hologram-shutdown");
+                            }, (buttons.length - 1 - index) * 60);
+                        });
+                    });
                 });
             },
         });
