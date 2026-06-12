@@ -14,14 +14,14 @@
         class="calendar-title text-[11.5px] font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer pb-1"
         :class="activeTab === 'github' ? 'text-black dark:text-white border-b-2 border-black dark:border-white' : 'text-black/45 dark:text-white/35 hover:text-black/75 dark:hover:text-white/65'"
       >
-        [SYS.DATA: GITHUB]
+        {{ githubTitleText }}
       </button>
       <button 
         @click="selectTab('steam', true)"
         class="steam-title text-[11.5px] font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer pb-1"
         :class="activeTab === 'steam' ? 'text-black dark:text-white border-b-2 border-black dark:border-white' : 'text-black/45 dark:text-white/35 hover:text-black/75 dark:hover:text-white/65'"
       >
-        [SYS.DATA: STEAM]
+        {{ steamTitleText }}
       </button>
     </div>
 
@@ -530,6 +530,8 @@ const busyDay = ref(null);
 const days = ref([]);
 const monthLabels = ref([]);
 const activeTab = ref('github');
+const githubTitleText = ref("[SYS.DATA: GITHUB]");
+const steamTitleText = ref("[SYS.DATA: STEAM]");
 
 // Steam API State
 const steamLoading = ref(true);
@@ -1003,7 +1005,7 @@ const hideTooltip = () => {
 };
 
 // Decrypt text effect
-const decryptText = (element, targetText, duration = 1.2) => {
+const decryptText = (titleRef, targetText, duration = 1.2) => {
   const chars = "01o*.!@#$%^&*()_+{}|:<>?`-=[];',./";
   const length = targetText.length;
   const obj = { progress: 0 };
@@ -1025,13 +1027,13 @@ const decryptText = (element, targetText, duration = 1.2) => {
           output += chars[Math.floor(Math.random() * chars.length)];
         }
       }
-      element.textContent = output;
+      titleRef.value = output;
     },
   });
 };
 
 // Encrypt text effect
-const encryptText = (element, targetText, duration = 0.5) => {
+const encryptText = (titleRef, targetText, duration = 0.5) => {
   const chars = "01o*.!@#$%^&*()_+{}|:<>?`-=[];',./";
   const length = targetText.length;
   const obj = { progress: 0 };
@@ -1055,7 +1057,7 @@ const encryptText = (element, targetText, duration = 0.5) => {
           output += targetText[i];
         }
       }
-      element.textContent = output;
+      titleRef.value = output;
     },
   });
 };
@@ -1079,11 +1081,10 @@ const selectTab = (tab, manual = false) => {
     if (!container) return;
 
     if (tab === "github") {
-      const title = container.querySelector(".calendar-title");
+      decryptText(githubTitleText, "[SYS.DATA: GITHUB]", 0.8);
+      
       const statItems = container.querySelectorAll(".stat-item");
       const cells = container.querySelectorAll(".contrib-cell");
-      
-      if (title) decryptText(title, "[SYS.DATA: GITHUB]", 0.8);
       
       // Reset and play github stagger animations
       if (statItems && statItems.length > 0) {
@@ -1112,11 +1113,10 @@ const selectTab = (tab, manual = false) => {
         });
       }
     } else {
-      const steamTitle = container.querySelector(".steam-title");
       const steamHeader = container.querySelector(".steam-header-item");
       const steamCards = container.querySelectorAll(".steam-card");
       
-      if (steamTitle) decryptText(steamTitle, "[SYS.DATA: STEAM]", 0.8);
+      decryptText(steamTitleText, "[SYS.DATA: STEAM]", 0.8);
       
       // Reset and play steam elements animations
       if (steamHeader) {
@@ -1193,12 +1193,10 @@ const initScrollAnimations = () => {
     }
 
     // 2. Decrypt active title
-    const title = container.querySelector('.calendar-title');
-    const steamTitle = container.querySelector('.steam-title');
     if (activeTab.value === "github") {
-      if (title) decryptText(title, "[SYS.DATA: GITHUB]", 1.2);
+      decryptText(githubTitleText, "[SYS.DATA: GITHUB]", 1.2);
     } else {
-      if (steamTitle) decryptText(steamTitle, "[SYS.DATA: STEAM]", 1.2);
+      decryptText(steamTitleText, "[SYS.DATA: STEAM]", 1.2);
     }
 
     // 3. Animate active panel elements
@@ -1280,12 +1278,10 @@ const initScrollAnimations = () => {
     }
 
     // 2. Encrypt active title back
-    const title = container.querySelector('.calendar-title');
-    const steamTitle = container.querySelector('.steam-title');
     if (activeTab.value === "github") {
-      if (title) encryptText(title, "[SYS.DATA: GITHUB]", 1.2);
+      encryptText(githubTitleText, "[SYS.DATA: GITHUB]", 1.2);
     } else {
-      if (steamTitle) encryptText(steamTitle, "[SYS.DATA: STEAM]", 1.2);
+      encryptText(steamTitleText, "[SYS.DATA: STEAM]", 1.2);
     }
 
     // 3. Slide down and fade out active components

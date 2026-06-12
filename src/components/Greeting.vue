@@ -134,8 +134,8 @@ onMounted(() => {
             };
             window.addEventListener("resize", handleResize);
 
-            const cols = window.innerWidth < 1024 ? 40 : 80;
-            const rows = window.innerWidth < 1024 ? 40 : 80;
+            const cols = window.innerWidth < 768 ? 36 : (window.innerWidth < 1024 ? 48 : 80);
+            const rows = window.innerWidth < 768 ? 36 : (window.innerWidth < 1024 ? 48 : 80);
             const gridW = 2000;
             const gridH = 1450;
 
@@ -182,15 +182,15 @@ onMounted(() => {
 
                 const now = performance.now();
 
-                // 1. Spawn heartbeat ripple automatically (every 3 seconds)
-                if (now - lastHeartbeatTime >= 3000) {
+                // 1. Spawn heartbeat ripple automatically (every 4 seconds)
+                if (now - lastHeartbeatTime >= 4000) {
                     lastHeartbeatTime = now;
                     activeRipples.push({
                         x: 0,
                         y: 0,
                         birthTime: now,
-                        duration: 4000, // Slow and calm ripple (lasts 4 seconds)
-                        maxRadius: 1800, // Wide propagation
+                        duration: 8000, // Slow and calm ripple (lasts 8 seconds)
+                        maxRadius: 2200, // Wide propagation
                         amplitude: 12, // Gentle amplitude
                     });
                 }
@@ -462,9 +462,6 @@ onMounted(() => {
     };
     window.addEventListener("language-changed", handleLanguageChange);
 
-    const isMobileViewport =
-        typeof window !== "undefined" && window.innerWidth < 768;
-
     // Smooth loop for grid updates and timecode
     const tickParallaxDecay = () => {
         if ((window as any)._draw3DGrid) {
@@ -475,16 +472,7 @@ onMounted(() => {
         updateTimecode();
 
         if (!isVisible) return;
-        if (!isMobileViewport) {
-            rafId = requestAnimationFrame(tickParallaxDecay);
-        }
-    };
-
-    // Lightweight loop for mobile viewport that only updates the timecode
-    const tickTimecodeOnly = () => {
-        if (!isVisible) return;
-        updateTimecode();
-        timecodeRafId = requestAnimationFrame(tickTimecodeOnly);
+        rafId = requestAnimationFrame(tickParallaxDecay);
     };
 
     // 6. Viewfinder ticking timecode update (60fps)
@@ -516,14 +504,8 @@ onMounted(() => {
     let observer: IntersectionObserver | null = null;
 
     const startLoops = () => {
-        if (!isMobileViewport) {
-            if (!rafId) {
-                rafId = requestAnimationFrame(tickParallaxDecay);
-            }
-        } else {
-            if (!timecodeRafId) {
-                timecodeRafId = requestAnimationFrame(tickTimecodeOnly);
-            }
+        if (!rafId) {
+            rafId = requestAnimationFrame(tickParallaxDecay);
         }
     };
 
@@ -531,10 +513,6 @@ onMounted(() => {
         if (rafId) {
             cancelAnimationFrame(rafId);
             rafId = 0;
-        }
-        if (timecodeRafId) {
-            cancelAnimationFrame(timecodeRafId);
-            timecodeRafId = 0;
         }
     };
 
