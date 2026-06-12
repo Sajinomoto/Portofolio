@@ -11,14 +11,14 @@
     <div class="flex items-center justify-center gap-6 mb-6 border-b border-black/5 dark:border-white/5 pb-4 select-none">
       <button 
         @click="selectTab('github', true)"
-        class="calendar-title text-[10px] font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer pb-1"
+        class="calendar-title text-[11.5px] font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer pb-1"
         :class="activeTab === 'github' ? 'text-black dark:text-white border-b-2 border-black dark:border-white' : 'text-black/45 dark:text-white/35 hover:text-black/75 dark:hover:text-white/65'"
       >
         [SYS.DATA: GITHUB]
       </button>
       <button 
         @click="selectTab('steam', true)"
-        class="steam-title text-[10px] font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer pb-1"
+        class="steam-title text-[11.5px] font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer pb-1"
         :class="activeTab === 'steam' ? 'text-black dark:text-white border-b-2 border-black dark:border-white' : 'text-black/45 dark:text-white/35 hover:text-black/75 dark:hover:text-white/65'"
       >
         [SYS.DATA: STEAM]
@@ -44,7 +44,7 @@
           
           <!-- GitHub Sub Tab Header with Cyber Arrows -->
           <div class="github-subheader flex items-center justify-between gap-4 border-b border-black/5 dark:border-white/5 pb-2">
-            <div class="text-[10px] font-bold text-black/45 dark:text-white/35 uppercase tracking-widest flex items-center gap-2">
+            <div class="text-[11.5px] font-bold text-black/45 dark:text-white/35 uppercase tracking-widest flex items-center gap-2">
               <span class="text-[#00ff41] animate-pulse">■</span>
               <span>{{ getGithubSubTabTitle() }}</span>
             </div>
@@ -74,32 +74,32 @@
               <!-- Stats Summary -->
               <div class="grid grid-cols-2 md:grid-cols-4 gap-4 border-b border-black/5 dark:border-white/5 pb-5">
                 <div class="stat-item">
-                  <div class="text-[9px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Total Contributions</div>
+                  <div class="text-[11px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Total Contributions</div>
                   <div class="text-xl sm:text-2xl font-bold font-display text-black dark:text-white">
                     {{ totalContributions }}
                   </div>
-                  <div class="text-[8px] text-black/40 dark:text-white/30 uppercase mt-0.5">In the last year</div>
+                  <div class="text-[10px] text-black/40 dark:text-white/30 uppercase mt-0.5">In the last year</div>
                 </div>
                 <div class="stat-item">
-                  <div class="text-[9px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Current Streak</div>
+                  <div class="text-[11px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Current Streak</div>
                   <div class="text-xl sm:text-2xl font-bold font-display text-black dark:text-white">
-                    {{ streakCurrent }} <span class="text-xs font-mono font-normal">days</span>
+                    {{ streakCurrent }} <span class="text-sm font-mono font-normal">days</span>
                   </div>
-                  <div class="text-[8px] text-black/40 dark:text-white/30 uppercase mt-0.5">Consecutive days</div>
+                  <div class="text-[10px] text-black/40 dark:text-white/30 uppercase mt-0.5">Consecutive days</div>
                 </div>
                 <div class="stat-item">
-                  <div class="text-[9px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Longest Streak</div>
+                  <div class="text-[11px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Longest Streak</div>
                   <div class="text-xl sm:text-2xl font-bold font-display text-black dark:text-white">
-                    {{ streakMax }} <span class="text-xs font-mono font-normal">days</span>
+                    {{ streakMax }} <span class="text-sm font-mono font-normal">days</span>
                   </div>
-                  <div class="text-[8px] text-black/40 dark:text-white/30 uppercase mt-0.5">Record commit run</div>
+                  <div class="text-[10px] text-black/40 dark:text-white/30 uppercase mt-0.5">Record commit run</div>
                 </div>
                 <div class="stat-item">
-                  <div class="text-[9px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Peak Commits</div>
+                  <div class="text-[11px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Peak Commits</div>
                   <div class="text-xl sm:text-2xl font-bold font-display text-black dark:text-white">
-                    {{ busyDay ? busyDay.count : 0 }} <span class="text-xs font-mono font-normal">commits</span>
+                    {{ busyDay ? busyDay.count : 0 }} <span class="text-sm font-mono font-normal">commits</span>
                   </div>
-                  <div class="text-[8px] text-black/40 dark:text-white/30 uppercase mt-0.5">
+                  <div class="text-[10px] text-black/40 dark:text-white/30 uppercase mt-0.5">
                     {{ busyDay ? formatDateLabel(busyDay.date) : 'No commits' }}
                   </div>
                 </div>
@@ -163,7 +163,7 @@
               </div>
 
               <!-- Footer Info -->
-              <div class="flex flex-wrap items-center justify-end gap-4 text-[9px] text-black/45 dark:text-white/35 pt-2 border-t border-black/5 dark:border-white/5">
+              <div class="flex flex-wrap items-center justify-end gap-4 text-[11px] text-black/45 dark:text-white/35 pt-2 border-t border-black/5 dark:border-white/5">
                 <!-- Legend -->
                 <div class="flex items-center gap-1.5 font-bold">
                   <span>Less</span>
@@ -211,13 +211,13 @@
 
                     <!-- Profile Details -->
                     <div class="flex flex-col min-w-0">
-                      <span class="text-sm font-bold text-black dark:text-white leading-tight truncate">
+                      <span class="text-base font-bold text-black dark:text-white leading-tight truncate">
                         {{ githubStats.name || githubStats.login }}
                       </span>
-                      <a :href="githubStats.html_url || 'https://github.com/Sajinomoto'" target="_blank" rel="noopener noreferrer" class="text-[9px] text-black/45 dark:text-white/35 hover:text-[#00ff41] transition-colors duration-150 uppercase tracking-widest font-mono mt-0.5 truncate">
+                      <a :href="githubStats.html_url || 'https://github.com/Sajinomoto'" target="_blank" rel="noopener noreferrer" class="text-[11px] text-black/45 dark:text-white/35 hover:text-[#00ff41] transition-colors duration-150 uppercase tracking-widest font-mono mt-0.5 truncate">
                         @{{ githubStats.login || 'Sajinomoto' }}
                       </a>
-                      <p class="text-[9px] text-black/60 dark:text-white/50 leading-relaxed line-clamp-2 mt-1.5 italic font-sans" :title="githubStats.bio">
+                      <p class="text-[11px] text-black/60 dark:text-white/50 leading-relaxed line-clamp-2 mt-1.5 italic font-sans" :title="githubStats.bio">
                         {{ githubStats.bio || 'No biography details provided.' }}
                       </p>
                     </div>
@@ -228,7 +228,7 @@
                     <div class="stat-card relative border border-black/10 dark:border-white/10 bg-black/[0.01] dark:bg-white/[0.01] p-4 transition-all duration-300 hover:border-black/20 dark:hover:border-white/20">
                       <div class="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-black/20 dark:border-white/20"></div>
                       <div class="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-black/20 dark:border-white/20"></div>
-                      <div class="text-[9px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Public Repos</div>
+                      <div class="text-[11px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Public Repos</div>
                       <div class="text-xl sm:text-2xl font-bold font-display text-black dark:text-white">
                         {{ githubStats.public_repos }}
                       </div>
@@ -237,7 +237,7 @@
                     <div class="stat-card relative border border-black/10 dark:border-white/10 bg-black/[0.01] dark:bg-white/[0.01] p-4 transition-all duration-300 hover:border-black/20 dark:hover:border-white/20">
                       <div class="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-black/20 dark:border-white/20"></div>
                       <div class="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-black/20 dark:border-white/20"></div>
-                      <div class="text-[9px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Followers</div>
+                      <div class="text-[11px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Followers</div>
                       <div class="text-xl sm:text-2xl font-bold font-display text-black dark:text-white">
                         {{ githubStats.followers }}
                       </div>
@@ -246,7 +246,7 @@
                     <div class="stat-card relative border border-black/10 dark:border-white/10 bg-black/[0.01] dark:bg-white/[0.01] p-4 transition-all duration-300 hover:border-black/20 dark:hover:border-white/20">
                       <div class="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-black/20 dark:border-white/20"></div>
                       <div class="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-black/20 dark:border-white/20"></div>
-                      <div class="text-[9px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Following</div>
+                      <div class="text-[11px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Following</div>
                       <div class="text-xl sm:text-2xl font-bold font-display text-black dark:text-white">
                         {{ githubStats.following }}
                       </div>
@@ -255,8 +255,8 @@
                     <div class="stat-card relative border border-black/10 dark:border-white/10 bg-black/[0.01] dark:bg-white/[0.01] p-4 transition-all duration-300 hover:border-black/20 dark:hover:border-white/20 font-mono">
                       <div class="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-black/20 dark:border-white/20"></div>
                       <div class="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-black/20 dark:border-white/20"></div>
-                      <div class="text-[9px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Account Uplink</div>
-                      <div class="text-xs font-bold text-[#00ff41] leading-tight pt-1">
+                      <div class="text-[11px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Account Uplink</div>
+                      <div class="text-sm font-bold text-[#00ff41] leading-tight pt-1">
                         ESTABLISHED<br/>{{ formatJoinedDate(githubStats.created_at) }}
                       </div>
                     </div>
@@ -264,7 +264,7 @@
                 </div>
 
                 <!-- Footer Info link -->
-                <div class="flex flex-wrap items-center justify-start gap-4 text-[9px] text-black/45 dark:text-white/35 pt-2 border-t border-black/5 dark:border-white/5">
+                <div class="flex flex-wrap items-center justify-start gap-4 text-[11px] text-black/45 dark:text-white/35 pt-2 border-t border-black/5 dark:border-white/5">
                   <a 
                     :href="githubStats.html_url || 'https://github.com/Sajinomoto'" 
                     target="_blank" 
@@ -290,11 +290,11 @@
                 </div>
               </div>
               
-              <div v-else-if="githubEvents.length === 0" class="text-[9px] font-bold text-black/40 dark:text-white/30 uppercase py-8 text-center">
+              <div v-else-if="githubEvents.length === 0" class="text-[11px] font-bold text-black/40 dark:text-white/30 uppercase py-8 text-center">
                 » NO RECENT GITHUB ACTIVITIES RECORDED IN THE LOGS
               </div>
               
-              <div v-else class="space-y-2 font-mono text-[9px] py-1">
+              <div v-else class="space-y-2 font-mono text-xs py-1">
                 <div 
                   v-for="event in githubEvents" 
                   :key="event.id"
@@ -303,7 +303,7 @@
                   <span class="truncate pr-4 font-bold flex items-center gap-1.5">
                     <span class="text-[#00ff41]">»</span> {{ formatGithubEvent(event) }}
                   </span>
-                  <span class="shrink-0 text-black/40 dark:text-white/30 text-right font-mono text-[8px] uppercase">
+                  <span class="shrink-0 text-black/40 dark:text-white/30 text-right font-mono text-[10px] uppercase">
                     {{ getRelativeTime(event.created_at) }}
                   </span>
                 </div>
@@ -332,17 +332,17 @@
               
               <!-- User Info -->
               <div class="flex flex-col">
-                <span class="text-sm font-bold text-black dark:text-white leading-tight">{{ steamProfile.personaname }}</span>
+                <span class="text-base font-bold text-black dark:text-white leading-tight">{{ steamProfile.personaname }}</span>
               </div>
             </div>
 
             <!-- Steam stats summary right side -->
             <div class="text-right">
-              <div class="text-[9px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-0.5">STATUS</div>
+              <div class="text-[11px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-0.5">STATUS</div>
               <div class="flex items-center justify-end gap-1.5">
                 <span class="w-1.5 h-1.5 rounded-full" :class="steamProfile.isOnline ? 'bg-[#00ff41] animate-pulse' : 'bg-black/30 dark:bg-white/30'"></span>
-                <span class="text-xs font-bold tracking-wider uppercase" :class="steamProfile.isOnline ? 'text-[#00ff41]' : 'text-black/45 dark:text-white/35'">
-                  {{ steamProfile.statusText }}
+                <span class="text-sm font-bold tracking-wider uppercase" :class="steamProfile.isOnline ? 'text-[#00ff41]' : 'text-black/45 dark:text-white/35'">
+                  {{ steamProfile.statusText }}<span v-if="steamProfile.isOnline && steamProfile.inGameName" class="text-sm font-medium text-[#00ff41] ml-2">Playing: {{ steamProfile.inGameName }}</span>
                 </span>
               </div>
             </div>
@@ -350,7 +350,7 @@
 
           <!-- Sub Tab Header with Cyber Arrows -->
           <div class="steam-subheader flex items-center justify-between gap-4 border-b border-black/5 dark:border-white/5 pb-2">
-            <div class="text-[10px] font-bold text-black/45 dark:text-white/35 uppercase tracking-widest flex items-center gap-2">
+            <div class="text-[11.5px] font-bold text-black/45 dark:text-white/35 uppercase tracking-widest flex items-center gap-2">
               <span class="text-[#00ff41] animate-pulse">■</span>
               <span>{{ activeSteamSubTab === 'most_played' ? 'MOST_PLAYED_GAMES' : 'RECENT_ACTIVITIES' }}</span>
             </div>
@@ -403,12 +403,12 @@
                   <div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-black/20 dark:border-white/20"></div>
                   
                   <div>
-                    <h4 class="text-xs font-bold text-black dark:text-white uppercase tracking-wider leading-tight mb-2 truncate" :title="game.name">
+                    <h4 class="text-[15px] font-bold text-black dark:text-white uppercase tracking-wider leading-tight mb-2 truncate" :title="game.name">
                       {{ game.name }}
                     </h4>
                     
                     <!-- Playtime details -->
-                    <div class="space-y-1 font-mono text-[9px] text-black/50 dark:text-white/45">
+                    <div class="space-y-1 font-mono text-[13.5px] text-black/50 dark:text-white/45">
                       <div class="flex justify-between">
                         <span>TOTAL RUNTIME:</span>
                         <span class="font-bold text-black dark:text-white">{{ formatPlaytime(game.playtime_forever) }} HRS</span>
@@ -422,11 +422,11 @@
 
                   <!-- Achievement Progress Bar -->
                   <div v-if="game.achievements" class="mt-4 pt-3 border-t border-black/5 dark:border-white/5">
-                    <div class="flex justify-between text-[8px] font-bold text-black/45 dark:text-white/35 mb-1">
+                    <div class="flex justify-between text-[10px] font-bold text-black/45 dark:text-white/35 mb-1">
                       <span>ACHIEVEMENTS</span>
                       <span>{{ game.achievements.unlocked }} / {{ game.achievements.total }} ({{ game.achievements.percentage }}%)</span>
                     </div>
-                    <div class="font-mono text-[9px] text-[#00ff41] leading-none tracking-normal select-none">
+                    <div class="font-mono text-[11px] text-[#00ff41] leading-none tracking-normal select-none">
                       {{ formatProgressBar(game.achievements.percentage) }}
                     </div>
                   </div>
@@ -442,11 +442,11 @@
                 <div class="h-3 bg-black/5 dark:bg-white/5 w-1/2 rounded-[1px]"></div>
               </div>
               
-              <div v-else-if="steamRecentGames.length === 0" class="text-[9px] font-bold text-black/40 dark:text-white/30 uppercase py-8 text-center">
+              <div v-else-if="steamRecentGames.length === 0" class="text-[11px] font-bold text-black/40 dark:text-white/30 uppercase py-8 text-center">
                 » NO RECENT ACTIVITY DETECTED IN THE PAST 2 WEEKS
               </div>
               
-              <div v-else class="space-y-2 font-mono text-[9px] py-1">
+              <div v-else class="space-y-2 font-mono text-[13.5px] py-1">
                 <div 
                   v-for="game in steamRecentGames" 
                   :key="'recent-' + game.appid"
@@ -457,16 +457,17 @@
                   </span>
                   <span class="shrink-0 text-black/40 dark:text-white/30 text-right font-mono">
                     <span class="font-bold text-black dark:text-white">{{ formatPlaytime(game.playtime_2weeks) }} HRS</span>
-                    <span class="text-[8px] ml-1.5 uppercase">(Total: {{ formatPlaytime(game.playtime_forever) }} Hrs)</span>
+                    <span class="text-[11px] ml-1.5 uppercase">(Total: {{ formatPlaytime(game.playtime_forever) }} Hrs)</span>
                   </span>
                 </div>
               </div>
+
             </div>
 
           </div>
 
           <!-- Footer Info -->
-          <div class="flex flex-wrap items-center justify-start gap-4 text-[9px] text-black/45 dark:text-white/35 pt-2 border-t border-black/5 dark:border-white/5">
+          <div class="flex flex-wrap items-center justify-start gap-4 text-[11px] text-black/45 dark:text-white/35 pt-2 border-t border-black/5 dark:border-white/5">
             <a 
               :href="steamProfile.profileurl" 
               target="_blank" 

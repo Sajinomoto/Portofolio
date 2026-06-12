@@ -7,6 +7,9 @@ const width = ref(120);
 const height = ref(50);
 
 const isVisible = ref(false);
+
+// --- FADE-IN STATE ---
+const isReady = ref(false);
 let observer: IntersectionObserver | null = null;
 let lastFrameTime = 0;
 const fpsInterval = 1000 / 30; // Target 30 FPS for optimized CPU usage and retro low-fi aesthetic
@@ -274,6 +277,74 @@ const renderFrame = (timestamp: number = 0) => {
         }
     }
 
+    // --- SHIPS GENERATION & RENDERING (Alternating between Yacht & Cargo Ship) ---
+    const shipSpeed = 1.2; // Kecepatan kapal bergerak lambat dan tenang
+    const loopDistance = 150.0;
+    const rawShipPos = time * shipSpeed;
+    const loopIndex = Math.floor(rawShipPos / loopDistance);
+    const shipX = (rawShipPos % loopDistance) - (loopDistance / 2); // Bergerak dari -75 ke 75
+    const shipZ = 12.0; // Posisinya di tengah ombak laut (zSun = 45.0)
+
+    // Desain Kapal 1: Sleek Yacht
+    const shipYacht = [
+        "      ___________      ",
+        "    _/_o__o__o__\\_    ",
+        "___/______________\\___",
+        "\\____________________/"
+    ];
+
+    // Desain Kapal 3: Cargo/Container Ship
+    const shipCargo = [
+        "                  ___  ",
+        "     _[]_ _[]_   |   | ",
+        "    |====|====|__|___| ",
+        "___/_________________\\_",
+        "\\____________________/ "
+    ];
+
+    const selectedSprite = loopIndex % 2 === 0 ? shipYacht : shipCargo;
+    const sH = selectedSprite.length;
+    const sW = selectedSprite[0].length;
+
+    // Menghitung tinggi gelombang laut di titik koordinat kapal (agar kapal mengapung naik-turun)
+    let shipY = perlin3D(shipX * 0.05, shipZ * 0.05, time * 0.7) * 4.5;
+    shipY += perlin3D(shipX * 0.12, shipZ * 0.12, time * 1.2) * 1.0;
+    shipY += 1.2; // Sedikit menenggelamkan bagian lambung bawah kapal ke dalam air agar realistis
+
+    // Proyeksi 3D pusat kapal ke ruang layar (Screen Space)
+    const xRotShip = shipX * cosY - shipZ * sinY;
+    const zRotYShip = shipX * sinY + shipZ * cosY;
+    const yRotShip = shipY * cosP - zRotYShip * sinP;
+    const zRotShip = shipY * sinP + zRotYShip * cosP;
+
+    const transXShip = xRotShip;
+    const transYShip = yRotShip + camY;
+    const transZShip = zRotShip + camZ;
+
+    if (transZShip > 0) {
+        const centerX = Math.floor(w / 2 + (transXShip * fov * aspectCorrection) / transZShip);
+        const centerY = Math.floor(h / 2 + (transYShip * fov) / transZShip);
+
+        for (let r = 0; r < sH; r++) {
+            for (let c = 0; c < sW; c++) {
+                const char = selectedSprite[r][c];
+                if (char === " ") continue; // Skip bagian transparan kosong
+
+                // Tentukan posisi X dan Y karakter kapal di layar
+                const screenX = centerX + c - Math.floor(sW / 2);
+                const screenY = centerY + r - sH + 1;
+
+                if (screenX >= 0 && screenX < w && screenY >= 0 && screenY < h) {
+                    // Lakukan depth testing dengan zBuffer agar ombak di depan menutupi lambung bawah kapal
+                    if (transZShip < zBuffer[screenY][screenX]) {
+                        zBuffer[screenY][screenX] = transZShip;
+                        screen[screenY][screenX] = char;
+                    }
+                }
+            }
+        }
+    }
+
     // --- FLYING BIRDS GENERATION & RENDERING ---
     // A small flock of 3 birds flying from right to left across the sky
     const flockSpeed = 2.4;
@@ -398,8 +469,10 @@ onMounted(() => {
                     cancelAnimationFrame(animationFrameId);
                     animationFrameId = requestAnimationFrame(renderFrame);
                 }
+                isReady.value = true;
             } else {
                 isVisible.value = false;
+                isReady.value = false;
                 cancelAnimationFrame(animationFrameId);
             }
         });
@@ -428,7 +501,8 @@ onUnmounted(() => {
         class="w-full h-full bg-transparent ascii-container flex items-center justify-center select-none overflow-hidden"
     >
         <pre
-            class="ascii-pre text-black/75 dark:text-[#EFEEE8]/75 transition-colors duration-300"
+            class="ascii-pre text-black/75 dark:text-[#EFEEE8]/75 transition-all duration-1000 ease-out"
+            :class="isReady ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-[0.98] blur-[2.5px]'"
             >{{ asciiText }}</pre
         >
     </div>
@@ -450,5 +524,6 @@ onUnmounted(() => {
     padding: 0;
     pointer-events: none;
     user-select: none;
+    transition: opacity 1s ease-out, transform 1s ease-out, filter 1s ease-out;
 }
 </style>

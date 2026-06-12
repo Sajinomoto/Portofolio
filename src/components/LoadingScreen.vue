@@ -85,7 +85,8 @@ onMounted(() => {
     scatterY: number;
     scatterZ: number;
   }[] = [];
-  const particleCount = 2000;
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const particleCount = isMobile ? 800 : 2000;
   const goldenRatio = (1 + Math.sqrt(5)) / 2;
   const angleIncrement = 2 * Math.PI * (2 - goldenRatio);
 

@@ -30,6 +30,8 @@ const y = ref(0);
 const isDragging = ref(false);
 const isHovered = ref(false);
 const chromaticIntensity = ref(0);
+const isVisible = ref(false);
+let observer: IntersectionObserver | null = null;
 
 // Physics states
 let vx = 0;
@@ -264,6 +266,7 @@ onMounted(() => {
     if (!ctx) return;
 
     const tick = () => {
+        if (!isVisible.value) return;
         const now = performance.now();
         const isDark = document.documentElement.classList.contains("dark");
         const { width: pWidth, height: pHeight } = getParentDimensions();
@@ -438,11 +441,35 @@ onMounted(() => {
         animationFrameId = requestAnimationFrame(tick);
     };
 
-    tick();
+    // Set up IntersectionObserver to play/pause the animation loop dynamically based on viewport visibility
+    observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                if (!isVisible.value) {
+                    isVisible.value = true;
+                    cancelAnimationFrame(animationFrameId);
+                    animationFrameId = requestAnimationFrame(tick);
+                }
+            } else {
+                isVisible.value = false;
+                cancelAnimationFrame(animationFrameId);
+            }
+        });
+    }, {
+        root: null,
+        threshold: 0.01,
+    });
+
+    if (containerRef.value) {
+        observer.observe(containerRef.value);
+    }
 });
 
 onUnmounted(() => {
     cancelAnimationFrame(animationFrameId);
+    if (observer) {
+        observer.disconnect();
+    }
     window.removeEventListener("mousemove", onMouseMove);
     window.removeEventListener("mouseup", onMouseUp);
     window.removeEventListener("touchmove", onTouchMove);
