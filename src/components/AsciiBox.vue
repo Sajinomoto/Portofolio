@@ -8,8 +8,7 @@ const height = ref(50);
 
 const isVisible = ref(false);
 
-// --- FADE-IN STATE ---
-const isReady = ref(false);
+
 let observer: IntersectionObserver | null = null;
 let lastFrameTime = 0;
 const fpsInterval = 1000 / 30; // Target 30 FPS for optimized CPU usage and retro low-fi aesthetic
@@ -469,10 +468,8 @@ onMounted(() => {
                     cancelAnimationFrame(animationFrameId);
                     animationFrameId = requestAnimationFrame(renderFrame);
                 }
-                isReady.value = true;
             } else {
                 isVisible.value = false;
-                isReady.value = false;
                 cancelAnimationFrame(animationFrameId);
             }
         });
@@ -501,8 +498,7 @@ onUnmounted(() => {
         class="w-full h-full bg-transparent ascii-container flex items-center justify-center select-none overflow-hidden"
     >
         <pre
-            class="ascii-pre text-black/75 dark:text-[#EFEEE8]/75 transition-all duration-1000 ease-out"
-            :class="isReady ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-[0.98] blur-[2.5px]'"
+            class="ascii-pre text-black/75 dark:text-[#EFEEE8]/75"
             >{{ asciiText }}</pre
         >
     </div>
@@ -524,6 +520,5 @@ onUnmounted(() => {
     padding: 0;
     pointer-events: none;
     user-select: none;
-    transition: opacity 1s ease-out, transform 1s ease-out, filter 1s ease-out;
 }
 </style>

@@ -45,10 +45,10 @@ import Analytics from '@vercel/analytics/astro';
 		<script>
 			import Lenis from 'lenis';
 
-			// Initialize Lenis smooth scroll globally
 			const lenis = new Lenis({
-				duration: 1.5,
-				lerp: 0.05, // Lower value = heavier, smoother scroll momentum
+				duration: 2.2,
+				lerp: 0.032, // Lower value = heavier, smoother scroll momentum
+				wheelMultiplier: 0.9, // Slower, heavier wheel feel
 				syncTouch: false, // Use native scroll on mobile for buttery-smooth performance
 			});
 
