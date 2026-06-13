@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
+
+const isMounted = ref(false);
 import { gsap } from "gsap";
 import FloatingCube from "./FloatingCube.vue";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
@@ -108,6 +110,7 @@ let handleLanguageChange: ((e: Event) => void) | null = null;
 let handleVisibilityChange: (() => void) | null = null;
 
 onMounted(() => {
+    isMounted.value = true;
     // Radial Water Ripple System
     interface Ripple {
         x: number;
@@ -634,8 +637,9 @@ const scrollToAbout = () => {
         <div class="absolute inset-0 pointer-events-none radial-glow z-0"></div>
 
         <!-- Camera Viewfinder HUD Overlay -->
+        <Teleport v-if="isMounted" to="body">
         <div
-            class="absolute inset-0 pointer-events-none z-10 font-mono text-[9px] sm:text-[10px] font-bold tracking-widest text-black/25 dark:text-[#EFEEE8]/25 select-none viewfinder-hud"
+            class="fixed inset-0 pointer-events-none z-50 font-mono text-[9px] sm:text-[10px] font-bold tracking-widest text-black/25 dark:text-[#EFEEE8]/25 select-none viewfinder-hud"
         >
             <!-- Bottom Left: AF & Specs -->
             <div
@@ -686,51 +690,13 @@ const scrollToAbout = () => {
                     </div>
                 </div>
             </div>
-
-            <!-- Center Focus Crosshair -->
-            <div
-                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-30"
-            >
-                <svg
-                    width="40"
-                    height="40"
-                    viewBox="0 0 40 40"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="text-current"
-                >
-                    <path
-                        d="M 20 12 V 28 M 12 20 H 28"
-                        stroke="currentColor"
-                        stroke-width="1.2"
-                    />
-                    <path
-                        d="M 4 12 V 4 H 12"
-                        stroke="currentColor"
-                        stroke-width="1"
-                    />
-                    <path
-                        d="M 36 12 V 4 H 28"
-                        stroke="currentColor"
-                        stroke-width="1"
-                    />
-                    <path
-                        d="M 4 28 V 36 H 12"
-                        stroke="currentColor"
-                        stroke-width="1"
-                    />
-                    <path
-                        d="M 36 28 V 36 H 28"
-                        stroke="currentColor"
-                        stroke-width="1"
-                    />
-                </svg>
-            </div>
         </div>
+        </Teleport>
 
         <!-- Cyber Bezel and Brackets Border Overlay (Desktop Only) -->
+        <Teleport v-if="isMounted" to="body">
         <div
-            class="absolute inset-0 pointer-events-none z-20 hidden lg:block text-[#0E0D0B] dark:text-[#EFEEE8]"
+            class="fixed inset-0 pointer-events-none z-50 hidden lg:block text-[#0E0D0B] dark:text-[#EFEEE8]"
         >
             <!-- Corner Brackets -->
             <!-- Top-Left Corner Bracket -->
@@ -1075,6 +1041,7 @@ const scrollToAbout = () => {
                 [EXPOSURE_VAL]
             </div>
         </div>
+        </Teleport>
 
         <!-- Main Content Container with Technical Frame -->
         <div
@@ -1254,6 +1221,7 @@ const scrollToAbout = () => {
 .viewfinder-hud {
 }
 
+
 /* Greeting Content styling */
 .greeting-content {
 }
@@ -1323,5 +1291,29 @@ const scrollToAbout = () => {
         rgba(255, 255, 255, 0.045) 0%,
         transparent 60%
     ) !important;
+}
+
+/* Screen Vignette — dark mode (default) */
+.screen-vignette {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 45;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 45%,
+        rgba(14, 13, 11, 0.55) 80%,
+        rgba(14, 13, 11, 0.82) 100%
+    );
+}
+
+/* Screen Vignette — light mode */
+:root:not(.dark) .screen-vignette {
+    background: radial-gradient(
+        ellipse at center,
+        transparent 45%,
+        rgba(180, 178, 170, 0.40) 80%,
+        rgba(180, 178, 170, 0.70) 100%
+    );
 }
 </style>

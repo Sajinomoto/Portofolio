@@ -13,6 +13,7 @@ const translations = {
     id: {
         home: "Beranda",
         about: "Tentang Saya",
+        tools: "Tools",
         projects: "Proyek",
         contact: "Kontak",
         tooltip: "Kunjungi Github Saya :)",
@@ -20,6 +21,7 @@ const translations = {
     en: {
         home: "Home",
         about: "About Me",
+        tools: "Tools",
         projects: "Projects",
         contact: "Contact",
         tooltip: "Visit My Github :)",
@@ -27,6 +29,7 @@ const translations = {
     ja: {
         home: "ホーム",
         about: "自己紹介",
+        tools: "Tools",
         projects: "プロジェクト",
         contact: "連絡先",
         tooltip: "GitHubを訪ねる :)",
@@ -34,6 +37,7 @@ const translations = {
     ko: {
         home: "홈",
         about: "자기소개",
+        tools: "Tools",
         projects: "프로젝트",
         contact: "연락처",
         tooltip: "GitHub 방문하기 :)",
@@ -41,6 +45,7 @@ const translations = {
     ar: {
         home: "الرئيسية",
         about: "عني",
+        tools: "Tools",
         projects: "المشاريع",
         contact: "اتصل بي",
         tooltip: "تفضل بزيارة حسابي على جيت هاب :)",
@@ -48,6 +53,7 @@ const translations = {
     hi: {
         home: "होम",
         about: "मेरे बारे में",
+        tools: "Tools",
         projects: "परियोजनाएं",
         contact: "संपर्क",
         tooltip: "मेरे गिटहब पर जाएँ :)",
@@ -55,6 +61,7 @@ const translations = {
     zh: {
         home: "首页",
         about: "关于我",
+        tools: "Tools",
         projects: "项目",
         contact: "联系",
         tooltip: "访问我的 GitHub :)",
@@ -100,7 +107,7 @@ const handleScroll = () => {
     // Only calculate active section state on desktop viewports (>= 768px)
     if (typeof window === "undefined" || window.innerWidth < 768) return;
 
-    const sections = ["home", "about", "projects", "contact"];
+    const sections = ["home", "about", "tools", "projects", "contact"];
     let currentActive = "home";
 
     for (const section of sections) {
@@ -183,7 +190,7 @@ const scrollToSection = (selector: string) => {
 
 <template>
     <header 
-        class="fixed top-0 left-0 w-full text-black dark:text-[#EFEEE8] transition-colors duration-300 z-50"
+        class="fixed top-0 left-0 w-full text-black dark:text-[#EFEEE8] transition-colors duration-300 z-[60]"
         :class="isSidebarOpen ? 'bg-transparent' : 'bg-[#EFEEE8]/70 dark:bg-[#0E0D0B]/70 backdrop-blur-md'"
     >
         <div
@@ -239,9 +246,9 @@ const scrollToSection = (selector: string) => {
             </div>
 
             <!-- Navigation & Dark Mode (Right) -->
-            <div class="flex items-center gap-6">
+            <div class="flex items-center gap-6 flex-1 justify-center">
                 <!-- Desktop Navigation (Hidden on mobile) -->
-                <nav class="hidden md:flex items-center gap-6">
+                <nav class="hidden md:flex items-center gap-6 mx-auto justify-center">
                     <!-- Home Link -->
                     <a
                         href="#home"
@@ -264,6 +271,18 @@ const scrollToSection = (selector: string) => {
                             : 'text-black/75 dark:text-[#EFEEE8]/75 hover:bg-black/5 dark:hover:bg-white/5 hover:border-black/15 dark:hover:border-white/15'"
                     >
                         {{ translations[currentLang].about }}
+                    </a>
+
+                    <!-- Tools Link -->
+                    <a
+                        href="#tools"
+                        @click.prevent="scrollToSection('#tools')"
+                        class="px-5 py-2.5 text-xs font-bold tracking-widest uppercase transition-all duration-300 rounded-none border border-transparent whitespace-nowrap cursor-pointer select-none"
+                        :class="activeSection === 'tools'
+                            ? 'bg-black text-[#EFEEE8] dark:bg-[#EFEEE8] dark:text-[#0E0D0B] border-black dark:border-[#EFEEE8]'
+                            : 'text-black/75 dark:text-[#EFEEE8]/75 hover:bg-black/5 dark:hover:bg-white/5 hover:border-black/15 dark:hover:border-white/15'"
+                    >
+                        {{ translations[currentLang].tools }}
                     </a>
 
                     <!-- Projects Link -->
@@ -446,6 +465,15 @@ const scrollToSection = (selector: string) => {
                         class="text-xl font-semibold text-black dark:text-white hover:opacity-60 transition-opacity tracking-tight py-1"
                     >
                         {{ translations[currentLang].about }}
+                    </a>
+
+                    <!-- Tools Link -->
+                    <a
+                        href="#tools"
+                        @click.prevent="scrollToSection('#tools')"
+                        class="text-xl font-semibold text-black dark:text-white hover:opacity-60 transition-opacity tracking-tight py-1"
+                    >
+                        {{ translations[currentLang].tools }}
                     </a>
 
                     <!-- Projects Link -->
