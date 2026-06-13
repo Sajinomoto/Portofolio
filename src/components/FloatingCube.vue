@@ -420,8 +420,8 @@ onMounted(() => {
         if (activeIntensity > 0.02) {
             ctx.globalCompositeOperation = isDark ? "screen" : "source-over";
 
-            // Increased offset factor for more visible, premium split
-            const offsetFactor = 3.6;
+            // Increased offset factor for more visible, premium split (proportional to canvas size)
+            const offsetFactor = size.value * 0.018;
             const totalOffset = (chromaticIntensity.value * offsetFactor) + (collisionFlash * 4.5);
             
             // Slightly increased opacities for better visual pop
@@ -465,6 +465,16 @@ onMounted(() => {
     }
 });
 
+const onMouseEnter = () => {
+    if (typeof window !== "undefined" && window.matchMedia("(hover: hover)").matches) {
+        isHovered.value = true;
+    }
+};
+
+const onMouseLeave = () => {
+    isHovered.value = false;
+};
+
 onUnmounted(() => {
     cancelAnimationFrame(animationFrameId);
     if (observer) {
@@ -490,8 +500,8 @@ onUnmounted(() => {
         }"
         @mousedown="onMouseDown"
         @touchstart="onTouchStart"
-        @mouseenter="isHovered = true"
-        @mouseleave="isHovered = false"
+        @mouseenter="onMouseEnter"
+        @mouseleave="onMouseLeave"
     >
         <canvas
             ref="canvasRef"

@@ -215,7 +215,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                     >
                         <!-- Left Column: Text Content (cols 1 to 7) -->
                         <div
-                            class="md:col-span-7 flex flex-col justify-start max-w-5xl"
+                            class="md:col-span-7 flex flex-col justify-start max-w-5xl order-2 md:order-1"
                         >
                             <h2
                                 class="about-title font-display text-3xl sm:text-5xl font-bold tracking-tight mb-4 text-black dark:text-white transition-colors duration-300"
@@ -229,7 +229,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                             </h2>
                             <p
                                 id="about-desc"
-                                class="about-desc font-mono text-xs sm:text-sm text-black/50 dark:text-[#EFEEE8]/50 leading-relaxed transition-colors duration-300 text-justify"
+                                class="about-desc font-mono text-[10.5px] xs:text-xs sm:text-sm text-black/50 dark:text-[#EFEEE8]/50 leading-relaxed transition-colors duration-300 text-justify"
                             >
                                 Under Development 🚧
                             </p>
@@ -237,11 +237,11 @@ import imgCatGlitched from "../assets/glitched-cat.png";
 
                         <!-- Right Column: Cyber Profile Picture (cols 8 to 12) -->
                         <div
-                            class="md:col-span-5 flex flex-col items-center md:items-end w-full"
+                            class="md:col-span-5 flex flex-col items-center md:items-end w-full order-1 md:order-2"
                         >
                             <div
                                 id="cyber-pic-frame"
-                                class="relative w-full max-w-[320px] aspect-square bg-[#0E0D0B]/5 dark:bg-[#EFEEE8]/5 border border-black/20 dark:border-white/20 p-4 select-none group transition-all duration-300 hover:border-black dark:hover:border-white cursor-crosshair"
+                                class="relative w-full max-w-[200px] xs:max-w-[240px] md:max-w-[320px] aspect-square bg-[#0E0D0B]/5 dark:bg-[#EFEEE8]/5 border border-black/20 dark:border-white/20 p-4 select-none group transition-all duration-300 hover:border-black dark:hover:border-white cursor-crosshair"
                             >
                                 <!-- Corner Brackets -->
                                 <div
@@ -1470,16 +1470,20 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                 start: "top 70%",
                 end: "bottom 15%",
                 onEnter: () => {
-                    decryptText(aboutDescEl, getActiveText(), 3);
+                    const isMobile = window.innerWidth < 768;
+                    decryptText(aboutDescEl, getActiveText(), isMobile ? 1.0 : 3);
                 },
                 onLeave: () => {
-                    encryptText(aboutDescEl, getActiveText(), 1);
+                    const isMobile = window.innerWidth < 768;
+                    encryptText(aboutDescEl, getActiveText(), isMobile ? 0.4 : 1);
                 },
                 onEnterBack: () => {
-                    decryptText(aboutDescEl, getActiveText(), 2);
+                    const isMobile = window.innerWidth < 768;
+                    decryptText(aboutDescEl, getActiveText(), isMobile ? 0.8 : 2);
                 },
                 onLeaveBack: () => {
-                    encryptText(aboutDescEl, getActiveText(), 0.8);
+                    const isMobile = window.innerWidth < 768;
+                    encryptText(aboutDescEl, getActiveText(), isMobile ? 0.3 : 0.8);
                 },
             });
         }
@@ -1499,7 +1503,8 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                 const isInViewport =
                     rect && rect.top < window.innerHeight && rect.bottom > 0;
                 if (isInViewport) {
-                    decryptText(aboutDescEl, text, 1.4);
+                    const isMobile = window.innerWidth < 768;
+                    decryptText(aboutDescEl, text, isMobile ? 0.6 : 1.4);
                 } else {
                     aboutDescEl.textContent = text;
                 }
@@ -2126,6 +2131,63 @@ import imgCatGlitched from "../assets/glitched-cat.png";
         animation: glitch-anim-2 1s infinite linear alternate-reverse;
     }
 
+    @media (max-width: 767px) {
+        .group:hover .group-hover\:animate-glitch-1 {
+            animation: glitch-anim-1-light 1.5s infinite linear alternate-reverse;
+            opacity: 0.45 !important;
+        }
+        .group:hover .group-hover\:animate-glitch-2 {
+            animation: glitch-anim-2-light 1.5s infinite linear alternate-reverse;
+            opacity: 0.45 !important;
+        }
+    }
+
+    @keyframes glitch-anim-1-light {
+        0%, 100% {
+            clip-path: inset(40% 0 40% 0);
+            transform: translate(-1px, -0.5px);
+        }
+        20% {
+            clip-path: inset(15% 0 75% 0);
+            transform: translate(1px, 0.5px);
+        }
+        40% {
+            clip-path: inset(80% 0 10% 0);
+            transform: translate(-0.5px, 1px);
+        }
+        60% {
+            clip-path: inset(5% 0 85% 0);
+            transform: translate(0.5px, -1px);
+        }
+        80% {
+            clip-path: inset(50% 0 45% 0);
+            transform: translate(-1px, 0.5px);
+        }
+    }
+
+    @keyframes glitch-anim-2-light {
+        0%, 100% {
+            clip-path: inset(25% 0 65% 0);
+            transform: translate(0.5px, 1px);
+        }
+        20% {
+            clip-path: inset(75% 0 15% 0);
+            transform: translate(-0.5px, -1px);
+        }
+        40% {
+            clip-path: inset(10% 0 80% 0);
+            transform: translate(1px, 0.5px);
+        }
+        60% {
+            clip-path: inset(55% 0 35% 0);
+            transform: translate(-1px, 0.5px);
+        }
+        80% {
+            clip-path: inset(30% 0 55% 0);
+            transform: translate(0.5px, -0.5px);
+        }
+    }
+
     /* Intense transition glitch animation */
     @keyframes intense-glitch-anim {
         0% {
@@ -2318,6 +2380,63 @@ import imgCatGlitched from "../assets/glitched-cat.png";
     .text-change-glitch.is-glitching::after {
         text-shadow: 2px 0 #00f0ff;
         animation: text-glitch-clip-2 0.35s steps(3) infinite;
+    }
+
+    @media (max-width: 767px) {
+        .text-change-glitch.is-glitching {
+            animation: text-shake-anim-light 0.35s steps(2) infinite;
+        }
+        .text-change-glitch.is-glitching::before {
+            text-shadow: -0.75px 0 rgba(255, 0, 80, 0.7);
+            animation: text-glitch-clip-1-light 0.35s steps(2) infinite;
+        }
+        .text-change-glitch.is-glitching::after {
+            text-shadow: 0.75px 0 rgba(0, 240, 255, 0.7);
+            animation: text-glitch-clip-2-light 0.35s steps(2) infinite;
+        }
+    }
+
+    @keyframes text-shake-anim-light {
+        0%, 100% {
+            transform: none;
+        }
+        50% {
+            transform: skewX(-1.5deg) translate(-0.5px);
+        }
+    }
+
+    @keyframes text-glitch-clip-1-light {
+        0%, 100% {
+            clip-path: inset(100% 0 0 0);
+            opacity: 0;
+        }
+        25% {
+            clip-path: inset(30% 0 40% 0);
+            opacity: 0.65;
+            transform: translate(-0.5px, -0.5px);
+        }
+        75% {
+            clip-path: inset(60% 0 20% 0);
+            opacity: 0.65;
+            transform: translate(0.5px, 0.5px);
+        }
+    }
+
+    @keyframes text-glitch-clip-2-light {
+        0%, 100% {
+            clip-path: inset(100% 0 0 0);
+            opacity: 0;
+        }
+        30% {
+            clip-path: inset(50% 0 30% 0);
+            opacity: 0.65;
+            transform: translate(0.5px, 0.5px);
+        }
+        80% {
+            clip-path: inset(20% 0 50% 0);
+            opacity: 0.65;
+            transform: translate(-0.5px, -0.5px);
+        }
     }
 
     @keyframes text-shake-anim {

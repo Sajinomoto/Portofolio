@@ -87,14 +87,14 @@
                   </div>
                   <div class="text-[10px] text-black/40 dark:text-white/30 uppercase mt-0.5">Consecutive days</div>
                 </div>
-                <div class="stat-item">
+                <div class="stat-item hidden sm:block">
                   <div class="text-[11px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Longest Streak</div>
                   <div class="text-xl sm:text-2xl font-bold font-display text-black dark:text-white">
                     {{ streakMax }} <span class="text-sm font-mono font-normal">days</span>
                   </div>
                   <div class="text-[10px] text-black/40 dark:text-white/30 uppercase mt-0.5">Record commit run</div>
                 </div>
-                <div class="stat-item">
+                <div class="stat-item hidden sm:block">
                   <div class="text-[11px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Peak Commits</div>
                   <div class="text-xl sm:text-2xl font-bold font-display text-black dark:text-white">
                     {{ busyDay ? busyDay.count : 0 }} <span class="text-sm font-mono font-normal">commits</span>
@@ -217,7 +217,7 @@
                       <a :href="githubStats.html_url || 'https://github.com/Sajinomoto'" target="_blank" rel="noopener noreferrer" class="text-[11px] text-black/45 dark:text-white/35 hover:text-[#00ff41] transition-colors duration-150 uppercase tracking-widest font-mono mt-0.5 truncate">
                         @{{ githubStats.login || 'Sajinomoto' }}
                       </a>
-                      <p class="text-[11px] text-black/60 dark:text-white/50 leading-relaxed line-clamp-2 mt-1.5 italic font-sans" :title="githubStats.bio">
+                      <p class="hidden sm:block text-[11px] text-black/60 dark:text-white/50 leading-relaxed line-clamp-2 mt-1.5 italic font-sans" :title="githubStats.bio">
                         {{ githubStats.bio || 'No biography details provided.' }}
                       </p>
                     </div>
@@ -243,7 +243,7 @@
                       </div>
                     </div>
 
-                    <div class="stat-card relative border border-black/10 dark:border-white/10 bg-black/[0.01] dark:bg-white/[0.01] p-4 transition-all duration-300 hover:border-black/20 dark:hover:border-white/20">
+                    <div class="stat-card hidden sm:block relative border border-black/10 dark:border-white/10 bg-black/[0.01] dark:bg-white/[0.01] p-4 transition-all duration-300 hover:border-black/20 dark:hover:border-white/20">
                       <div class="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-black/20 dark:border-white/20"></div>
                       <div class="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-black/20 dark:border-white/20"></div>
                       <div class="text-[11px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Following</div>
@@ -252,7 +252,7 @@
                       </div>
                     </div>
 
-                    <div class="stat-card relative border border-black/10 dark:border-white/10 bg-black/[0.01] dark:bg-white/[0.01] p-4 transition-all duration-300 hover:border-black/20 dark:hover:border-white/20 font-mono">
+                    <div class="stat-card hidden sm:block relative border border-black/10 dark:border-white/10 bg-black/[0.01] dark:bg-white/[0.01] p-4 transition-all duration-300 hover:border-black/20 dark:hover:border-white/20 font-mono">
                       <div class="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-black/20 dark:border-white/20"></div>
                       <div class="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-black/20 dark:border-white/20"></div>
                       <div class="text-[11px] uppercase tracking-wider text-black/45 dark:text-[#EFEEE8]/35 mb-1">Account Uplink</div>
@@ -413,7 +413,7 @@
                         <span>TOTAL RUNTIME:</span>
                         <span class="font-bold text-black dark:text-white">{{ formatPlaytime(game.playtime_forever) }} HRS</span>
                       </div>
-                      <div class="flex justify-between">
+                      <div class="flex justify-between hidden sm:flex">
                         <span>RECENT RUNTIME:</span>
                         <span class="font-bold text-black dark:text-white">{{ formatPlaytime(game.playtime_2weeks) }} (2 WKS)</span>
                       </div>
@@ -426,7 +426,7 @@
                       <span>ACHIEVEMENTS</span>
                       <span>{{ game.achievements.unlocked }} / {{ game.achievements.total }} ({{ game.achievements.percentage }}%)</span>
                     </div>
-                    <div class="font-mono text-[11px] text-[#00ff41] leading-none tracking-normal select-none">
+                    <div class="hidden sm:block font-mono text-[11px] text-[#00ff41] leading-none tracking-normal select-none">
                       {{ formatProgressBar(game.achievements.percentage) }}
                     </div>
                   </div>
@@ -457,7 +457,7 @@
                   </span>
                   <span class="shrink-0 text-black/40 dark:text-white/30 text-right font-mono">
                     <span class="font-bold text-black dark:text-white">{{ formatPlaytime(game.playtime_2weeks) }} HRS</span>
-                    <span class="text-[11px] ml-1.5 uppercase">(Total: {{ formatPlaytime(game.playtime_forever) }} Hrs)</span>
+                    <span class="hidden sm:inline text-[11px] ml-1.5 uppercase">(Total: {{ formatPlaytime(game.playtime_forever) }} Hrs)</span>
                   </span>
                 </div>
               </div>
