@@ -134,8 +134,8 @@ onMounted(() => {
             };
             window.addEventListener("resize", handleResize);
 
-            const cols = window.innerWidth < 768 ? 36 : (window.innerWidth < 1024 ? 48 : 80);
-            const rows = window.innerWidth < 768 ? 36 : (window.innerWidth < 1024 ? 48 : 80);
+            const cols = window.innerWidth < 768 ? 24 : (window.innerWidth < 1024 ? 36 : 54);
+            const rows = window.innerWidth < 768 ? 24 : (window.innerWidth < 1024 ? 36 : 54);
             const gridW = 2000;
             const gridH = 1450;
 
