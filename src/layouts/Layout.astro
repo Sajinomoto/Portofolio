@@ -64,8 +64,10 @@ import Analytics from '@vercel/analytics/astro';
 
 
 			// 2. Drag Selection Marquee (Windows-style) with corner brackets
-			const marqueeEl = document.getElementById('selection-marquee');
-			if (marqueeEl) {
+			const initDragMarquee = () => {
+				const marqueeEl = document.getElementById('selection-marquee');
+				if (!marqueeEl) return;
+
 				let startX = 0;
 				let startY = 0;
 				let isMouseDown = false;
@@ -192,6 +194,19 @@ import Analytics from '@vercel/analytics/astro';
 						}, 150);
 					}
 				});
+			};
+
+			// Initialize drag marquee immediately if page is already loaded, otherwise watch for class changes
+			if (document.documentElement.classList.contains('is-loaded')) {
+				initDragMarquee();
+			} else {
+				const observer = new MutationObserver(() => {
+					if (document.documentElement.classList.contains('is-loaded')) {
+						initDragMarquee();
+						observer.disconnect();
+					}
+				});
+				observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 			}
 		</script>
 		<Analytics />

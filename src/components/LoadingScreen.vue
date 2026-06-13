@@ -86,7 +86,7 @@ onMounted(() => {
     scatterZ: number;
   }[] = [];
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const particleCount = isMobile ? 800 : 2000;
+  const particleCount = isMobile ? 250 : 600;
   const goldenRatio = (1 + Math.sqrt(5)) / 2;
   const angleIncrement = 2 * Math.PI * (2 - goldenRatio);
 
@@ -221,8 +221,7 @@ onMounted(() => {
       };
     });
 
-    // Depth sort (draw back particles first)
-    projected.sort((a, b) => b.z - a.z);
+    // Depth sort omitted to reduce CPU rendering overhead and improve performance
 
     // Draw particles
     projected.forEach(p => {
