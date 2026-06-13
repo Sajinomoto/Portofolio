@@ -1343,11 +1343,8 @@ const initScrollAnimations = () => {
   scrollTriggerInstance = ScrollTrigger.create({
     trigger: container,
     start: "top 88%",
-    end: "bottom 12%",
     onEnter: playInAnimation,
-    onLeave: playOutAnimation,
-    onEnterBack: playInAnimation,
-    onLeaveBack: playOutAnimation,
+    once: true,
   });
 };
 

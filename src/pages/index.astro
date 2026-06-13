@@ -1839,10 +1839,11 @@ import imgCatGlitched from "../assets/glitched-cat.png";
             }
         });
 
-        // Trigger dynamic ScrollTrigger animation on entering the viewport
+        // Trigger dynamic ScrollTrigger animation on entering the viewport (runs once)
         ScrollTrigger.create({
             trigger: "#quotes",
             start: "top 80%",
+            once: true,
             onEnter: () => {
                 if (quoteRevealed) return;
 
@@ -1870,6 +1871,23 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                 });
             },
         });
+
+        // Toggle active class on ASCII container based on visibility to pause CSS animations when offscreen
+        ScrollTrigger.create({
+            trigger: "#quotes",
+            start: "top 100%",
+            end: "bottom 0%",
+            onToggle: (self) => {
+                const container = document.getElementById("quotes-ascii-container");
+                if (container) {
+                    if (self.isActive) {
+                        container.classList.add("active");
+                    } else {
+                        container.classList.remove("active");
+                    }
+                }
+            }
+        });
     };
 
     const initContactAnimations = () => {
@@ -1886,7 +1904,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
         ScrollTrigger.create({
             trigger: "#contact",
             start: "top 75%",
-            end: "bottom 15%",
+            once: true,
             onEnter: () => {
                 decryptText(titleEl, "Let's Get in Touch", 1.8);
                 buttons.forEach((btn, index) => {
@@ -1898,49 +1916,6 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                                 btn.style.opacity = "";
                                 btn.classList.add("hologram-booting");
                             }, index * 120);
-                        });
-                    });
-                });
-            },
-            onLeave: () => {
-                encryptText(titleEl, "Let's Get in Touch", 1.0);
-                buttons.forEach((btn, index) => {
-                    btn.classList.remove("hologram-booting");
-                    btn.classList.remove("hologram-shutdown");
-                    requestAnimationFrame(() => {
-                        requestAnimationFrame(() => {
-                            setTimeout(() => {
-                                btn.classList.add("hologram-shutdown");
-                            }, (buttons.length - 1 - index) * 80);
-                        });
-                    });
-                });
-            },
-            onEnterBack: () => {
-                decryptText(titleEl, "Let's Get in Touch", 1.5);
-                buttons.forEach((btn, index) => {
-                    btn.classList.remove("hologram-shutdown");
-                    btn.classList.remove("hologram-booting");
-                    requestAnimationFrame(() => {
-                        requestAnimationFrame(() => {
-                            setTimeout(() => {
-                                btn.style.opacity = "";
-                                btn.classList.add("hologram-booting");
-                            }, index * 100);
-                        });
-                    });
-                });
-            },
-            onLeaveBack: () => {
-                encryptText(titleEl, "Let's Get in Touch", 0.8);
-                buttons.forEach((btn, index) => {
-                    btn.classList.remove("hologram-booting");
-                    btn.classList.remove("hologram-shutdown");
-                    requestAnimationFrame(() => {
-                        requestAnimationFrame(() => {
-                            setTimeout(() => {
-                                btn.classList.add("hologram-shutdown");
-                            }, (buttons.length - 1 - index) * 60);
                         });
                     });
                 });
@@ -1998,7 +1973,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
         }
     }
 
-    .animate-ascii-drift {
+    .active .animate-ascii-drift {
         animation: ascii-drift var(--drift-duration, 6s) ease-in-out
             var(--drift-delay, 0s) infinite;
     }

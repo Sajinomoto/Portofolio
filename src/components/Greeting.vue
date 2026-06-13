@@ -105,6 +105,7 @@ const tickingTimecode = ref("00:00:00:00");
 let timecodeRafId = 0;
 let rafId = 0;
 let handleLanguageChange: ((e: Event) => void) | null = null;
+let handleVisibilityChange: (() => void) | null = null;
 
 onMounted(() => {
     // Radial Water Ripple System
@@ -534,6 +535,26 @@ onMounted(() => {
     } else {
         startLoops();
     }
+
+    // Handle tab focus / browser tab switching to save battery and CPU cycles
+    handleVisibilityChange = () => {
+        if (document.hidden) {
+            stopLoops();
+            if (timeIntervalId) {
+                clearInterval(timeIntervalId);
+                timeIntervalId = null;
+            }
+        } else {
+            if (isVisible) {
+                startLoops();
+            }
+            if (!timeIntervalId) {
+                updateTime();
+                timeIntervalId = setInterval(updateTime, 1000);
+            }
+        }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 });
 
 onUnmounted(() => {
@@ -560,6 +581,9 @@ onUnmounted(() => {
     }
     if (handleLanguageChange) {
         window.removeEventListener("language-changed", handleLanguageChange);
+    }
+    if (handleVisibilityChange) {
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
     }
 });
 
