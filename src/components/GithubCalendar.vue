@@ -1062,7 +1062,7 @@ const encryptText = (titleRef, targetText, duration = 0.5) => {
   });
 };
 
-// Switch Tab Handler with Animation
+// Switch Tab Handler
 const selectTab = (tab, manual = false) => {
   if (activeTab.value === tab) return;
   activeTab.value = tab;
@@ -1081,65 +1081,30 @@ const selectTab = (tab, manual = false) => {
     if (!container) return;
 
     if (tab === "github") {
-      decryptText(githubTitleText, "[SYS.DATA: GITHUB]", 0.8);
+      decryptText(githubTitleText, "[SYS.DATA: GITHUB]", 0.2);
       
       const statItems = container.querySelectorAll(".stat-item");
       const cells = container.querySelectorAll(".contrib-cell");
       
-      // Reset and play github stagger animations
       if (statItems && statItems.length > 0) {
-        gsap.set(statItems, { y: 12, opacity: 0 });
-        gsap.to(statItems, {
-          y: 0,
-          opacity: 1,
-          duration: 0.5,
-          stagger: 0.05,
-          ease: "power2.out",
-          overwrite: "auto"
-        });
+        gsap.set(statItems, { y: 0, opacity: 1, overwrite: "auto" });
       }
       
       if (cells && cells.length > 0) {
-        gsap.set(cells, { scale: 0.2, opacity: 0 });
-        gsap.to(cells, {
-          scale: 1,
-          opacity: 1,
-          duration: 0.4,
-          stagger: 0.005,
-          ease: "power1.out",
-          overwrite: "auto",
-          force3D: true,
-          lazy: true
-        });
+        gsap.set(cells, { scale: 1, opacity: 1, overwrite: "auto" });
       }
     } else {
       const steamHeader = container.querySelector(".steam-header-item");
       const steamCards = container.querySelectorAll(".steam-card");
       
-      decryptText(steamTitleText, "[SYS.DATA: STEAM]", 0.8);
+      decryptText(steamTitleText, "[SYS.DATA: STEAM]", 0.2);
       
-      // Reset and play steam elements animations
       if (steamHeader) {
-        gsap.set(steamHeader, { y: 10, opacity: 0 });
-        gsap.to(steamHeader, {
-          y: 0,
-          opacity: 1,
-          duration: 0.5,
-          ease: "power2.out",
-          overwrite: "auto"
-        });
+        gsap.set(steamHeader, { y: 0, opacity: 1, overwrite: "auto" });
       }
       
       if (steamCards && steamCards.length > 0) {
-        gsap.set(steamCards, { y: 15, opacity: 0 });
-        gsap.to(steamCards, {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.12,
-          ease: "power2.out",
-          overwrite: "auto"
-        });
+        gsap.set(steamCards, { y: 0, opacity: 1, overwrite: "auto" });
       }
     }
   });
@@ -1149,203 +1114,40 @@ const selectTab = (tab, manual = false) => {
 const initScrollAnimations = () => {
   if (!containerRef.value) return;
 
-  // Register GSAP ScrollTrigger plugin on client
-  gsap.registerPlugin(ScrollTrigger);
-
   const container = containerRef.value;
   const cbTl = container.querySelector('.cb-tl');
   const cbTr = container.querySelector('.cb-tr');
   const cbBl = container.querySelector('.cb-bl');
   const cbBr = container.querySelector('.cb-br');
 
-  // Set initial hidden states for corner brackets
+  // Set initial visible states for corner brackets
   if (cbTl && cbTr && cbBl && cbBr) {
-    gsap.set(cbTl, { x: 8, y: 8, opacity: 0 });
-    gsap.set(cbTr, { x: -8, y: 8, opacity: 0 });
-    gsap.set(cbBl, { x: 8, y: -8, opacity: 0 });
-    gsap.set(cbBr, { x: -8, y: -8, opacity: 0 });
+    gsap.set([cbTl, cbTr, cbBl, cbBr], { x: 0, y: 0, opacity: 1 });
   }
 
-  // Set initial hidden states for active tab elements dynamically
+  // Set initial visible states for active tab elements dynamically
   if (activeTab.value === "github") {
     const statItems = container.querySelectorAll('.stat-item');
     const cells = container.querySelectorAll('.contrib-cell');
-    if (statItems.length > 0) gsap.set(statItems, { y: 12, opacity: 0 });
-    if (cells.length > 0) gsap.set(cells, { scale: 0.2, opacity: 0, force3D: true });
+    if (statItems.length > 0) gsap.set(statItems, { y: 0, opacity: 1 });
+    if (cells.length > 0) gsap.set(cells, { scale: 1, opacity: 1, force3D: true });
   } else {
     const steamHeader = container.querySelector('.steam-header-item');
     const steamCards = container.querySelectorAll('.steam-card');
-    if (steamHeader) gsap.set(steamHeader, { y: 10, opacity: 0 });
-    if (steamCards.length > 0) gsap.set(steamCards, { y: 15, opacity: 0 });
+    if (steamHeader) gsap.set(steamHeader, { y: 0, opacity: 1 });
+    if (steamCards.length > 0) gsap.set(steamCards, { y: 0, opacity: 1 });
   }
 
-  const playInAnimation = () => {
-    // 1. Expand brackets to the corners
-    if (cbTl && cbTr && cbBl && cbBr) {
-      gsap.to([cbTl, cbTr, cbBl, cbBr], {
-        x: 0,
-        y: 0,
-        opacity: 1,
-        duration: 0.5,
-        ease: "power2.out",
-        overwrite: "auto"
-      });
-    }
+  // Decrypt titles immediately (fast)
+  decryptText(githubTitleText, "[SYS.DATA: GITHUB]", 0.2);
+  decryptText(steamTitleText, "[SYS.DATA: STEAM]", 0.2);
 
-    // 2. Decrypt active title
-    if (activeTab.value === "github") {
-      decryptText(githubTitleText, "[SYS.DATA: GITHUB]", 1.2);
-    } else {
-      decryptText(steamTitleText, "[SYS.DATA: STEAM]", 1.2);
-    }
-
-    // 3. Animate active panel elements
-    if (activeTab.value === "github") {
-      const statItems = container.querySelectorAll('.stat-item');
-      const cells = container.querySelectorAll('.contrib-cell');
-
-      if (statItems.length > 0) {
-        gsap.to(statItems, {
-          y: 0,
-          opacity: 1,
-          duration: 2,
-          stagger: 0.08,
-          ease: "power2.out",
-          delay: 0.1,
-          overwrite: "auto"
-        });
-      }
-
-      if (cells.length > 0) {
-        gsap.to(cells, {
-          scale: 1,
-          opacity: 1,
-          duration: 0.4,
-          stagger: 0.007,
-          ease: "power1.out",
-          delay: 0.12,
-          overwrite: "auto",
-          force3D: true,
-          lazy: true
-        });
-      }
-    } else {
-      const steamHeader = container.querySelector(".steam-header-item");
-      const steamCards = container.querySelectorAll(".steam-card");
-      
-      if (steamHeader) {
-        gsap.to(steamHeader, {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power2.out",
-          overwrite: "auto"
-        });
-      }
-      
-      if (steamCards && steamCards.length > 0) {
-        gsap.to(steamCards, {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.15,
-          ease: "power2.out",
-          delay: 0.1,
-          overwrite: "auto"
-        });
-      }
-    }
-
-    // Start auto-sliding when on-screen
-    if (activeTab.value === 'steam') {
-      startSteamSubTabAutoSlide();
-    } else {
-      startGithubSubTabAutoSlide();
-    }
-  };
-
-  const playOutAnimation = () => {
-    // Stop sliding when scrolled off-screen
-    stopSteamSubTabAutoSlide();
-    stopGithubSubTabAutoSlide();
-
-    // 1. Collapse brackets inward
-    if (cbTl && cbTr && cbBl && cbBr) {
-      gsap.to(cbTl, { x: 8, y: 8, opacity: 0, duration: 0.4, ease: "power2.in", overwrite: "auto" });
-      gsap.to(cbTr, { x: -8, y: 8, opacity: 0, duration: 0.4, ease: "power2.in", overwrite: "auto" });
-      gsap.to(cbBl, { x: 8, y: -8, opacity: 0, duration: 0.4, ease: "power2.in", overwrite: "auto" });
-      gsap.to(cbBr, { x: -8, y: -8, opacity: 0, duration: 0.4, ease: "power2.in", overwrite: "auto" });
-    }
-
-    // 2. Encrypt active title back
-    if (activeTab.value === "github") {
-      encryptText(githubTitleText, "[SYS.DATA: GITHUB]", 1.2);
-    } else {
-      encryptText(steamTitleText, "[SYS.DATA: STEAM]", 1.2);
-    }
-
-    // 3. Slide down and fade out active components
-    if (activeTab.value === "github") {
-      const statItems = container.querySelectorAll('.stat-item');
-      const cells = container.querySelectorAll('.contrib-cell');
-
-      if (statItems.length > 0) {
-        gsap.to(statItems, {
-          y: 12,
-          opacity: 0,
-          duration: 1,
-          stagger: 0.03,
-          ease: "power2.in",
-          overwrite: "auto"
-        });
-      }
-
-      if (cells.length > 0) {
-        gsap.to(cells, {
-          scale: 0.2,
-          opacity: 0,
-          duration: 0.4,
-          stagger: 0.003,
-          ease: "power1.in",
-          overwrite: "auto",
-          force3D: true,
-          lazy: true
-        });
-      }
-    } else {
-      const steamHeader = container.querySelector(".steam-header-item");
-      const steamCards = container.querySelectorAll(".steam-card");
-      
-      if (steamHeader) {
-        gsap.to(steamHeader, {
-          y: 10,
-          opacity: 0,
-          duration: 0.4,
-          ease: "power2.in",
-          overwrite: "auto"
-        });
-      }
-      
-      if (steamCards && steamCards.length > 0) {
-        gsap.to(steamCards, {
-          y: 15,
-          opacity: 0,
-          duration: 0.4,
-          stagger: 0.05,
-          ease: "power2.in",
-          overwrite: "auto"
-        });
-      }
-    }
-  };
-
-  // Bind ScrollTrigger
-  scrollTriggerInstance = ScrollTrigger.create({
-    trigger: container,
-    start: "top 88%",
-    onEnter: playInAnimation,
-    once: true,
-  });
+  // Start auto-sliding
+  if (activeTab.value === 'steam') {
+    startSteamSubTabAutoSlide();
+  } else {
+    startGithubSubTabAutoSlide();
+  }
 };
 
 // Generates simulated contribution data when offline or rate-limited

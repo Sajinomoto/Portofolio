@@ -1671,18 +1671,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
         setInterval(switchRole, 4000);
     };
 
-    const initCardGlow = () => {
-        const cards = document.querySelectorAll(".tech-card");
-        cards.forEach((card: any) => {
-            card.addEventListener("mousemove", (e: MouseEvent) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty("--mouse-x", `${x}px`);
-                card.style.setProperty("--mouse-y", `${y}px`);
-            });
-        });
-    };
+
 
     const spawnQuotesAscii = () => {
         const container = document.getElementById("quotes-ascii-container");
@@ -1890,39 +1879,6 @@ import imgCatGlitched from "../assets/glitched-cat.png";
         });
     };
 
-    const initContactAnimations = () => {
-        const titleEl = document.getElementById("contact-title");
-        const buttons = document.querySelectorAll(".hologram-btn") as NodeListOf<HTMLElement>;
-        if (!titleEl || buttons.length === 0) return;
-
-        // Set initial state
-        titleEl.textContent = "-----------------";
-        buttons.forEach((btn) => {
-            btn.style.opacity = "0";
-        });
-
-        ScrollTrigger.create({
-            trigger: "#contact",
-            start: "top 75%",
-            once: true,
-            onEnter: () => {
-                decryptText(titleEl, "Let's Get in Touch", 1.8);
-                buttons.forEach((btn, index) => {
-                    btn.classList.remove("hologram-shutdown");
-                    btn.classList.remove("hologram-booting");
-                    requestAnimationFrame(() => {
-                        requestAnimationFrame(() => {
-                            setTimeout(() => {
-                                btn.style.opacity = "";
-                                btn.classList.add("hologram-booting");
-                            }, index * 120);
-                        });
-                    });
-                });
-            },
-        });
-    };
-
     // Initialize scroll animations and translations
     const init = () => {
         initScrollAnimations();
@@ -1931,9 +1887,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
         initCyberCoords();
         initCyberImageSwitcher();
         initRoleSwitcher();
-        initCardGlow();
         initQuotesReveal();
-        initContactAnimations();
     };
 
     if (
@@ -2456,6 +2410,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
         position: relative;
         scroll-snap-align: center;
         scroll-snap-stop: always;
+        pointer-events: none !important;
     }
     .tech-card::before {
         content: "";
