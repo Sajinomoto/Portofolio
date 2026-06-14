@@ -637,9 +637,8 @@ const scrollToAbout = () => {
         <div class="absolute inset-0 pointer-events-none radial-glow z-0"></div>
 
         <!-- Camera Viewfinder HUD Overlay -->
-        <Teleport v-if="isMounted" to="body">
         <div
-            class="fixed inset-0 pointer-events-none z-50 font-mono text-[9px] sm:text-[10px] font-bold tracking-widest text-black/25 dark:text-[#EFEEE8]/25 select-none viewfinder-hud"
+            class="absolute inset-0 pointer-events-none z-10 font-mono text-[9px] sm:text-[10px] font-bold tracking-widest text-black/25 dark:text-[#EFEEE8]/25 select-none viewfinder-hud"
         >
             <!-- Bottom Left: AF & Specs -->
             <div
@@ -690,13 +689,51 @@ const scrollToAbout = () => {
                     </div>
                 </div>
             </div>
+
+            <!-- Center Focus Crosshair -->
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-30"
+            >
+                <svg
+                    width="40"
+                    height="40"
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="text-current"
+                >
+                    <path
+                        d="M 20 12 V 28 M 12 20 H 28"
+                        stroke="currentColor"
+                        stroke-width="1.2"
+                    />
+                    <path
+                        d="M 4 12 V 4 H 12"
+                        stroke="currentColor"
+                        stroke-width="1"
+                    />
+                    <path
+                        d="M 36 12 V 4 H 28"
+                        stroke="currentColor"
+                        stroke-width="1"
+                    />
+                    <path
+                        d="M 4 28 V 36 H 12"
+                        stroke="currentColor"
+                        stroke-width="1"
+                    />
+                    <path
+                        d="M 36 28 V 36 H 28"
+                        stroke="currentColor"
+                        stroke-width="1"
+                    />
+                </svg>
+            </div>
         </div>
-        </Teleport>
 
         <!-- Cyber Bezel and Brackets Border Overlay (Desktop Only) -->
-        <Teleport v-if="isMounted" to="body">
         <div
-            class="fixed inset-0 pointer-events-none z-50 hidden lg:block text-[#0E0D0B] dark:text-[#EFEEE8]"
+            class="absolute inset-0 pointer-events-none z-20 hidden lg:block text-[#0E0D0B] dark:text-[#EFEEE8]"
         >
             <!-- Corner Brackets -->
             <!-- Top-Left Corner Bracket -->
@@ -1041,7 +1078,6 @@ const scrollToAbout = () => {
                 [EXPOSURE_VAL]
             </div>
         </div>
-        </Teleport>
 
         <!-- Main Content Container with Technical Frame -->
         <div
