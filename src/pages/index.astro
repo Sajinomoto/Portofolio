@@ -412,9 +412,9 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                     </div>
 
                     <!-- Part 1.5: Journey / Timeline -->
-                    <div class="w-full mt-24 z-10">
+                    <div class="w-full mt-24 z-10 flex flex-col items-center">
                         <!-- Section Header -->
-                        <div class="mb-12 text-left">
+                        <div class="mb-12 text-center w-full">
                             <h3 class="font-display text-xl sm:text-3xl font-bold tracking-tight text-black dark:text-white mb-2 uppercase">
                                 TIMELINE
                             </h3>
@@ -424,7 +424,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                         </div>
 
                         <!-- Timeline Layout -->
-                        <div class="relative pl-6 sm:pl-8 ml-4 sm:ml-6 border-l border-dashed border-black/20 dark:border-white/15">
+                        <div class="relative pl-6 sm:pl-8 border-l border-dashed border-black/20 dark:border-white/15 max-w-2xl w-full mx-auto">
                             <!-- Timeline Year: 2025 -->
                             <div class="relative mb-14">
                                 <!-- Year Node -->
@@ -437,77 +437,119 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                                 <!-- Cards Container for 2025 -->
                                 <div class="space-y-8 pt-10">
                                     <!-- Card 1: Asisten Matkul FE -->
-                                    <div class="relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl">
-                                        <div class="flex items-center gap-3 mb-3.5">
+                                    <div class="timeline-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl" tabindex="0" role="button" aria-expanded="false">
+                                        <!-- Expand/Collapse Button (Absolute) -->
+                                        <div class="absolute top-5 right-5 text-black/40 dark:text-white/30 group-hover:text-black dark:group-hover:text-white transition-colors select-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="card-toggle-icon"><path d="m6 9 6 6 6-6"/></svg>
+                                        </div>
+
+                                        <!-- Halftone decorative element -->
+                                        <div class="absolute bottom-0 right-0 w-24 h-20 pointer-events-none overflow-hidden opacity-10 dark:opacity-15 transition-opacity duration-300 group-hover:opacity-25 halftone-container">
+                                            <div class="absolute inset-0 halftone-pattern"></div>
+                                        </div>
+
+                                        <div class="flex items-center gap-3 mb-3.5 pr-8">
                                             <div class="w-7 h-7 flex items-center justify-center border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] text-black/60 dark:text-white/60">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                                             </div>
-                                            <span class="font-mono text-[9px] font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
+                                            <span class="font-mono text-[11px] sm:text-xs font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
                                                 // ACADEMIC & TEACHING
                                             </span>
                                         </div>
-                                        <h4 class="font-display text-base sm:text-lg font-bold tracking-tight text-black dark:text-white mb-1">
+                                        <h4 class="font-display text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white mb-1">
                                             Asisten Mata Kuliah Front-End (FE)
                                         </h4>
-                                        <p class="font-mono text-[10px] sm:text-xs text-black/40 dark:text-white/30 mb-4 font-semibold uppercase tracking-wider">
+                                        <p class="font-mono text-xs sm:text-sm text-black/40 dark:text-white/30 font-semibold uppercase tracking-wider">
                                             Universitas Sebelas Maret &middot; 2025
                                         </p>
-                                        <p class="font-mono text-[10.5px] xs:text-xs text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4">
-                                            Membimbing mahasiswa dalam memahami konsep dasar hingga lanjutan pengembangan antarmuka web, termasuk HTML, CSS, JavaScript, serta metodologi perancangan web responsif untuk menciptakan aplikasi yang fungsional dan ramah pengguna.
-                                        </p>
-                                        <div class="flex flex-wrap gap-2">
-                                            <span class="font-mono text-[9px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Front-End]</span>
-                                            <span class="font-mono text-[9px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[UI/UX]</span>
+                                        <div class="card-collapsible">
+                                            <div class="card-collapsible-inner">
+                                                <p class="font-mono text-xs sm:text-[13.5px] text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4 mt-4">
+                                                    Membimbing mahasiswa dalam memahami konsep dasar hingga lanjutan pengembangan antarmuka web, termasuk HTML, CSS, JavaScript, serta metodologi perancangan web responsif untuk menciptakan aplikasi yang fungsional dan ramah pengguna.
+                                                </p>
+                                                <div class="flex flex-wrap gap-2">
+                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Front-End]</span>
+                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[UI/UX]</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <!-- Card 2: Asisten Matkul Pemrograman Dasar -->
-                                    <div class="relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl">
-                                        <div class="flex items-center gap-3 mb-3.5">
+                                    <div class="timeline-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl" tabindex="0" role="button" aria-expanded="false">
+                                        <!-- Expand/Collapse Button (Absolute) -->
+                                        <div class="absolute top-5 right-5 text-black/40 dark:text-white/30 group-hover:text-black dark:group-hover:text-white transition-colors select-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="card-toggle-icon"><path d="m6 9 6 6 6-6"/></svg>
+                                        </div>
+
+                                        <!-- Halftone decorative element -->
+                                        <div class="absolute bottom-0 right-0 w-24 h-20 pointer-events-none overflow-hidden opacity-10 dark:opacity-15 transition-opacity duration-300 group-hover:opacity-25 halftone-container">
+                                            <div class="absolute inset-0 halftone-pattern"></div>
+                                        </div>
+
+                                        <div class="flex items-center gap-3 mb-3.5 pr-8">
                                             <div class="w-7 h-7 flex items-center justify-center border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] text-black/60 dark:text-white/60">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                                             </div>
-                                            <span class="font-mono text-[9px] font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
+                                            <span class="font-mono text-[11px] sm:text-xs font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
                                                 // ACADEMIC & TEACHING
                                             </span>
                                         </div>
-                                        <h4 class="font-display text-base sm:text-lg font-bold tracking-tight text-black dark:text-white mb-1">
+                                        <h4 class="font-display text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white mb-1">
                                             Asisten Mata Kuliah Pemrograman Dasar
                                         </h4>
-                                        <p class="font-mono text-[10px] sm:text-xs text-black/40 dark:text-white/30 mb-4 font-semibold uppercase tracking-wider">
+                                        <p class="font-mono text-xs sm:text-sm text-black/40 dark:text-white/30 font-semibold uppercase tracking-wider">
                                             Universitas Sebelas Maret &middot; 2025
                                         </p>
-                                        <p class="font-mono text-[10.5px] xs:text-xs text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4">
-                                            Mengajar dan membimbing mahasiswa baru dalam memahami logika pemrograman dasar, struktur data, algoritma pemecahan masalah, serta penulisan kode yang bersih dan terstruktur untuk membangun pondasi pemrograman yang kuat.
-                                        </p>
-                                        <div class="flex flex-wrap gap-2">
-                                            <span class="font-mono text-[9px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Programming Logic]</span>
-                                            <span class="font-mono text-[9px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Algorithms]</span>
+                                        <div class="card-collapsible">
+                                            <div class="card-collapsible-inner">
+                                                <p class="font-mono text-xs sm:text-[13.5px] text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4 mt-4">
+                                                    Mengajar dan membimbing mahasiswa baru dalam memahami logika pemrograman dasar, struktur data, algoritma pemecahan masalah, serta penulisan kode yang bersih dan terstruktur untuk membangun pondasi pemrograman yang kuat.
+                                                </p>
+                                                <div class="flex flex-wrap gap-2">
+                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Programming Logic]</span>
+                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Algorithms]</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <!-- Card 3: Asisten Matkul Database -->
-                                    <div class="relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl">
-                                        <div class="flex items-center gap-3 mb-3.5">
+                                    <div class="timeline-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl" tabindex="0" role="button" aria-expanded="false">
+                                        <!-- Expand/Collapse Button (Absolute) -->
+                                        <div class="absolute top-5 right-5 text-black/40 dark:text-white/30 group-hover:text-black dark:group-hover:text-white transition-colors select-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="card-toggle-icon"><path d="m6 9 6 6 6-6"/></svg>
+                                        </div>
+
+                                        <!-- Halftone decorative element -->
+                                        <div class="absolute bottom-0 right-0 w-24 h-20 pointer-events-none overflow-hidden opacity-10 dark:opacity-15 transition-opacity duration-300 group-hover:opacity-25 halftone-container">
+                                            <div class="absolute inset-0 halftone-pattern"></div>
+                                        </div>
+
+                                        <div class="flex items-center gap-3 mb-3.5 pr-8">
                                             <div class="w-7 h-7 flex items-center justify-center border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] text-black/60 dark:text-white/60">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                                             </div>
-                                            <span class="font-mono text-[9px] font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
+                                            <span class="font-mono text-[11px] sm:text-xs font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
                                                 // ACADEMIC & TEACHING
                                             </span>
                                         </div>
-                                        <h4 class="font-display text-base sm:text-lg font-bold tracking-tight text-black dark:text-white mb-1">
+                                        <h4 class="font-display text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white mb-1">
                                             Asisten Mata Kuliah Database
                                         </h4>
-                                        <p class="font-mono text-[10px] sm:text-xs text-black/40 dark:text-white/30 mb-4 font-semibold uppercase tracking-wider">
+                                        <p class="font-mono text-xs sm:text-sm text-black/40 dark:text-white/30 font-semibold uppercase tracking-wider">
                                             Universitas Sebelas Maret &middot; 2025
                                         </p>
-                                        <p class="font-mono text-[10.5px] xs:text-xs text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4">
-                                            Membantu mahasiswa dalam mempelajari desain basis data relasional, normalisasi data, serta pembuatan query SQL yang efisien menggunakan sistem manajemen basis data (DBMS) untuk menunjang pengembangan aplikasi skala terdistribusi.
-                                        </p>
-                                        <div class="flex flex-wrap gap-2">
-                                            <span class="font-mono text-[9px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Database]</span>
-                                            <span class="font-mono text-[9px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[SQL]</span>
+                                        <div class="card-collapsible">
+                                            <div class="card-collapsible-inner">
+                                                <p class="font-mono text-xs sm:text-[13.5px] text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4 mt-4">
+                                                    Membantu mahasiswa dalam mempelajari desain basis data relasional, normalisasi data, serta pembuatan query SQL yang efisien menggunakan sistem manajemen basis data (DBMS) untuk menunjang pengembangan aplikasi skala terdistribusi.
+                                                </p>
+                                                <div class="flex flex-wrap gap-2">
+                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Database]</span>
+                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[SQL]</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -524,27 +566,41 @@ import imgCatGlitched from "../assets/glitched-cat.png";
 
                                 <!-- Cards Container for 2024 -->
                                 <div class="space-y-8 pt-10">
-                                    <div class="relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl">
-                                        <div class="flex items-center gap-3 mb-3.5">
+                                    <div class="timeline-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl" tabindex="0" role="button" aria-expanded="false">
+                                        <!-- Expand/Collapse Button (Absolute) -->
+                                        <div class="absolute top-5 right-5 text-black/40 dark:text-white/30 group-hover:text-black dark:group-hover:text-white transition-colors select-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="card-toggle-icon"><path d="m6 9 6 6 6-6"/></svg>
+                                        </div>
+
+                                        <!-- Halftone decorative element -->
+                                        <div class="absolute bottom-0 right-0 w-24 h-20 pointer-events-none overflow-hidden opacity-10 dark:opacity-15 transition-opacity duration-300 group-hover:opacity-25 halftone-container">
+                                            <div class="absolute inset-0 halftone-pattern"></div>
+                                        </div>
+
+                                        <div class="flex items-center gap-3 mb-3.5 pr-8">
                                             <div class="w-7 h-7 flex items-center justify-center border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] text-black/60 dark:text-white/60">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
                                             </div>
-                                            <span class="font-mono text-[9px] font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
+                                            <span class="font-mono text-[11px] sm:text-xs font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
                                                 // EDUCATION
                                             </span>
                                         </div>
-                                        <h4 class="font-display text-base sm:text-lg font-bold tracking-tight text-black dark:text-white mb-1">
+                                        <h4 class="font-display text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white mb-1">
                                             Mahasiswa D3 Teknik Informatika
                                         </h4>
-                                        <p class="font-mono text-[10px] sm:text-xs text-black/40 dark:text-white/30 mb-4 font-semibold uppercase tracking-wider">
+                                        <p class="font-mono text-xs sm:text-sm text-black/40 dark:text-white/30 font-semibold uppercase tracking-wider">
                                             Universitas Sebelas Maret &middot; 2024 - Sekarang
                                         </p>
-                                        <p class="font-mono text-[10.5px] xs:text-xs text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4">
-                                            Memulai perjalanan akademik di program studi D3 Teknik Informatika, Universitas Sebelas Maret (UNS). Mempelajari berbagai fundamental ilmu komputer, pemrograman web, struktur data, dan pengembangan perangkat lunak untuk membangun fondasi karir di bidang IT.
-                                        </p>
-                                        <div class="flex flex-wrap gap-2">
-                                            <span class="font-mono text-[9px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Mahasiswa]</span>
-                                            <span class="font-mono text-[9px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Teknik Informatika]</span>
+                                        <div class="card-collapsible">
+                                            <div class="card-collapsible-inner">
+                                                <p class="font-mono text-xs sm:text-[13.5px] text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4 mt-4">
+                                                    Memulai perjalanan akademik di program studi D3 Teknik Informatika, Universitas Sebelas Maret (UNS). Mempelajari berbagai fundamental ilmu komputer, pemrograman web, struktur data, dan pengembangan perangkat lunak untuk membangun fondasi karir di bidang IT.
+                                                </p>
+                                                <div class="flex flex-wrap gap-2">
+                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Mahasiswa]</span>
+                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Teknik Informatika]</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -561,52 +617,80 @@ import imgCatGlitched from "../assets/glitched-cat.png";
 
                                 <!-- Cards Container for 2023 -->
                                 <div class="space-y-8 pt-10">
-                                    <div class="relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl">
-                                        <div class="flex items-center gap-3 mb-3.5">
+                                    <div class="timeline-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl" tabindex="0" role="button" aria-expanded="false">
+                                        <!-- Expand/Collapse Button (Absolute) -->
+                                        <div class="absolute top-5 right-5 text-black/40 dark:text-white/30 group-hover:text-black dark:group-hover:text-white transition-colors select-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="card-toggle-icon"><path d="m6 9 6 6 6-6"/></svg>
+                                        </div>
+
+                                        <!-- Halftone decorative element -->
+                                        <div class="absolute bottom-0 right-0 w-24 h-20 pointer-events-none overflow-hidden opacity-10 dark:opacity-15 transition-opacity duration-300 group-hover:opacity-25 halftone-container">
+                                            <div class="absolute inset-0 halftone-pattern"></div>
+                                        </div>
+
+                                        <div class="flex items-center gap-3 mb-3.5 pr-8">
                                             <div class="w-7 h-7 flex items-center justify-center border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] text-black/60 dark:text-white/60">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2"/><path d="M12 22v-2"/><path d="m17 20.66-1-1.73"/><path d="M11 5.07 10 3.34"/><path d="m20.66 17-1.73-1"/><path d="M5.07 11 3.34 10"/><path d="m22 12-2 0"/><path d="m2 12 2 0"/><path d="m20.66 7-1.73 1"/><path d="M5.07 13 3.34 14"/><path d="m17 3.34-1 1.73"/><path d="M11 18.93 10 20.66"/></svg>
                                             </div>
-                                            <span class="font-mono text-[9px] font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
+                                            <span class="font-mono text-[11px] sm:text-xs font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
                                                 // PROFESSIONAL WORK
                                             </span>
                                         </div>
-                                        <h4 class="font-display text-base sm:text-lg font-bold tracking-tight text-black dark:text-white mb-1">
+                                        <h4 class="font-display text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white mb-1">
                                             Graphic Designer
                                         </h4>
-                                        <p class="font-mono text-[10px] sm:text-xs text-black/40 dark:text-white/30 mb-4 font-semibold uppercase tracking-wider">
+                                        <p class="font-mono text-xs sm:text-sm text-black/40 dark:text-white/30 font-semibold uppercase tracking-wider">
                                             Jakarta Barat &middot; 2023
                                         </p>
-                                        <p class="font-mono text-[10.5px] xs:text-xs text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4">
-                                            Bekerja sebagai Desainer Grafis dengan spesialisasi pada desain *social media feeds* dan ilustrasi produk. Bertanggung jawab dalam merancang visual yang menarik dan komunikatif untuk meningkatkan *brand awareness* serta interaksi audiens.
-                                        </p>
-                                        <div class="flex flex-wrap gap-2">
-                                            <span class="font-mono text-[9px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Graphic Design]</span>
-                                            <span class="font-mono text-[9px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Social Media]</span>
-                                            <span class="font-mono text-[9px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Illustration]</span>
+                                        <div class="card-collapsible">
+                                            <div class="card-collapsible-inner">
+                                                <p class="font-mono text-xs sm:text-[13.5px] text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4 mt-4">
+                                                    Bekerja sebagai Desainer Grafis dengan spesialisasi pada desain *social media feeds* dan ilustrasi produk. Bertanggung jawab dalam merancang visual yang menarik dan komunikatif untuk meningkatkan *brand awareness* serta interaksi audiens.
+                                                </p>
+                                                <div class="flex flex-wrap gap-2">
+                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Graphic Design]</span>
+                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Social Media]</span>
+                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Illustration]</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl">
-                                        <div class="flex items-center gap-3 mb-3.5">
+                                    <div class="timeline-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl" tabindex="0" role="button" aria-expanded="false">
+                                        <!-- Expand/Collapse Button (Absolute) -->
+                                        <div class="absolute top-5 right-5 text-black/40 dark:text-white/30 group-hover:text-black dark:group-hover:text-white transition-colors select-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="card-toggle-icon"><path d="m6 9 6 6 6-6"/></svg>
+                                        </div>
+
+                                        <!-- Halftone decorative element -->
+                                        <div class="absolute bottom-0 right-0 w-24 h-20 pointer-events-none overflow-hidden opacity-10 dark:opacity-15 transition-opacity duration-300 group-hover:opacity-25 halftone-container">
+                                            <div class="absolute inset-0 halftone-pattern"></div>
+                                        </div>
+
+                                        <div class="flex items-center gap-3 mb-3.5 pr-8">
                                             <div class="w-7 h-7 flex items-center justify-center border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] text-black/60 dark:text-white/60">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
                                             </div>
-                                            <span class="font-mono text-[9px] font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
+                                            <span class="font-mono text-[11px] sm:text-xs font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
                                                 // EDUCATION
                                             </span>
                                         </div>
-                                        <h4 class="font-display text-base sm:text-lg font-bold tracking-tight text-black dark:text-white mb-1">
+                                        <h4 class="font-display text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white mb-1">
                                             Siswa SMA (Jurusan IPA)
                                         </h4>
-                                        <p class="font-mono text-[10px] sm:text-xs text-black/40 dark:text-white/30 mb-4 font-semibold uppercase tracking-wider">
+                                        <p class="font-mono text-xs sm:text-sm text-black/40 dark:text-white/30 font-semibold uppercase tracking-wider">
                                             SMAN 2 Depok, Jawa Barat &middot; Lulus 2023
                                         </p>
-                                        <p class="font-mono text-[10.5px] xs:text-xs text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4">
-                                            Menyelesaikan pendidikan sekolah menengah atas di SMAN 2 Depok dengan fokus pada peminatan Ilmu Pengetahuan Alam (IPA). Membangun dasar pemikiran analitis dan logis yang berguna untuk memecahkan masalah kompleks di masa depan.
-                                        </p>
-                                        <div class="flex flex-wrap gap-2">
-                                            <span class="font-mono text-[9px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[IPA]</span>
-                                            <span class="font-mono text-[9px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Science]</span>
+                                        <div class="card-collapsible">
+                                            <div class="card-collapsible-inner">
+                                                <p class="font-mono text-xs sm:text-[13.5px] text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4 mt-4">
+                                                    Menyelesaikan pendidikan sekolah menengah atas di SMAN 2 Depok dengan fokus pada peminatan Ilmu Pengetahuan Alam (IPA). Membangun dasar pemikiran analitis dan logis yang berguna untuk memecahkan masalah kompleks di masa depan.
+                                                </p>
+                                                <div class="flex flex-wrap gap-2">
+                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[IPA]</span>
+                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Science]</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -2144,6 +2228,29 @@ import imgCatGlitched from "../assets/glitched-cat.png";
         });
     };
 
+    const initTimelineCards = () => {
+        const cards = document.querySelectorAll(".timeline-card");
+        cards.forEach((card) => {
+            const toggleCard = () => {
+                const isExpanded = card.classList.contains("is-expanded");
+                card.classList.toggle("is-expanded");
+                card.setAttribute("aria-expanded", (!isExpanded).toString());
+                // Refresh ScrollTrigger after CSS grid transition completes (350ms)
+                setTimeout(() => {
+                    ScrollTrigger.refresh();
+                }, 380);
+            };
+
+            card.addEventListener("click", toggleCard);
+            card.addEventListener("keydown", (e: any) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    toggleCard();
+                }
+            });
+        });
+    };
+
     // Initialize scroll animations and translations
     const init = () => {
         initScrollAnimations();
@@ -2153,6 +2260,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
         initCyberImageSwitcher();
         initRoleSwitcher();
         initQuotesReveal();
+        initTimelineCards();
     };
 
     const initWithLoaded = () => {
@@ -3017,4 +3125,112 @@ import imgCatGlitched from "../assets/glitched-cat.png";
     .hologram-shutdown {
         animation: holo-shutdown 0.45s ease-in forwards;
     }
+
+    /* Timeline Collapsible Card Styles */
+    .timeline-card {
+        cursor: pointer;
+        outline: none;
+    }
+    
+    .timeline-card:focus-visible {
+        outline: 1px dashed currentColor;
+    }
+    
+    .timeline-card .card-collapsible {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in-out;
+        opacity: 0;
+    }
+    
+    .timeline-card.is-expanded .card-collapsible {
+        grid-template-rows: 1fr;
+        opacity: 1;
+    }
+    
+    .timeline-card .card-collapsible-inner {
+        overflow: hidden;
+    }
+    
+    .timeline-card .card-toggle-icon {
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: block;
+    }
+    
+    .timeline-card.is-expanded .card-toggle-icon {
+        transform: rotate(180deg);
+    }
+
+    /* Halftone Animation & Masking */
+    .halftone-container {
+        mask-image: radial-gradient(circle at bottom right, black 20%, transparent 80%);
+        -webkit-mask-image: radial-gradient(circle at bottom right, black 20%, transparent 80%);
+    }
+    
+    .halftone-pattern {
+        background-image: radial-gradient(circle, currentColor 18%, transparent 18%);
+        background-size: 7px 7px;
+        animation: halftone-scroll 12s linear infinite;
+    }
+    
+    @keyframes halftone-scroll {
+        from {
+            background-position: 0 0;
+        }
+        to {
+            background-position: 14px 14px;
+        }
+    }
+
+    /* Timeline Card Border Shine Animation */
+    .timeline-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border: 1px solid transparent;
+        background: linear-gradient(115deg, 
+            transparent 30%, 
+            rgba(0, 0, 0, 0.08) 43%, 
+            currentColor 50%, 
+            rgba(0, 0, 0, 0.08) 57%, 
+            transparent 70%
+        ) border-box;
+        -webkit-mask: 
+            linear-gradient(#fff 0 0) padding-box, 
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        background-size: 200% 100%;
+        animation: border-shine 6s linear infinite;
+        pointer-events: none;
+        z-index: 2;
+        opacity: 0.15;
+        transition: opacity 0.3s ease;
+    }
+    
+    html.dark .timeline-card::before {
+        background: linear-gradient(115deg, 
+            transparent 30%, 
+            rgba(255, 255, 255, 0.15) 43%, 
+            currentColor 50%, 
+            rgba(255, 255, 255, 0.15) 57%, 
+            transparent 70%
+        ) border-box;
+    }
+    
+    .timeline-card:hover::before,
+    .timeline-card:focus-within::before,
+    .timeline-card.is-expanded::before {
+        opacity: 0.65;
+    }
+    
+    @keyframes border-shine {
+        0% {
+            background-position: 200% 0;
+        }
+        100% {
+            background-position: -200% 0;
+        }
+    }
 </style>
+
