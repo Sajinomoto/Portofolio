@@ -29,7 +29,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
             </div>
             <div
                 id="scroll-content"
-                class="relative z-10 bg-[#EFEEE8] dark:bg-[#0E0D0B] transition-colors duration-300 w-full"
+                class="relative z-10 bg-[#EFEEE8] dark:bg-[#0E0D0B] transition-colors duration-300 w-full overflow-x-hidden"
             >
                 <!-- Glassmorphism Top Transition Bar -->
                 <div
@@ -209,6 +209,15 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                         </svg>
                     </div>
 
+                    <!-- Section Header -->
+                    <div class="mb-16 text-center w-full relative z-10">
+                        <h2
+                            class="text-3xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight uppercase text-black dark:text-white"
+                        >
+                            About Me
+                        </h2>
+                    </div>
+
                     <!-- Grid Container -->
                     <div
                         class="relative z-10 w-full grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start mt-4"
@@ -217,7 +226,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                         <div
                             class="md:col-span-7 flex flex-col justify-start max-w-5xl order-2 md:order-1"
                         >
-                            <h2
+                            <h3
                                 class="about-title font-display text-xl sm:text-3xl font-bold tracking-tight mb-4 text-black dark:text-white transition-colors duration-300"
                             >
                                 SAJI | <span
@@ -225,7 +234,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                                     class="inline-block"
                                     >FULLSTACK DEVELOPER</span
                                 >
-                            </h2>
+                            </h3>
                             <p
                                 id="about-desc"
                                 class="about-desc font-mono text-[10.5px] xs:text-xs sm:text-sm text-black/50 dark:text-[#EFEEE8]/50 leading-relaxed transition-colors duration-300 text-justify"
@@ -236,11 +245,11 @@ import imgCatGlitched from "../assets/glitched-cat.png";
 
                         <!-- Right Column: Cyber Profile Picture (cols 8 to 12) -->
                         <div
-                            class="md:col-span-5 flex flex-col items-center md:items-end w-full order-1 md:order-2"
+                            class="md:col-span-5 flex flex-col items-center md:items-end w-full order-1 md:order-2 md:-mt-10"
                         >
                             <div
                                 id="cyber-pic-frame"
-                                class="relative w-full max-w-[200px] xs:max-w-[240px] md:max-w-[320px] aspect-square bg-[#0E0D0B]/5 dark:bg-[#EFEEE8]/5 border border-black/20 dark:border-white/20 p-4 select-none group transition-all duration-300 hover:border-black dark:hover:border-white cursor-crosshair"
+                                class="relative w-full max-w-[180px] xs:max-w-[220px] md:max-w-[250px] aspect-square bg-[#0E0D0B]/5 dark:bg-[#EFEEE8]/5 border border-black/20 dark:border-white/20 p-4 select-none group transition-all duration-300 hover:border-black dark:hover:border-white cursor-crosshair"
                             >
                                 <!-- Corner Brackets -->
                                 <div
@@ -260,20 +269,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                                 >
                                 </div>
  
-                                <!-- Top Readouts -->
-                                <div
-                                    class="absolute top-2 left-4 right-4 flex justify-between text-[9px] font-mono tracking-wider opacity-60 group-hover:opacity-100 transition-opacity duration-300"
-                                >
-                                    <span class="flex items-center gap-1.5">
-                                        <span
-                                            class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"
-                                        ></span>
-                                        SYS.RUNNING
-                                    </span>
-                                    <span id="cyber-pic-coords"
-                                        >X: 000 // Y: 000</span
-                                    >
-                                </div>
+
  
                                 <!-- Inner Viewport -->
                                 <div
@@ -391,15 +387,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                                     </div>
                                 </div>
  
-                                <!-- Bottom Readouts -->
-                                <div
-                                    class="absolute bottom-2 left-4 right-4 flex justify-between text-[9px] font-mono tracking-wider opacity-60 group-hover:opacity-100 transition-opacity duration-300"
-                                >
-                                    <span id="cyber-pic-unit"
-                                        >UNIT: IMG_SET_01</span
-                                    >
-                                    <span>SYS.LOC // ID_IDN</span>
-                                </div>
+
                             </div>
  
                             <!-- Name Label underneath -->
@@ -411,11 +399,16 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                         </div>
                     </div>
 
+                    <!-- Github Contribution Calendar & Steam Activity -->
+                    <div class="w-full mt-16 z-10">
+                        <GithubCalendar client:visible />
+                    </div>
+
                     <!-- Part 1.5: Journey / Timeline -->
                     <div class="w-full mt-24 z-10 flex flex-col items-center">
                         <!-- Section Header -->
                         <div class="mb-12 text-center w-full">
-                            <h3 class="font-display text-xl sm:text-3xl font-bold tracking-tight text-black dark:text-white mb-2 uppercase">
+                            <h3 class="text-3xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight text-black dark:text-white mb-2 uppercase">
                                 TIMELINE
                             </h3>
                             <p class="font-mono text-[10px] sm:text-xs text-black/55 dark:text-[#EFEEE8]/45 uppercase tracking-widest">
@@ -723,7 +716,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                         class="w-full flex flex-col items-center justify-center mt-4 z-10"
                     >
                         <h3
-                            class="text-2xl sm:text-4xl font-bold tracking-tight text-center uppercase font-mono mb-2 text-black dark:text-white"
+                            class="text-3xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight text-center uppercase mb-2 text-black dark:text-white"
                         >
                             Tech Stacks & Tools
                         </h3>
@@ -1436,11 +1429,6 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                             </div>
                         </div>
                     </div>
-
-                    <!-- Github Contribution Calendar -->
-                    <div class="w-full mt-16 z-10">
-                        <GithubCalendar client:visible />
-                    </div>
                 </section>
 
 
@@ -1460,22 +1448,275 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                     <div
                         class="absolute top-6 left-8 font-mono text-[9px] opacity-65 select-none"
                     >
-                        SYS.PRJ_SECTION
+                        SYS.PRJ_MATRIX
                     </div>
                     <div
                         class="absolute top-6 right-8 font-mono text-[9px] opacity-65 select-none"
                     >
-                        [STATUS: UNDER_DEV]
+                        [STATUS: DATA_STREAM_ONLINE]
                     </div>
 
-                    <div
-                        class="relative flex flex-col items-center justify-center"
-                    >
+                    <!-- Section Header -->
+                    <div class="mb-16 text-center w-full max-w-2xl relative z-10">
                         <h2
-                            class="text-3xl sm:text-5xl md:text-6xl font-normal tracking-tight uppercase relative font-mono text-center select-none cursor-pointer"
+                            class="text-3xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight uppercase mb-2 text-black dark:text-white"
                         >
-                            My Projects - [Under Development]
+                            Projects
                         </h2>
+                    </div>
+                    <!-- Projects Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl relative z-10">
+                        <!-- Node 01: NeuroLink-Web -->
+                        <div class="project-hud-card relative p-6 flex flex-col justify-between select-none" tabindex="0">
+                            <div class="space-y-4">
+                                <!-- Project Screen Mockup Placeholder -->
+                                <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/[0.03] dark:bg-white/[0.02] flex items-center justify-center transition-colors duration-300">
+                                    <div class="absolute inset-0 project-grid-pattern opacity-30"></div>
+                                    <div class="flex flex-col items-center gap-2 text-black/35 dark:text-white/20 transition-colors duration-300 z-10">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                                        <span class="font-mono text-[9px] uppercase tracking-widest opacity-60">PREVIEW_OFFLINE</span>
+                                    </div>
+                                </div>
+
+                                <!-- Details -->
+                                <div class="space-y-2.5">
+                                    <h3 class="text-xl font-bold tracking-tight text-black dark:text-white uppercase leading-none font-sans mt-1">
+                                        NeuroLink-Web
+                                    </h3>
+                                    <p class="text-[13px] text-black/75 dark:text-[#EFEEE8]/70 leading-relaxed text-left font-sans">
+                                        A high-performance components library introducing neural node network structures and interactive graph systems to web layouts.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Tech tags & Links -->
+                            <div class="mt-4 pt-4 border-t border-black/5 dark:border-white/5 space-y-4">
+                                <!-- Tech Stack Pills -->
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
+                                        <svg class="w-3 h-3 text-[#3178C6]" viewBox="0 0 24 24" fill="currentColor"><path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0H1.125zm17.363 9.75c.612 0 1.154.037 1.627.111v2.113c-.452-.111-.96-.166-1.527-.166-.827 0-1.37.222-1.627.666-.209.365-.314.987-.314 1.86v3.298c0 .88.204 1.503.612 1.87.408.365.997.548 1.767.548.573 0 1.04-.047 1.4-.14v2.008c-.567.168-1.237.252-2.009.252-1.378 0-2.433-.356-3.16-1.07-.73-.713-1.093-1.782-1.093-3.203v-3.297c0-1.42.364-2.49 1.093-3.203.727-.714 1.782-1.07 3.16-1.07zm-7.054.074c.73 0 1.345.196 1.843.585.5.39.75.98.75 1.77 0 .584-.132 1.05-.396 1.396-.264.347-.783.743-1.557 1.19a8.625 8.625 0 0 0-1.554 1.12c-.225.21-.337.5-.337.868v.112c0 .324.084.58.253.766.168.187.414.28.736.28.537 0 .973-.243 1.309-.73a4.707 4.707 0 0 0 .504-2.126h2.247c-.037.94-.3 1.745-.788 2.416-.487.67-1.173 1.006-2.058 1.006-.823 0-1.487-.22-1.99-.658-.504-.438-.756-1.085-.756-1.94 0-.62.133-1.115.399-1.488.267-.373.8-.806 1.6-1.298.536-.33.918-.629 1.144-.897.227-.267.34-.601.34-1.003 0-.35-.095-.626-.285-.826-.19-.201-.462-.301-.815-.301-.453 0-.814.168-1.08.503-.268.336-.403.874-.403 1.614H3.84c.038-1.168.347-2.072.927-2.712.58-.64 1.397-.96 2.454-.96z"/></svg>
+                                        TypeScript
+                                    </span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
+                                        <svg class="w-3 h-3 text-[#990000]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.16 8.37-9-5a1 1 0 0 0-1 0l-9 5A1 1 0 0 0 1.7 9.22l9 5a1 1 0 0 0 1 0l9-5a1 1 0 0 0 .46-.85z"/><path d="M1.7 14.78l9 5a1 1 0 0 0 1 0l9-5"/><path d="M11.5 22.48V13.5"/></svg>
+                                        WebGL
+                                    </span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
+                                        <svg class="w-3 h-3 text-[#FF5D01]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                                        Astro
+                                    </span>
+                                </div>
+
+                                <!-- Footer Links -->
+                                <div class="flex items-center justify-between">
+                                    <a 
+                                        href="https://github.com/Sajinomoto/Portofolio" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        class="font-sans text-xs font-semibold text-black/60 dark:text-white/50 hover:text-black dark:hover:text-white flex items-center gap-1.5 transition-colors duration-150"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                                        GitHub
+                                    </a>
+
+                                    <button 
+                                        class="project-detail-btn font-mono text-[11px] font-bold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 rounded-md px-3 py-1 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150 cursor-pointer" 
+                                        data-project="neurolink"
+                                    >
+                                        Detail
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 02: SynthWave CLI -->
+                        <div class="project-hud-card relative p-6 flex flex-col justify-between select-none" tabindex="0">
+                            <div class="space-y-4">
+                                <!-- Project Screen Mockup Placeholder -->
+                                <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/[0.03] dark:bg-white/[0.02] flex items-center justify-center transition-colors duration-300">
+                                    <div class="absolute inset-0 project-grid-pattern opacity-30"></div>
+                                    <div class="flex flex-col items-center gap-2 text-black/35 dark:text-white/20 transition-colors duration-300 z-10">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                                        <span class="font-mono text-[9px] uppercase tracking-widest opacity-60">PREVIEW_OFFLINE</span>
+                                    </div>
+                                </div>
+
+                                <!-- Details -->
+                                <div class="space-y-2.5">
+                                    <h3 class="text-xl font-bold tracking-tight text-black dark:text-white uppercase leading-none font-sans mt-1">
+                                        SynthWave CLI
+                                    </h3>
+                                    <p class="text-[13px] text-black/75 dark:text-[#EFEEE8]/70 leading-relaxed text-left font-sans">
+                                        A terminal simulator featuring simulated audio spectrum analyzer and customizable retro-synthesizer module built in Rust.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Tech tags & Links -->
+                            <div class="mt-4 pt-4 border-t border-black/5 dark:border-white/5 space-y-4">
+                                <!-- Tech Stack Pills -->
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
+                                        <svg class="w-3 h-3 text-[#E05B26]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                                        Rust
+                                    </span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
+                                        <svg class="w-3 h-3 text-[#654FF0]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
+                                        WASM
+                                    </span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
+                                        <svg class="w-3 h-3 text-[#1DB954]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5v14M22 9v6M7 8v8M2 10v4"/></svg>
+                                        WebAudio
+                                    </span>
+                                </div>
+
+                                <!-- Footer Links -->
+                                <div class="flex items-center justify-between">
+                                    <a 
+                                        href="https://github.com/Sajinomoto/Portofolio" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        class="font-sans text-xs font-semibold text-black/60 dark:text-white/50 hover:text-black dark:hover:text-white flex items-center gap-1.5 transition-colors duration-150"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                                        GitHub
+                                    </a>
+
+                                    <button 
+                                        class="project-detail-btn font-mono text-[11px] font-bold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 rounded-md px-3 py-1 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150 cursor-pointer" 
+                                        data-project="synthwave"
+                                    >
+                                        Detail
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 03: ChronoStream-DB -->
+                        <div class="project-hud-card relative p-6 flex flex-col justify-between select-none" tabindex="0">
+                            <div class="space-y-4">
+                                <!-- Project Screen Mockup Placeholder -->
+                                <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/[0.03] dark:bg-white/[0.02] flex items-center justify-center transition-colors duration-300">
+                                    <div class="absolute inset-0 project-grid-pattern opacity-30"></div>
+                                    <div class="flex flex-col items-center gap-2 text-black/35 dark:text-white/20 transition-colors duration-300 z-10">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                                        <span class="font-mono text-[9px] uppercase tracking-widest opacity-60">PREVIEW_OFFLINE</span>
+                                    </div>
+                                </div>
+
+                                <!-- Details -->
+                                <div class="space-y-2.5">
+                                    <h3 class="text-xl font-bold tracking-tight text-black dark:text-white uppercase leading-none font-sans mt-1">
+                                        ChronoStream-DB
+                                    </h3>
+                                    <p class="text-[13px] text-black/75 dark:text-[#EFEEE8]/70 leading-relaxed text-left font-sans">
+                                        A time-series database dashboard application for tracking real-time IoT sensor telemetry streams with customizable anomaly alerts.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Tech tags & Links -->
+                            <div class="mt-4 pt-4 border-t border-black/5 dark:border-white/5 space-y-4">
+                                <!-- Tech Stack Pills -->
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
+                                        <svg class="w-3 h-3 text-[#00ADD8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
+                                        Go
+                                    </span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
+                                        <svg class="w-3 h-3 text-[#1394D8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                                        InfluxDB
+                                    </span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
+                                        <svg class="w-3 h-3 text-[#61DAFB]" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-2.385-6.195-4.32-10-4.32s-10 1.935-10 4.32c0 2.385 6.195 4.32 10 4.32s10-1.935 10-4.32zm-10-6c-3.805 0-10 1.935-10 4.32 0 2.385 6.195 4.32 10 4.32s10-1.935 10-4.32c0-2.385-6.195-4.32-10-4.32zm0-2C5.97 4 1.135 7.58.2 12c.935 4.42 5.77 8 11.8 8s10.865-3.58 11.8-8c-.935-4.42-5.77-8-11.8-8zm0 14c-5.525 0-10-2.685-10-6s4.475-6 10-6 10 2.685 10 6-4.475 6-10 6z"/><circle cx="12" cy="12" r="2"/></svg>
+                                        React
+                                    </span>
+                                </div>
+
+                                <!-- Footer Links -->
+                                <div class="flex items-center justify-between">
+                                    <a 
+                                        href="https://github.com/Sajinomoto/Portofolio" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        class="font-sans text-xs font-semibold text-black/60 dark:text-white/50 hover:text-black dark:hover:text-white flex items-center gap-1.5 transition-colors duration-150"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                                        GitHub
+                                    </a>
+
+                                    <button 
+                                        class="project-detail-btn font-mono text-[11px] font-bold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 rounded-md px-3 py-1 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150 cursor-pointer" 
+                                        data-project="chronostream"
+                                    >
+                                        Detail
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 04: Retro Glitch Engine -->
+                        <div class="project-hud-card relative p-6 flex flex-col justify-between select-none" tabindex="0">
+                            <div class="space-y-4">
+                                <!-- Project Screen Mockup Placeholder -->
+                                <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/[0.03] dark:bg-white/[0.02] flex items-center justify-center transition-colors duration-300">
+                                    <div class="absolute inset-0 project-grid-pattern opacity-30"></div>
+                                    <div class="flex flex-col items-center gap-2 text-black/35 dark:text-white/20 transition-colors duration-300 z-10">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                                        <span class="font-mono text-[9px] uppercase tracking-widest opacity-60">PREVIEW_OFFLINE</span>
+                                    </div>
+                                </div>
+
+                                <!-- Details -->
+                                <div class="space-y-2.5">
+                                    <h3 class="text-xl font-bold tracking-tight text-black dark:text-white uppercase leading-none font-sans mt-1">
+                                        Retro Glitch Engine
+                                    </h3>
+                                    <p class="text-[13px] text-black/75 dark:text-[#EFEEE8]/70 leading-relaxed text-left font-sans">
+                                        Canvas shader engine utilising custom GLSL fragment shaders to apply real-time analog video noise & distortion effects.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Tech tags & Links -->
+                            <div class="mt-4 pt-4 border-t border-black/5 dark:border-white/5 space-y-4">
+                                <!-- Tech Stack Pills -->
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
+                                        <svg class="w-3 h-3 text-[#990000]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.16 8.37-9-5a1 1 0 0 0-1 0l-9 5A1 1 0 0 0 1.7 9.22l9 5a1 1 0 0 0 1 0l9-5a1 1 0 0 0 .46-.85z"/><path d="M1.7 14.78l9 5a1 1 0 0 0 1 0l9-5"/><path d="M11.5 22.48V13.5"/></svg>
+                                        WebGL
+                                    </span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
+                                        <svg class="w-3 h-3 text-[#FFB900]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                                        GLSL
+                                    </span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
+                                        <svg class="w-3 h-3 text-[#646CFF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                                        Vite
+                                    </span>
+                                </div>
+
+                                <!-- Footer Links -->
+                                <div class="flex items-center justify-between">
+                                    <a 
+                                        href="https://github.com/Sajinomoto/Portofolio" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        class="font-sans text-xs font-semibold text-black/60 dark:text-white/50 hover:text-black dark:hover:text-white flex items-center gap-1.5 transition-colors duration-150"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                                        GitHub
+                                    </a>
+
+                                    <button 
+                                        class="project-detail-btn font-mono text-[11px] font-bold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 rounded-md px-3 py-1 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150 cursor-pointer" 
+                                        data-project="glitch"
+                                    >
+                                        Detail
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -1674,7 +1915,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                     <!-- Section: 3D ASCII Sandbox -->
                     <section
                         id="ascii-sandbox"
-                        class="relative h-[160vh] w-full bg-transparent"
+                        class="relative h-[105vh] w-full bg-transparent"
                     >
                         <div
                             class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center"
@@ -1682,7 +1923,88 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                             <AsciiBox client:load />
                         </div>
                     </section>
-                </section>
+                    <!-- Project Detail Modal Backdrop -->
+                    <div
+                        id="project-modal"
+                        class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/60 dark:bg-black/80 backdrop-blur-sm transition-opacity duration-300"
+                        role="dialog"
+                        aria-modal="true"
+                        style="opacity: 0; display: none;"
+                    >
+                        <!-- Modal Content Box -->
+                        <div
+                            id="project-modal-content"
+                            class="relative w-full max-w-2xl border border-black/15 dark:border-white/15 bg-[#EFEEE8] dark:bg-[#0E0D0B] p-6 sm:p-8 select-none font-mono text-left shadow-2xl overflow-y-auto max-h-[90vh] transition-transform duration-300"
+                            style="opacity: 0; transform: translateY(16px);"
+                        >
+                            <!-- Scanline decorative overlay -->
+                            <div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-black/[0.03] to-transparent bg-[length:100%_4px] opacity-30"></div>
+
+                            <!-- Header -->
+                            <div class="flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-4 mb-6">
+                                <h3 id="modal-project-title" class="font-display text-xl sm:text-2xl font-bold tracking-tight text-black dark:text-white uppercase leading-none">
+                                    Project Schematics
+                                </h3>
+                                <button
+                                    id="project-modal-close"
+                                    class="font-mono text-xs font-bold text-black/50 dark:text-white/40 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 px-2.5 py-1 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150 cursor-pointer"
+                                >
+                                    [ CLOSE ]
+                                </button>
+                            </div>
+
+                            <!-- Body Grid -->
+                            <div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-start">
+                                <!-- Details Column (60%) -->
+                                <div class="md:col-span-3 space-y-4">
+                                    <div>
+                                        <h4 class="text-[9px] uppercase tracking-wider text-black/40 dark:text-white/30 font-bold mb-1">// TECHNOLOGY_STACK</h4>
+                                        <div id="modal-project-tech" class="flex flex-wrap gap-1.5">
+                                            <!-- Dynamic Tech Tags -->
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <h4 class="text-[9px] uppercase tracking-wider text-black/40 dark:text-white/30 font-bold mb-1.5">// SYSTEM_OVERVIEW</h4>
+                                        <p id="modal-project-desc" class="text-xs text-black/70 dark:text-[#EFEEE8]/60 leading-relaxed text-justify">
+                                            <!-- Dynamic Description -->
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <h4 class="text-[9px] uppercase tracking-wider text-black/40 dark:text-white/30 font-bold mb-1.5">// SUB_ROUTINES & FEATURES</h4>
+                                        <ul id="modal-project-features" class="space-y-2 text-xs text-black/75 dark:text-[#EFEEE8]/70">
+                                            <!-- Dynamic bullet points -->
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Right Visual Blueprint (40%) -->
+                                <div class="md:col-span-2 flex flex-col items-center justify-center p-4 border border-dashed border-black/10 dark:border-white/10 relative min-h-[200px]">
+                                    <div class="absolute inset-0 project-grid-pattern opacity-30"></div>
+                                    <div id="modal-project-blueprint" class="z-10 w-full h-full flex items-center justify-center">
+                                        <!-- Dynamic SVG Blueprint -->
+                                    </div>
+                                    <div class="mt-4 font-mono text-[8px] opacity-40 text-center w-full">
+                                        TELEMETRY_REFRESH: ACTIVE
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Footer Links -->
+                            <div class="border-t border-black/10 dark:border-white/10 pt-5 mt-6 flex items-center justify-between">
+                                <span id="modal-project-id" class="font-mono text-[9px] opacity-40 tracking-wider">INDEX_REF: 0x00</span>
+                                <div class="flex gap-3">
+                                    <a id="modal-project-launch" href="#" target="_blank" rel="noopener noreferrer" class="font-mono text-xs font-bold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 px-3 py-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">
+                                        [ LAUNCH_PROJECT ]
+                                    </a>
+                                    <a id="modal-project-source" href="#" target="_blank" rel="noopener noreferrer" class="font-mono text-xs font-bold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 px-3 py-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">
+                                        [ REPOS.SRC ]
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </main>
     </div>
@@ -2251,6 +2573,259 @@ import imgCatGlitched from "../assets/glitched-cat.png";
         });
     };
 
+    const initProjectModal = () => {
+        const modal = document.getElementById("project-modal");
+        const modalContent = document.getElementById("project-modal-content");
+        const closeBtn = document.getElementById("project-modal-close");
+        const detailBtns = document.querySelectorAll(".project-detail-btn");
+
+        const modalTitle = document.getElementById("modal-project-title");
+        const modalTech = document.getElementById("modal-project-tech");
+        const modalDesc = document.getElementById("modal-project-desc");
+        const modalFeatures = document.getElementById("modal-project-features");
+        const modalBlueprint = document.getElementById("modal-project-blueprint");
+        const modalId = document.getElementById("modal-project-id");
+        const modalLaunch = document.getElementById("modal-project-launch") as HTMLAnchorElement | null;
+        const modalSource = document.getElementById("modal-project-source") as HTMLAnchorElement | null;
+
+        const projectsData: Record<string, {
+            title: string;
+            tech: string[];
+            description: string;
+            features: string[];
+            blueprint: string;
+            id: string;
+            launchUrl: string;
+            sourceUrl: string;
+        }> = {
+            neurolink: {
+                title: "NeuroLink-Web",
+                tech: ["TypeScript", "WebGL", "Astro", "Canvas-API", "TailwindCSS"],
+                description: "A high-performance components library introducing neural node network structures and interactive graph systems to web layouts. Designed to render complex relationship nodes dynamically with high frame rates using vanilla canvas rendering, custom layout physics, and force-directed simulations.",
+                features: [
+                    "Force-directed nodes simulation using custom Verlet integration.",
+                    "Sub-pixel anti-aliased Canvas rendering for crisp node grids.",
+                    "Integrated collision detection and user-drag gesture support.",
+                    "Dynamic auto-routing lines with customizable signal pulses.",
+                    "Lightweight footprint under 12KB with zero runtime dependencies."
+                ],
+                blueprint: `<svg class="w-32 h-32 stroke-black/50 dark:stroke-white/40 fill-none z-10" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" stroke-dasharray="3, 3" class="blueprint-spin-reverse" stroke-width="0.75" />
+                    <circle cx="50" cy="50" r="30" class="blueprint-spin" stroke-width="0.75" />
+                    <circle cx="50" cy="50" r="10" stroke-dasharray="1, 4" class="blueprint-spin" stroke-width="0.75" />
+                    <g class="blueprint-spin">
+                        <line x1="50" y1="20" x2="26" y2="62" stroke-width="0.75" />
+                        <line x1="26" y1="62" x2="74" y2="62" stroke-width="0.75" />
+                        <line x1="74" y1="62" x2="50" y2="20" stroke-width="0.75" />
+                        <circle cx="50" cy="20" r="3" fill="currentColor" class="blueprint-pulse" />
+                        <circle cx="26" cy="62" r="3" fill="currentColor" class="blueprint-pulse" />
+                        <circle cx="74" cy="62" r="3" fill="currentColor" class="blueprint-pulse" />
+                    </g>
+                    <text x="5" y="12" font-family="monospace" font-size="5" fill="currentColor" class="opacity-40">SYS.NL_NODE</text>
+                </svg>`,
+                id: "INDEX_REF: 0x01",
+                launchUrl: "https://github.com/Sajinomoto/Portofolio",
+                sourceUrl: "https://github.com/Sajinomoto/Portofolio"
+            },
+            synthwave: {
+                title: "SynthWave CLI",
+                tech: ["Rust", "WASM", "WebAudio", "HTML5 Canvas", "Bincode"],
+                description: "A terminal simulator featuring a simulated audio spectrum analyzer and a customizable retro-synthesizer module built in Rust. Leverages WebAssembly compilation to feed custom synthesized oscillators directly to the browser's WebAudio destination context with minimal delay.",
+                features: [
+                    "High-performance oscillator voice allocations written in safe Rust.",
+                    "WebAudio polyphony scheduler for low-latency note triggering.",
+                    "Fast Fourier Transform (FFT) simulated visualizer bars.",
+                    "Custom CLI commands parsing for envelope ADSR parameter edits.",
+                    "Raw binary preset saving via JS-WASM data buffer transfers."
+                ],
+                blueprint: `<svg class="w-32 h-32 stroke-black/50 dark:stroke-white/40 fill-none z-10" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(15, 30)">
+                        <path d="M0,20 Q10,0 20,20 T40,20 T60,20" class="blueprint-dash" stroke-width="1.5" />
+                        <path d="M0,25 Q15,40 30,25 T60,25" class="blueprint-dash" stroke-dasharray="2, 5" stroke-width="1" />
+                    </g>
+                    <circle cx="50" cy="50" r="40" stroke-dasharray="10, 5" class="blueprint-spin" stroke-width="0.75" />
+                    <circle cx="50" cy="50" r="35" class="blueprint-spin-reverse" stroke-width="0.75" />
+                    <line x1="50" y1="50" x2="50" y2="15" stroke-width="1.5" class="blueprint-radar-line" />
+                    <text x="5" y="12" font-family="monospace" font-size="5" fill="currentColor" class="opacity-40">TUI.OSC_FRQ</text>
+                </svg>`,
+                id: "INDEX_REF: 0x02",
+                launchUrl: "https://github.com/Sajinomoto/Portofolio",
+                sourceUrl: "https://github.com/Sajinomoto/Portofolio"
+            },
+            chronostream: {
+                title: "ChronoStream-DB",
+                tech: ["Go", "InfluxDB", "React", "gRPC", "ChartJS"],
+                description: "A time-series database dashboard application for tracking real-time IoT sensor telemetry streams with customizable anomaly alerts. Utilizes Go's concurrency primitives to parse incoming streams with a high throughput rate, writing directly to a TSDB backend.",
+                features: [
+                    "Parallel stream processor processing up to 10k messages per second.",
+                    "Auto-refreshing graphs featuring live window data decimation.",
+                    "gRPC communication channels for microsecond serialization delay.",
+                    "Anomaly detection model alert configurations using standard deviations.",
+                    "Dual-pane dashboard showing live logs and metrics graphs concurrently."
+                ],
+                blueprint: `<svg class="w-32 h-32 stroke-black/50 dark:stroke-white/40 fill-none z-10" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="40" stroke-width="0.75" />
+                    <circle cx="50" cy="50" r="25" stroke-dasharray="4, 4" stroke-width="0.75" />
+                    <circle cx="50" cy="50" r="10" stroke-width="0.75" />
+                    <line x1="50" y1="10" x2="50" y2="90" stroke-width="0.5" stroke-dasharray="2, 2" />
+                    <line x1="10" y1="50" x2="90" y2="50" stroke-width="0.5" stroke-dasharray="2, 2" />
+                    <line x1="50" y1="50" x2="78" y2="22" stroke-width="1.5" class="blueprint-radar-line" />
+                    <circle cx="65" cy="30" r="2" fill="currentColor" class="blueprint-pulse" />
+                    <circle cx="35" cy="65" r="1.5" fill="currentColor" class="blueprint-pulse" />
+                    <text x="5" y="12" font-family="monospace" font-size="5" fill="currentColor" class="opacity-40">SYS.TELEMETRY</text>
+                </svg>`,
+                id: "INDEX_REF: 0x03",
+                launchUrl: "https://github.com/Sajinomoto/Portofolio",
+                sourceUrl: "https://github.com/Sajinomoto/Portofolio"
+            },
+            glitch: {
+                title: "Retro Glitch Engine",
+                tech: ["WebGL", "GLSL", "Vite", "Canvas2D", "WebGPURenderer"],
+                description: "A canvas shader engine utilising custom GLSL fragment shaders to apply real-time analog video noise, CRT curvature distortions, and chromatic aberrations. Highly optimized to compile shaders dynamically, maintaining a smooth 60fps refresh rate on modern mobile browsers.",
+                features: [
+                    "Custom fragment shaders reproducing NTSC color phase artifacts.",
+                    "Dynamic coordinate distortion creating curved scanline CRT tube simulation.",
+                    "Interactive glitch bursts triggered by mouse positions or sound inputs.",
+                    "Integrated post-processing pipelines for multi-pass screen filters.",
+                    "Uniform variables updating on every animation frame via custom JS triggers."
+                ],
+                blueprint: `<svg class="w-32 h-32 stroke-black/50 dark:stroke-white/40 fill-none z-10" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="15" y="15" width="70" height="70" stroke-dasharray="5, 5" stroke-width="0.75" />
+                    <line x1="15" y1="35" x2="85" y2="35" stroke-width="0.5" />
+                    <line x1="15" y1="65" x2="85" y2="65" stroke-width="0.5" />
+                    <line x1="35" y1="15" x2="35" y2="85" stroke-width="0.5" />
+                    <line x1="65" y1="15" x2="65" y2="85" stroke-width="0.5" />
+                    <g class="blueprint-pulse">
+                        <rect x="25" y="45" width="10" height="10" fill="currentColor" opacity="0.3" />
+                        <rect x="55" y="25" width="15" height="15" stroke-width="1" />
+                    </g>
+                    <path d="M20,20 L30,20 L30,30" stroke-width="1.5" />
+                    <path d="M80,80 L70,80 L70,70" stroke-width="1.5" />
+                    <rect x="40" y="55" width="30" height="2" fill="currentColor" class="blueprint-pulse" />
+                    <rect x="30" y="40" width="20" height="1" fill="currentColor" class="blueprint-pulse" />
+                    <text x="5" y="12" font-family="monospace" font-size="5" fill="currentColor" class="opacity-40">GLITCH.DSP_0x7</text>
+                </svg>`,
+                id: "INDEX_REF: 0x04",
+                launchUrl: "https://github.com/Sajinomoto/Portofolio",
+                sourceUrl: "https://github.com/Sajinomoto/Portofolio"
+            }
+        };
+
+        const openModal = (projectKey: string) => {
+            const data = projectsData[projectKey];
+            if (!data) return;
+
+            // Populate title
+            if (modalTitle) modalTitle.textContent = data.title;
+
+            // Populate tech tags
+            if (modalTech) {
+                modalTech.innerHTML = "";
+                data.tech.forEach(tag => {
+                    const span = document.createElement("span");
+                    span.className = "font-mono text-[9px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-1.5 py-0.5 bg-black/[0.01] dark:bg-white/[0.01]";
+                    span.textContent = `[${tag}]`;
+                    modalTech.appendChild(span);
+                });
+            }
+
+            // Populate description
+            if (modalDesc) modalDesc.textContent = data.description;
+
+            // Populate features
+            if (modalFeatures) {
+                modalFeatures.innerHTML = "";
+                data.features.forEach(feat => {
+                    const li = document.createElement("li");
+                    li.className = "flex items-start gap-2";
+                    li.innerHTML = `<span class="text-black/40 dark:text-white/40 font-bold">&gt;&gt;</span><span>${feat}</span>`;
+                    modalFeatures.appendChild(li);
+                });
+            }
+
+            // Populate blueprint SVG
+            if (modalBlueprint) modalBlueprint.innerHTML = data.blueprint;
+
+            // Populate ID Ref
+            if (modalId) modalId.textContent = data.id;
+
+            // Populate URLs
+            if (modalLaunch) modalLaunch.href = data.launchUrl;
+            if (modalSource) modalSource.href = data.sourceUrl;
+
+            // Show and animate
+            if (modal && modalContent) {
+                modal.style.display = "flex";
+                modal.classList.remove("hidden");
+                gsap.killTweensOf([modal, modalContent]);
+                gsap.to(modal, {
+                    opacity: 1,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+                gsap.to(modalContent, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.4,
+                    ease: "back.out(1.2)",
+                    delay: 0.05
+                });
+            }
+        };
+
+        const closeModal = () => {
+            if (modal && modalContent) {
+                gsap.killTweensOf([modal, modalContent]);
+                gsap.to(modalContent, {
+                    opacity: 0,
+                    y: 16,
+                    duration: 0.3,
+                    ease: "power2.in"
+                });
+                gsap.to(modal, {
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: "power2.in",
+                    onComplete: () => {
+                        modal.style.display = "none";
+                        modal.classList.add("hidden");
+                    }
+                });
+            }
+        };
+
+        // Wire up buttons
+        detailBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                const projectKey = btn.getAttribute("data-project");
+                if (projectKey) {
+                    openModal(projectKey);
+                }
+            });
+        });
+
+        // Close button click
+        if (closeBtn) {
+            closeBtn.addEventListener("click", closeModal);
+        }
+
+        // Backdrop click
+        if (modal) {
+            modal.addEventListener("click", (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        }
+
+        // Escape key close
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && modal && !modal.classList.contains("hidden")) {
+                closeModal();
+            }
+        });
+    };
+
     // Initialize scroll animations and translations
     const init = () => {
         initScrollAnimations();
@@ -2261,6 +2836,7 @@ import imgCatGlitched from "../assets/glitched-cat.png";
         initRoleSwitcher();
         initQuotesReveal();
         initTimelineCards();
+        initProjectModal();
     };
 
     const initWithLoaded = () => {
@@ -3231,6 +3807,91 @@ import imgCatGlitched from "../assets/glitched-cat.png";
         100% {
             background-position: -200% 0;
         }
+    }
+
+    /* Project HUD Card Styles */
+    .project-hud-card {
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: rgba(255, 255, 255, 0.45);
+        backdrop-filter: blur(12px);
+        border-radius: 1rem;
+    }
+    
+    html.dark .project-hud-card {
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(14, 14, 14, 0.65);
+    }
+    
+    .project-hud-card:hover {
+        border-color: rgba(0, 0, 0, 0.16);
+        transform: scale(1.02);
+        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.06);
+        z-index: 10;
+    }
+    
+    html.dark .project-hud-card:hover {
+        border-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.45);
+    }
+
+    /* Grid plot pattern inside card */
+    .project-grid-pattern {
+        background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+        background-size: 16px 16px;
+    }
+    html.dark .project-grid-pattern {
+        background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    }
+    
+    /* Interactive SVG Blueprint Animations */
+    @keyframes blueprint-spin-anim {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    .blueprint-spin {
+        transform-origin: center;
+        animation: blueprint-spin-anim 30s linear infinite;
+        transition: animation-duration 0.5s ease;
+    }
+    
+    .blueprint-spin-reverse {
+        transform-origin: center;
+        animation: blueprint-spin-anim 20s linear infinite reverse;
+        transition: animation-duration 0.5s ease;
+    }
+
+    @keyframes blueprint-pulse-anim {
+        0%, 100% { opacity: 0.3; transform: scale(0.96); }
+        50% { opacity: 0.95; transform: scale(1.04); }
+    }
+    
+    .blueprint-pulse {
+        transform-origin: center;
+        animation: blueprint-pulse-anim 3s ease-in-out infinite;
+    }
+    
+    @keyframes blueprint-radar-sweep {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    .blueprint-radar-line {
+        transform-origin: center;
+        animation: blueprint-radar-sweep 4s linear infinite;
+    }
+    
+    @keyframes blueprint-dash-anim {
+        from { stroke-dashoffset: 0; }
+        to { stroke-dashoffset: -1000; }
+    }
+    
+    .blueprint-dash {
+        stroke-dasharray: 4, 4;
+        animation: blueprint-dash-anim 40s linear infinite;
     }
 </style>
 
