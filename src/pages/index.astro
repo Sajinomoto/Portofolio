@@ -9,6 +9,9 @@ import { Image } from "astro:assets";
 import imgCat from "../assets/cat.jpg";
 import imgBird from "../assets/glitched-bird.png";
 import imgCatGlitched from "../assets/glitched-cat.png";
+import absMockup from "../assets/abs_mockup.png";
+import zunoiCafeMockup from "../assets/zunoi_cafe_mockup.png";
+import redStringsMockup from "../assets/red_strings_mockup.png";
 ---
 
 <Layout>
@@ -1459,32 +1462,36 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                     <!-- Section Header -->
                     <div class="mb-16 text-center w-full max-w-2xl relative z-10">
                         <h2
+                            id="project-section-title"
                             class="text-3xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight uppercase mb-2 text-black dark:text-white"
                         >
                             Projects
                         </h2>
                     </div>
                     <!-- Projects Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl relative z-10">
-                        <!-- Node 01: NeuroLink-Web -->
-                        <div class="project-hud-card relative p-6 flex flex-col justify-between select-none" tabindex="0">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl relative z-10">
+                        <!-- Node 01: ABS -->
+                        <div class="project-hud-card relative p-5 flex flex-col justify-between select-none" tabindex="0">
                             <div class="space-y-4">
-                                <!-- Project Screen Mockup Placeholder -->
-                                <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/[0.03] dark:bg-white/[0.02] flex items-center justify-center transition-colors duration-300">
-                                    <div class="absolute inset-0 project-grid-pattern opacity-30"></div>
-                                    <div class="flex flex-col items-center gap-2 text-black/35 dark:text-white/20 transition-colors duration-300 z-10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-                                        <span class="font-mono text-[9px] uppercase tracking-widest opacity-60">PREVIEW_OFFLINE</span>
-                                    </div>
+                                <!-- Project Screen Mockup -->
+                                <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/[0.03] dark:bg-white/[0.02]">
+                                    <Image
+                                        src={absMockup}
+                                        alt="ABS Preview"
+                                        width={600}
+                                        height={338}
+                                        class="w-full h-full object-cover object-top hover:scale-[1.02] transition-transform duration-300 project-card-image-click cursor-pointer"
+                                        data-project="neurolink"
+                                    />
                                 </div>
 
                                 <!-- Details -->
                                 <div class="space-y-2.5">
                                     <h3 class="text-xl font-bold tracking-tight text-black dark:text-white uppercase leading-none font-sans mt-1">
-                                        NeuroLink-Web
+                                        ABS (Aplikasi Bank Sampah)
                                     </h3>
-                                    <p class="text-[13px] text-black/75 dark:text-[#EFEEE8]/70 leading-relaxed text-left font-sans">
-                                        A high-performance components library introducing neural node network structures and interactive graph systems to web layouts.
+                                    <p id="project-desc-abs" class="text-[13px] text-black/75 dark:text-[#EFEEE8]/70 leading-relaxed text-left font-sans">
+                                        <!-- Dynamic Description -->
                                     </p>
                                 </div>
                             </div>
@@ -1493,24 +1500,18 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                             <div class="mt-4 pt-4 border-t border-black/5 dark:border-white/5 space-y-4">
                                 <!-- Tech Stack Pills -->
                                 <div class="flex flex-wrap gap-2">
-                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
-                                        <svg class="w-3 h-3 text-[#3178C6]" viewBox="0 0 24 24" fill="currentColor"><path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0H1.125zm17.363 9.75c.612 0 1.154.037 1.627.111v2.113c-.452-.111-.96-.166-1.527-.166-.827 0-1.37.222-1.627.666-.209.365-.314.987-.314 1.86v3.298c0 .88.204 1.503.612 1.87.408.365.997.548 1.767.548.573 0 1.04-.047 1.4-.14v2.008c-.567.168-1.237.252-2.009.252-1.378 0-2.433-.356-3.16-1.07-.73-.713-1.093-1.782-1.093-3.203v-3.297c0-1.42.364-2.49 1.093-3.203.727-.714 1.782-1.07 3.16-1.07zm-7.054.074c.73 0 1.345.196 1.843.585.5.39.75.98.75 1.77 0 .584-.132 1.05-.396 1.396-.264.347-.783.743-1.557 1.19a8.625 8.625 0 0 0-1.554 1.12c-.225.21-.337.5-.337.868v.112c0 .324.084.58.253.766.168.187.414.28.736.28.537 0 .973-.243 1.309-.73a4.707 4.707 0 0 0 .504-2.126h2.247c-.037.94-.3 1.745-.788 2.416-.487.67-1.173 1.006-2.058 1.006-.823 0-1.487-.22-1.99-.658-.504-.438-.756-1.085-.756-1.94 0-.62.133-1.115.399-1.488.267-.373.8-.806 1.6-1.298.536-.33.918-.629 1.144-.897.227-.267.34-.601.34-1.003 0-.35-.095-.626-.285-.826-.19-.201-.462-.301-.815-.301-.453 0-.814.168-1.08.503-.268.336-.403.874-.403 1.614H3.84c.038-1.168.347-2.072.927-2.712.58-.64 1.397-.96 2.454-.96z"/></svg>
-                                        TypeScript
-                                    </span>
-                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
-                                        <svg class="w-3 h-3 text-[#990000]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.16 8.37-9-5a1 1 0 0 0-1 0l-9 5A1 1 0 0 0 1.7 9.22l9 5a1 1 0 0 0 1 0l9-5a1 1 0 0 0 .46-.85z"/><path d="M1.7 14.78l9 5a1 1 0 0 0 1 0l9-5"/><path d="M11.5 22.48V13.5"/></svg>
-                                        WebGL
-                                    </span>
-                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
-                                        <svg class="w-3 h-3 text-[#FF5D01]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-                                        Astro
-                                    </span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">Laravel</span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">MySQL</span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">Docker</span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">Vue 3</span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">TailwindCSS</span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">ApexCharts</span>
                                 </div>
 
                                 <!-- Footer Links -->
                                 <div class="flex items-center justify-between">
                                     <a 
-                                        href="https://github.com/Sajinomoto/Portofolio" 
+                                        href="https://github.com/amandanmira/PBL-BankSampah" 
                                         target="_blank" 
                                         rel="noopener noreferrer" 
                                         class="font-sans text-xs font-semibold text-black/60 dark:text-white/50 hover:text-black dark:hover:text-white flex items-center gap-1.5 transition-colors duration-150"
@@ -1529,25 +1530,28 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                             </div>
                         </div>
 
-                        <!-- Node 02: SynthWave CLI -->
-                        <div class="project-hud-card relative p-6 flex flex-col justify-between select-none" tabindex="0">
+                        <!-- Node 02: Red Strings -->
+                        <div class="project-hud-card relative p-5 flex flex-col justify-between select-none" tabindex="0">
                             <div class="space-y-4">
-                                <!-- Project Screen Mockup Placeholder -->
-                                <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/[0.03] dark:bg-white/[0.02] flex items-center justify-center transition-colors duration-300">
-                                    <div class="absolute inset-0 project-grid-pattern opacity-30"></div>
-                                    <div class="flex flex-col items-center gap-2 text-black/35 dark:text-white/20 transition-colors duration-300 z-10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-                                        <span class="font-mono text-[9px] uppercase tracking-widest opacity-60">PREVIEW_OFFLINE</span>
-                                    </div>
+                                <!-- Project Screen Mockup -->
+                                <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/[0.03] dark:bg-white/[0.02]">
+                                    <Image
+                                        src={redStringsMockup}
+                                        alt="Red Strings Preview"
+                                        width={600}
+                                        height={338}
+                                        class="w-full h-full object-cover object-top hover:scale-[1.02] transition-transform duration-300 project-card-image-click cursor-pointer"
+                                        data-project="synthwave"
+                                    />
                                 </div>
 
                                 <!-- Details -->
                                 <div class="space-y-2.5">
                                     <h3 class="text-xl font-bold tracking-tight text-black dark:text-white uppercase leading-none font-sans mt-1">
-                                        SynthWave CLI
+                                        Red Strings
                                     </h3>
-                                    <p class="text-[13px] text-black/75 dark:text-[#EFEEE8]/70 leading-relaxed text-left font-sans">
-                                        A terminal simulator featuring simulated audio spectrum analyzer and customizable retro-synthesizer module built in Rust.
+                                    <p id="project-desc-redstrings" class="text-[13px] text-black/75 dark:text-[#EFEEE8]/70 leading-relaxed text-left font-sans">
+                                        <!-- Dynamic Description -->
                                     </p>
                                 </div>
                             </div>
@@ -1556,24 +1560,18 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                             <div class="mt-4 pt-4 border-t border-black/5 dark:border-white/5 space-y-4">
                                 <!-- Tech Stack Pills -->
                                 <div class="flex flex-wrap gap-2">
-                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
-                                        <svg class="w-3 h-3 text-[#E05B26]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-                                        Rust
-                                    </span>
-                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
-                                        <svg class="w-3 h-3 text-[#654FF0]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
-                                        WASM
-                                    </span>
-                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
-                                        <svg class="w-3 h-3 text-[#1DB954]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5v14M22 9v6M7 8v8M2 10v4"/></svg>
-                                        WebAudio
-                                    </span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">Next.js</span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">React</span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">TailwindCSS</span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">Firebase</span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">LangChain</span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">Mistral AI</span>
                                 </div>
 
                                 <!-- Footer Links -->
                                 <div class="flex items-center justify-between">
                                     <a 
-                                        href="https://github.com/Sajinomoto/Portofolio" 
+                                        href="https://github.com/Sajinomoto/Red-String/" 
                                         target="_blank" 
                                         rel="noopener noreferrer" 
                                         class="font-sans text-xs font-semibold text-black/60 dark:text-white/50 hover:text-black dark:hover:text-white flex items-center gap-1.5 transition-colors duration-150"
@@ -1592,25 +1590,28 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                             </div>
                         </div>
 
-                        <!-- Node 03: ChronoStream-DB -->
-                        <div class="project-hud-card relative p-6 flex flex-col justify-between select-none" tabindex="0">
+                        <!-- Node 03: Zunoi Cafe -->
+                        <div class="project-hud-card relative p-5 flex flex-col justify-between select-none" tabindex="0">
                             <div class="space-y-4">
-                                <!-- Project Screen Mockup Placeholder -->
-                                <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/[0.03] dark:bg-white/[0.02] flex items-center justify-center transition-colors duration-300">
-                                    <div class="absolute inset-0 project-grid-pattern opacity-30"></div>
-                                    <div class="flex flex-col items-center gap-2 text-black/35 dark:text-white/20 transition-colors duration-300 z-10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-                                        <span class="font-mono text-[9px] uppercase tracking-widest opacity-60">PREVIEW_OFFLINE</span>
-                                    </div>
+                                <!-- Project Screen Mockup -->
+                                <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/[0.03] dark:bg-white/[0.02]">
+                                    <Image
+                                        src={zunoiCafeMockup}
+                                        alt="Zunoi Cafe Preview"
+                                        width={600}
+                                        height={338}
+                                        class="w-full h-full object-cover object-top hover:scale-[1.02] transition-transform duration-300 project-card-image-click cursor-pointer"
+                                        data-project="chronostream"
+                                    />
                                 </div>
 
                                 <!-- Details -->
                                 <div class="space-y-2.5">
                                     <h3 class="text-xl font-bold tracking-tight text-black dark:text-white uppercase leading-none font-sans mt-1">
-                                        ChronoStream-DB
+                                        Zunoi Cafe
                                     </h3>
-                                    <p class="text-[13px] text-black/75 dark:text-[#EFEEE8]/70 leading-relaxed text-left font-sans">
-                                        A time-series database dashboard application for tracking real-time IoT sensor telemetry streams with customizable anomaly alerts.
+                                    <p id="project-desc-zunoicafe" class="text-[13px] text-black/75 dark:text-[#EFEEE8]/70 leading-relaxed text-left font-sans">
+                                        <!-- Dynamic Description -->
                                     </p>
                                 </div>
                             </div>
@@ -1619,24 +1620,18 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                             <div class="mt-4 pt-4 border-t border-black/5 dark:border-white/5 space-y-4">
                                 <!-- Tech Stack Pills -->
                                 <div class="flex flex-wrap gap-2">
-                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
-                                        <svg class="w-3 h-3 text-[#00ADD8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
-                                        Go
-                                    </span>
-                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
-                                        <svg class="w-3 h-3 text-[#1394D8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                                        InfluxDB
-                                    </span>
-                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
-                                        <svg class="w-3 h-3 text-[#61DAFB]" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-2.385-6.195-4.32-10-4.32s-10 1.935-10 4.32c0 2.385 6.195 4.32 10 4.32s10-1.935 10-4.32zm-10-6c-3.805 0-10 1.935-10 4.32 0 2.385 6.195 4.32 10 4.32s10-1.935 10-4.32c0-2.385-6.195-4.32-10-4.32zm0-2C5.97 4 1.135 7.58.2 12c.935 4.42 5.77 8 11.8 8s10.865-3.58 11.8-8c-.935-4.42-5.77-8-11.8-8zm0 14c-5.525 0-10-2.685-10-6s4.475-6 10-6 10 2.685 10 6-4.475 6-10 6z"/><circle cx="12" cy="12" r="2"/></svg>
-                                        React
-                                    </span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">Laravel</span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">Inertia.js</span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">Vue 3</span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">SQLite</span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">TailwindCSS</span>
+                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] transition-colors duration-150">shadcn-vue</span>
                                 </div>
 
                                 <!-- Footer Links -->
                                 <div class="flex items-center justify-between">
                                     <a 
-                                        href="https://github.com/Sajinomoto/Portofolio" 
+                                        href="https://github.com/HaritsF807/ZUNOI-CAFE" 
                                         target="_blank" 
                                         rel="noopener noreferrer" 
                                         class="font-sans text-xs font-semibold text-black/60 dark:text-white/50 hover:text-black dark:hover:text-white flex items-center gap-1.5 transition-colors duration-150"
@@ -1654,70 +1649,14 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Node 04: Retro Glitch Engine -->
-                        <div class="project-hud-card relative p-6 flex flex-col justify-between select-none" tabindex="0">
-                            <div class="space-y-4">
-                                <!-- Project Screen Mockup Placeholder -->
-                                <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/[0.03] dark:bg-white/[0.02] flex items-center justify-center transition-colors duration-300">
-                                    <div class="absolute inset-0 project-grid-pattern opacity-30"></div>
-                                    <div class="flex flex-col items-center gap-2 text-black/35 dark:text-white/20 transition-colors duration-300 z-10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-                                        <span class="font-mono text-[9px] uppercase tracking-widest opacity-60">PREVIEW_OFFLINE</span>
-                                    </div>
-                                </div>
-
-                                <!-- Details -->
-                                <div class="space-y-2.5">
-                                    <h3 class="text-xl font-bold tracking-tight text-black dark:text-white uppercase leading-none font-sans mt-1">
-                                        Retro Glitch Engine
-                                    </h3>
-                                    <p class="text-[13px] text-black/75 dark:text-[#EFEEE8]/70 leading-relaxed text-left font-sans">
-                                        Canvas shader engine utilising custom GLSL fragment shaders to apply real-time analog video noise & distortion effects.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- Tech tags & Links -->
-                            <div class="mt-4 pt-4 border-t border-black/5 dark:border-white/5 space-y-4">
-                                <!-- Tech Stack Pills -->
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
-                                        <svg class="w-3 h-3 text-[#990000]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.16 8.37-9-5a1 1 0 0 0-1 0l-9 5A1 1 0 0 0 1.7 9.22l9 5a1 1 0 0 0 1 0l9-5a1 1 0 0 0 .46-.85z"/><path d="M1.7 14.78l9 5a1 1 0 0 0 1 0l9-5"/><path d="M11.5 22.48V13.5"/></svg>
-                                        WebGL
-                                    </span>
-                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
-                                        <svg class="w-3 h-3 text-[#FFB900]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                                        GLSL
-                                    </span>
-                                    <span class="font-sans text-[11px] font-medium text-black/70 dark:text-white/60 border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.03] flex items-center gap-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-150">
-                                        <svg class="w-3 h-3 text-[#646CFF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                                        Vite
-                                    </span>
-                                </div>
-
-                                <!-- Footer Links -->
-                                <div class="flex items-center justify-between">
-                                    <a 
-                                        href="https://github.com/Sajinomoto/Portofolio" 
-                                        target="_blank" 
-                                        rel="noopener noreferrer" 
-                                        class="font-sans text-xs font-semibold text-black/60 dark:text-white/50 hover:text-black dark:hover:text-white flex items-center gap-1.5 transition-colors duration-150"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-                                        GitHub
-                                    </a>
-
-                                    <button 
-                                        class="project-detail-btn font-mono text-[11px] font-bold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 rounded-md px-3 py-1 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150 cursor-pointer" 
-                                        data-project="glitch"
-                                    >
-                                        Detail
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
+
+                    <!-- Hidden project mockups path helper element -->
+                    <div id="project-mockups-data" 
+                         data-abs={absMockup.src} 
+                         data-zunoicafe={zunoiCafeMockup.src} 
+                         data-redstrings={redStringsMockup.src} 
+                         class="hidden"></div>
                 </section>
 
                 <!-- Cyber Separator Line -->
@@ -1892,8 +1831,9 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                             </div>
                         </div>
                     </div>
+                </section>
 
-                    <!-- Section: Quotes -->
+                <!-- Section: Quotes -->
                     <section
                         id="quotes"
                         class="relative min-h-[45vh] flex flex-col items-center justify-center py-20 px-8 sm:px-12 md:px-24 max-w-7xl mx-auto text-black dark:text-[#EFEEE8] transition-colors duration-300 w-full z-10 overflow-hidden"
@@ -1934,75 +1874,134 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                         <!-- Modal Content Box -->
                         <div
                             id="project-modal-content"
-                            class="relative w-full max-w-2xl border border-black/15 dark:border-white/15 bg-[#EFEEE8] dark:bg-[#0E0D0B] p-6 sm:p-8 select-none font-mono text-left shadow-2xl overflow-y-auto max-h-[90vh] transition-transform duration-300"
+                            class="relative w-full max-w-3xl border border-black/15 dark:border-white/15 bg-[#EFEEE8] dark:bg-[#0E0D0B] p-5 sm:p-6 text-left shadow-2xl overflow-y-auto max-h-[80vh] transition-transform duration-300 rounded-2xl"
                             style="opacity: 0; transform: translateY(16px);"
+                            data-lenis-prevent
                         >
-                            <!-- Scanline decorative overlay -->
-                            <div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-black/[0.03] to-transparent bg-[length:100%_4px] opacity-30"></div>
-
                             <!-- Header -->
-                            <div class="flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-4 mb-6">
-                                <h3 id="modal-project-title" class="font-display text-xl sm:text-2xl font-bold tracking-tight text-black dark:text-white uppercase leading-none">
-                                    Project Schematics
+                            <div class="flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-3 mb-4">
+                                <h3 id="modal-project-title" class="font-sans text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white leading-none">
+                                    Project Details
                                 </h3>
                                 <button
                                     id="project-modal-close"
-                                    class="font-mono text-xs font-bold text-black/50 dark:text-white/40 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 px-2.5 py-1 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150 cursor-pointer"
+                                    class="text-xs font-semibold text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 rounded-md px-3 py-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150 cursor-pointer flex items-center gap-1"
                                 >
-                                    [ CLOSE ]
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                                    Close
                                 </button>
                             </div>
 
                             <!-- Body Grid -->
-                            <div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-start">
-                                <!-- Details Column (60%) -->
-                                <div class="md:col-span-3 space-y-4">
-                                    <div>
-                                        <h4 class="text-[9px] uppercase tracking-wider text-black/40 dark:text-white/30 font-bold mb-1">// TECHNOLOGY_STACK</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                                <!-- Left Column (Image, Links, & Tech Stacks) - col-span-4 -->
+                                <div class="md:col-span-4 space-y-6">
+                                    <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/[0.03] dark:bg-white/[0.02] shadow-sm">
+                                        <img 
+                                            id="modal-project-image" 
+                                            src="" 
+                                            alt="Project Preview" 
+                                            class="w-full h-full object-cover object-top cursor-zoom-in hover:opacity-90 transition-opacity duration-200" 
+                                        />
+                                    </div>
+
+                                    <div class="space-y-3">
+                                        <h4 id="modal-title-links" class="text-xs font-semibold uppercase tracking-wider text-black/50 dark:text-white/40 mb-2">Links</h4>
+                                        <div class="flex flex-wrap gap-2.5">
+                                            <a 
+                                                id="modal-project-launch" 
+                                                href="#" 
+                                                target="_blank" 
+                                                rel="noopener noreferrer" 
+                                                class="font-sans text-xs font-semibold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 px-3 py-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150 rounded-md flex items-center gap-1.5"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                                                Live Demo
+                                            </a>
+                                            <a 
+                                                id="modal-project-source" 
+                                                href="#" 
+                                                target="_blank" 
+                                                rel="noopener noreferrer" 
+                                                class="font-sans text-xs font-semibold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 px-3 py-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150 rounded-md flex items-center gap-1.5"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                                                GitHub
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="space-y-3">
+                                        <h4 id="modal-title-tech" class="text-xs font-semibold uppercase tracking-wider text-black/50 dark:text-white/40 mb-2">Tech Stacks</h4>
                                         <div id="modal-project-tech" class="flex flex-wrap gap-1.5">
                                             <!-- Dynamic Tech Tags -->
                                         </div>
                                     </div>
+                                </div>
 
+                                <!-- Right Column (Project details) - col-span-8 -->
+                                <div class="md:col-span-8 space-y-6">
                                     <div>
-                                        <h4 class="text-[9px] uppercase tracking-wider text-black/40 dark:text-white/30 font-bold mb-1.5">// SYSTEM_OVERVIEW</h4>
-                                        <p id="modal-project-desc" class="text-xs text-black/70 dark:text-[#EFEEE8]/60 leading-relaxed text-justify">
+                                        <h4 id="modal-title-desc" class="text-xs font-semibold uppercase tracking-wider text-black/50 dark:text-white/40 mb-1.5">Description</h4>
+                                        <p id="modal-project-desc" class="text-sm text-black/85 dark:text-[#EFEEE8]/90 leading-relaxed text-justify font-sans">
                                             <!-- Dynamic Description -->
                                         </p>
                                     </div>
 
                                     <div>
-                                        <h4 class="text-[9px] uppercase tracking-wider text-black/40 dark:text-white/30 font-bold mb-1.5">// SUB_ROUTINES & FEATURES</h4>
-                                        <ul id="modal-project-features" class="space-y-2 text-xs text-black/75 dark:text-[#EFEEE8]/70">
-                                            <!-- Dynamic bullet points -->
+                                        <h4 id="modal-title-role" class="text-xs font-semibold uppercase tracking-wider text-black/50 dark:text-white/40 mb-1.5">Roles</h4>
+                                        <p id="modal-project-role" class="text-sm font-semibold text-black/90 dark:text-white font-sans mb-1">
+                                            <!-- Dynamic Role -->
+                                        </p>
+                                        <ul id="modal-project-role-list" class="text-xs text-black/75 dark:text-[#EFEEE8]/80 space-y-1.5 list-disc pl-4 font-sans leading-relaxed text-justify">
+                                            <!-- Dynamic Role Details -->
                                         </ul>
                                     </div>
-                                </div>
 
-                                <!-- Right Visual Blueprint (40%) -->
-                                <div class="md:col-span-2 flex flex-col items-center justify-center p-4 border border-dashed border-black/10 dark:border-white/10 relative min-h-[200px]">
-                                    <div class="absolute inset-0 project-grid-pattern opacity-30"></div>
-                                    <div id="modal-project-blueprint" class="z-10 w-full h-full flex items-center justify-center">
-                                        <!-- Dynamic SVG Blueprint -->
+                                    <div>
+                                        <h4 id="modal-title-challenge" class="text-xs font-semibold uppercase tracking-wider text-black/50 dark:text-white/40 mb-1.5">Tantangan & Solusi</h4>
+                                        <ul id="modal-project-challenge" class="text-sm text-black/85 dark:text-[#EFEEE8]/90 space-y-3.5 font-sans list-none leading-relaxed text-justify">
+                                            <!-- Dynamic Challenge & Solution -->
+                                        </ul>
                                     </div>
-                                    <div class="mt-4 font-mono text-[8px] opacity-40 text-center w-full">
-                                        TELEMETRY_REFRESH: ACTIVE
+
+                                    <div>
+                                        <h4 id="modal-title-learning" class="text-xs font-semibold uppercase tracking-wider text-black/50 dark:text-white/40 mb-1.5">Tujuan Pembelajaran</h4>
+                                        <p id="modal-project-learning" class="text-sm text-black/85 dark:text-[#EFEEE8]/90 leading-relaxed text-justify font-sans">
+                                            <!-- Dynamic Learning Outcome -->
+                                        </p>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
 
-                            <!-- Footer Links -->
-                            <div class="border-t border-black/10 dark:border-white/10 pt-5 mt-6 flex items-center justify-between">
-                                <span id="modal-project-id" class="font-mono text-[9px] opacity-40 tracking-wider">INDEX_REF: 0x00</span>
-                                <div class="flex gap-3">
-                                    <a id="modal-project-launch" href="#" target="_blank" rel="noopener noreferrer" class="font-mono text-xs font-bold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 px-3 py-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">
-                                        [ LAUNCH_PROJECT ]
-                                    </a>
-                                    <a id="modal-project-source" href="#" target="_blank" rel="noopener noreferrer" class="font-mono text-xs font-bold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 px-3 py-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">
-                                        [ REPOS.SRC ]
-                                    </a>
-                                </div>
-                            </div>
+                    <!-- Image Preview Modal -->
+                    <div
+                        id="image-preview-modal"
+                        class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/80 backdrop-blur-md transition-opacity duration-300"
+                        role="dialog"
+                        aria-modal="true"
+                        style="opacity: 0; display: none;"
+                    >
+                        <div
+                            id="image-preview-content"
+                            class="relative max-w-5xl w-full max-h-[85vh] flex items-center justify-center transition-transform duration-300"
+                            style="opacity: 0; transform: scale(0.95);"
+                        >
+                            <button
+                                id="image-preview-close"
+                                class="absolute -top-12 right-0 text-white hover:text-neutral-300 font-sans text-xs font-semibold flex items-center gap-1 bg-black/30 border border-white/20 px-3 py-1.5 rounded-md cursor-pointer transition-all duration-150"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                                Close Preview
+                            </button>
+                            <img
+                                id="modal-preview-large-image"
+                                src=""
+                                alt="Large Project Preview"
+                                class="max-w-full max-h-[80vh] object-contain rounded-xl border border-white/10 shadow-2xl"
+                            />
                         </div>
                     </div>
             </div>
@@ -2503,7 +2502,6 @@ import imgCatGlitched from "../assets/glitched-cat.png";
         ScrollTrigger.create({
             trigger: "#quotes",
             start: "top 80%",
-            once: true,
             onEnter: () => {
                 if (quoteRevealed) return;
 
@@ -2582,179 +2580,852 @@ import imgCatGlitched from "../assets/glitched-cat.png";
         const modalTitle = document.getElementById("modal-project-title");
         const modalTech = document.getElementById("modal-project-tech");
         const modalDesc = document.getElementById("modal-project-desc");
-        const modalFeatures = document.getElementById("modal-project-features");
-        const modalBlueprint = document.getElementById("modal-project-blueprint");
-        const modalId = document.getElementById("modal-project-id");
+        const modalImage = document.getElementById("modal-project-image") as HTMLImageElement | null;
+        const modalRole = document.getElementById("modal-project-role");
+        const modalRoleList = document.getElementById("modal-project-role-list");
+        const modalChallenge = document.getElementById("modal-project-challenge");
+        const modalLearning = document.getElementById("modal-project-learning");
         const modalLaunch = document.getElementById("modal-project-launch") as HTMLAnchorElement | null;
         const modalSource = document.getElementById("modal-project-source") as HTMLAnchorElement | null;
+
+        // Modal Title Header Elements
+        const titleLinks = document.getElementById("modal-title-links");
+        const titleDesc = document.getElementById("modal-title-desc");
+        const titleTech = document.getElementById("modal-title-tech");
+        const titleRole = document.getElementById("modal-title-role");
+        const titleChallenge = document.getElementById("modal-title-challenge");
+        const titleLearning = document.getElementById("modal-title-learning");
+
+        // Image Preview Modal Elements
+        const imgPreviewModal = document.getElementById("image-preview-modal");
+        const imgPreviewContent = document.getElementById("image-preview-content");
+        const imgPreviewClose = document.getElementById("image-preview-close");
+        const modalPreviewLargeImage = document.getElementById("modal-preview-large-image") as HTMLImageElement | null;
+
+        let activeProjectKey: string | null = null;
+        let activeImageSrc: string | null = null;
+
+        const modalTitleTranslations = {
+            desc: {
+                id: "Deskripsi",
+                en: "Description",
+                zh: "描述",
+                ko: "설명",
+                ja: "説明",
+                ar: "الوصف",
+                hi: "विवरण"
+            },
+            tech: {
+                id: "Tech Stacks",
+                en: "Tech Stacks",
+                zh: "技术栈",
+                ko: "기술 스택",
+                ja: "技術スタック",
+                ar: "مجموعات التقنيات",
+                hi: "टेक स्टैक"
+            },
+            role: {
+                id: "Roles",
+                en: "Roles",
+                zh: "角色",
+                ko: "역할",
+                ja: "役割",
+                ar: "الأدوار",
+                hi: "भूमिकाएं"
+            },
+            challenge: {
+                id: "Tantangan & Solusi",
+                en: "Challenges & Solutions",
+                zh: "挑战与解决方案",
+                ko: "도전 및 해결책",
+                ja: "課題と解決策",
+                ar: "التحديات والحلول",
+                hi: "चुनौतियां और समाधान"
+            },
+            learning: {
+                id: "Tujuan Pembelajaran",
+                en: "Tujuan Pembelajaran",
+                zh: "学习成果",
+                ko: "학습 목표",
+                ja: "学習成果",
+                ar: "نتائج التعلم",
+                hi: "सीखने के परिणाम"
+            },
+            links: {
+                id: "Tautan",
+                en: "Links",
+                zh: "链接",
+                ko: "링크",
+                ja: "링크",
+                ar: "الروابط",
+                hi: "लिंक"
+            }
+        };
+
+        const translateModalHeaders = (lang: string) => {
+            const l = lang as keyof typeof modalTitleTranslations.links;
+            if (titleLinks) titleLinks.textContent = modalTitleTranslations.links[l] || modalTitleTranslations.links.en;
+            if (titleDesc) titleDesc.textContent = modalTitleTranslations.desc[l] || modalTitleTranslations.desc.en;
+            if (titleTech) titleTech.textContent = modalTitleTranslations.tech[l] || modalTitleTranslations.tech.en;
+            if (titleRole) titleRole.textContent = modalTitleTranslations.role[l] || modalTitleTranslations.role.en;
+            if (titleChallenge) titleChallenge.textContent = modalTitleTranslations.challenge[l] || modalTitleTranslations.challenge.en;
+            if (titleLearning) titleLearning.textContent = modalTitleTranslations.learning[l] || modalTitleTranslations.learning.en;
+        };
+
+        const projectTranslations = {
+            abs: {
+                desc: {
+                    id: "Aplikasi web komprehensif untuk mengelola inventaris fisik, transaksi keuangan, dan logistik penjemputan bank sampah secara terintegrasi.",
+                    en: "A comprehensive web application to manage physical inventory, financial transactions, and pickup logistics of a waste bank in an integrated manner.",
+                    zh: "一个综合性的网络应用程序，用于以集成的方式管理垃圾银行的实物库存、财务交易和收集物流。",
+                    ko: "쓰레기 은행의 실물 재고, 금융 거래 및 수거 물류를 통합적으로 관리하는 종합 웹 애플리케이션입니다.",
+                    ja: "ごみ銀行の物理的な在庫、金融取引、回収物流を統合的に管理する包括的なWebアプリケーションです。",
+                    ar: "تطبيق ويب شامل لإدارة المخزون المادي والمعاملات المالية ولوجستيات جمع بنك النفايات بشكل متكامل.",
+                    hi: "कचरा बैंक के भौतिक इन्वेंट्री, वित्तीय लेनदेन और पिकअप रसद को एकीकृत तरीके से प्रबंधित करने के लिए एक व्यापक वेब एप्लिकेशन।"
+                },
+                role: {
+                    id: "Front-end",
+                    en: "Front-end",
+                    zh: "前端",
+                    ko: "프론트엔드",
+                    ja: "フロントエンド",
+                    ar: "واجهة أمامية",
+                    hi: "फ्रंट-энд"
+                },
+                roleDetails: {
+                    id: [
+                        "Implementasi Proteksi Rute dan Otorisasi Multi-Role front-end bertanggung jawab mengelola navigasi dan akses halaman menggunakan vue-router dengan menerapkan route guards berbasis peran pengguna. Sistem di sisi klien harus memastikan bahwa nasabah tidak dapat mengakses dasbor petugas atau admin, serta mengelola penyimpanan token autentikasi secara aman di penyimpanan lokal (session storage).",
+                        "Integrasi Komponen Interaktif Peta dan Grafik Data Pengembang bertanggung jawab menyajikan data spasial dan analitik secara visual melalui integrasi pustaka pihak ketiga. Ini mencakup implementasi peta interaktif menggunakan leaflet untuk penentuan koordinat penjemputan sampah nasabah, serta pembuatan grafik fluktuasi setoran, kapasitas gudang, dan statistik keuangan interaktif menggunakan ApexCharts untuk membantu kebutuhan audit manajer.",
+                        "Manajemen State Global dan Keranjang Belanja Transaksional Mengelola aliran data antar-komponen menggunakan pinia sebagai penyimpanan state global. Tanggung jawab ini sangat penting pada fitur belanja sampah oleh pengepul (BeliSampah.vue), di mana sistem front-end harus mengelola keranjang belanja lokal, memvalidasi batas stok gudang secara dinamis sebelum pesanan dikirim, dan merangkum rincian transaksi sebelum proses pembayaran.",
+                        "Optimalisasi Upload Media dan Utilitas Sisi Klien Menerapkan fitur penanganan dokumen sensitif dan berkas berukuran besar di sisi klien. front-end bertanggung jawab untuk melakukan validasi format dokumen pendaftaran pengepul (seperti KTP dan NPWP), melakukan kompresi ukuran gambar dinamis untuk menghemat penyimpanan server, serta merancang tata letak halaman yang ramah cetak (print-friendly) untuk mencetak bukti transaksi fisik.",
+                        "Pengembangan UI/UX Responsif dengan Tailwind CSS Menyusun komponen antarmuka yang adaptif agar dapat digunakan dengan nyaman di berbagai perangkat, terutama perangkat seluler yang digunakan oleh nasabah dan petugas di lapangan saat proses penjemputan sampah, dengan mengoptimalkan utilitas layouting dan transisi visual menggunakan Tailwind CSS v4."
+                    ],
+                    en: [
+                        "Route Protection & Multi-Role Authorization: Managed client-side navigation and access control using Vue Router guards based on user roles. Ensured customers cannot access employee/admin dashboards and securely managed auth tokens (Laravel Sanctum) in session storage.",
+                        "Interactive Map & Data Visualization Integration: Handled spatial and analytical data visualization by integrating Leaflet GIS for customer waste pickup mapping and ApexCharts for set-off fluctuation, warehouse capacity, and financial statistics auditing.",
+                        "Global State Management & Transactional Cart: Managed multi-component data flow using Pinia. Implemented local cart logic for waste purchase (BeliSampah.vue), dynamic stock validations, and transaction details verification before payment.",
+                        "Client-Side Media Upload & Utilities Optimization: Developed secure handling for sensitive documents and large files, validated vendor registrations (KTP/NPWP), implemented local image compression to save server storage, and designed print-friendly layout sheets.",
+                        "Responsive UI/UX Development with Tailwind CSS: Structured mobile-first, adaptive interface layouts optimized for field operators and customers on various devices, utilizing Tailwind CSS v4 utilities and transitions."
+                    ],
+                    zh: [
+                        "路由保护与多角色授权：使用基于用户角色的 Vue Router 导航守卫管理客户端页面导航和访问控制，确保普通客户无法访问员工或管理员面板，并在会话存储中安全管理 Laravel Sanctum 身份验证令牌。",
+                        "交互式地图与数据可视化集成：通过集成第三方库以可视化方式呈现空间和分析数据。包括使用 Leaflet GIS 确定垃圾收集坐标，以及使用 ApexCharts 生成库存、容量和财务数据的审计图表。",
+                        "全局状态管理与交易购物车：使用 Pinia 作为全局状态管理器协调组件间的数据流。在废品回收购物功能中实现本地购物车逻辑、动态库存验证和交易结算摘要。",
+                        "客户端媒体上传与实用程序优化：在客户端实现敏感文件和高分辨率大图的校验、本地压缩以节省服务器存储空间，并设计了对打印友好的交易凭证布局。",
+                        "使用 Tailwind CSS 构建响应式 UI/UX：为户外回收员和客户优化多端自适应布局，利用 Tailwind CSS v4 的排版与过渡动效实现流畅性体验。"
+                    ],
+                    ko: [
+                        "경로 보호 및 다중 역할 권한 부여: 사용자 역할 기반의 Vue Router 가드를 사용하여 클라이언트 측 탐색 및 액세스 제어를 관리하고, 일반 고객이 직원 또는 관리자 대시보드에 접근할 수 없도록 방지하며 세션 저장소에서 인증 토큰(Laravel Sanctum)을 안전하게 관리합니다.",
+                        "대화형 지도 및 데이터 시각화 통합: Leaflet GIS를 통한 고객 쓰레기 수거 위치 지도 매핑 및 ApexCharts를 이용한 금융, 재고량 변동 분석 그래프 작성을 포함하여 타사 라이브러리를 사용한 공간 및 분석 데이터의 시각적 인터페이스를 설계합니다.",
+                        "전역 상태 관리 및 트랜잭션 장바구니: Pinia를 사용하여 구성 요소 간 데이터 흐름을 조정합니다. 수거 장바구니 로직, 실시간 잔여 재고 유효성 검사, 결제 전 거래 요약 처리를 클라이언트 측에서 관리합니다.",
+                        "미디어 업로드 및 유틸리티 최적화: 민감 문서(KTP/NPWP 등) 및 고해상도 대용량 파일 검증, 서버 디스크 절약을 위한 클라이언트 측 이미지 압축, 영수증 출력을 위한 프린트 친화적 레이아웃 설계를 구현합니다.",
+                        "Tailwind CSS 기반 반응형 UI/UX 개발: 현장 수거 담당자와 사용자가 다양한 모바일 기기에서도 편리하게 이용할 수 있도록 Tailwind CSS v4를 활용하여 부드러운 화면 전환과 모바일 우선 레이아웃을 작성합니다."
+                    ],
+                    ja: [
+                        "ルート保護とマルチロール認可：ユーザー権限に基づいた Vue Router ガードを使用してクライアント側のナビゲーションを制御し、一般ユーザーが管理者ダッシュボードにアクセスするのを防ぎ、認証トークンをセッションストレージに安全に保管します。",
+                        "インタラクティブマップとデータ可視化：Leaflet GIS を統合して顧客のゴミ回収場所をマップ上にプロットし、ApexCharts を利用して収支や倉庫容量 of 推移などをビジュアル表示する管理機能を構築します。",
+                        "グローバル状態管理とトランザクションカート：Pinia を用いてコンポーネント間のデータフローを統括。回収カートのローカルロジック、リアルタイム在庫制限の検証、決済前の最終確認フローを実装します。",
+                        "クライアント側メディア最適化：本人確認書類などの大容量ファイルの検証、サーバー負荷を抑えるためのブラウザ側での画像圧縮処理、領収書発行用の印刷向けスタイルシートの設計を行います。",
+                        "Tailwind CSS によるレスポンシブ UI/UX：回収員やユーザーが屋外でスマートフォンから快適に操作できるよう、Tailwind CSS v4 を使用してモジュール式で応答性の高いレイアウトをデザインします。"
+                    ],
+                    ar: [
+                        "حماية المسار وتفويض الأدوار المتعددة: إدارة التنقل والتحكم في الوصول في جانب العميل باستخدام حراس Vue Router بناءً على أدوار المستخدمين، وضمان عدم وصول العملاء إلى لوحات تحكم الموظفين/المشرفين وتخزين رموز المصادقة بأمان.",
+                        "دمج الخرائط التفاعلية وتصور البيانات: معالجة تصور البيانات الجغرافية والتحليلات عبر دمج Leaflet GIS لتحديد مواقع جمع نفايات العملاء واستخدام ApexCharts للرسوم البيانية المالية وسعة المخازن لأغراض التدقيق.",
+                        "إدارة الحالة العامة وعربة التسوق المالي: إدارة تدفق البيانات بين المكونات باستخدام Pinia كمخزن حالة عام. إدارة عربة التسوق المحلية لمشتريات النفايات، التحقق من المخزون ديناميكيًا، وتلخيص المعاملة قبل الدفع.",
+                        "تحسين تحميل الوسائط والأدوات المساعدة للعميل: تنفيذ ميزات معالجة الوثائق الحساسة والملفات الكبيرة في جانب العميل، والتحقق من صحة وثائق التسجيل، وضغط الصور محليًا لتوفير مساحة السيرفر، وتصميم واجهات سهلة الطباعة للفواتير.",
+                        "تطوير واجهة مستخدم مستجيبة باستخدام Tailwind CSS: هيكلة واجهات مرنة ومتوافقة للاستخدام السلس على مختلف الأجهزة، خاصة الهواتف المحمولة التي يستخدمها العملاء والسائقون في الميدان باستخدام Tailwind CSS v4."
+                    ],
+                    hi: [
+                        "रूट सुरक्षा और बहु-भूमिका प्राधिकरण: उपयोगकर्ता भूमिकाओं के आधार पर Vue Router गार्ड का उपयोग करके क्लाइंट-साइड नेविगेशन और एक्सेस कंट्रोल प्रबंधित किया। यह सुनिश्चित किया कि ग्राहक कर्मचारी/एडमिन डैशबोर्ड तक न पहुँच सकें और स्थानीय स्टोरेज में ऑथ टोकन को सुरक्षित रखा।",
+                        "इंटरैक्टिव मानचित्र और डेटा विज़ुअलाइज़ेशन एकीकरण: ग्राहक कचरा पिकअप मानचित्रण के लिए Leaflet GIS और क्षमता उतार-चढ़ाव व वित्तीय ऑडिट आँकड़ों के लिए ApexCharts को एकीकृत करके स्थानिक और विश्लेषणात्मक डेटा प्रस्तुतीकरण संभाला।",
+                        "ग्लोबल स्टेट मैनेजमेंट और ट्रांजैक्शनल कार्ट: Pinia का उपयोग करके घटक डेटा प्रवाह प्रबंधित किया। कचरा खरीद सुविधा (BeliSampah.vue) के लिए स्थानीय कार्ट तर्क, गतिशील स्टॉक सत्यापन और भुगतान से पहले लेनदेन विवरण को संभाला।",
+                        "क्लाइंट-साइड मीडिया अपलोड और उपयोगिता अनुकूलन: क्लाइंट-साइड पर संवेदनशील दस्तावेजों और बड़ी फ़ाइलों की जांच की, सर्वर स्टोरेज बचाने के लिए छवियों को स्थानीय रूप से संपीड़ित किया, और भौतिक रसीदों के मुद्रण के अनुकूल लेआउट तैयार किया।",
+                        "Tailwind CSS के साथ उत्तरदायी UI/UX विकास: क्षेत्र ऑपरेटरों और ग्राहकों के लिए मोबाइल-प्रथम और उत्तरदायी इंटरफ़ेस लेआउट तैयार किया, जिसमें Tailwind CSS v4 उपयोगिताओं और सुचारू बदलावों का उपयोग किया गया है।"
+                    ]
+                },
+                challenge: {
+                    id: [
+                        {
+                            title: "Kompresi Gambar di Sisi Klien pada Unggah Foto Sampah",
+                            desc: "Mengatasi kendala unggahan foto beresolusi tinggi (5-10MB) dari smartphone nasabah dengan mengimplementasikan sistem kompresi otomatis di sisi klien. Menggunakan FileReader API dan HTML5 Canvas, sistem secara rekursif me-resize (lebar maks 1600px) dan mengompresi gambar hingga di bawah 1MB sebelum diunggah melalui Axios. Solusi ini efektif mempercepat waktu unggah, mencegah error batasan ukuran server, dan menghemat data pengguna dengan kualitas visual yang tetap terjaga."
+                        },
+                        {
+                            title: "Sinkronisasi dan Rendering Peta Interaktif Leaflet pada Halaman Profil Nasabah",
+                            desc: "Mengatasi kendala render glitch pada integrasi Leaflet di Vue 3 SPA dengan memanfaatkan kombinasi nextTick dan map.invalidateSize() untuk memastikan ubin peta termuat sempurna. Untuk meningkatkan UX penentuan lokasi, titik awal dideteksi menggunakan HTML5 Geolocation API. Sistem juga dilengkapi sinkronisasi dua arah menggunakan OpenStreetMap Nominatim API untuk reverse geocoding asinkron. Setiap kali marker digeser, koordinat langsung diterjemahkan menjadi alamat teks fisik secara otomatis, sehingga pengguna tidak perlu mengetik manual dan presisi data tetap terjaga."
+                        }
+                    ],
+                    en: [
+                        {
+                            title: "Client-Side Image Compression for Waste Photo Upload",
+                            desc: "Addressed the bottleneck of uploading high-resolution photos (5-10MB) from customer smartphones by implementing an automatic client-side compression system. Using the FileReader API and HTML5 Canvas, the system recursively resizes (max width 1600px) and compresses images to under 1MB before uploading via Axios. This effectively speeds up upload times, avoids server file limit errors, and saves user mobile data while maintaining adequate visual quality."
+                        },
+                        {
+                            title: "Interactive Leaflet Map Synchronization & Rendering on Profile Page",
+                            desc: "Resolved map tile rendering glitches in the Vue 3 SPA Leaflet integration by combining Vue's nextTick and map.invalidateSize() to force map recalculation upon visibility. To improve location selection UX, the initial center is detected using the Geolocation API. It features bidirectional synchronization with OpenStreetMap Nominatim API for asynchronous reverse geocoding, converting coordinates into physical address texts dynamically as the marker is dragged, ensuring data precision without manual typing."
+                        }
+                    ],
+                    zh: [
+                        {
+                            title: "客户端废品照片上传图像压缩",
+                            desc: "通过实现客户端自动图像压缩系统，解决用户手机上传高分辨率照片（5-10MB）导致的吞吐瓶颈。利用 FileReader API 和 HTML5 Canvas，系统在通过 Axios 上传之前，递归调整（最大宽度 1600px）并将图像压缩至 1MB 以下。这有效缩短了上传时间，避免了服务器文件限制错误，并在保持极佳视觉质量的同时节省了用户流量。"
+                        },
+                        {
+                            title: "个人资料页面上交互式 Leaflet 地图的同步与渲染",
+                            desc: "结合 Vue 的 nextTick 和 map.invalidateSize()，解决了 Vue 3 SPA Leaflet 地图集成中的渲染闪烁与地图瓦片加载不全的问题。为了改善位置选择的 UX，利用 Geolocation API 定位初始中心。系统使用 OpenStreetMap Nominatim API 实现了双向同步用于逆地理编码，在拖动标记时将经纬度实时转化为物理地址，无需手动输入即可保证数据精确性。"
+                        }
+                    ],
+                    ko: [
+                        {
+                            title: "폐기물 사진 업로드를 위한 클라이언트 측 이미지 압축",
+                            desc: "고객 스마트폰에서 고해상도 사진(5-10MB)을 업로드할 때 발생하는 병목 현상을 해결하기 위해 클라이언트 측 자동 압축 시스템을 설계했습니다. FileReader API와 HTML5 Canvas를 사용하여 Axios 업로드 전에 이미지 가로 폭을 최대 1600px로 리사이징하고 1MB 미만으로 재귀 압축합니다. 이를 통해 업로드 지연과 서버 파일 크기 제한 오류를 방지하고, 시각적 품질을 훼손하지 않으면서 사용자의 모바일 데이터를 절약할 수 있습니다."
+                        },
+                        {
+                            title: "사용자 프로필 페이지 내 대화형 Leaflet 지도 렌더링 및 동기화",
+                            desc: "Vue 3 SPA 내 Leaflet 렌더링 오류를 해결하기 위해 nextTick과 map.invalidateSize()를 병행하여 지도가 정상적으로 활성화되도록 제어했습니다. 위치 지정 편의성을 위해 Geolocation API로 시작 지점을 설정하고, OpenStreetMap Nominatim API를 통한 비동기 역지오코딩을 구축하여 마커를 드래그할 때마다 주소 텍스트가 양방향으로 즉시 갱신되므로 수동 입력 없이 정확한 좌표 데이터를 수집합니다."
+                        }
+                    ],
+                    ja: [
+                        {
+                            title: "ゴミ写真アップロード用ブラウザ側画像圧縮",
+                            desc: "ユーザーのスマホから高解像度写真（5-10MB）が送信される際のタイムアウトを防ぐため、ブラウザ側での自動圧縮処理を構築。FileReader API と HTML5 Canvas を利用して、アップロード前に再帰的にリサイズ（最大幅1600px）および圧縮を実施し、1MB未満に落としてから Axios 送信します。これにより、通信時間の短縮とサーバー制限エラーの回避を両立させ、画質を保ちながらギガ消費を節約します。"
+                        },
+                        {
+                            title: "プロフィール画面での Leaflet マップ描画と位置同期の最適化",
+                            desc: "Vue 3 SPA での Leaflet マップ表示崩れに対し、nextTick と map.invalidateSize() を組み合わせることで描画領域を強制更新。初期座標は Geolocation API で取得し、OpenStreetMap Nominatim API による非同期逆ジオコーディングを実装。ピンをドラッグするだけで座標が物理的な住所テキストにリアルタイム翻訳され、手入力を省きつつ位置情報の精度を保証します。"
+                        }
+                    ],
+                    ar: [
+                        {
+                            title: "ضغط الصور في جانب العميل لصور النفايات المرفوعة",
+                            desc: "معالجة مشكلة تحميل الصور عالية الدقة (5-10 ميجابايت) من الهواتف الذكية للعملاء من خلال تطبيق نظام ضغط تلقائي في جانب العميل. باستخدام FileReader API و HTML5 Canvas، يقوم النظام بشكل متكرر بتغيير حجم الصور (الحد الأقصى للعرض 1600 بكسل) وضغطها لتكون أقل من 1 ميجابايت قبل رفعها عبر Axios. يعمل هذا الحل على تسريع وقت الرفع بشكل فعال، وتجنب أخطاء حجم الخادم، وتوفير بيانات المستخدم مع الحفاظ على الجودة البصرية."
+                        },
+                        {
+                            title: "مزامنة ورسم خرائط Leaflet التفاعلية على صفحة الملف الشخصي",
+                            desc: "التغلب على مشكلات معالجة الرندر في خرائط Leaflet داخل تطبيق Vue 3 SPA باستخدام nextTick و map.invalidateSize() للتأكد من تحميل الخريطة بالكامل. لتحسين تجربة المستخدم، يتم تحديد الموقع البدئي تلقائيًا باستخدام Geolocation API. يشتمل النظام أيضًا على مزامنة ثنائية الاتجاه باستخدام OpenStreetMap Nominatim API لتحديد العناوين الفعلية عند سحب العلامة (marker) تلقائيًا دون كتابة يدوية."
+                        }
+                    ],
+                    hi: [
+                        {
+                            title: "कचरा फोटो अपलोड के लिए क्लाइंट-साइड छवि संपीड़न",
+                            desc: "क्लाइंट-साइड स्वचालित संपीड़न प्रणाली लागू करके ग्राहकों के स्मार्टफोन से उच्च-रिज़ॉल्यूशन वाली तस्वीरों (5-10MB) को अपलोड करने की बाधा को हल किया। FileReader API और HTML5 Canvas का उपयोग करके, सिस्टम Axios के माध्यम से अपलोड करने से पहले छवियों को 1MB से कम आकार में संपीड़ित और रीसाइज़ (अधिकतम चौड़ाई 1600px) करता है। इससे अपलोड समय कम होता है, सर्वर त्रुटियों से बचाव होता है, और डेटा की बचत होती है।"
+                        },
+                        {
+                            title: "प्रोफ़ाइल पृष्ठ पर मुख्य Leaflet मानचित्र सिंक्रनाइज़ेशन और रेंडरिंग",
+                            desc: "नियमित रेंडरिंग गड़बड़ियों को हल करने के लिए Vue's nextTick व map.invalidateSize() का उपयोग किया ताकि मानचित्र टाइलें पूरी तरह से लोड हों। स्थान चयन अनुभव को बेहतर बनाने के लिए Geolocation API का उपयोग करके प्रारंभिक स्थान का पता लगाया गया। यह OpenStreetMap Nominatim API का उपयोग करके असमकालिक रिवर्स जियोकोडिंग के साथ द्वि-दिशात्मक सिंक्रनाइज़ेशन प्रदान करता है, जिससे मार्कर खिसकाने पर निर्देशांक भौतिक पते में अनुवादित हो जाते हैं।"
+                        }
+                    ]
+                },
+                learning: {
+                    id: "Proyek full-stack ini mengintegrasikan manajemen inventaris fisik dan transaksi keuangan secara aman. Sisi front-end dibangun sebagai SPA responsif menggunakan Vue 3, Tailwind CSS v4, dan Pinia, serta dilengkapi sistem keamanan RBAC. Sisi back-end ditenagai oleh RESTful API (Laravel Sanctum) dengan implementasi database transactions untuk menjaga konsistensi data secara ketat. Aplikasi ini juga diperkaya dengan fitur tingkat lanjut, termasuk pemetaan lokasi (Leaflet GIS), grafik analitik (ApexCharts), ekspor dokumen (Excel/PDF), dan optimasi unggahan melalui kompresi gambar di sisi klien.",
+                    en: "This full-stack project securely integrates physical inventory management and financial transactions. The front-end is built as a responsive SPA using Vue 3, Tailwind CSS v4, and Pinia, featuring an RBAC security system. The back-end is powered by a Laravel Sanctum RESTful API with database transactions to strictly maintain data consistency. The app is also enriched with advanced features, including Leaflet GIS location mapping, ApexCharts analytics, Excel/PDF exports, and client-side image compression optimizations.",
+                    zh: "该全栈项目实现了实物库存管理和财务交易的安全整合。前端采用 Vue 3、Tailwind CSS v4 和 Pinia 构建为响应式单页面应用（SPA），并配备基于角色的访问控制（RBAC）安全系统。后端由基于 Laravel Sanctum 的 RESTful API 驱动，并通过数据库事务保证数据的强一致性。应用还包含高级功能，如 Leaflet GIS 地图定位、ApexCharts 分析图表、Excel/PDF 数据导出，以及客户端图片压缩优化。",
+                    ko: "이 풀스택 프로젝트는 실물 재고 관리와 금융 거래를 안전하게 통합합니다. 프론트엔드는 Vue 3, Tailwind CSS v4 및 Pinia를 사용하여 반응형 SPA로 빌드되었으며, RBAC 보안 시스템이 장착되어 있습니다. 백엔드는 데이터 일관성을 엄격히 관리하기 위해 데이터베이스 트랜잭션이 적용된 Laravel Sanctum RESTful API로 구성되었습니다. 또한 Leaflet GIS 위치 매핑, ApexCharts 분석 그래프, Excel/PDF 문서 내보내기, 클라이언트 측 이미지 압축 최적화 등 다채로운 고급 기능이 반영되었습니다.",
+                    ja: "物理的な在庫管理と金融取引を安全に統合したフルスタックプロジェクト。フロントエンドは Vue 3、Tailwind CSS v4、Pinia を用いて応答性の高い SPA として構築され、RBAC による権限管理が行われます。バックエンドは RESTful API (Laravel Sanctum) で駆動し、データ整合性を保つためのデータベーストランザクションを実装。さらに Leaflet GIS マップ、ApexCharts 分析、Excel/PDF出力、クライアント側画像圧縮などの高度な機能を備えています。",
+                    ar: "يجمع هذا المشروع الكامل بشكل آمن بين إدارة المخزون المادي والمعاملات المالية. تم بناء الواجهة الأمامية كـ SPA مستجيب باستخدام Vue 3 و Tailwind CSS v4 و Pinia، مع نظام أمان RBAC. يتم تشغيل الخلفية بواسطة RESTful API (Laravel Sanctum) مع معاملات قاعدة البيانات لضمان اتساق البيانات بدقة. تم إثراء التطبيق بميزات متقدمة بما في ذلك خرائط Leaflet GIS، تحليلات ApexCharts، تصدير ملفات Excel/PDF، وضغط الصور محليًا.",
+                    hi: "यह फुल-स्टैक प्रोजेक्ट भौतिक सूची प्रबंधन और वित्तीय लेनदेन को सुरक्षित रूप से एकीकृत करता है। फ्रंट-एंड को Vue 3, Tailwind CSS v4, और Pinia का उपयोग करके उत्तरदायी SPA के रूप में बनाया गया है, जिसमें RBAC सुरक्षा प्रणाली है। बैक-एंड को डेटा स्थिरता बनाए रखने के लिए डेटाबेस लेनदेन के साथ Laravel Sanctum RESTful API द्वारा संचालित किया जाता. एप्लिकेशन उन्नत सुविधाओं जैसे Leaflet GIS स्थान मानचित्रण, ApexCharts विश्लेषण, Excel/PDF निर्यात और क्लाइंट-साइड छवि संपीड़न से समृद्ध है。"
+                }
+            },
+            zunoicafe: {
+                desc: {
+                    id: "Platform pemesanan kafe modern yang menghubungkan sistem pesanan mandiri (mobile) pelanggan dengan dasbor manajemen kasir secara real-time.",
+                    en: "A modern cafe ordering platform that connects the customer self-ordering (mobile) system with the cashier management dashboard in real-time.",
+                    zh: "一个现代化的咖啡馆点单平台，将顾客的自助点单（移动端）系统与收银管理仪表盘进行实时连接。",
+                    ko: "고객의 셀프 주문(모바일) 시스템과 계산대 관리 대시보드를 실시간으로 연결하는 현대적인 카페 주문 플랫폼입니다.",
+                    ja: "顧客のセルフ注文（モバイル）システムとレジ管理ダッシュボードをリアルタイムで接続する、モダンなカフェ注文プラットフォームです。",
+                    ar: "منصة طلبات مقاهي حديثة تربط نظام الطلب الذاتي للعملاء (عبر الهاتف المحمول) بلوحة تحكم إدارة أمين الصندوق في الوقت الفعلي.",
+                    hi: "एक आधुनिक कैफे ऑर्डरिंग प्लेटफॉर्म जो ग्राहक के स्वयं-ऑर्डरिंग (मोबाइल) सिस्टम को वास्तविक समय में कैशियर प्रबंधन डैशबोर्ड से जोड़ता है。"
+                },
+                role: {
+                    id: "Full-stack",
+                    en: "Full-stack",
+                    zh: "全栈",
+                    ko: "풀스택",
+                    ja: "フルスタック",
+                    ar: "مطور شامل",
+                    hi: "फुल-स्टैक"
+                },
+                roleDetails: {
+                    id: [
+                        "Pengembangan Halaman Aplikasi (Inertia.js & Vue 3) Membangun antarmuka mobile-first untuk halaman pelanggan (seperti MenuList.vue dan Cart.vue) serta dasbor admin yang komprehensif (Manajemen Reservasi, Kasir, dan Statistik). Bertanggung jawab dalam menerima dan mengolah data (props) secara mulus dari controller Laravel melalui integrasi Inertia.js.",
+                        "Styling & UI Components (Tailwind CSS v4 & shadcn-vue) Merancang antarmuka pengguna yang responsif, modern, dan konsisten dengan memanfaatkan utilitas Tailwind CSS serta komponen UI modular dari shadcn-vue.",
+                        "Visualisasi Data (ApexCharts & Chart.js) Mengintegrasikan pustaka grafik untuk menyajikan visualisasi data interaktif berupa laporan penjualan dan statistik transaksi pada dasbor admin.",
+                        "Logika Bisnis Sisi Klien & Integrasi API Mengelola aliran data (state) pada fitur keranjang belanja, melakukan kalkulasi dinamis untuk promo atau voucher diskon, menerapkan validasi form input, serta menangani integrasi request API secara asinkron menggunakan Axios.",
+                        "Standarisasi & Kualitas Kode (TypeScript) Menulis kode yang lebih aman dan terstruktur (type-safe) menggunakan TypeScript, serta memastikan konsistensi standar pemformatan kode di seluruh proyek menggunakan ESLint dan Prettier."
+                    ],
+                    en: [
+                        "Application Pages Development (Inertia.js & Vue 3): Constructed a mobile-first UI for customer pages (MenuList.vue, Cart.vue) and a comprehensive admin panel (Reservations, Cashier, Statistics). Handled seamless Laravel controller data passing (props) via Inertia.js integration.",
+                        "Styling & UI Components (Tailwind CSS v4 & shadcn-vue): Designed responsive, premium, and unified interfaces using Tailwind CSS v4 styling rules alongside shadcn-vue modular UI components.",
+                        "Data Visualization (ApexCharts & Chart.js): Integrated chart libraries to visualize interactive reports, transactional logs, and sales metrics on the admin management dashboard.",
+                        "Client Business Logic & API Integration: Structured global client states for the shopping cart system, handled dynamic discount voucher validations, ran input form sanitization, and controlled asynchronous Axios API operations.",
+                        "Standardization & Code Quality (TypeScript): Authored clean, type-safe code scripts using TypeScript and maintained workspace-wide code formatting using ESLint and Prettier."
+                    ],
+                    zh: [
+                        "应用页面开发（Inertia.js 和 Vue 3）：为客户页面（如 MenuList.vue 和 Cart.vue）构建移动优先界面，并为管理员开发综合控制台。通过 Inertia.js 实现 Laravel 控制器数据到 Vue 组件的无缝渲染。",
+                        "样式与UI组件（Tailwind CSS v4 & shadcn-vue）：利用 Tailwind CSS v4 实用工具以及 shadcn-vue 模块化组件，设计响应式、现代且一致的用户界面。",
+                        "数据可视化（ApexCharts & Chart.js）：集成图表库，在管理后台中以交互式图形展示销售报告和交易统计数据。",
+                        "客户端业务逻辑与API集成：管理购物车功能的数据流（状态），执行折扣或优惠券的动态计算，应用表单验证，并通过 Axios 异步处理 API 请求。",
+                        "代码规范与质量保障（TypeScript）：使用 TypeScript 编写类型安全、结构更健壮的代码，并通过 ESLint 和 Prettier 确保整个项目代码格式标准的一致性。"
+                    ],
+                    ko: [
+                        "애플리케이션 페이지 개발(Inertia.js & Vue 3): 고객용 모바일 우선 페이지(MenuList.vue, Cart.vue) 및 종합 관리자 대시보드(예약 관리, 계산대, 통계)를 개발했습니다. Inertia.js 통합을 통해 Laravel 컨트롤러의 데이터를 원활히 처리했습니다.",
+                        "스타일링 및 UI 구성 요소(Tailwind CSS v4 & shadcn-vue): Tailwind CSS와 shadcn-vue의 모듈식 UI 구성 요소를 사용하여 반응형이며 세련된 일관된 사용자 인터페이스를 디자인했습니다.",
+                        "데이터 시각화(ApexCharts & Chart.js): 관리자 대시보드에서 판매 보고서 및 거래 통계를 인터랙티브하게 보여주는 차트 라이브러리를 통합했습니다.",
+                        "클라이언트 비즈니스 로직 및 API 연동: 장바구니 상태를 관리하고, 프로모션/할인 쿠폰의 동적 계산을 처리하며, 입력 양식 유효성 검사 및 Axios를 활용한 비동기 API 요청을 제어했습니다.",
+                        "코드 표준화 및 품질 관리(TypeScript): TypeScript를 도입하여 타입 안정성이 보장된 구조적인 코드를 작성하였으며, ESLint 및 Prettier를 사용해 프로젝트 전반의 코드 스타일 일관성을 확보했습니다."
+                    ],
+                    ja: [
+                        "アプリケーション開発（Inertia.js & Vue 3）：顧客向けモバイル優先画面（MenuList.vue, Cart.vue）および総合管理画面（予約管理、レジ、売上統計）を構築。Inertia.js を通して Laravel コントローラーからデータを Vue プロップスとしてスムーズに処理します。",
+                        "スタイリングとUIコンポーネント（Tailwind CSS v4 & shadcn-vue）：Tailwind CSS v4 と shadcn-vue モジュールコンポーネントを駆使し、一貫性のあるモダンなレスポンシブデザインを実装します。",
+                        "データ可視化（ApexCharts & Chart.js）：管理ダッシュボードにチャートライブラリを組み込み、売上報告やトランザクション統計を動的なグラフとして視覚化します。",
+                        "フロントエンドロジックとAPI統合：カート機能の状態管理、クーポン値引き of 自動計算ロジック、フォーム検証、および Axios を用いた非同期 API 通信を統括します。",
+                        "コード標準化と品質向上（TypeScript）：TypeScript を用いて安全で構造化されたタイプセーフなコードを実装。ESLint と Prettier により全ソースの品質標準を統一します。"
+                    ],
+                    ar: [
+                        "تطوير صفحات التطبيق (Inertia.js & Vue 3): بناء واجهة مستخدم تعتمد على الهواتف المحمولة أولاً لصفحات العملاء ولوحة تحكم شاملة للمسؤولين. تلقي ومعالجة البيانات بسلاسة من وحدات تحكم Laravel عبر Inertia.js.",
+                        "التصميم ومكونات UI (Tailwind CSS v4 & shadcn-vue): تصميم واجهات مستخدم مستجيبة ومتسقة باستخدام فئات Tailwind CSS بالإضافة إلى مكونات UI الجاهزة من shadcn-vue.",
+                        "تصور البيانات (ApexCharts & Chart.js): دمج مكتبات الرسوم البيانية لتقديم تقارير مبيعات تفاعلية وإحصاءات المعاملات في لوحة تحكم الإدارة.",
+                        "منطق الأعمال وجانب العميل وتكامل API: إدارة تدفق بيانات عربة التسوق، إجراء حسابات ديناميكية للعروض أو القسائم، تطبيق التحقق من صحة المدخلات، وتكامل طلبات API غير المتزامنة عبر Axios.",
+                        "معايير وجودة الكود (TypeScript): كتابة كود برمجية آمن ومنظم باستخدام TypeScript، وضمان توافق معايير التنسيق في كامل المشروع باستخدام ESLint و Prettier."
+                    ],
+                    hi: [
+                        "एप्लिकेशन पेज विकास (Inertia.js और Vue 3): ग्राहक पृष्ठों (जैसे MenuList.vue और Cart.vue) और व्यापक एडमिन डैशबोर्ड (आरक्षण प्रबंधन, कैशियर और सांख्यिकी) के लिए मोबाइल-प्रथम  इंटरफ़ेस बनाया। Inertia.js एकीकरण के माध्यम से Laravel नियंत्रक से डेटा को सुचारू रूप से संभाला।",
+                        "स्टाइलिंग और UI घटक (Tailwind CSS v4 और shadcn-vue): Tailwind CSS और shadcn-vue घटकों का उपयोग करके उत्तरदायी, आधुनिक और सुसंगत उपयोगकर्ता इंटरफ़ेस डिज़ाइन किया।",
+                        "डेटा विज़ुअलाइज़ेशन (ApexCharts और Chart.js): एडमिन डैशबोर्ड पर इंटरैक्टिव बिक्री रिपोर्ट और लेनदेन आंकड़े प्रस्तुत करने के लिए ग्राफ़ लाइब्रेरी को एकीकृत किया।",
+                        "क्लाइंट-साइड बिजनेस लॉजिक और API एकीकरण: शॉपिंग कार्ट के लिए डेटा प्रवाह (स्टेट) को प्रबंधित किया, डिस्काउंट वाउचर के लिए गतिशील गणना की, इनपुट फ़ॉर्म सत्यापन लागू किया, और Axios का उपयोग करके एसिंक्रोनस API अनुरोधों को संभाला।",
+                        "मानकीकरण और कोड गुणवत्ता (TypeScript): TypeScript का उपयोग करके सुरक्षित और संरचित (टाइप-सेफ) कोड लिखा, और ESLint और Prettier का उपयोग करके पूरे प्रोजेक्ट में कोड फॉर्मेटिंग की स्थिरता सुनिश्चित की।"
+                    ]
+                },
+                challenge: {
+                    id: [
+                        {
+                            title: "Kerumitan Logika Keranjang & Promosi",
+                            desc: "Mengatasi potensi selisih harga saat checkout akibat kalkulasi keranjang yang kompleks (seperti addons, validasi voucher, dan promo otomatis) dengan mensentralisasi logika ke dalam Vue Composable (useCart.ts). Untuk menjamin akurasi data, backend ditetapkan sebagai sumber kebenaran utama (single source of truth) dengan menggunakan mekanisme debounced request guna memperbarui total harga riil secara dinamis, alih-alih mengandalkan perhitungan penuh di frontend."
+                        },
+                        {
+                            title: "Refaktorisasi Komponen Besar (Fat Component)",
+                            desc: "Menyelesaikan masalah kesulitan pemeliharaan dan potensi konflik kode pada file ReservationManagement.vue yang berukuran terlalu besar (77 KB). Kode dioptimalkan dengan memecahnya menjadi komponen-komponen UI modular yang reusable (seperti form modal dan tabel), serta mengekstrak logika API dan manajemen state ke dalam Vue Composable (useReservations.ts) agar arsitektur kode menjadi lebih bersih dan mudah dibaca."
+                        },
+                        {
+                            title: "Sinkronisasi Pesanan Real-Time",
+                            desc: "Memastikan dasbor kasir dan barista menerima notifikasi pesanan masuk dari pelanggan secara instan tanpa perlu memuat ulang halaman manual. Solusi ini diimplementasikan melalui integrasi websockets menggunakan Laravel Echo (Pusher/Reverb) untuk menangkap event pesanan secara real-time, dengan mekanisme polling API berkala sebagai sistem cadangan (fallback) untuk menjaga stabilitas pembaruan data."
+                        }
+                    ],
+                    en: [
+                        {
+                            title: "Cart Complexity & Promotion Logic",
+                            desc: "Addressed potential price discrepancies during checkout caused by complex cart calculations (addons, voucher validation, automatic promos) by centralizing logic inside a Vue Composable (useCart.ts). To guarantee data accuracy, the backend was established as the single source of truth, using debounced requests to dynamically fetch real total prices instead of relying entirely on frontend calculations."
+                        },
+                        {
+                            title: "Refactoring Large 'Fat' Components",
+                            desc: "Resolved maintenance difficulties and potential git conflicts within the massive ReservationManagement.vue file (77 KB). The code was optimized by splitting it into reusable, modular UI components (modal forms, tables) and extracting API endpoints and state management into a dedicated Vue Composable (useReservations.ts) for cleaner and more readable architecture."
+                        },
+                        {
+                            title: "Real-Time Order Synchronization",
+                            desc: "Ensured cashier and barista dashboards receive incoming order notifications from customers instantly without manual page reloads. This was implemented via websocket integrations using Laravel Echo (Pusher/Reverb) to catch real-time order events, combined with a periodic API polling fallback mechanism to ensure data updates remain stable."
+                        }
+                    ],
+                    zh: [
+                        {
+                            title: "购物车复杂性与促销逻辑",
+                            desc: "通过将购物车逻辑集中到 Vue Composable（useCart.ts）中，解决由于复杂购物车计算（如加购商品、优惠券验证和自动促销）导致结算时产生差价的隐患。为了确保数据的准确性，后端被确立为单一事实来源（single source of truth），通过防抖请求机制动态更新实际总价，而不是完全依赖前端计算。"
+                        },
+                        {
+                            title: "超大组件（Fat Component）的重构",
+                            desc: "解决了体积过大（77 KB）的 ReservationManagement.vue 文件带来的维护困难和代码冲突风险。通过将该代码拆分为可复用、模块化的 UI 组件（如弹窗表单和数据表格），并将 API 调用和状态管理提取到专用的 Vue Composable（useReservations.ts）中，实现了更清晰、更易读的架构。"
+                        },
+                        {
+                            title: "实时订单同步",
+                            desc: "确保收银台和咖啡师的仪表盘在客户下单后能即时收到通知，而无需手动刷新页面。此方案通过 Laravel Echo（Pusher/Reverb）集成 WebSockets 捕捉实时订单事件，并使用 API 定时轮询作为备用机制（fallback），以维持数据更新的稳定性。"
+                        }
+                    ],
+                    ko: [
+                        {
+                            title: "장바구니 및 프로모션 로직의 복잡성",
+                            desc: "추가 옵션, 쿠폰 유효성 검사, 자동 프로모션 등으로 인해 발생할 수 있는 결제 금액 불일치를 방지하기 위해 로직을 Vue Composable(useCart.ts)로 중앙집중화했습니다. 계산 오차를 차단하고 데이터의 일관성을 보장하기 위해 백엔드를 최종 단일 진실 공급원(Single Source of Truth)으로 설정하였으며, 프론트엔드의 독자 연산 대신 디바운스 요청을 통해 백엔드에서 동적으로 재산출된 총금액을 수신하도록 처리했습니다."
+                        },
+                        {
+                            title: "대형 컴포넌트(Fat Component) 리팩토링",
+                            desc: "코드 규모가 비대해진 ReservationManagement.vue(77 KB) 파일의 유지보수 어려움 및 형상 관리 충돌 위험을 제거했습니다. UI 요소를 재사용 가능한 모듈형 컴포넌트(폼 모달, 테이블 등)로 분리하고, API 호출 및 상태 관리 코드를 전용 Composable(useReservations.ts)로 분리하여 한결 명료하고 간결한 아키텍처를 구현했습니다."
+                        },
+                        {
+                            title: "실시간 주문 동기화",
+                            desc: "고객이 주문 시 계산대와 바리스타 대시보드에서 새로고침 없이 즉각 주문 알림을 받도록 동기화 처리를 진행했습니다. Laravel Echo(Pusher/Reverb) 기반의 웹소켓 연결을 통합하여 실시간 주문 이벤트를 수신하도록 구성했고, 네트워크 불안정에 대비해 주기적인 API 폴링 폴백(fallback) 메커니즘을 융합하여 데이터 갱신 안정성을 높였습니다."
+                        }
+                    ],
+                    ja: [
+                        {
+                            title: "カート計算とプロモーションロジックの複雑性",
+                            desc: "トッピング、クーポン検証、自動割引などの複雑なカート計算による決済時の金額の差異を防ぐため、ロジックを Vue Composable (useCart.ts) に集約。データの正確性を担保するため、バックエンドを Single Source of Truth（唯一の事実のソース）とし、フロントエンドの独自計算に依存せず、デバウンスしたリクエストでバックエンドからリアルタイムに合計金額を再取得する設計にしました。"
+                        },
+                        {
+                            title: "肥大化したコンポーネント（Fat Component）の再設計",
+                            desc: "ファイルサイズが 77 KB に達していた ReservationManagement.vue の可読性低下とマージ競合のリスクを解消。UI要素を再利用可能なモジュール（フォーム、テーブル等）に分割し、APIロジックと状態管理を専用 Composable (useReservations.ts) に抽出してアーキテクチャを簡素化しました。"
+                        },
+                        {
+                            title: "リアルタイム注文同期",
+                            desc: "顧客が注文した際に、レジやバリスタ側のダッシュボードが手動更新なしで即座に新規注文を検知できるよう同期化。Laravel Echo (Pusher/Reverb) を介した WebSocket 連携を実装して注文イベントをキャッチし、バックアップとして定期的な API ポーリングによるフォールバックも組み込み、更新の安定性を確保しました。"
+                        }
+                    ],
+                    ar: [
+                        {
+                            title: "تعقيد عربة التسوق ومنطق الترويج",
+                            desc: "معالجة التباين المحتمل في الأسعار عند الدفع والناتج عن الحسابات المعقدة لعربة التسوق (الإضافات، التحقق من القسائم، والعروض التلقائية) من خلال مركزية المنطق داخل Vue Composable (useCart.ts). لضمان دقة البيانات، تم تأسيس الخلفية كمصدر وحيد للحقيقة باستخدام طلبات debounced لتحديث السعر الإجمالي الفعلي ديناميكيًا."
+                        },
+                        {
+                            title: "إعادة هيكلة المكونات الضخمة (Fat Component)",
+                            desc: "حل مشكلات صعوبة الصيانة وتعارض الأكواد في ملف ReservationManagement.vue الذي يبلغ حجمه 77 كيلوبايت. تم تحسين الكود عن طريق تقسيمه إلى مكونات واجهة مستخدم برمجية قابلة لإعادة الاستخدام (مثل نماذج الجداول) واستخراج منطق API وإدارة الحالة في Vue Composable (useReservations.ts)."
+                        },
+                        {
+                            title: "مزامنة الطلبات في الوقت الفعلي",
+                            desc: "ضمان تلقي لوحات تحكم أمين الصندوق والباريستا إشعارات بالطلبات الواردة من العملاء فورًا دون الحاجة إلى إعادة تحميل الصفحة يدويًا. تم تنفيذ ذلك عبر دمج websockets باستخدام Laravel Echo (Pusher/Reverb) لالتقاط أحداث الطلبات، مع آلية اقتراع API دورية كاحتياطي لاستقرار التحديثات."
+                        }
+                    ],
+                    hi: [
+                        {
+                            title: "शॉपिंग कार्ट की जटिलता और प्रचार तर्क",
+                            desc: "जटिल कार्ट गणनाओं (जैसे एडॉन्स, वाउचर सत्यापन और स्वचालित प्रचार) के कारण चेकआउट के दौरान संभावित मूल्य विसंगतियों को हल करने के लिए तर्क को एक Vue Composable (useCart.ts) में केंद्रीकृत किया गया। डेटा सटीकता की गारंटी के लिए, बैकएंड को सत्य का एकमात्र स्रोत (Single Source of Truth) माना गया, जिसमें फ्रंटएंड पर पूर्ण गणना के बजाय वास्तविक कीमतों को गतिशील रूप से प्राप्त करने के लिए डिबाउंस अनुरोधों का उपयोग किया गया।"
+                        },
+                        {
+                            title: "बड़े घटकों (Fat Component) का पुनर्गठन",
+                            desc: "अत्यधिक बड़े ReservationManagement.vue फ़ाइल (77 KB) में रखरखाव की कठिनाइयों और कोड संघर्षों को हल किया। कोड को पुन: प्रयोज्य, मॉड्यूलर UI घटकों (जैसे फ़ॉर्म मोडल और टेबल) में तोड़कर अनुकूलित किया गया और क्लीनर और अधिक पठनीय वास्तुकला के लिए API और राज्य प्रबंधन को Vue Composable (useReservations.ts) में निकाला गया।"
+                        },
+                        {
+                            title: "वास्तविक समय आदेश सिंक्रनाइज़ेशन",
+                            desc: "यह सुनिश्चित किया कि कैशियर और बरिस्ता डैशबोर्ड ग्राहकों से प्राप्त होने वाले ऑर्डर की सूचनाओं को मैन्युअल पेज रीलोड के बिना तुरंत प्राप्त करें। इसे वास्तविक समय के ऑर्डर ईवेंट को पकड़ने के लिए Laravel Echo (Pusher/Reverb) का उपयोग करके वेबसोकेट एकीकरण के माध्यम से लागू किया गया था, जिसमें स्थिरता बनाए रखने के लिए आवधिक API पोलिंग फ़ॉलबैक तंत्र था।"
+                        }
+                    ]
+                },
+                learning: {
+                    id: "Aplikasi web SPA modern yang menjembatani Laravel dan Vue 3 menggunakan Inertia.js tanpa memerlukan API terpisah. Pengembangan berfokus pada keandalan frontend menggunakan TypeScript dan desain antarmuka premium dengan Tailwind CSS v4 & shadcn-vue, menghasilkan pengalaman mobile-first untuk pelanggan dan dasbor desktop untuk admin. Proyek ini mendemonstrasikan manajemen state klien yang kompleks (sistem keranjang dan promo dinamis via Axios), visualisasi data transaksi interaktif menggunakan ApexCharts & Chart.js, serta penerapan standar kode industri melalui ESLint dan Prettier.",
+                    en: "A modern SPA web application bridging Laravel and Vue 3 using Inertia.js without needing a separate API. Development focused on frontend reliability with TypeScript and premium interface design with Tailwind CSS v4 & shadcn-vue, delivering a mobile-first experience for customers and a desktop dashboard for admins. The project demonstrates complex client-side state management (dynamic cart and promotions via Axios), interactive transaction data visualizations using ApexCharts & Chart.js, and the implementation of industry-standard coding conventions via ESLint and Prettier.",
+                    zh: "这是一个现代化单页面应用（SPA）咖啡馆系统，通过 Inertia.js 连接 Laravel 和 Vue 3，无需开发独立的 REST API。开发重点是利用 TypeScript 保证前端的强类型与可靠性，并使用 Tailwind CSS v4 和 shadcn-vue 设计精美的人机交互，为客户提供移动优先的点餐界面，为管理员提供桌面端管理后台。项目涵盖了复杂的客户端状态管理（通过 Axios 异步交互的购物车和促销逻辑）、使用 ApexCharts 和 Chart.js 的交互式财务图表，以及使用 ESLint 和 Prettier 落地行业标准代码规范。",
+                    ko: "Inertia.js를 통해 별도의 REST API 구성 없이 Laravel과 Vue 3를 유기적으로 연결한 모던 SPA 웹 애플리케이션입니다. TypeScript를 도입하여 프론트엔드의 타입 유효성 검사 안정성을 강화하고, Tailwind CSS v4 및 shadcn-vue를 사용한 프리미엄 UI 디자인 설계로 고객을 위한 모바일 우선 주문 경험과 어드민 대시보드를 구축했습니다. 프로젝트 개발 과정을 통해 Axios 기반의 동적 장바구니 및 프로모션 시스템 등 정교한 전역 상태 관리 로직을 구축했고, ApexCharts & Chart.js 기반의 거래 현황 다이어그램 시각화, 그리고 ESLint 및 Prettier 규격을 통한 업계 표준 소스 코드 제어를 수련했습니다.",
+                    ja: "Laravel と Vue 3 を Inertia.js で連携させ、独立した API なしで構築されたモダンな SPA。TypeScript による堅牢なフロントエンド設計、Tailwind CSS v4 & shadcn-vue を用いたプレミアム UI デザインを追求し、顧客向けモバイル画面と管理者向けデスクトップ管理画面を提供。複雑な状態管理（Axios 経由のカートや割引）、ApexCharts & Chart.js による取引分析グラフ、そして ESLint & Prettier による業界標準の品質管理手法を修得しました。",
+                    ar: "تطبيق ويب SPA حديث يربط بين Laravel و Vue 3 باستخدام Inertia.js دون الحاجة إلى واجهة برمجة تطبيقات منفصلة. ركز التطوير على موثوقية واجهة المستخدم باستخدام TypeScript وتصميم واجهة متميز مع Tailwind CSS v4 & shadcn-vue، مما يوفر تجربة فريدة للهواتف المحمولة للعملاء ولوحة تحكم سطح المكتب للمشرفين. يوضح المشروع إدارة معقدة لحالة العميل (عربة التسوق الديناميكية والعروض الترويجية عبر Axios) وتصورات تفاعلية لبيانات المعاملات باستخدام ApexCharts & Chart.js وتطبيق معايير التشفير القياسية للصناعة عبر ESLint و Prettier.",
+                    hi: "एक आधुनिक SPA वेब एप्लिकेशन जो बिना किसी अलग API के Inertia.js का उपयोग करके Laravel और Vue 3 को जोड़ता है। विकास में TypeScript और Tailwind CSS v4 व shadcn-vue के साथ प्रीमियम  इंटरफ़ेस डिज़ाइन का उपयोग करके फ्रंटएंड विश्वसनीयता पर ध्यान केंद्रित किया गया, जिससे ग्राहकों के लिए मोबाइल-प्रथम अनुभव और व्यवस्थापकों के लिए डेस्कटॉप डैशबोर्ड प्रदान किया गया। यह प्रोजेक्ट जटिल क्लाइंट-साइड स्टेट मैनेजमेंट (Axios के माध्यम से कार्ट और प्रोमो), ApexCharts और Chart.js का उपयोग करके लेनदेन डेटा विज़ुअलाइज़ेशन और ESLint व Prettier के माध्यम से कोडिंग मानकों को प्रदर्शित करता है।"
+                }
+            },
+            redstrings: {
+                desc: {
+                    id: "Aplikasi web permainan roleplay interaktif yang memanfaatkan AI generatif sebagai Game Master untuk merangkai cerita petualangan pemain secara dinamis.",
+                    en: "An interactive roleplay web application that utilizes generative AI as a Game Master to dynamically weave player adventure stories.",
+                    zh: "一款交互式角色扮演网络应用程序，利用生成式人工智能作为游戏管理员（Game Master），动态编织玩家的冒险故事。",
+                    ko: "생성형 AI를 게임 마스터로 활용하여 플레이어의 모험 이야기를 동적으로 연출하는 대화형 역할 수행(roleplay) 웹 애플리케이션입니다.",
+                    ja: "生成AIをゲームマスターとして活用し、プレイヤーの冒険ストーリーを動的に織り成すインタラクティブなロールプレイングWebアプリケーションです。",
+                    ar: "تطبيق ويب تفاعلي للعب الأدوار يستخدم الذكاء الاصطناعي التوليدي كصانع ألعاب (Game Master) لنسج قصص مغامرات اللاعبين ديناميكيًا.",
+                    hi: "एक इंटरैक्टिव रोलप्ले वेब एप्लिकेशन जो खिलाड़ियों की साहसिक कहानियों को एआई का उपयोग करके बुनता है。"
+                },
+                role: {
+                    id: "Full-stack",
+                    en: "Full-stack",
+                    zh: "全栈",
+                    ko: "풀스택",
+                    ja: "フルスタック",
+                    ar: "مطور شامل",
+                    hi: "फुल-stack"
+                },
+                roleDetails: {
+                    id: [
+                        "Pengembangan Antarmuka (Front-End) - UI Roleplay Interaktif: Mendesain antarmuka responsif menggunakan React 19 dan Tailwind CSS v4 untuk halaman login, pembuatan karakter, dan papan cerita (storyboard). - Integrasi Fitur Klien: Mengimplementasikan fitur pemotong gambar (react-easy-crop), rendering teks markdown (react-markdown), serta fungsionalitas streaming teks AI secara real-time ke antarmuka pengguna.",
+                        "Pengembangan Server & API (Back-End) - Arsitektur API Serverless: Membangun dan mengamankan rute API menggunakan Next.js untuk menjembatani komunikasi data antara klien dan layanan pihak ketiga (AI & database). - Operasi Data Aman: Mengintegrasikan Firebase Admin SDK untuk mengelola operasi database bersensitivitas tinggi secara aman di sisi server.",
+                        "Integrasi & Orkestrasi AI - Prompt Engineering: Merancang system prompt terstruktur menggunakan LangChain.js agar model AI (Mistral) dapat bertindak secara konsisten sebagai Game Master. - Logika Alur Cerita: Mengelola alur logika AI dalam memproses input aksi pemain untuk menghasilkan narasi dinamis beserta 3-5 opsi tindakan responsif berikutnya.",
+                        "Manajemen Basis Data & Autentikasi - Arsitektur Firebase: Mengonfigurasi Firebase Auth untuk manajemen pengguna dan merancang struktur Firestore guna menyimpan state cerita serta riwayat permainan. - Keamanan Data: Mengimplementasikan aturan keamanan yang ketat (Firestore Security Rules) guna membatasi akses baca dan tulis data khusus untuk pengguna yang telah terautentikasi."
+                    ],
+                    en: [
+                        "Interface Development (Front-End): Structured an interactive, responsive game storyboard, character generation screen, and profile hubs using React 19 and Tailwind CSS v4. Integrated client features such as react-easy-crop, markdown renders (react-markdown), and real-time streaming texts.",
+                        "Server & API Development (Back-End): Built secure Serverless API routes using Next.js to bridge connection calls between users and third-party resources (Mistral AI engine & database). Integrated Firebase Admin SDK to conduct secure server-side operations.",
+                        "AI Integration & Orchestration: Designed robust system prompts using LangChain.js to enforce Game Master constraints. Crafted context state flows to process player action keys and yield dynamic storylines alongside 3-5 generated options.",
+                        "Database Management & Authentication: Configured Firebase Auth credentials and designed NoSQL database collections in Firestore to record adventure state logs. Authored Firebase Security Rules to restrict unauthorized reading or updating permissions."
+                    ],
+                    zh: [
+                        "前端界面开发：使用 React 19 和 Tailwind CSS v4 为登录、角色创建和剧情画板设计高度互动的响应式界面。集成了 react-easy-crop 图片裁剪、react-markdown 富文本解析，以及实时的 AI 文本流式渲染（streaming）。",
+                        "服务端与API开发（后端）：使用 Next.js 构建和保护无服务器（Serverless）API 路由，在客户端和第三方服务（AI 和数据库）之间架起安全的通信桥梁。集成 Firebase Admin SDK 以在服务端安全地执行高敏感的数据读写操作。",
+                        "AI 集成与编排：使用 LangChain.js 设计结构化的系统提示词（system prompt），确保 Mistral AI 能够稳定担任游戏管理员（Game Master）角色。管理 AI 上下文流，处理玩家行动输入，生成动态叙事并配套生成 3-5 个情景行动选项。",
+                        "数据库管理与身份验证：配置 Firebase Auth 负责用户认证，设计 Firestore NoSQL 数据库结构以记录游戏状态与角色历史数据。部署严格的 Firestore 安全规则（Security Rules），限制非授权读写，保护数据隐私。"
+                    ],
+                    ko: [
+                        "인터페이스 개발(프론트엔드): React 19와 Tailwind CSS v4를 도입하여 로그인, 캐릭터 생성 및 대화형 스토리보드 페이지의 자극적인 반응형 UI를 작성했습니다. react-easy-crop 이미지 편집 기능, react-markdown 텍스트 뷰어 및 사용자 화면으로의 실시간 AI 텍스트 스트리밍 솔루션을 구축했습니다.",
+                        "서버 및 API 개발(백엔드): 클라이언트와 제3자 서비스(AI 및 데이터베이스) 간의 통신 허브 역할을 하는 Next.js 서버리스 API 라우트를 구축 및 암호화했습니다. 서버 측에서 민감한 데이터 작업을 격리하기 위해 Firebase Admin SDK를 통합했습니다.",
+                        "AI 연동 및 조율: AI 모델(Mistral)이 완벽한 게임 마스터(Game Master) 역할을 일관되게 수행하도록 LangChain.js를 사용한 지능형 시스템 프롬프트(system prompt)를 코딩했습니다. 플레이어 조작 이벤트를 파싱하여 유동적인 게임 스토리 분기 및 3-5가지 인터랙티브 선택지 제공 로직을 제어했습니다.",
+                        "데이터베이스 설계 및 인증: 안정적인 회원 관리를 위해 Firebase Auth를 구성하고, 플레이어의 게임 진행 상태와 히스토리를 추적하기 위해 Firestore NoSQL 아키텍처를 설계했습니다. UID 기반의 사용자 격리를 유도하고 비인가 쓰기를 방지하기 위해 엄격한 Firestore 보안 규칙을 작성했습니다.",
+                        "Tailwind CSS 기반 반응형 UI/UX 개발: 현장 수거 담당자와 사용자가 다양한 모바일 기기에서도 편리하게 이용할 수 있도록 Tailwind CSS v4를 활용하여 부드러운 화면 전환과 모바일 우선 레이아웃을 작성합니다."
+                    ],
+                    ja: [
+                        "UI開発（フロントエンド）：React 19 と Tailwind CSS v4 を使用し、ログイン、キャラクター作成、ゲーム進行等のインタラクティブなレスポンシブ画面を実装。画像切り抜き機能（react-easy-crop）、Markdown表示（react-markdown）、および AI 応答のテキストストリーミング処理をフロントエンドに実装しました。",
+                        "サーバー＆API開発（バックエンド）：Next.js を採用してサーバーレス API ルーティングを構築し、ユーザーと外部リソース（AIエンジン及びデータベース）間のセキュアな通信経路を用意。Firebase Admin SDK を統合し、サーバーサイドでの安全なデータアクセスを制御します。",
+                        "AI連携と設計：LangChain.js を利用して、AI（Mistral）が首尾一貫したゲームマスターとして振る舞う構造化システムプロンプトをデザイン。ユーザーのアクションを受け取り、新たな冒険の分岐シナリオと3〜5件のアクション候補を都度創出する処理を制御します。",
+                        "データベース＆ユーザー認証：Firebase Auth を設定してユーザーログインを管理し、Firestore の NoSQL スキーマを設計してシナリオ進行状態やゲーム履歴を記録。Firestore Security Rules を適用して、UIDに基づく認証済みの所有者本人以外のデータ書き換えを堅固に防止します。"
+                    ],
+                    ar: [
+                        "تطوير الواجهة (Front-End): تصميم واجهة تفاعلية مستجيبة باستخدام React 19 و Tailwind CSS v4 لصفحات تسجيل الدخول، إنشاء الشخصيات، ولوحة القصة. دمج ميزات مثل قص الصور (react-easy-crop)، قراءة الماركدون (react-markdown)، وبث نصوص الذكاء الاصطناعي في الوقت الفعلي.",
+                        "تطوير السيرفر والـ API (Back-End): بناء وتأمين مسارات API بدون خادم (Serverless) باستخدام Next.js لجسر الاتصال بين العميل والخدمات الخارجية. دمج Firebase Admin SDK لإدارة عمليات قاعدة البيانات الحساسة بأمان في جانب السيرفر.",
+                        "دمج وتنظيم الذكاء الاصطناعي: تصميم هندسة أوامر مهيكلة لـ system prompt باستخدام LangChain.js لضمان عمل Mistral AI كصانع ألعاب متناسق. إدارة تدفق المنطق لمعالجة مدخلات اللاعبين وتوليد سيناريوهات ديناميكية مع 3-5 خيارات إجراءات تالية.",
+                        "إدارة قواعد البيانات والمصادقة: تكوين Firebase Auth لإدارة المستخدمين وتصميم هيكل قاعدة بيانات Firestore NoSQL لحفظ حالات اللعب وتاريخ اللعبة. تطبيق قواعد أمان Firestore الصارمة لتقييد صلاحيات القراءة والكتابة فقط للمستخدم المصرح له."
+                    ],
+                    hi: [
+                        "इंटरफ़ेस विकास (फ्रंट-एंड): लॉगिन, चरित्र निर्माण और स्टोरीबोर्ड पृष्ठों के लिए React 19 और Tailwind CSS v4 का उपयोग करके उत्तरदायी इंटरफ़ेस डिज़ाइन किया। छवियों को क्रॉप करने के लिए react-easy-crop, रिच टेक्स्ट के लिए react-markdown और रीयल-टाइम AI टेक्स्ट स्ट्रीमिंग जैसी सुविधाएं लागू कीं।",
+                        "सर्वर और API विकास (बैक-एंड): क्लाइंट और तीसरे पक्ष की सेवाओं (AI और डेटाबेस) के बीच डेटा संचार को सुरक्षित रूप से जोड़ने के लिए Next.js का उपयोग करके सर्वरलेस API रूट बनाए। सर्वर-साइड पर उच्च-संवेदनशीलता वाले संचालन को सुरक्षित रूप से प्रबंधित करने के लिए Firebase Admin SDK को एकीकृत किया।",
+                        "एआई एकीकरण और ऑर्केस्ट्रेशन: LangChain.js का उपयोग करके संरचित सिस्टम प्रॉम्प्ट को डिज़ाइन किया ताकि मिस्ट्रल एआई गेम मास्टर (Game Master) के रूप में कार्य कर सके। खिलाड़ी इनपुट को संसाधित करने के लिए संदर्भ प्रबंधन को संभाला ताकि गतिशील कहानियां और 3-5 विकल्प तैयार हो सकें।",
+                        "डेटाबेस प्रबंधन और प्रमाणीकरण: उपयोगकर्ता क्रेडेंशियल के लिए Firebase Auth को कॉन्फ़िगर किया और रोमांच के विवरणों को संग्रहीत करने के लिए Firestore NoSQL डेटाबेस संग्रह को डिज़ाइन किया। अनधिकृत पहुंच को प्रतिबंधित करने के लिए सख्त Firestore सुरक्षा नियम (Firestore Security Rules) लागू किए।"
+                    ]
+                },
+                challenge: {
+                    id: [
+                        {
+                            title: "Standarisasi Output AI (JSON Mode)",
+                            desc: "Mengatasi error parsing di frontend akibat format balasan AI yang tidak menentu dengan menerapkan Structured Output dari Mistral AI via LangChain. Skema JSON diwajibkan untuk menjamin format narasi dan jumlah opsi aksi selalu terstruktur dan aman untuk dirender."
+                        },
+                        {
+                            title: "Optimasi Context Window & Batas Token",
+                            desc: "Mencegah pembengkakan biaya API dan respons lambat akibat riwayat cerita yang panjang dengan mengimplementasikan Memory Management. Alih-alih mengirim seluruh riwayat, sistem menggunakan kombinasi ringkasan cerita dan teknik sliding window (N-percakapan terakhir) untuk menghemat token."
+                        },
+                        {
+                            title: "Streaming Teks & Parsing JSON Parsial",
+                            desc: "Mengatasi limitasi browser dalam membaca data JSON yang belum lengkap saat proses streaming. Memanfaatkan Vercel AI SDK untuk memproses parsing JSON parsial secara real-time, sehingga teks cerita dapat mengalir interaktif huruf demi huruf sebelum tombol aksi muncul."
+                        },
+                        {
+                            title: "Integritas & Keamanan State Firestore",
+                            desc: "Menjamin proses simpan data permainan (state, HP, inventory) berjalan sempurna dan anti-korup menggunakan Firestore Transactions (atomic writes). Akses data diamankan secara ketat melalui Firestore Security Rules untuk mencegah manipulasi skor antar pengguna berdasarkan UID."
+                        }
+                    ],
+                    en: [
+                        {
+                            title: "AI Output Standardization (JSON Mode)",
+                            desc: "Addressed frontend parsing errors caused by unpredictable AI response structures by applying Structured Outputs from Mistral AI via LangChain. Mandatory JSON schemas guaranteed that the story narrative format and action buttons are always parsed safely."
+                        },
+                        {
+                            title: "Context Window Optimization & Token Limits",
+                            desc: "Prevented bloated API bills and slow latency from long conversational logs by implementing Custom Memory Management. Instead of sending the full backlog history, the system dynamically couples active summaries with sliding windows (N-most recent exchanges) to conserve token sizes."
+                        },
+                        {
+                            title: "Text Streaming & Partial JSON Parsing",
+                            desc: "Resolved browser limits on parsing incomplete JSON chunks during active streams. Integrated Vercel AI SDK's real-time parser to read partial streams line by line, displaying stories letter-by-letter dynamically before the final interactive action buttons load."
+                        },
+                        {
+                            title: "Firestore State Security & Integrity",
+                            desc: "Secured accurate updates of gameplay states (HP, level, items) by employing atomic Firestore Transactions to prevent race conditions. Access is fortified via Firestore Security Rules to block data manipulation across profiles based on authorized UIDs."
+                        }
+                    ],
+                    zh: [
+                        {
+                            title: "AI输出标准化（JSON模式）",
+                            desc: "为防止由于AI输出结构飘忽不定导致的客户端解析（parsing）崩溃，通过 LangChain 强制集成了 Mistral AI 的结构化输出（Structured Outputs）。指定严密的 JSON Schema 架构，确保剧情旁白和可用行动按钮选项的格式稳定且安全。"
+                        },
+                        {
+                            title: "上下文窗口（Context Window）优化与 Token 限制",
+                            desc: "为解决由于游玩历史过长导致的 API 费用高昂和延迟变长问题，构建了专门的上下文内存管理。非一成不变发送全部记录，而是通过自动总结算法结合滑动窗口技术（Sliding Window，仅取最近N轮对话），极大节省了 Token 开销。"
+                        },
+                        {
+                            title: "流式文本与部分 JSON 解析（Partial JSON Parsing）",
+                            desc: "解决了流式（streaming）响应中，浏览器无法读取不完整 JSON 报文的分块痛点。利用 Vercel AI SDK 的流式解析器，在后台实时解析未闭合的 JSON 字符，使游戏文字得以逐字流动渲染，极佳地提升了视觉沉浸感。"
+                        },
+                        {
+                            title: "Firestore 状态数据完整性与安全加固",
+                            desc: "使用 Firestore Transactions（原子写入）确保角色属性、血量和物品背包等游戏状态同步保存时的安全性，规避了潜在的并发写入冲突。通过编写严格的 Firestore Security Rules 锁定数据，阻断跨用户 UID 的篡改行为。"
+                        }
+                    ],
+                    ko: [
+                        {
+                            title: "AI 출력 표준화 (JSON 모드)",
+                            desc: "AI 모델의 무작위 답변 형식으로 인해 프론트엔드 파싱 오류가 발생하는 문제를 해결하고자 LangChain을 통해 Mistral AI Structured Output을 규정했습니다. JSON 스키마를 고정하여 스토리 지문 데이터 및 선택지 문항이 항상 규격화된 상태로 브라우저에 안전히 로드되도록 제어했습니다."
+                        },
+                        {
+                            title: "컨텍스트 윈도우 최적화 및 토큰 소모 억제",
+                            desc: "스토리 이력 누적으로 인한 API 비용 폭증 및 응답 지연을 방지하기 위해 정교한 메모리 관리를 코딩했습니다. 단순 전체 로그 발송을 배제하고, 핵심 줄거리 요약 데이터와 최근 N개의 대화 내용만을 취합하는 슬라이딩 윈도우를 조합하여 토큰 크기를 절약했습니다."
+                        },
+                        {
+                            title: "텍스트 스트리밍 및 부분 JSON 파싱",
+                            desc: "텍스트 스트리밍 시, 브라우저가 아직 완성되지 않은 불완전한 JSON 데이터 블록을 읽지 못하는 제약을 극복했습니다. Vercel AI SDK의 파서를 도입하여 스트림 진행 도중에도 실시간으로 미완성 JSON을 가상 파싱함으로써 액션 버튼 노출 전에도 문자가 한 글자씩 부드럽게 연출되도록 유도했습니다."
+                        },
+                        {
+                            title: "Firestore 상태 제어 안전성 및 데이터 정합성",
+                            desc: "HP, 인벤토리 등 주요 게임 상태 값 저장의 정합성을 확보하기 위해 Firestore 트랜잭션(원자적 쓰기)을 구현했습니다. 계정 로그인 정보와 UID를 대조하는 Firestore Security Rules를 배포하여 타 사용자가 비정상적으로 스토어 데이터를 조작하지 못하도록 보안을 강화했습니다."
+                        }
+                    ],
+                    ja: [
+                        {
+                            title: "AI出力の標準化（JSONモードの実装）",
+                            desc: "出力形式が不規則なAI応答によるブラウザ側のパースエラーを防ぐため、LangChain 経由で Mistral AI の Structured Output を適用。JSON スキーマを義務付けることで、ストーリーナレーションとアクションボタンの選択肢が常に保証された形式で安全に描写されます。"
+                        },
+                        {
+                            title: "コンテキスト制限とトークンの最適化",
+                            desc: "長時間のチャット履歴によるAPI費用の高騰と待機時間の増加を防ぐため、メモリー管理を組み込み。全対話ログを送信する代わりに、プロットの要約文と直近数ターンのスライディングウィンドウを組み合わせることで、精度を維持しながらトークンサイズを抑制します。"
+                        },
+                        {
+                            title: "テキストストリーミングと部分JSONパース",
+                            desc: "ストリーム中、未完了のJSONパケットがブラウザのパースエラーを引き起こす問題に対処。Vercel AI SDK のリアルタイムストリームパーサーを使用して未完のJSONデータを解析。テキストナレーションが文字単位で画面に流れ、完了後に次のアクションキーがシームレスに出現するUXを構築しました。"
+                        },
+                        {
+                            title: "Firestore データ保全とセキュリティ保護",
+                            desc: "ゲーム状態（HP、経験値、所持品）を整合的に保存するため、Firestore Transactions（アトミック書き込み）を実装。データベースアクセスは Firestore Security Rules でUIDごとに隔離され、他人によるパラメータ書き換えを排除して整合性を保護します。"
+                        }
+                    ],
+                    ar: [
+                        {
+                            title: "توحيد مخرجات الذكاء الاصطناعي (وضع JSON)",
+                            desc: "التغلب على أخطاء التحليل في الواجهة الأمامية بسبب المخرجات غير المتوقعة للذكاء الاصطناعي من خلال تطبيق Structured Output لـ Mistral AI عبر LangChain. يضمن مخطط JSON تنسيق سرد القصص والأزرار دائمًا."
+                        },
+                        {
+                            title: "تحسين نافذة السياق وحدود الرموز (Tokens)",
+                            desc: "تجنب ارتفاع تكاليف API والبطء الناتج عن طول سجل القصص عبر تنفيذ إدارة مخصصة للذاكرة. بدلاً من إرسال كامل السجل، يجمع النظام ديناميكيًا ملخصات القصة مع sliding windows (آخر ن من المحادثات) لتوفير التوكن."
+                        },
+                        {
+                            title: "بث النصوص وتحليل JSON الجزئي",
+                            desc: "معالجة قيود المتصفح في قراءة بيانات JSON غير المكتملة أثناء عملية البث. تم استخدام Vercel AI SDK لمعالجة التحليل الجزئي للـ JSON في الوقت الفعلي، مما يسمح بتدفق نصوص القصة بشكل جذاب حرفًا بحرف قبل ظهور الأزرار."
+                        },
+                        {
+                            title: "أمان ونزاهة حالة اللعبة في Firestore",
+                            desc: "تأمين عمليات تحديث حالة اللعبة (نقاط الحياة، الأدوات المكتسبة) باستخدام المعاملات الذرية (Transactions) لـ Firestore. يتم تأمين الوصول تمامًا من خلال قواعد أمان Firestore (Security Rules) لمنع التلاعب في البيانات."
+                        }
+                    ],
+                    hi: [
+                        {
+                            title: "एआई आउटपुट मानकीकरण (JSON मोड)",
+                            desc: "अप्रत्याशित एआई प्रतिक्रिया संरचनाओं के कारण होने वाली फ्रंटएंड पार्सिंग त्रुटियों को LangChain के माध्यम से मिस्ट्रल एआई से स्ट्रक्चर्ड आउटपुट लागू करके हल किया गया। अनिवार्य JSON स्कीमा ने गारंटी दी कि कहानी प्रारूप और क्रिया विकल्प हमेशा सुरक्षित रूप से पार्स हों।"
+                        },
+                        {
+                            title: "संदर्भ विंडो अनुकूलन और टोकन सीमाएं",
+                            desc: "लंबे वार्तालाप लॉग के कारण बढ़े हुए API बिलों और धीमी प्रतिक्रियाओं को रोकने के लिए कस्टम मेमोरी मैनेजमेंट लागू किया गया। पूरे इतिहास को भेजने के बजाय, टोकन आकार को बचाने के लिए सिस्टम गतिशील रूप से सक्रिय सारांशों को स्लाइडिंग विंडो (नवीनतम N वार्तालाप) के साथ जोड़ता है।"
+                        },
+                        {
+                            title: "टेक्स्ट स्ट्रीमिंग और आंशिक JSON पार्सिंग",
+                            desc: "सक्रिय स्ट्रीम के दौरान अपूर्ण JSON चंक्स को पार्स करने पर ब्राउज़र सीमाओं को हल किया गया। आंशिक स्ट्रीम को वास्तविक समय में पार्स करने के लिए Vercel AI SDK को एकीकृत किया, जिससे कहानी के अक्षर गतिशील रूप से एक-एक करके प्रवाहित होते हैं।"
+                        },
+                        {
+                            title: "फायरस्टोर स्टेट सिक्योरिटी और डेटा अखंडता",
+                            desc: "रेस कंडीशंस को रोकने के लिए परमाणु फ़ायरस्टोर लेनदेन (Firestore Transactions) का उपयोग करके गेमप्ले राज्यों (HP, स्तर, आइटम) के सटीक अपडेट सुरक्षित किए। प्राधिकृत UID के आधार पर प्रोफाइल में डेटा हेरफेर को ब्लॉक करने के लिए फ़ायरस्टोर सुरक्षा नियम लागू किए।"
+                        }
+                    ]
+                },
+                learning: {
+                    id: "Proyek ini membekali pembelajar dengan penguasaan arsitektur full-stack modern menggunakan Next.js dan React, memadukan keamanan Server API Routes dengan interaktivitas Client Components. Secara khusus, pembelajar akan mengintegrasikan AI Generatif (Mistral) melalui LangChain.js untuk prompt engineering sebagai Game Master, penghematan context window, dan parsing output JSON yang terstruktur. Manajemen backend dikelola secara komprehensif menggunakan ekosistem Firebase untuk autentikasi, pemodelan data state permainan di database NoSQL (Firestore), dan pengamanan privasi via Security Rules. Selain itu, pengalaman pengguna (UX) dimaksimalkan agar lebih imersif melalui streaming respons AI secara real-time menggunakan Vercel AI SDK, rendering teks kaya format dengan React Markdown, serta fitur manipulasi pemotongan gambar lokal menggunakan React Easy Crop.",
+                    en: "This project equips learners with mastery of modern full-stack architecture using Next.js and React, combining the security of Server API Routes with the interactivity of Client Components. Specifically, learners will integrate Generative AI (Mistral) via LangChain.js for prompt engineering as a Game Master, context window optimization, and structured JSON output parsing. Backend management is handled using the Firebase ecosystem for authentication, Firestore NoSQL database models, and privacy enforcement via Security Rules. Additionally, the user experience (UX) is maximized for immersion via real-time streaming AI responses using Vercel AI SDK, rich Markdown rendering with React Markdown, and local image manipulation using React Easy Crop.",
+                    zh: "本项目通过 Next.js 和 React 教授全栈架构，将安全的服务端 API 路由（Server API Routes）与交互式客户端组件（Client Components）深度结合。学习者能够利用 LangChain.js 整合 Mistral AI，完成游戏管理员的提示词工程（prompt engineering）、上下文窗口优化以及结构化 JSON 输出的解析。后端采用 Firebase 生态系统，管理用户认证、Firestore 数据库中 NoSQL 游戏存档的设计，以及利用安全规则进行隐私保护。此外，使用 Vercel AI SDK 实现大模型回复的逐字实时流式传输、基于 React Markdown 的富文本渲染，以及利用 React Easy Crop 进行客户端图片剪裁，最大程度提升人机交互体验。",
+                    ko: "Next.js와 React를 중심으로 서버 측 API 라우트의 보안성과 클라이언트 구성 요소의 인터랙티브 성능을 최적로 결합한 최신 풀스택 아키텍처 학습용 프로젝트입니다. 특히 LangChain.js를 활용하여 생성형 AI(Mistral)를 게임 마스터(Game Master)로 설정하기 위한 프롬프트 엔지니어링, 대화 임계량(Context Window) 튜닝, 구조적인 JSON 데이터 수신 방식을 심도 있게 교육합니다. 백엔드 구성은 Firebase 인증 모듈, Firestore NoSQL 구조화 설계, Security Rules를 통한 데이터 격리 등 Firebase 에코시스템을 조화롭게 이식했습니다. 이에 더해 Vercel AI SDK를 통한 AI 스트리밍 기법, React Markdown을 이용한 스토리북 렌더링, React Easy Crop을 사용한 로컬 파일 가공 처리를 융합하여 사용자 경험을 최고조로 끌어올렸습니다.",
+                    ja: "Next.js と React を用いて、セキュアなサーバーサイド API ルートと対話的なクライアントコンポーネントを融合させたフルスタック設計。特に LangChain.js を用いて生成AI（Mistral）をゲームマスターとして操るためのプロンプトエンジニアリング、履歴メモリ制限の攻略、構造化 JSON パースを学習します。Firebase を認証、NoSQL データベース（Firestore）の状態モデル、およびセキュリティルールによる保護に包括活用。さらに Vercel AI SDK による超低遅延ストリーミング、React Markdown による装飾テキスト表示、React Easy Crop による画像のトリミング機能をフル動員し、臨場感溢れる体験を極めました。",
+                    ar: "يزود هذا المشروع المتعلمين بالتحكم الكامل في بنية full-stack الحديثة باستخدام Next.js و React، من خلال دمج أمان Server API Routes مع تفاعل مكونات العميل. على وجه التحديد، يدمج المتعلم الذكاء الاصطناعي التوليدي (Mistral) عبر LangChain.js لعمل هندسة أوامر Game Master، وتحسين نافذة السياق، وتحليل المخرجات المهيكلة لـ JSON. تتم إدارة الخلفية باستخدام نظام Firebase للمصادقة وتخزين البيانات. بالإضافة إلى ذلك، يتم تحسين واجهة المستخدم بالبث الفوري لردود الذكاء الاصطناعي عبر Vercel AI SDK و react-markdown و react-easy-crop.",
+                    hi: "यह परियोजना शिक्षार्थियों को Next.js और React का उपयोग करके आधुनिक फुल-स्टैक आर्किटेक्चर में महारत हासिल करने में सक्षम बनाती है, जो सर्वर API रूट्स की सुरक्षा को क्लाइंट कंपोनेंट्स की अन्तरक्रियाशीलता के साथ जोड़ती है। विशेष रूप से, शिक्षार्थी गेम मास्टर (Game Master) के रूप में कार्य करने, संदर्भ अनुकूलन और संरचित JSON आउटपुट पार्सिंग के लिए LangChain.js के माध्यम से जनरेटिव एआई (Mistral) को एकीकृत करेंगे। बैकएंड को प्रमाणीकरण, NoSQL डेटाबेस मॉडल के लिए फायरबेस और सुरक्षा नियमों के लिए फायरबेस पारिस्थितिकी तंत्र का उपयोग करके प्रबंधित किया जाता है। इसके अतिरिक्त, Vercel AI SDK का उपयोग करके वास्तविक समय में एआई प्रतिक्रियाओं, React Markdown और react-easy-crop के उपयोग से इमर्सिव उपयोगकर्ता अनुभव (UX) को अधिकतम किया गया है।"
+                }
+            }
+        };
 
         const projectsData: Record<string, {
             title: string;
             tech: string[];
             description: string;
-            features: string[];
-            blueprint: string;
-            id: string;
             launchUrl: string;
             sourceUrl: string;
+            role: string;
+            challenge: string;
+            learning: string;
         }> = {
             neurolink: {
-                title: "NeuroLink-Web",
-                tech: ["TypeScript", "WebGL", "Astro", "Canvas-API", "TailwindCSS"],
-                description: "A high-performance components library introducing neural node network structures and interactive graph systems to web layouts. Designed to render complex relationship nodes dynamically with high frame rates using vanilla canvas rendering, custom layout physics, and force-directed simulations.",
-                features: [
-                    "Force-directed nodes simulation using custom Verlet integration.",
-                    "Sub-pixel anti-aliased Canvas rendering for crisp node grids.",
-                    "Integrated collision detection and user-drag gesture support.",
-                    "Dynamic auto-routing lines with customizable signal pulses.",
-                    "Lightweight footprint under 12KB with zero runtime dependencies."
-                ],
-                blueprint: `<svg class="w-32 h-32 stroke-black/50 dark:stroke-white/40 fill-none z-10" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="45" stroke-dasharray="3, 3" class="blueprint-spin-reverse" stroke-width="0.75" />
-                    <circle cx="50" cy="50" r="30" class="blueprint-spin" stroke-width="0.75" />
-                    <circle cx="50" cy="50" r="10" stroke-dasharray="1, 4" class="blueprint-spin" stroke-width="0.75" />
-                    <g class="blueprint-spin">
-                        <line x1="50" y1="20" x2="26" y2="62" stroke-width="0.75" />
-                        <line x1="26" y1="62" x2="74" y2="62" stroke-width="0.75" />
-                        <line x1="74" y1="62" x2="50" y2="20" stroke-width="0.75" />
-                        <circle cx="50" cy="20" r="3" fill="currentColor" class="blueprint-pulse" />
-                        <circle cx="26" cy="62" r="3" fill="currentColor" class="blueprint-pulse" />
-                        <circle cx="74" cy="62" r="3" fill="currentColor" class="blueprint-pulse" />
-                    </g>
-                    <text x="5" y="12" font-family="monospace" font-size="5" fill="currentColor" class="opacity-40">SYS.NL_NODE</text>
-                </svg>`,
-                id: "INDEX_REF: 0x01",
-                launchUrl: "https://github.com/Sajinomoto/Portofolio",
-                sourceUrl: "https://github.com/Sajinomoto/Portofolio"
+                title: "ABS (Aplikasi Bank Sampah)",
+                tech: ["Laravel", "MySQL", "Docker", "Vue", "TailwindCSS", "ApexCharts"],
+                description: "Aplikasi web komprehensif untuk mengelola inventaris fisik, transaksi keuangan, dan logistik penjemputan bank sampah secara terintegrasi.",
+                launchUrl: "",
+                sourceUrl: "https://github.com/amandanmira/PBL-BankSampah",
+                role: "Front-end",
+                challenge: "Mengelola data timbunan sampah yang bervariasi jenisnya dan melacak lokasi penjemputan armada truk sampah secara real-time. Solusinya dengan mengembangkan pemetaan rute dinamis berbasis geolokasi dan merancang skema MySQL yang ternormalisasi.",
+                learning: "Memahami alur integrasi penuh antara backend Laravel dan Vue.js, menguasai kontainerisasi Docker untuk konsistensi environment, serta visualisasi data dengan ApexCharts."
             },
             synthwave: {
-                title: "SynthWave CLI",
-                tech: ["Rust", "WASM", "WebAudio", "HTML5 Canvas", "Bincode"],
-                description: "A terminal simulator featuring a simulated audio spectrum analyzer and a customizable retro-synthesizer module built in Rust. Leverages WebAssembly compilation to feed custom synthesized oscillators directly to the browser's WebAudio destination context with minimal delay.",
-                features: [
-                    "High-performance oscillator voice allocations written in safe Rust.",
-                    "WebAudio polyphony scheduler for low-latency note triggering.",
-                    "Fast Fourier Transform (FFT) simulated visualizer bars.",
-                    "Custom CLI commands parsing for envelope ADSR parameter edits.",
-                    "Raw binary preset saving via JS-WASM data buffer transfers."
-                ],
-                blueprint: `<svg class="w-32 h-32 stroke-black/50 dark:stroke-white/40 fill-none z-10" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <g transform="translate(15, 30)">
-                        <path d="M0,20 Q10,0 20,20 T40,20 T60,20" class="blueprint-dash" stroke-width="1.5" />
-                        <path d="M0,25 Q15,40 30,25 T60,25" class="blueprint-dash" stroke-dasharray="2, 5" stroke-width="1" />
-                    </g>
-                    <circle cx="50" cy="50" r="40" stroke-dasharray="10, 5" class="blueprint-spin" stroke-width="0.75" />
-                    <circle cx="50" cy="50" r="35" class="blueprint-spin-reverse" stroke-width="0.75" />
-                    <line x1="50" y1="50" x2="50" y2="15" stroke-width="1.5" class="blueprint-radar-line" />
-                    <text x="5" y="12" font-family="monospace" font-size="5" fill="currentColor" class="opacity-40">TUI.OSC_FRQ</text>
-                </svg>`,
-                id: "INDEX_REF: 0x02",
-                launchUrl: "https://github.com/Sajinomoto/Portofolio",
-                sourceUrl: "https://github.com/Sajinomoto/Portofolio"
+                title: "Red Strings",
+                tech: ["Next JS", "TailwindCSS", "React JS", "Firebase", "LangChain JS", "Mistral AI"],
+                description: "Aplikasi web permainan roleplay interaktif yang memanfaatkan AI generatif sebagai Game Master untuk merangkai cerita petualangan pemain secara dinamis.",
+                launchUrl: "https://red-strings.vercel.app/",
+                sourceUrl: "https://github.com/Sajinomoto/Red-String/",
+                role: "Full-stack",
+                challenge: "Menjaga konsistensi konteks cerita panjang dalam permainan roleplay interaktif dan memberikan opsi tindakan pemain yang logis berdasarkan alur AI. Solusinya menggunakan LangChain JS untuk memori percakapan AI dan rekayasa prompt (prompt engineering) pada Mistral AI.",
+                learning: "Mempelajari cara mengintegrasikan model AI generatif (Mistral AI) ke Next.js secara aman, mengimplementasikan text streaming cerita AI, dan menguasai database Firebase Firestore."
             },
             chronostream: {
-                title: "ChronoStream-DB",
-                tech: ["Go", "InfluxDB", "React", "gRPC", "ChartJS"],
-                description: "A time-series database dashboard application for tracking real-time IoT sensor telemetry streams with customizable anomaly alerts. Utilizes Go's concurrency primitives to parse incoming streams with a high throughput rate, writing directly to a TSDB backend.",
-                features: [
-                    "Parallel stream processor processing up to 10k messages per second.",
-                    "Auto-refreshing graphs featuring live window data decimation.",
-                    "gRPC communication channels for microsecond serialization delay.",
-                    "Anomaly detection model alert configurations using standard deviations.",
-                    "Dual-pane dashboard showing live logs and metrics graphs concurrently."
-                ],
-                blueprint: `<svg class="w-32 h-32 stroke-black/50 dark:stroke-white/40 fill-none z-10" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="40" stroke-width="0.75" />
-                    <circle cx="50" cy="50" r="25" stroke-dasharray="4, 4" stroke-width="0.75" />
-                    <circle cx="50" cy="50" r="10" stroke-width="0.75" />
-                    <line x1="50" y1="10" x2="50" y2="90" stroke-width="0.5" stroke-dasharray="2, 2" />
-                    <line x1="10" y1="50" x2="90" y2="50" stroke-width="0.5" stroke-dasharray="2, 2" />
-                    <line x1="50" y1="50" x2="78" y2="22" stroke-width="1.5" class="blueprint-radar-line" />
-                    <circle cx="65" cy="30" r="2" fill="currentColor" class="blueprint-pulse" />
-                    <circle cx="35" cy="65" r="1.5" fill="currentColor" class="blueprint-pulse" />
-                    <text x="5" y="12" font-family="monospace" font-size="5" fill="currentColor" class="opacity-40">SYS.TELEMETRY</text>
-                </svg>`,
-                id: "INDEX_REF: 0x03",
-                launchUrl: "https://github.com/Sajinomoto/Portofolio",
-                sourceUrl: "https://github.com/Sajinomoto/Portofolio"
-            },
-            glitch: {
-                title: "Retro Glitch Engine",
-                tech: ["WebGL", "GLSL", "Vite", "Canvas2D", "WebGPURenderer"],
-                description: "A canvas shader engine utilising custom GLSL fragment shaders to apply real-time analog video noise, CRT curvature distortions, and chromatic aberrations. Highly optimized to compile shaders dynamically, maintaining a smooth 60fps refresh rate on modern mobile browsers.",
-                features: [
-                    "Custom fragment shaders reproducing NTSC color phase artifacts.",
-                    "Dynamic coordinate distortion creating curved scanline CRT tube simulation.",
-                    "Interactive glitch bursts triggered by mouse positions or sound inputs.",
-                    "Integrated post-processing pipelines for multi-pass screen filters.",
-                    "Uniform variables updating on every animation frame via custom JS triggers."
-                ],
-                blueprint: `<svg class="w-32 h-32 stroke-black/50 dark:stroke-white/40 fill-none z-10" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="15" y="15" width="70" height="70" stroke-dasharray="5, 5" stroke-width="0.75" />
-                    <line x1="15" y1="35" x2="85" y2="35" stroke-width="0.5" />
-                    <line x1="15" y1="65" x2="85" y2="65" stroke-width="0.5" />
-                    <line x1="35" y1="15" x2="35" y2="85" stroke-width="0.5" />
-                    <line x1="65" y1="15" x2="65" y2="85" stroke-width="0.5" />
-                    <g class="blueprint-pulse">
-                        <rect x="25" y="45" width="10" height="10" fill="currentColor" opacity="0.3" />
-                        <rect x="55" y="25" width="15" height="15" stroke-width="1" />
-                    </g>
-                    <path d="M20,20 L30,20 L30,30" stroke-width="1.5" />
-                    <path d="M80,80 L70,80 L70,70" stroke-width="1.5" />
-                    <rect x="40" y="55" width="30" height="2" fill="currentColor" class="blueprint-pulse" />
-                    <rect x="30" y="40" width="20" height="1" fill="currentColor" class="blueprint-pulse" />
-                    <text x="5" y="12" font-family="monospace" font-size="5" fill="currentColor" class="opacity-40">GLITCH.DSP_0x7</text>
-                </svg>`,
-                id: "INDEX_REF: 0x04",
-                launchUrl: "https://github.com/Sajinomoto/Portofolio",
-                sourceUrl: "https://github.com/Sajinomoto/Portofolio"
+                title: "Zunoi Cafe",
+                tech: ["Laravel", "SQLite", "Vue", "InertiaJS", "TailwindCSS", "ApexChart", "ShadCN Vue", "Vite"],
+                description: "Platform pemesanan kafe modern yang menghubungkan sistem pesanan mandiri (mobile) pelanggan dengan dasbor manajemen kasir secara real-time.",
+                launchUrl: "https://paseban.zunoi.id/login",
+                sourceUrl: "https://github.com/HaritsF807/ZUNOI-CAFE",
+                role: "Full-stack",
+                challenge: "Sinkronisasi pemesanan menu secara langsung antara perangkat seluler pelanggan dengan dasbor utama di kasir/barista tanpa adanya keterlambatan (delay). Solusinya dengan mengimplementasikan Laravel InertiaJS dikombinasikan dengan State Management Vue.",
+                learning: "Memperdalam pemahaman tentang InertiaJS sebagai jembatan antara Laravel dan Vue 3, menggunakan SQLite sebagai database, dan menyusun UI responsif menggunakan ShadCN Vue dan TailwindCSS."
             }
         };
 
-        const openModal = (projectKey: string) => {
+        const populateDynamicLists = (trans: any, lang: string, data: any) => {
+            // Populate role details list
+            if (modalRoleList) {
+                modalRoleList.innerHTML = "";
+                const details = trans && trans.roleDetails ? (trans.roleDetails[lang] || trans.roleDetails.en) : [];
+                if (Array.isArray(details)) {
+                    details.forEach((item: string) => {
+                        const li = document.createElement("li");
+                        li.textContent = item;
+                        modalRoleList.appendChild(li);
+                    });
+                }
+            }
+
+            // Populate challenge list
+            if (modalChallenge) {
+                modalChallenge.innerHTML = "";
+                const challenges = trans && trans.challenge ? (trans.challenge[lang] || trans.challenge.en) : [];
+                if (Array.isArray(challenges)) {
+                    challenges.forEach((item: any) => {
+                        const li = document.createElement("li");
+                        li.className = "space-y-1";
+                        
+                        const titleEl = document.createElement("strong");
+                        titleEl.className = "block text-sm font-semibold text-black dark:text-white font-sans";
+                        titleEl.textContent = item.title;
+                        
+                        const descEl = document.createElement("p");
+                        descEl.className = "text-xs text-black/75 dark:text-[#EFEEE8]/80 leading-relaxed text-justify font-sans";
+                        descEl.textContent = item.desc;
+                        
+                        li.appendChild(titleEl);
+                        li.appendChild(descEl);
+                        modalChallenge.appendChild(li);
+                    });
+                } else if (typeof challenges === "string" && challenges) {
+                    const li = document.createElement("li");
+                    li.className = "text-sm text-black/85 dark:text-[#EFEEE8]/90 font-sans";
+                    li.textContent = challenges;
+                    modalChallenge.appendChild(li);
+                }
+            }
+        };
+
+        const sectionTitleTranslations = {
+            id: "Proyek",
+            en: "Projects",
+            zh: "项目",
+            ko: "프로젝트",
+            ja: "プロジェクト",
+            ar: "المشاريع",
+            hi: "परियोजनाएं"
+        };
+
+        const detailButtonTranslations = {
+            id: "Detail",
+            en: "Detail",
+            zh: "详情",
+            ko: "상세보기",
+            ja: "詳細",
+            ar: "التفاصيل",
+            hi: "विस्तार"
+        };
+
+        const mockupsEl = document.getElementById("project-mockups-data");
+        const projectMockups = {
+            abs: mockupsEl?.getAttribute("data-abs") || "",
+            zunoicafe: mockupsEl?.getAttribute("data-zunoicafe") || "",
+            redstrings: mockupsEl?.getAttribute("data-redstrings") || ""
+        };
+
+        const updateProjectsGrid = (lang: string) => {
+            const sectionTitle = document.getElementById("project-section-title");
+            if (sectionTitle) {
+                sectionTitle.textContent = sectionTitleTranslations[lang as keyof typeof sectionTitleTranslations] || sectionTitleTranslations.en;
+            }
+
+            const descAbs = document.getElementById("project-desc-abs");
+            const descRedStrings = document.getElementById("project-desc-redstrings");
+            const descZunoi = document.getElementById("project-desc-zunoicafe");
+
+            if (descAbs) {
+                descAbs.textContent = projectTranslations.abs.desc[lang as keyof typeof projectTranslations.abs.desc] || projectTranslations.abs.desc.en;
+            }
+            if (descRedStrings) {
+                descRedStrings.textContent = projectTranslations.redstrings.desc[lang as keyof typeof projectTranslations.redstrings.desc] || projectTranslations.redstrings.desc.en;
+            }
+            if (descZunoi) {
+                descZunoi.textContent = projectTranslations.zunoicafe.desc[lang as keyof typeof projectTranslations.zunoicafe.desc] || projectTranslations.zunoicafe.desc.en;
+            }
+
+            // Also translate detail buttons
+            detailBtns.forEach(btn => {
+                btn.textContent = detailButtonTranslations[lang as keyof typeof detailButtonTranslations] || detailButtonTranslations.en;
+            });
+        };
+
+        const openModal = (projectKey: string, imageSrc: string | null = null) => {
+            const preferredLang = localStorage.getItem("preferred-language");
+            const lang = preferredLang || navigator.language.split("-")[0].toLowerCase();
+
+            translateModalHeaders(lang);
+
+            let translationKey = "";
+            if (projectKey === "neurolink") translationKey = "abs";
+            else if (projectKey === "synthwave") translationKey = "redstrings";
+            else if (projectKey === "chronostream") translationKey = "zunoicafe";
+
             const data = projectsData[projectKey];
             if (!data) return;
 
+            activeProjectKey = projectKey;
+            activeImageSrc = imageSrc;
+
             // Populate title
             if (modalTitle) modalTitle.textContent = data.title;
+
+            // Populate image
+            if (modalImage) {
+                modalImage.src = imageSrc || "";
+            }
 
             // Populate tech tags
             if (modalTech) {
                 modalTech.innerHTML = "";
                 data.tech.forEach(tag => {
                     const span = document.createElement("span");
-                    span.className = "font-mono text-[9px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-1.5 py-0.5 bg-black/[0.01] dark:bg-white/[0.01]";
-                    span.textContent = `[${tag}]`;
+                    span.className = "font-sans text-xs font-medium text-black/80 dark:text-white/90 border border-black/10 dark:border-white/10 px-2.5 py-1 rounded-md bg-black/[0.04] dark:bg-white/[0.04]";
+                    span.textContent = tag;
                     modalTech.appendChild(span);
                 });
             }
 
-            // Populate description
-            if (modalDesc) modalDesc.textContent = data.description;
+            const trans = projectTranslations[translationKey as keyof typeof projectTranslations];
 
-            // Populate features
-            if (modalFeatures) {
-                modalFeatures.innerHTML = "";
-                data.features.forEach(feat => {
-                    const li = document.createElement("li");
-                    li.className = "flex items-start gap-2";
-                    li.innerHTML = `<span class="text-black/40 dark:text-white/40 font-bold">&gt;&gt;</span><span>${feat}</span>`;
-                    modalFeatures.appendChild(li);
-                });
+            // Populate description
+            if (modalDesc) {
+                modalDesc.textContent = trans ? (trans.desc[lang as keyof typeof trans.desc] || trans.desc.en) : data.description;
             }
 
-            // Populate blueprint SVG
-            if (modalBlueprint) modalBlueprint.innerHTML = data.blueprint;
+            // Populate role
+            if (modalRole) {
+                modalRole.textContent = trans ? (trans.role[lang as keyof typeof trans.role] || trans.role.en) : data.role;
+            }
 
-            // Populate ID Ref
-            if (modalId) modalId.textContent = data.id;
+            // Populate dynamic lists
+            populateDynamicLists(trans, lang, data);
+
+            // Populate learning
+            if (modalLearning) {
+                modalLearning.textContent = trans ? (trans.learning[lang as keyof typeof trans.learning] || trans.learning.en) : data.learning;
+            }
 
             // Populate URLs
-            if (modalLaunch) modalLaunch.href = data.launchUrl;
-            if (modalSource) modalSource.href = data.sourceUrl;
+            if (modalLaunch) {
+                if (data.launchUrl && data.launchUrl !== "") {
+                    modalLaunch.href = data.launchUrl;
+                    modalLaunch.style.display = "inline-flex";
+                } else {
+                    modalLaunch.style.display = "none";
+                }
+            }
+            if (modalSource) {
+                if (data.sourceUrl && data.sourceUrl !== "") {
+                    modalSource.href = data.sourceUrl;
+                    modalSource.style.display = "inline-flex";
+                } else {
+                    modalSource.style.display = "none";
+                }
+            }
 
             // Show and animate
             if (modal && modalContent) {
+                const lenis = (window as any).lenis;
+                if (lenis) lenis.stop();
                 modal.style.display = "flex";
                 modal.classList.remove("hidden");
                 gsap.killTweensOf([modal, modalContent]);
@@ -2789,6 +3460,10 @@ import imgCatGlitched from "../assets/glitched-cat.png";
                     onComplete: () => {
                         modal.style.display = "none";
                         modal.classList.add("hidden");
+                        activeProjectKey = null;
+                        activeImageSrc = null;
+                        const lenis = (window as any).lenis;
+                        if (lenis) lenis.start();
                     }
                 });
             }
@@ -2799,7 +3474,26 @@ import imgCatGlitched from "../assets/glitched-cat.png";
             btn.addEventListener("click", () => {
                 const projectKey = btn.getAttribute("data-project");
                 if (projectKey) {
-                    openModal(projectKey);
+                    let imgPath = null;
+                    if (projectKey === "neurolink") imgPath = projectMockups.abs;
+                    else if (projectKey === "synthwave") imgPath = projectMockups.redstrings;
+                    else if (projectKey === "chronostream") imgPath = projectMockups.zunoicafe;
+                    openModal(projectKey, imgPath);
+                }
+            });
+        });
+
+        // Wire up project card image clicks
+        const cardImages = document.querySelectorAll(".project-card-image-click");
+        cardImages.forEach(img => {
+            img.addEventListener("click", () => {
+                const projectKey = img.getAttribute("data-project");
+                if (projectKey) {
+                    let imgPath = null;
+                    if (projectKey === "neurolink") imgPath = projectMockups.abs;
+                    else if (projectKey === "synthwave") imgPath = projectMockups.redstrings;
+                    else if (projectKey === "chronostream") imgPath = projectMockups.zunoicafe;
+                    openModal(projectKey, imgPath);
                 }
             });
         });
@@ -2818,10 +3512,91 @@ import imgCatGlitched from "../assets/glitched-cat.png";
             });
         }
 
+        // Image Preview Open/Close Logic
+        const closePreviewModal = () => {
+            if (imgPreviewModal && imgPreviewContent) {
+                gsap.killTweensOf([imgPreviewModal, imgPreviewContent]);
+                gsap.to(imgPreviewContent, {
+                    opacity: 0,
+                    scale: 0.95,
+                    duration: 0.3,
+                    ease: "power2.in"
+                });
+                gsap.to(imgPreviewModal, {
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: "power2.in",
+                    onComplete: () => {
+                        imgPreviewModal.style.display = "none";
+                        imgPreviewModal.classList.add("hidden");
+                    }
+                });
+            }
+        };
+
+        if (modalImage) {
+            modalImage.addEventListener("click", () => {
+                const currentSrc = modalImage.src;
+                if (!currentSrc || !imgPreviewModal || !imgPreviewContent || !modalPreviewLargeImage) return;
+
+                modalPreviewLargeImage.src = currentSrc;
+
+                imgPreviewModal.style.display = "flex";
+                imgPreviewModal.classList.remove("hidden");
+                gsap.killTweensOf([imgPreviewModal, imgPreviewContent]);
+                gsap.to(imgPreviewModal, {
+                    opacity: 1,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+                gsap.to(imgPreviewContent, {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.4,
+                    ease: "back.out(1.2)"
+                });
+            });
+        }
+
+        if (imgPreviewClose) {
+            imgPreviewClose.addEventListener("click", closePreviewModal);
+        }
+
+        if (imgPreviewModal) {
+            imgPreviewModal.addEventListener("click", (e) => {
+                if (e.target === imgPreviewModal || e.target === imgPreviewContent) {
+                    closePreviewModal();
+                }
+            });
+        }
+
         // Escape key close
         window.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && modal && !modal.classList.contains("hidden")) {
-                closeModal();
+            if (e.key === "Escape") {
+                if (imgPreviewModal && !imgPreviewModal.classList.contains("hidden")) {
+                    closePreviewModal();
+                } else if (modal && !modal.classList.contains("hidden")) {
+                    closeModal();
+                }
+            }
+        });
+
+        // Set initial translations for cards and headers
+        const preferredLang = localStorage.getItem("preferred-language");
+        const initialLang = preferredLang || navigator.language.split("-")[0].toLowerCase();
+        updateProjectsGrid(initialLang);
+        translateModalHeaders(initialLang);
+
+        window.addEventListener("language-changed", (e: any) => {
+            const lang = e.detail;
+            updateProjectsGrid(lang);
+            translateModalHeaders(lang);
+            if (modal && !modal.classList.contains("hidden") && activeProjectKey) {
+                let imgPath = null;
+                if (activeProjectKey === "neurolink") imgPath = projectMockups.abs;
+                else if (activeProjectKey === "synthwave") imgPath = projectMockups.redstrings;
+                else if (activeProjectKey === "chronostream") imgPath = projectMockups.zunoicafe;
+                openModal(activeProjectKey, imgPath);
             }
         });
     };
