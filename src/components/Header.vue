@@ -252,7 +252,7 @@ const scrollToSection = (selector: string) => {
             </div>
 
             <!-- Navigation & Dark Mode (Right) -->
-            <div class="flex items-center gap-6 flex-1 justify-center">
+            <div class="flex items-center gap-3 sm:gap-6 flex-1 justify-end md:justify-center">
                 <!-- Desktop Navigation (Hidden on mobile) -->
                 <nav class="hidden md:flex items-center gap-6 mx-auto justify-center">
                     <!-- Home Link -->
