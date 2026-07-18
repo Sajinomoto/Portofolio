@@ -107,7 +107,7 @@ const handleScroll = () => {
     // Only calculate active section state on desktop viewports (>= 768px)
     if (typeof window === "undefined" || window.innerWidth < 768) return;
 
-    const sections = ["home", "about", "tools", "projects", "contact"];
+    const sections = ["home", "about", "timeline", "tools", "projects", "contact"];
     let currentActive = "home";
 
     for (const section of sections) {
@@ -119,7 +119,13 @@ const handleScroll = () => {
             }
         }
     }
-    activeSection.value = currentActive;
+    
+    // Map timeline section to highlight the 'about' navigation link
+    if (currentActive === "timeline") {
+        activeSection.value = "about";
+    } else {
+        activeSection.value = currentActive;
+    }
 };
 
 onMounted(() => {

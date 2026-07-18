@@ -6,9 +6,7 @@ import Layout from "../layouts/Layout.astro";
 import AsciiBox from "../components/AsciiBox.vue";
 import GithubCalendar from "../components/GithubCalendar.vue";
 import { Image } from "astro:assets";
-import imgCat from "../assets/cat.jpg";
-import imgBird from "../assets/glitched-bird.png";
-import imgCatGlitched from "../assets/glitched-cat.png";
+import imgProfile from "../assets/my_profile.png";
 import absMockup from "../assets/abs_mockup.png";
 import zunoiCafeMockup from "../assets/zunoi_cafe_mockup.png";
 import redStringsMockup from "../assets/red_strings_mockup.png";
@@ -279,21 +277,21 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                                     id="cyber-viewport"
                                     class="relative w-full h-full border border-black/10 dark:border-white/10 overflow-hidden flex items-center justify-center bg-black/[0.03] dark:bg-white/[0.03]"
                                 >
-                                    <!-- Image Wrapper 0: Cat -->
+                                    <!-- Image Wrapper: Profile Picture -->
                                     <div
                                         class="cyber-slide absolute inset-0 w-full h-full opacity-100 z-10 transition-opacity duration-200"
                                     >
                                         <!-- Main Image -->
                                         <Image
-                                            src={imgCat}
-                                            alt="Satrio Aji Profile Cat"
+                                            src={imgProfile}
+                                            alt="Satrio Aji Profile Picture"
                                             width={250}
                                             height={250}
                                             class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
                                         />
                                         <!-- Glitch Layer 1 -->
                                         <Image
-                                            src={imgCat}
+                                            src={imgProfile}
                                             alt="Glitch Layer 1"
                                             width={250}
                                             height={250}
@@ -301,67 +299,7 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                                         />
                                         <!-- Glitch Layer 2 -->
                                         <Image
-                                            src={imgCat}
-                                            alt="Glitch Layer 2"
-                                            width={250}
-                                            height={250}
-                                            class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-2 filter hue-rotate-[240deg] pointer-events-none"
-                                        />
-                                    </div>
- 
-                                    <!-- Image Wrapper 1: Bird -->
-                                    <div
-                                        class="cyber-slide absolute inset-0 w-full h-full opacity-0 z-0 transition-opacity duration-200"
-                                    >
-                                        <!-- Main Image -->
-                                        <Image
-                                            src={imgBird}
-                                            alt="Satrio Aji Glitched Bird"
-                                            width={250}
-                                            height={250}
-                                            class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                                        />
-                                        <!-- Glitch Layer 1 -->
-                                        <Image
-                                            src={imgBird}
-                                            alt="Glitch Layer 1"
-                                            width={250}
-                                            height={250}
-                                            class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-1 filter hue-rotate-[90deg] pointer-events-none"
-                                        />
-                                        <!-- Glitch Layer 2 -->
-                                        <Image
-                                            src={imgBird}
-                                            alt="Glitch Layer 2"
-                                            width={250}
-                                            height={250}
-                                            class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-2 filter hue-rotate-[240deg] pointer-events-none"
-                                        />
-                                    </div>
- 
-                                    <!-- Image Wrapper 2: Glitched Cat -->
-                                    <div
-                                        class="cyber-slide absolute inset-0 w-full h-full opacity-0 z-0 transition-opacity duration-200"
-                                    >
-                                        <!-- Main Image -->
-                                        <Image
-                                            src={imgCatGlitched}
-                                            alt="Satrio Aji Glitched Cat"
-                                            width={250}
-                                            height={250}
-                                            class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                                        />
-                                        <!-- Glitch Layer 1 -->
-                                        <Image
-                                            src={imgCatGlitched}
-                                            alt="Glitch Layer 1"
-                                            width={250}
-                                            height={250}
-                                            class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-0 group-hover:opacity-70 group-hover:animate-glitch-1 filter hue-rotate-[90deg] pointer-events-none"
-                                        />
-                                        <!-- Glitch Layer 2 -->
-                                        <Image
-                                            src={imgCatGlitched}
+                                            src={imgProfile}
                                             alt="Glitch Layer 2"
                                             width={250}
                                             height={250}
@@ -406,17 +344,18 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                     <div class="w-full mt-16 z-10">
                         <GithubCalendar client:visible />
                     </div>
+                </section>
 
+                <section
+                    id="timeline"
+                    class="relative py-24 px-8 sm:px-12 md:px-24 max-w-7xl mx-auto text-black dark:text-[#EFEEE8] transition-colors duration-300 w-full z-10 flex flex-col items-center"
+                >
                     <!-- Part 1.5: Journey / Timeline -->
                     <div class="w-full mt-24 z-10 flex flex-col items-center">
                         <!-- Section Header -->
                         <div class="mb-12 text-center w-full">
-                            <h3 class="text-3xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight text-black dark:text-white mb-2 uppercase">
-                                TIMELINE
-                            </h3>
-                            <p class="font-mono text-[10px] sm:text-xs text-black/55 dark:text-[#EFEEE8]/45 uppercase tracking-widest">
-                                A timeline of my programming journey and key milestones.
-                            </p>
+                            <h3 id="timeline-title" class="text-3xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight text-black dark:text-white mb-2 uppercase">TIMELINE</h3>
+                            <p id="timeline-subtitle" class="font-mono text-[10px] sm:text-xs text-black/55 dark:text-[#EFEEE8]/45 uppercase tracking-widest">A timeline of my programming journey and key milestones.</p>
                         </div>
 
                         <!-- Timeline Layout -->
@@ -432,54 +371,15 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
 
                                 <!-- Cards Container for 2025 -->
                                 <div class="space-y-8 pt-10">
-                                    <!-- Card 1: Asisten Matkul FE -->
-                                    <div class="timeline-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl" tabindex="0" role="button" aria-expanded="false">
-                                        <!-- Expand/Collapse Button (Absolute) -->
-                                        <div class="absolute top-5 right-5 text-black/40 dark:text-white/30 group-hover:text-black dark:group-hover:text-white transition-colors select-none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="card-toggle-icon"><path d="m6 9 6 6 6-6"/></svg>
-                                        </div>
-
-                                        <!-- Halftone decorative element -->
-                                        <div class="absolute bottom-0 right-0 w-24 h-20 pointer-events-none overflow-hidden opacity-10 dark:opacity-15 transition-opacity duration-300 group-hover:opacity-25 halftone-container">
-                                            <div class="absolute inset-0 halftone-pattern"></div>
-                                        </div>
-
-                                        <div class="flex items-center gap-3 mb-3.5 pr-8">
-                                            <div class="w-7 h-7 flex items-center justify-center border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] text-black/60 dark:text-white/60">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                                            </div>
-                                            <span class="font-mono text-[11px] sm:text-xs font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
-                                                // ACADEMIC & TEACHING
-                                            </span>
-                                        </div>
-                                        <h4 class="font-display text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white mb-1">
-                                            Asisten Mata Kuliah Front-End (FE)
-                                        </h4>
-                                        <p class="font-mono text-xs sm:text-sm text-black/40 dark:text-white/30 font-semibold uppercase tracking-wider">
-                                            Universitas Sebelas Maret &middot; 2025
-                                        </p>
-                                        <div class="card-collapsible">
-                                            <div class="card-collapsible-inner">
-                                                <p class="font-mono text-xs sm:text-[13.5px] text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4 mt-4">
-                                                    Membimbing mahasiswa dalam memahami konsep dasar hingga lanjutan pengembangan antarmuka web, termasuk HTML, CSS, JavaScript, serta metodologi perancangan web responsif untuk menciptakan aplikasi yang fungsional dan ramah pengguna.
-                                                </p>
-                                                <div class="flex flex-wrap gap-2">
-                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Front-End]</span>
-                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[UI/UX]</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                     <!-- Card 2: Asisten Matkul Pemrograman Dasar -->
-                                    <div class="timeline-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl" tabindex="0" role="button" aria-expanded="false">
+                                    <div class="timeline-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 group select-none max-w-2xl" tabindex="0" role="button" aria-expanded="false">
                                         <!-- Expand/Collapse Button (Absolute) -->
-                                        <div class="absolute top-5 right-5 text-black/40 dark:text-white/30 group-hover:text-black dark:group-hover:text-white transition-colors select-none">
+                                        <div class="absolute top-5 right-5 text-black/40 dark:text-white/30 select-none">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="card-toggle-icon"><path d="m6 9 6 6 6-6"/></svg>
                                         </div>
 
                                         <!-- Halftone decorative element -->
-                                        <div class="absolute bottom-0 right-0 w-24 h-20 pointer-events-none overflow-hidden opacity-10 dark:opacity-15 transition-opacity duration-300 group-hover:opacity-25 halftone-container">
+                                        <div class="absolute bottom-0 right-0 w-24 h-20 pointer-events-none overflow-hidden opacity-10 dark:opacity-15 halftone-container">
                                             <div class="absolute inset-0 halftone-pattern"></div>
                                         </div>
 
@@ -487,38 +387,38 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                                             <div class="w-7 h-7 flex items-center justify-center border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] text-black/60 dark:text-white/60">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                                             </div>
-                                            <span class="font-mono text-[11px] sm:text-xs font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
+                                            <span id="timeline-card-1-category" class="font-mono text-[11px] sm:text-xs font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
                                                 // ACADEMIC & TEACHING
                                             </span>
                                         </div>
-                                        <h4 class="font-display text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white mb-1">
+                                        <h4 id="timeline-card-1-title" class="font-display text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white mb-1">
                                             Asisten Mata Kuliah Pemrograman Dasar
                                         </h4>
-                                        <p class="font-mono text-xs sm:text-sm text-black/40 dark:text-white/30 font-semibold uppercase tracking-wider">
+                                        <p id="timeline-card-1-org" class="font-mono text-xs sm:text-sm text-black/40 dark:text-white/30 font-semibold uppercase tracking-wider">
                                             Universitas Sebelas Maret &middot; 2025
                                         </p>
                                         <div class="card-collapsible">
                                             <div class="card-collapsible-inner">
-                                                <p class="font-mono text-xs sm:text-[13.5px] text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4 mt-4">
+                                                <p id="timeline-card-1-desc" class="font-mono text-xs sm:text-[13.5px] text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4 mt-4">
                                                     Mengajar dan membimbing mahasiswa baru dalam memahami logika pemrograman dasar, struktur data, algoritma pemecahan masalah, serta penulisan kode yang bersih dan terstruktur untuk membangun pondasi pemrograman yang kuat.
                                                 </p>
                                                 <div class="flex flex-wrap gap-2">
-                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Programming Logic]</span>
-                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Algorithms]</span>
+                                                    <span id="timeline-card-1-tag-1" class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Programming Logic]</span>
+                                                    <span id="timeline-card-1-tag-2" class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Algorithms]</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <!-- Card 3: Asisten Matkul Database -->
-                                    <div class="timeline-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl" tabindex="0" role="button" aria-expanded="false">
+                                    <div class="timeline-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 group select-none max-w-2xl" tabindex="0" role="button" aria-expanded="false">
                                         <!-- Expand/Collapse Button (Absolute) -->
-                                        <div class="absolute top-5 right-5 text-black/40 dark:text-white/30 group-hover:text-black dark:group-hover:text-white transition-colors select-none">
+                                        <div class="absolute top-5 right-5 text-black/40 dark:text-white/30 select-none">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="card-toggle-icon"><path d="m6 9 6 6 6-6"/></svg>
                                         </div>
 
                                         <!-- Halftone decorative element -->
-                                        <div class="absolute bottom-0 right-0 w-24 h-20 pointer-events-none overflow-hidden opacity-10 dark:opacity-15 transition-opacity duration-300 group-hover:opacity-25 halftone-container">
+                                        <div class="absolute bottom-0 right-0 w-24 h-20 pointer-events-none overflow-hidden opacity-10 dark:opacity-15 halftone-container">
                                             <div class="absolute inset-0 halftone-pattern"></div>
                                         </div>
 
@@ -526,24 +426,24 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                                             <div class="w-7 h-7 flex items-center justify-center border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] text-black/60 dark:text-white/60">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                                             </div>
-                                            <span class="font-mono text-[11px] sm:text-xs font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
+                                            <span id="timeline-card-2-category" class="font-mono text-[11px] sm:text-xs font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
                                                 // ACADEMIC & TEACHING
                                             </span>
                                         </div>
-                                        <h4 class="font-display text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white mb-1">
+                                        <h4 id="timeline-card-2-title" class="font-display text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white mb-1">
                                             Asisten Mata Kuliah Database
                                         </h4>
-                                        <p class="font-mono text-xs sm:text-sm text-black/40 dark:text-white/30 font-semibold uppercase tracking-wider">
+                                        <p id="timeline-card-2-org" class="font-mono text-xs sm:text-sm text-black/40 dark:text-white/30 font-semibold uppercase tracking-wider">
                                             Universitas Sebelas Maret &middot; 2025
                                         </p>
                                         <div class="card-collapsible">
                                             <div class="card-collapsible-inner">
-                                                <p class="font-mono text-xs sm:text-[13.5px] text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4 mt-4">
+                                                <p id="timeline-card-2-desc" class="font-mono text-xs sm:text-[13.5px] text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4 mt-4">
                                                     Membantu mahasiswa dalam mempelajari desain basis data relasional, normalisasi data, serta pembuatan query SQL yang efisien menggunakan sistem manajemen basis data (DBMS) untuk menunjang pengembangan aplikasi skala terdistribusi.
                                                 </p>
                                                 <div class="flex flex-wrap gap-2">
-                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Database]</span>
-                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[SQL]</span>
+                                                    <span id="timeline-card-2-tag-1" class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Database]</span>
+                                                    <span id="timeline-card-2-tag-2" class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[SQL]</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -562,14 +462,14 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
 
                                 <!-- Cards Container for 2024 -->
                                 <div class="space-y-8 pt-10">
-                                    <div class="timeline-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl" tabindex="0" role="button" aria-expanded="false">
+                                    <div class="timeline-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 group select-none max-w-2xl" tabindex="0" role="button" aria-expanded="false">
                                         <!-- Expand/Collapse Button (Absolute) -->
-                                        <div class="absolute top-5 right-5 text-black/40 dark:text-white/30 group-hover:text-black dark:group-hover:text-white transition-colors select-none">
+                                        <div class="absolute top-5 right-5 text-black/40 dark:text-white/30 select-none">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="card-toggle-icon"><path d="m6 9 6 6 6-6"/></svg>
                                         </div>
 
                                         <!-- Halftone decorative element -->
-                                        <div class="absolute bottom-0 right-0 w-24 h-20 pointer-events-none overflow-hidden opacity-10 dark:opacity-15 transition-opacity duration-300 group-hover:opacity-25 halftone-container">
+                                        <div class="absolute bottom-0 right-0 w-24 h-20 pointer-events-none overflow-hidden opacity-10 dark:opacity-15 halftone-container">
                                             <div class="absolute inset-0 halftone-pattern"></div>
                                         </div>
 
@@ -577,24 +477,24 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                                             <div class="w-7 h-7 flex items-center justify-center border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] text-black/60 dark:text-white/60">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
                                             </div>
-                                            <span class="font-mono text-[11px] sm:text-xs font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
+                                            <span id="timeline-card-3-category" class="font-mono text-[11px] sm:text-xs font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
                                                 // EDUCATION
                                             </span>
                                         </div>
-                                        <h4 class="font-display text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white mb-1">
+                                        <h4 id="timeline-card-3-title" class="font-display text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white mb-1">
                                             Mahasiswa D3 Teknik Informatika
                                         </h4>
-                                        <p class="font-mono text-xs sm:text-sm text-black/40 dark:text-white/30 font-semibold uppercase tracking-wider">
+                                        <p id="timeline-card-3-org" class="font-mono text-xs sm:text-sm text-black/40 dark:text-white/30 font-semibold uppercase tracking-wider">
                                             Universitas Sebelas Maret &middot; 2024 - Sekarang
                                         </p>
                                         <div class="card-collapsible">
                                             <div class="card-collapsible-inner">
-                                                <p class="font-mono text-xs sm:text-[13.5px] text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4 mt-4">
+                                                <p id="timeline-card-3-desc" class="font-mono text-xs sm:text-[13.5px] text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4 mt-4">
                                                     Memulai perjalanan akademik di program studi D3 Teknik Informatika, Universitas Sebelas Maret (UNS). Mempelajari berbagai fundamental ilmu komputer, pemrograman web, struktur data, dan pengembangan perangkat lunak untuk membangun fondasi karir di bidang IT.
                                                 </p>
                                                 <div class="flex flex-wrap gap-2">
-                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Mahasiswa]</span>
-                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Teknik Informatika]</span>
+                                                    <span id="timeline-card-3-tag-1" class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Mahasiswa]</span>
+                                                    <span id="timeline-card-3-tag-2" class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Teknik Informatika]</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -613,14 +513,14 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
 
                                 <!-- Cards Container for 2023 -->
                                 <div class="space-y-8 pt-10">
-                                    <div class="timeline-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl" tabindex="0" role="button" aria-expanded="false">
+                                    <div class="timeline-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 group select-none max-w-2xl" tabindex="0" role="button" aria-expanded="false">
                                         <!-- Expand/Collapse Button (Absolute) -->
-                                        <div class="absolute top-5 right-5 text-black/40 dark:text-white/30 group-hover:text-black dark:group-hover:text-white transition-colors select-none">
+                                        <div class="absolute top-5 right-5 text-black/40 dark:text-white/30 select-none">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="card-toggle-icon"><path d="m6 9 6 6 6-6"/></svg>
                                         </div>
 
                                         <!-- Halftone decorative element -->
-                                        <div class="absolute bottom-0 right-0 w-24 h-20 pointer-events-none overflow-hidden opacity-10 dark:opacity-15 transition-opacity duration-300 group-hover:opacity-25 halftone-container">
+                                        <div class="absolute bottom-0 right-0 w-24 h-20 pointer-events-none overflow-hidden opacity-10 dark:opacity-15 halftone-container">
                                             <div class="absolute inset-0 halftone-pattern"></div>
                                         </div>
 
@@ -628,38 +528,38 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                                             <div class="w-7 h-7 flex items-center justify-center border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] text-black/60 dark:text-white/60">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2"/><path d="M12 22v-2"/><path d="m17 20.66-1-1.73"/><path d="M11 5.07 10 3.34"/><path d="m20.66 17-1.73-1"/><path d="M5.07 11 3.34 10"/><path d="m22 12-2 0"/><path d="m2 12 2 0"/><path d="m20.66 7-1.73 1"/><path d="M5.07 13 3.34 14"/><path d="m17 3.34-1 1.73"/><path d="M11 18.93 10 20.66"/></svg>
                                             </div>
-                                            <span class="font-mono text-[11px] sm:text-xs font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
+                                            <span id="timeline-card-4-category" class="font-mono text-[11px] sm:text-xs font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
                                                 // PROFESSIONAL WORK
                                             </span>
                                         </div>
-                                        <h4 class="font-display text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white mb-1">
+                                        <h4 id="timeline-card-4-title" class="font-display text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white mb-1">
                                             Graphic Designer
                                         </h4>
-                                        <p class="font-mono text-xs sm:text-sm text-black/40 dark:text-white/30 font-semibold uppercase tracking-wider">
+                                        <p id="timeline-card-4-org" class="font-mono text-xs sm:text-sm text-black/40 dark:text-white/30 font-semibold uppercase tracking-wider">
                                             Jakarta Barat &middot; 2023
                                         </p>
                                         <div class="card-collapsible">
                                             <div class="card-collapsible-inner">
-                                                <p class="font-mono text-xs sm:text-[13.5px] text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4 mt-4">
+                                                <p id="timeline-card-4-desc" class="font-mono text-xs sm:text-[13.5px] text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4 mt-4">
                                                     Bekerja sebagai Desainer Grafis dengan spesialisasi pada desain *social media feeds* dan ilustrasi produk. Bertanggung jawab dalam merancang visual yang menarik dan komunikatif untuk meningkatkan *brand awareness* serta interaksi audiens.
                                                 </p>
                                                 <div class="flex flex-wrap gap-2">
-                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Graphic Design]</span>
-                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Social Media]</span>
-                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Illustration]</span>
+                                                    <span id="timeline-card-4-tag-1" class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Graphic Design]</span>
+                                                    <span id="timeline-card-4-tag-2" class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Social Media]</span>
+                                                    <span id="timeline-card-4-tag-3" class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Illustration]</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="timeline-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 transition-all duration-300 hover:border-black/30 dark:hover:border-white/30 group select-none max-w-2xl" tabindex="0" role="button" aria-expanded="false">
+                                    <div class="timeline-card relative border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 group select-none max-w-2xl" tabindex="0" role="button" aria-expanded="false">
                                         <!-- Expand/Collapse Button (Absolute) -->
-                                        <div class="absolute top-5 right-5 text-black/40 dark:text-white/30 group-hover:text-black dark:group-hover:text-white transition-colors select-none">
+                                        <div class="absolute top-5 right-5 text-black/40 dark:text-white/30 select-none">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="card-toggle-icon"><path d="m6 9 6 6 6-6"/></svg>
                                         </div>
 
                                         <!-- Halftone decorative element -->
-                                        <div class="absolute bottom-0 right-0 w-24 h-20 pointer-events-none overflow-hidden opacity-10 dark:opacity-15 transition-opacity duration-300 group-hover:opacity-25 halftone-container">
+                                        <div class="absolute bottom-0 right-0 w-24 h-20 pointer-events-none overflow-hidden opacity-10 dark:opacity-15 halftone-container">
                                             <div class="absolute inset-0 halftone-pattern"></div>
                                         </div>
 
@@ -667,24 +567,24 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                                             <div class="w-7 h-7 flex items-center justify-center border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] text-black/60 dark:text-white/60">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
                                             </div>
-                                            <span class="font-mono text-[11px] sm:text-xs font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
+                                            <span id="timeline-card-5-category" class="font-mono text-[11px] sm:text-xs font-bold tracking-widest text-black/45 dark:text-white/35 uppercase">
                                                 // EDUCATION
                                             </span>
                                         </div>
-                                        <h4 class="font-display text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white mb-1">
+                                        <h4 id="timeline-card-5-title" class="font-display text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white mb-1">
                                             Siswa SMA (Jurusan IPA)
                                         </h4>
-                                        <p class="font-mono text-xs sm:text-sm text-black/40 dark:text-white/30 font-semibold uppercase tracking-wider">
+                                        <p id="timeline-card-5-org" class="font-mono text-xs sm:text-sm text-black/40 dark:text-white/30 font-semibold uppercase tracking-wider">
                                             SMAN 2 Depok, Jawa Barat &middot; Lulus 2023
                                         </p>
                                         <div class="card-collapsible">
                                             <div class="card-collapsible-inner">
-                                                <p class="font-mono text-xs sm:text-[13.5px] text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4 mt-4">
+                                                <p id="timeline-card-5-desc" class="font-mono text-xs sm:text-[13.5px] text-black/55 dark:text-[#EFEEE8]/50 leading-relaxed text-justify mb-4 mt-4">
                                                     Menyelesaikan pendidikan sekolah menengah atas di SMAN 2 Depok dengan fokus pada peminatan Ilmu Pengetahuan Alam (IPA). Membangun dasar pemikiran analitis dan logis yang berguna untuk memecahkan masalah kompleks di masa depan.
                                                 </p>
                                                 <div class="flex flex-wrap gap-2">
-                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[IPA]</span>
-                                                    <span class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Science]</span>
+                                                    <span id="timeline-card-5-tag-1" class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[IPA]</span>
+                                                    <span id="timeline-card-5-tag-2" class="font-mono text-[10px] sm:text-[11px] text-black/50 dark:text-white/40 border border-black/10 dark:border-white/10 px-2 py-0.5 bg-black/[0.02] dark:bg-white/[0.02] select-none hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">[Science]</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -1434,6 +1334,8 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                     </div>
                 </section>
 
+                
+
 
 
                 <!-- Section: Projects -->
@@ -1726,9 +1628,7 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                                     <!-- Card -->
                                     <div class="relative w-full border-t border-b border-l border-r-0 border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-6 sm:p-7 select-none font-mono text-left group transition-all duration-300 hover:border-black/20 dark:hover:border-white/20 flex flex-col justify-between">
                                         <div>
-                                            <h3 class="text-xs font-bold tracking-widest uppercase text-black/80 dark:text-white/80 mb-2.5 text-center">
-                                                Contact Information
-                                            </h3>
+                                            <h3 id="contact-info-title" class="text-xs font-bold tracking-widest uppercase text-black/80 dark:text-white/80 mb-2.5 text-center">Contact Information</h3>
                                             <!-- Divider line under title -->
                                             <div class="border-b border-black/10 dark:border-white/10 mb-5 w-full"></div>
                                         </div>
@@ -1754,7 +1654,7 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4.5 h-4.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                                                 </div>
                                                 <div class="flex flex-col min-w-0">
-                                                    <span class="text-[9px] uppercase tracking-wider text-black/40 dark:text-white/30 font-bold">No HP</span>
+                                                    <span id="contact-phone-label" class="text-[9px] uppercase tracking-wider text-black/40 dark:text-white/30 font-bold">No HP</span>
                                                     <a href="https://wa.me/6285174354574" target="_blank" rel="noopener noreferrer" class="text-black/75 dark:text-white/75 hover:text-black dark:hover:text-white transition-colors duration-150 truncate font-mono">
                                                         +62 851-7435-4574
                                                     </a>
@@ -1767,10 +1667,8 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4.5 h-4.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                                                 </div>
                                                 <div class="flex flex-col min-w-0">
-                                                    <span class="text-[9px] uppercase tracking-wider text-black/40 dark:text-white/30 font-bold">Location</span>
-                                                    <span class="text-black/75 dark:text-white/75 truncate font-mono">
-                                                        Surakarta, Indonesia
-                                                    </span>
+                                                    <span id="contact-location-label" class="text-[9px] uppercase tracking-wider text-black/40 dark:text-white/30 font-bold">Location</span>
+                                                    <span id="contact-location-value" class="text-black/75 dark:text-white/75 truncate font-mono">Surakarta, Indonesia</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -1817,7 +1715,7 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                                             </a>
                                             <!-- LinkedIn -->
                                             <a
-                                                href="https://www.linkedin.com/in/satrio-aji-pamungkas-843a87340/"
+                                                href="https://www.linkedin.com/in/satrio-aji/"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 class="group/btn relative hover:z-10 -mt-px flex items-center justify-start flex-1 w-11 hover:w-36 border-y border-r border-black/10 dark:border-white/10 rounded-br-md rounded-tr-none rounded-l-none bg-black/[0.015] dark:bg-white/[0.015] hover:bg-black/5 dark:hover:bg-white/5 hover:border-black/20 dark:hover:border-white/20 transition-all duration-300 ease-in-out overflow-hidden px-3 select-none"
@@ -2048,6 +1946,150 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
         hi: "तकनीक और उपकरण जिनका उपयोग मैंने अपने प्रोजेक्ट बनाने के लिए किया है।"
     };
 
+    // Translations for Timeline
+    const timelineTranslations = {
+        subtitle: {
+            id: "Linimasa perjalanan pemrograman dan pencapaian utama saya.",
+            en: "A timeline of my programming journey and key milestones.",
+            zh: "我的编程之旅和关键里程碑的时间线。",
+            ko: "나의 프로그래밍 여정과 주요 이정표의 타임라인.",
+            ja: "私のプログラミングの旅と主要なマイルストーンのタイムライン。",
+            ar: "جدول زمني لرحلتي في البرمجة وأهم المحطات.",
+            hi: "मेरी प्रोग्रामिंग यात्रा और प्रमुख मील के पत्थरों की एक समयरेखा।"
+        },
+        card1: {
+            category: { id: "// AKADEMIK & PENGAJARAN", en: "// ACADEMIC & TEACHING", zh: "// 学术与教学", ko: "// 학술 및 교육", ja: "// 学術・教育", ar: "// الأكاديمية والتدريس", hi: "// शैक्षणिक और शिक्षण" },
+            title: { id: "Asisten Mata Kuliah Pemrograman Dasar", en: "Basic Programming Course Assistant", zh: "基础编程课程助教", ko: "기초 프로그래밍 과목 조교", ja: "基礎プログラミング科目アシスタント", ar: "مساعد تدريس لمادة البرمجة الأساسية", hi: "बुनियादी प्रोग्रामिंग पाठ्यक्रम सहायक" },
+            org: { id: "Universitas Sebelas Maret &middot; 2025", en: "Universitas Sebelas Maret &middot; 2025", zh: "Universitas Sebelas Maret &middot; 2025", ko: "Universitas Sebelas Maret &middot; 2025", ja: "Universitas Sebelas Maret &middot; 2025", ar: "Universitas Sebelas Maret &middot; 2025", hi: "Universitas Sebelas Maret &middot; 2025" },
+            desc: {
+                id: "Mengajar dan membimbing mahasiswa baru dalam memahami logika pemrograman dasar, struktur data, algoritma pemecahan masalah, serta penulisan kode yang bersih dan terstruktur untuk membangun pondasi pemrograman yang kuat.",
+                en: "Teaching and mentoring freshmen in understanding basic programming logic, data structures, problem-solving algorithms, and writing clean, structured code to build a solid programming foundation.",
+                zh: "指导新生理解基础编程逻辑、数据结构、问题解决算法，并编写整洁、结构化的代码，以构建扎实的编程基础。",
+                ko: "신입생들이 기초 프로그래밍 논리, 자료 구조, 문제 해결 알고리즘을 이해하도록 지도하고, 깨끗하고 구조화된 코드를 작성하여 단단한 프로그래밍 기반을 구축할 수 있도록 도왔습니다.",
+                ja: "新入生を対象に、基礎的なプログラミング論理、データ構造、問題解決アルゴリズムの理解を指導し、クリーンで構造化されたコードを記述して強固なプログラミングの土台を築くサポートを行いました。",
+                ar: "تدريس وتوجيه الطلاب الجدد في فهم منطق البرمجة الأساسي، وهياكل البيانات، وخوارزميات حل المشكلات، وكتابة كود نظيف ومنظم لبناء أساس برمجي قوي.",
+                hi: "नए छात्रों को बुनियादी प्रोग्रामिंग लॉजिक, डेटा स्ट्रक्चर, समस्या-समाधान एल्गोरिदम को समझने और एक मजबूत प्रोग्रामिंग नींव बनाने के लिए स्वच्छ और संरचित कोड लिखने में पढ़ाना और मार्गदर्शन करना।"
+            },
+            tag1: { id: "[Logika Pemrograman]", en: "[Programming Logic]", zh: "[编程逻辑]", ko: "[프로그래밍 논리]", ja: "[プログラミング論理]", ar: "[منطق البرمجة]", hi: "[प्रोग्रामिंग लॉजिक]" },
+            tag2: { id: "[Algoritma]", en: "[Algorithms]", zh: "[算法]", ko: "[알고리즘]", ja: "[アルゴリズム]", ar: "[الخوارزميات]", hi: "[एल्गोरिदम]" }
+        },
+        card2: {
+            category: { id: "// AKADEMIK & PENGAJARAN", en: "// ACADEMIC & TEACHING", zh: "// 学术与教学", ko: "// 학술 및 교육", ja: "// 学術・教育", ar: "// الأكاديمية والتدريس", hi: "// शैक्षणिक और शिक्षण" },
+            title: { id: "Asisten Mata Kuliah Database", en: "Database Course Assistant", zh: "数据库课程助教", ko: "데이터베이스 과목 조교", ja: "データベース科目アシスタント", ar: "مساعد تدريس لمادة قواعد البيانات", hi: "डेटाबेस पाठ्यक्रम सहायक" },
+            org: { id: "Universitas Sebelas Maret &middot; 2025", en: "Universitas Sebelas Maret &middot; 2025", zh: "Universitas Sebelas Maret &middot; 2025", ko: "Universitas Sebelas Maret &middot; 2025", ja: "Universitas Sebelas Maret &middot; 2025", ar: "Universitas Sebelas Maret &middot; 2025", hi: "Universitas Sebelas Maret &middot; 2025" },
+            desc: {
+                id: "Membantu mahasiswa dalam mempelajari desain basis data relasional, normalisasi data, serta pembuatan query SQL yang efisien menggunakan sistem manajemen basis data (DBMS) untuk menunjang pengembangan aplikasi skala terdistribusi.",
+                en: "Assisting students in learning relational database design, data normalization, and writing efficient SQL queries using DBMS to support distributed-scale application development.",
+                zh: "协助学生学习关系数据库设计、数据规范化，并使用 DBMS 编写高效的 SQL 查询，以支持分布式规模的应用开发。",
+                ko: "학생들이 관계형 데이터베이스 설계, 데이터 정규화, 그리고 DBMS를 활용한 효율적인 SQL 쿼리 작성을 학습하도록 지원하여 분산 규모의 애플리케이션 개발을 뒷받침했습니다.",
+                ja: "学生が関係データベース設計、データの正規化、DBMSを使用した効率的なSQLクエリの作成を学ぶのを支援し、分散規模のアプリケーション開発をサポートしました。",
+                ar: "مساعدة الطلاب في تعلم تصميم قواعد البيانات العلاقية، وتطبيع البيانات، وكتابة استعلامات SQL فعالة باستخدام DBMS لدعم تطوير التطبيقات على نطاق موزع.",
+                hi: "वितरित-पैमाने के अनुप्रयोग विकास का समर्थन करने के लिए छात्रों को रिलेशनल डेटाबेस डिज़ाइन, डेटा सामान्यीकरण और DBMS का उपयोग करके कुशल SQL क्वेरी लिखने में मदद करना।"
+            },
+            tag1: { id: "[Basis Data]", en: "[Database]", zh: "[数据库]", ko: "[데이터베이스]", ja: "[データベース]", ar: "[قاعدة البيانات]", hi: "[डेटाबेस]" },
+            tag2: { id: "[SQL]", en: "[SQL]", zh: "[SQL]", ko: "[SQL]", ja: "[SQL]", ar: "[SQL]", hi: "[SQL]" }
+        },
+        card3: {
+            category: { id: "// PENDIDIKAN", en: "// EDUCATION", zh: "// 教育", ko: "// 교육", ja: "// 教育", ar: "// التعليم", hi: "// शिक्षा" },
+            title: { id: "Mahasiswa D3 Teknik Informatika", en: "Diploma of Informatics Engineering Student", zh: "信息工程专科学生", ko: "정보공학 전문학사 과정 학생", ja: "情報工学専門課程学生", ar: "طالب دبلوم في هندسة المعلوماتية", hi: "इंफॉर्मेटिक्स इंजीनियरिंग में डिप्लोमा छात्र" },
+            org: { id: "Universitas Sebelas Maret &middot; 2024 - Sekarang", en: "Universitas Sebelas Maret &middot; 2024 - Present", zh: "Universitas Sebelas Maret &middot; 2024 - 至今", ko: "Universitas Sebelas Maret &middot; 2024 - 현재", ja: "Universitas Sebelas Maret &middot; 2024 - 現在", ar: "Universitas Sebelas Maret &middot; 2024 - حالياً", hi: "Universitas Sebelas Maret &middot; 2024 - वर्तमान" },
+            desc: {
+                id: "Memulai perjalanan akademik di program studi D3 Teknik Informatika, Universitas Sebelas Maret (UNS). Mempelajari berbagai fundamental ilmu komputer, pemrograman web, struktur data, dan pengembangan perangkat lunak untuk membangun fondasi karir di bidang IT.",
+                en: "Began my academic journey in the Diploma of Informatics Engineering study program at Universitas Sebelas Maret (UNS). Learning computer science fundamentals, web programming, data structures, and software engineering to lay the groundwork for an IT career.",
+                zh: "在 Universitas Sebelas Maret (UNS) 开始了信息工程大专专业的学术旅程。学习计算机科学基础、Web 编程、数据结构和软件工程，为 IT 职业生涯奠定基础。",
+                ko: "Universitas Sebelas Maret (UNS)에서 정보공학 전문학사 학위 과정을 시작했습니다. 컴퓨터 과학 기초, 웹 프로그래밍, 자료 구조, 소프트웨어 공학을 학습하여 IT 분야 커리어를 위한 기틀을 다지고 있습니다.",
+                ja: "Universitas Sebelas Maret (UNS) の情報工学専門課程において学術的な旅をスタートしました。IT分野でのキャリアの基礎を築くため、コンピュータサイエンス of 基礎、ウェブプログラミング、データ構造、ソフトウェア工学を学んでいます。",
+                ar: "بدأت رحلتي الأكاديمية في برنامج دبلوم هندسة المعلوماتية بجامعة سيبيلاس ماريت (UNS). أدرس أساسيات علوم الكمبيوتر، وبرمجة الويب، وهياكل البيانات، وهندسة البرمجيات لتأسيس مسيرة مهنية في مجال تكنولوجيا المعلومات.",
+                hi: "Universitas Sebelas Maret (UNS) में इंफॉर्मेटिक्स इंजीनियरिंग अध्ययन कार्यक्रम में डिप्लोमा के साथ अपनी शैक्षणिक यात्रा शुरू की। आईटी करियर की नींव रखने के लिए कंप्यूटर विज्ञान के बुनियादी सिद्धांतों, वेब प्रोग्रामिंग, डेटा संरचनाओं और सॉफ्टवेयर इंजीनियरिंग का अध्ययन कर रहा हूँ।"
+            },
+            tag1: { id: "[Mahasiswa]", en: "[Student]", zh: "[学生]", ko: "[대학생]", ja: "[学生]", ar: "[طالب]", hi: "[छात्र]" },
+            tag2: { id: "[Teknik Informatika]", en: "[Informatics Engineering]", zh: "[信息工程]", ko: "[정보공학]", ja: "[情報工学]", ar: "[هندسة المعلوماتية]", hi: "[इंफॉर्मेटिक्स इंजीनियरिंग]" }
+        },
+        card4: {
+            category: { id: "// PEKERJAAN PROFESIONAL", en: "// PROFESSIONAL WORK", zh: "// 专业工作", ko: "// 전문 경력", ja: "// 実務経験", ar: "// العمل المهني", hi: "// पेशेवर काम" },
+            title: { id: "Graphic Designer", en: "Graphic Designer", zh: "平面设计师", ko: "그래픽 디자이너", ja: "グラフィックデザイナー", ar: "مصمم جرافيك", hi: "ग्राफिक डिजाइनर" },
+            org: { id: "Jakarta Barat &middot; 2023", en: "West Jakarta &middot; 2023", zh: "西雅加达 &middot; 2023", ko: "자카르타 바랏 &middot; 2023", ja: "西ジャカルタ &middot; 2023", ar: "غرب جاكرتا &middot; 2023", hi: "पश्चिम जकार्ता &middot; 2023" },
+            desc: {
+                id: "Bekerja sebagai Desainer Grafis dengan spesialisasi pada desain *social media feeds* dan ilustrasi produk. Bertanggung jawab dalam merancang visual yang menarik dan komunikatif untuk meningkatkan *brand awareness* serta interaksi audiens.",
+                en: "Worked as a Graphic Designer specializing in social media feed designs and product illustrations. Responsible for creating engaging and communicative visuals to enhance brand awareness and audience interaction.",
+                zh: "担任平面设计师，专注于社交媒体信息流设计和产品插图。负责创作吸引人且具有沟通力的视觉效果，以提高品牌知名度和受众互动。",
+                ko: "소셜 미디어 피드 디자인과 제품 일러스트레이션을 전문으로 하는 그래픽 디자이너로 일했습니다. 브랜드 인지도와 청중과의 소통을 높이기 위해 매력적이고 소통이 잘 되는 비주얼을 제작하는 업무를 담당했습니다.",
+                ja: "ソーシャルメディアのフィードデザインや製品イラストレーションを専門とするグラフィックデザイナーとして勤務しました。ブランド認知度の向上とオーディエンスとのエンゲージメントを高めるため、魅力的で伝わりやすいビジュアルデザインを担当しました。",
+                ar: "عملت كمصمم جرافيك متخصص في تصميمات منشورات وسائل التواصل الاجتماعي والرسوم التوضيحية للمنتجات. مسؤولة عن إنشاء مرئيات جذابة وتواصلية لتعزيز الوعي بالعلامة التجارية وتفاعل الجمهور.",
+                hi: "सोशल मीडिया फीड डिजाइन और उत्पाद चित्रों में विशेषज्ञता वाले ग्राफिक डिजाइनर के रूप में काम किया। ब्रांड जागरूकता और दर्शकों की सहभागिता बढ़ाने के लिए आकर्षक और संचारी दृश्यों को डिजाइन करने के लिए जिम्मेदार।"
+            },
+            tag1: { id: "[Desain Grafis]", en: "[Graphic Design]", zh: "[平面设计]", ko: "[그래픽 디자인]", ja: "[グラフィックデザイン]", ar: "[تصميم الجرافيك]", hi: "[ग्राफिक डिजाइन]" },
+            tag2: { id: "[Media Sosial]", en: "[Social Media]", zh: "[社交媒体]", ko: "[소셜 미디어]", ja: "[ソーシャルメディア]", ar: "[وسائل التواصل الاجتماعي]", hi: "[सोशल मीडिया]" },
+            tag3: { id: "[Ilustrasi]", en: "[Illustration]", zh: "[插图]", ko: "[일러스트레이션]", ja: "[イラスト]", ar: "[الرسوم التوضيحية]", hi: "[चित्रण]" }
+        },
+        card5: {
+            category: { id: "// PENDIDIKAN", en: "// EDUCATION", zh: "// 教育", ko: "// 교육", ja: "// 教育", ar: "// التعليم", hi: "// शिक्षा" },
+            title: { id: "Siswa SMA (Jurusan IPA)", en: "High School Student (Science Major)", zh: "高中生（理科）", ko: "고등학생 (자연계열/이과)", ja: "高校生（理系）", ar: "طالب مدرسة ثانوية (تخصص علمي)", hi: "हाई स्कूल छात्र (विज्ञान वर्ग)" },
+            org: { id: "SMAN 2 Depok, Jawa Barat &middot; Lulus 2023", en: "SMAN 2 Depok, West Java &middot; Graduated 2023", zh: "西爪哇省德波第二国立高中 &middot; 2023年毕业", ko: "SMAN 2 Depok, 서부 자바 &middot; 2023년 졸업", ja: "SMAN 2 デポック、西ジャワ &middot; 2023年卒業", ar: "SMAN 2 Depok، جاوة الغربية &middot; تخرج عام 2023", hi: "SMAN 2 देपोक, पश्चिम जावा &middot; स्नातक 2023" },
+            desc: {
+                id: "Menyelesaikan pendidikan sekolah menengah atas di SMAN 2 Depok dengan fokus pada peminatan Ilmu Pengetahuan Alam (IPA). Membangun dasar pemikiran analitis dan logis yang berguna untuk memecahkan masalah kompleks di masa depan.",
+                en: "Completed high school education at SMAN 2 Depok with a focus on Natural Sciences (IPA). Built analytical and logical thinking foundations useful for solving complex problems in the future.",
+                zh: "在 SMAN 2 Depok 完成高中教育，专注于自然科学（IPA）。建立了分析和逻辑思维基础，有助于在未来解决复杂问题。",
+                ko: "SMAN 2 Depok에서 자연과학(IPA)을 중점으로 고등학교 교육을 마쳤습니다. 향후 복잡한 문제를 해결하는 데 도움이 될 분석적이고 논리적인 사고의 기초를 다졌습니다.",
+                ja: "SMAN 2 Depok にて自然科学（IPA）を専攻し、高校教育を修了しました。将来的に複雑な問題を解決するために有用な、分析的かつ論理的な思考プロセスの基礎を築きました。",
+                ar: "أكملت التعليم الثانوي في مدرسة SMAN 2 Depok مع التركيز على العلوم الطبيعية (IPA). بنيت أسس التفكير التحليلي والمنطقي المفيدة لحل المشكلات المعقدة في المستقبل.",
+                hi: "प्राकृतिक विज्ञान (IPA) पर ध्यान केंद्रित करते हुए SMAN 2 Depok से हाई स्कूल की शिक्षा पूरी की। भविष्य में जटिल समस्याओं को हल करने के लिए उपयोगी विश्लेषणात्मक और तार्किक सोच की नींव बनाई।"
+            },
+            tag1: { id: "[IPA]", en: "[IPA]", zh: "[IPA]", ko: "[IPA]", ja: "[IPA]", ar: "[IPA]", hi: "[IPA]" },
+            tag2: { id: "[Sains]", en: "[Science]", zh: "[科学]", ko: "[과학]", ja: "[科学]", ar: "[العلوم]", hi: "[विज्ञान]" }
+        }
+    };
+
+    // Translations for Contact / Get in Touch
+    const contactTranslations = {
+        title: {
+            id: "Mari Terhubung",
+            en: "Let's Get in Touch",
+            zh: "联系我",
+            ko: "연락하기",
+            ja: "お問い合わせ",
+            ar: "دعنا نتواصل",
+            hi: "आइए संपर्क करें"
+        },
+        infoTitle: {
+            id: "Informasi Kontak",
+            en: "Contact Information",
+            zh: "联系方式",
+            ko: "연락처 정보",
+            ja: "連絡先情報",
+            ar: "معلومات الاتصال",
+            hi: "संपर्क जानकारी"
+        },
+        phoneLabel: {
+            id: "No HP",
+            en: "Phone",
+            zh: "电话",
+            ko: "전화번호",
+            ja: "電話番号",
+            ar: "رقم الهاتف",
+            hi: "फ़ोन"
+        },
+        locationLabel: {
+            id: "Lokasi",
+            en: "Location",
+            zh: "地点",
+            ko: "위치",
+            ja: "場所",
+            ar: "الموقع",
+            hi: "स्थान"
+        },
+        locationValue: {
+            id: "Surakarta, Indonesia",
+            en: "Surakarta, Indonesia",
+            zh: "苏拉卡尔塔，印度尼西亚",
+            ko: "인도네시아 수라카르타",
+            ja: "インドネシア、スラカルタ",
+            ar: "سوراكارتا، إندونيسيا",
+            hi: "सुरकार्ता, इंडोनेशिया"
+        }
+    };
+
+
     // Decrypt / Encrypt helper functions for About Me text scroll effects
     const decryptText = (
         element: HTMLElement,
@@ -2207,6 +2249,84 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
         });
     };
 
+    const initTimelineTranslations = () => {
+        const subtitleEl = document.getElementById("timeline-subtitle");
+        
+        const updateText = (lang: string) => {
+            const getTranslation = (dict: any, field?: string) => {
+                const item = field ? dict[field] : dict;
+                return item[lang as keyof typeof item] || item.en;
+            };
+
+            if (subtitleEl) {
+                subtitleEl.textContent = getTranslation(timelineTranslations.subtitle);
+            }
+
+            // Update Cards
+            for (let i = 1; i <= 5; i++) {
+                const cardKey = `card${i}` as keyof typeof timelineTranslations;
+                const cardDict = timelineTranslations[cardKey] as any;
+
+                const categoryEl = document.getElementById(`timeline-card-${i}-category`);
+                const titleEl = document.getElementById(`timeline-card-${i}-title`);
+                const orgEl = document.getElementById(`timeline-card-${i}-org`);
+                const descEl = document.getElementById(`timeline-card-${i}-desc`);
+
+                if (categoryEl) categoryEl.textContent = getTranslation(cardDict.category);
+                if (titleEl) titleEl.textContent = getTranslation(cardDict.title);
+                if (orgEl) orgEl.innerHTML = getTranslation(cardDict.org);
+                if (descEl) descEl.textContent = getTranslation(cardDict.desc);
+
+                // Update tags
+                let t = 1;
+                while (true) {
+                    const tagEl = document.getElementById(`timeline-card-${i}-tag-${t}`);
+                    if (!tagEl) break;
+                    const tagKey = `tag${t}`;
+                    tagEl.textContent = getTranslation(cardDict[tagKey]);
+                    t++;
+                }
+            }
+        };
+
+        const preferredLang = localStorage.getItem("preferred-language");
+        const sysLang = preferredLang || navigator.language.split("-")[0].toLowerCase();
+        updateText(sysLang);
+
+        window.addEventListener("language-changed", (e: any) => {
+            updateText(e.detail);
+        });
+    };
+
+    const initContactTranslations = () => {
+        const titleEl = document.getElementById("contact-title");
+        const infoTitleEl = document.getElementById("contact-info-title");
+        const phoneLabelEl = document.getElementById("contact-phone-label");
+        const locationLabelEl = document.getElementById("contact-location-label");
+        const locationValueEl = document.getElementById("contact-location-value");
+
+        const updateText = (lang: string) => {
+            const getTranslation = (dict: any) => {
+                return dict[lang as keyof typeof dict] || dict.en;
+            };
+
+            if (titleEl) titleEl.textContent = getTranslation(contactTranslations.title);
+            if (infoTitleEl) infoTitleEl.textContent = getTranslation(contactTranslations.infoTitle);
+            if (phoneLabelEl) phoneLabelEl.textContent = getTranslation(contactTranslations.phoneLabel);
+            if (locationLabelEl) locationLabelEl.textContent = getTranslation(contactTranslations.locationLabel);
+            if (locationValueEl) locationValueEl.textContent = getTranslation(contactTranslations.locationValue);
+        };
+
+        const preferredLang = localStorage.getItem("preferred-language");
+        const sysLang = preferredLang || navigator.language.split("-")[0].toLowerCase();
+        updateText(sysLang);
+
+        window.addEventListener("language-changed", (e: any) => {
+            updateText(e.detail);
+        });
+    };
+
+
     const initScrollAnimations = () => {
         const homeSection = document.getElementById("home");
         const lenis = (window as any).lenis;
@@ -2263,6 +2383,20 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
         let currentIndex = 0;
         let isSwitching = false;
         let switchInterval: any = null;
+
+        if (slides.length <= 1) {
+            // Click to trigger a single glitch effect as an interaction
+            frame.addEventListener("click", () => {
+                if (isSwitching) return;
+                isSwitching = true;
+                viewport.classList.add("is-switching");
+                setTimeout(() => {
+                    viewport.classList.remove("is-switching");
+                    isSwitching = false;
+                }, 400);
+            });
+            return;
+        }
 
         const showSlide = (nextIndex: number) => {
             if (isSwitching) return;
@@ -2329,6 +2463,7 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
             "INDIE GAME DEVELOPER",
         ];
         let currentIndex = 0;
+        let roleInterval: any = null;
 
         const switchRole = () => {
             const nextIndex = (currentIndex + 1) % roles.length;
@@ -2338,7 +2473,33 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
             currentIndex = nextIndex;
         };
 
-        setInterval(switchRole, 4000);
+        const startInterval = () => {
+            if (!roleInterval) {
+                roleInterval = setInterval(switchRole, 4000);
+            }
+        };
+
+        const stopInterval = () => {
+            if (roleInterval) {
+                clearInterval(roleInterval);
+                roleInterval = null;
+            }
+        };
+
+        if (typeof window !== "undefined" && "IntersectionObserver" in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        startInterval();
+                    } else {
+                        stopInterval();
+                    }
+                });
+            }, { threshold: 0 });
+            observer.observe(roleEl);
+        } else {
+            startInterval();
+        }
     };
 
 
@@ -3606,6 +3767,8 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
         initScrollAnimations();
         initAboutText();
         initTechSubtitle();
+        initTimelineTranslations();
+        initContactTranslations();
         initCyberCoords();
         initCyberImageSwitcher();
         initRoleSwitcher();
@@ -4277,7 +4440,7 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
             transparent 80%
         );
         opacity: 0;
-        transition: opacity 0.3s ease;
+        transition: none !important;
         pointer-events: none;
         z-index: 1;
     }
@@ -4490,7 +4653,7 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
     .timeline-card .card-collapsible {
         display: grid;
         grid-template-rows: 0fr;
-        transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in-out;
+        transition: none !important;
         opacity: 0;
     }
     
@@ -4504,7 +4667,7 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
     }
     
     .timeline-card .card-toggle-icon {
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: none !important;
         display: block;
     }
     
@@ -4521,7 +4684,7 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
     .halftone-pattern {
         background-image: radial-gradient(circle, currentColor 18%, transparent 18%);
         background-size: 7px 7px;
-        animation: halftone-scroll 12s linear infinite;
+        animation: none !important;
     }
     
     @keyframes halftone-scroll {
@@ -4552,11 +4715,11 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
         -webkit-mask-composite: xor;
         mask-composite: exclude;
         background-size: 200% 100%;
-        animation: border-shine 6s linear infinite;
+        animation: none !important;
         pointer-events: none;
         z-index: 2;
         opacity: 0.15;
-        transition: opacity 0.3s ease;
+        transition: none !important;
     }
     
     html.dark .timeline-card::before {

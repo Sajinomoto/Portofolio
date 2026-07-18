@@ -519,6 +519,8 @@ const totalDays = totalWeeks * 7;
 const containerRef = ref(null);
 let scrollTriggerInstance = null;
 let autoSlideTimer = null;
+let intersectionObserverInstance = null;
+const hasBeenSeen = ref(false);
 
 // Component State
 const loading = ref(true);
@@ -1316,8 +1318,9 @@ const buildMonthLabels = (daysList) => {
   monthLabels.value = labels;
 };
 
-// Mount hook: load data
-onMounted(async () => {
+
+// Load data and trigger animations
+const loadData = async () => {
   try {
     loading.value = true;
     apiMode.value = 'LIVE';
@@ -1343,13 +1346,54 @@ onMounted(async () => {
   } finally {
     loading.value = false;
     
-    // Proactively fetch Steam API data
-    fetchSteamData();
-    fetchGithubExtraData();
+    // Proactively fetch Steam API data and Github extra stats
+    await Promise.all([
+      fetchSteamData(),
+      fetchGithubExtraData()
+    ]);
     
     // Wait for Vue to render the elements in v-else before querying DOM
     await nextTick();
     initScrollAnimations();
+  }
+};
+
+// Mount hook: load data
+onMounted(() => {
+  if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+    intersectionObserverInstance = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (!hasBeenSeen.value) {
+            hasBeenSeen.value = true;
+            loadData();
+          } else {
+            // Resume timers when visible
+            if (activeTab.value === 'steam') {
+              startSteamSubTabAutoSlide();
+            } else {
+              startGithubSubTabAutoSlide();
+            }
+          }
+        } else {
+          // Pause timers when not visible to save CPU
+          stopSteamSubTabAutoSlide();
+          stopGithubSubTabAutoSlide();
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '100px 0px 100px 0px', // start loading when card is within 100px of viewport
+      threshold: 0
+    });
+
+    if (containerRef.value) {
+      intersectionObserverInstance.observe(containerRef.value);
+    }
+  } else {
+    // Fallback if IntersectionObserver is not supported
+    hasBeenSeen.value = true;
+    loadData();
   }
 });
 
@@ -1358,6 +1402,10 @@ onUnmounted(() => {
   stopGithubSubTabAutoSlide();
   if (scrollTriggerInstance) {
     scrollTriggerInstance.kill();
+  }
+  if (intersectionObserverInstance) {
+    intersectionObserverInstance.disconnect();
+    intersectionObserverInstance = null;
   }
 });
 </script>
