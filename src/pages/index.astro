@@ -5,6 +5,7 @@ import Greeting from "../components/Greeting.vue";
 import Layout from "../layouts/Layout.astro";
 import AsciiBox from "../components/AsciiBox.vue";
 import GithubCalendar from "../components/GithubCalendar.vue";
+import Certificates from "../components/Certificates.vue";
 import { Image } from "astro:assets";
 import imgProfile from "../assets/my_profile.png";
 import absMockup from "../assets/abs_mockup.png";
@@ -338,6 +339,11 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                                 [Satrio Aji Pamungkas]
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Certificate & Badges Section -->
+                    <div class="w-full mt-16 z-10">
+                        <Certificates client:visible />
                     </div>
 
                     <!-- Github Contribution Calendar & Steam Activity -->

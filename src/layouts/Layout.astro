@@ -126,9 +126,9 @@ import geistSansUrl from "@fontsource-variable/geist/files/geist-latin-wght-norm
 
             const initLenis = () => {
                 lenis = new Lenis({
-                    duration: 3.0,
-                    lerp: 0.022, // Lower value = heavier, smoother scroll momentum
-                    wheelMultiplier: 0.6, // Slower, heavier wheel feel
+                    duration: 1.2,
+                    lerp: 0.1, // Higher value = lighter, faster, more responsive scroll
+                    wheelMultiplier: 1.0, // Standard wheel multiplier for responsive scrolling
                     syncTouch: false, // Use native scroll on mobile for buttery-smooth performance
                 });
 
