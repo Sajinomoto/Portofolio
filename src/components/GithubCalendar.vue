@@ -532,8 +532,8 @@ const busyDay = ref(null);
 const days = ref([]);
 const monthLabels = ref([]);
 const activeTab = ref('github');
-const githubTitleText = ref("[SYS.DATA: GITHUB]");
-const steamTitleText = ref("[SYS.DATA: STEAM]");
+const githubTitleText = ref("[GITHUB PROFILE]");
+const steamTitleText = ref("[STEAM PROFILE]");
 
 // Steam API State
 const steamLoading = ref(true);
@@ -1083,7 +1083,7 @@ const selectTab = (tab, manual = false) => {
     if (!container) return;
 
     if (tab === "github") {
-      decryptText(githubTitleText, "[SYS.DATA: GITHUB]", 0.2);
+      decryptText(githubTitleText, "[GITHUB PROFILE]", 0.2);
       
       const statItems = container.querySelectorAll(".stat-item");
       const cells = container.querySelectorAll(".contrib-cell");
@@ -1099,7 +1099,7 @@ const selectTab = (tab, manual = false) => {
       const steamHeader = container.querySelector(".steam-header-item");
       const steamCards = container.querySelectorAll(".steam-card");
       
-      decryptText(steamTitleText, "[SYS.DATA: STEAM]", 0.2);
+      decryptText(steamTitleText, "[STEAM PROFILE]", 0.2);
       
       if (steamHeader) {
         gsap.set(steamHeader, { y: 0, opacity: 1, overwrite: "auto" });
@@ -1141,8 +1141,8 @@ const initScrollAnimations = () => {
   }
 
   // Decrypt titles immediately (fast)
-  decryptText(githubTitleText, "[SYS.DATA: GITHUB]", 0.2);
-  decryptText(steamTitleText, "[SYS.DATA: STEAM]", 0.2);
+  decryptText(githubTitleText, "[GITHUB PROFILE]", 0.2);
+  decryptText(steamTitleText, "[STEAM PROFILE]", 0.2);
 
   // Start auto-sliding
   if (activeTab.value === 'steam') {
