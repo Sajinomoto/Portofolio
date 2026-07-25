@@ -38,3 +38,7 @@ Project-lists.txt
 .vscode/
 .agents/
 
+# PDF documents folder
+PDF/
+
+
