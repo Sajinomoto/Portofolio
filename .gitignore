@@ -25,3 +25,16 @@ pnpm-debug.log*
 
 # Vercel
 .vercel/
+
+# Temporary & scratch files
+scratch/
+recovered_diff.txt
+replace_timeline.cjs
+replace_timeline.js
+update_timeline_safe.cjs
+Project-lists.txt
+
+# Editor & agent configs
+.vscode/
+.agents/
+
