@@ -11,6 +11,10 @@ import imgProfile from "../assets/my_profile.png";
 import absMockup from "../assets/abs_mockup.png";
 import zunoiCafeMockup from "../assets/zunoi_cafe_mockup.png";
 import redStringsMockup from "../assets/red_strings_mockup.png";
+import pixelIcon from "../assets/pixel_icon.png";
+import pixelCatIcon from "../assets/pixel_cat_icon.png";
+import pixelCardBg from "../assets/pixel_cardbg.png";
+import icon1 from "../assets/icon1.png";
 ---
 
 <Layout>
@@ -1876,9 +1880,89 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                     <div
                         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl relative z-10"
                     >
+                        <!-- Node 00: Pixel Game Project Card -->
+                        <div
+                            id="pixelgame-card"
+                            class="project-item-card relative w-full flex flex-col items-center justify-center select-none group transition-all duration-300 ease-out hover:scale-105 hover:drop-shadow-[0_15px_25px_rgba(0,0,0,0.85)] dark:hover:drop-shadow-[0_15px_25px_rgba(255,255,255,0.45)] cursor-pointer"
+                            tabindex="0"
+                            data-project="pixelgame"
+                        >
+                            <!-- Frame Container using pixelCardBg -->
+                            <div
+                                class="relative w-full aspect-[3/4.2] flex flex-col justify-between p-6 rounded-none overflow-visible"
+                            >
+                                <!-- Controller / Pixel Icon (Sembunyi di Balik Card, Meluncur ke Atas saat Hover) -->
+                                <div
+                                    class="absolute top-1 left-1/2 -translate-x-1/2 z-0 transition-transform duration-400 ease-out translate-y-6 group-hover:-translate-y-7"
+                                >
+                                    <Image
+                                        src={pixelIcon}
+                                        alt="Pixel Controller Icon"
+                                        width={48}
+                                        height={48}
+                                        class="w-10 h-10 object-contain [image-rendering:pixelated]"
+                                    />
+                                </div>
+
+                                <!-- Background Pixel Card Frame (Menutupi Ikon saat Default) -->
+                                <Image
+                                    src={pixelCardBg}
+                                    alt="Pixel Card Frame"
+                                    class="absolute inset-0 w-full h-full object-fill [image-rendering:pixelated] pointer-events-none z-10"
+                                />
+
+                                <!-- Area Konten di Dalam Bingkai Hitam Card -->
+                                <div
+                                    class="relative z-20 flex flex-col items-center justify-start h-full pt-9 pb-2 px-2 text-white font-pixelmix text-center pointer-events-auto"
+                                >
+                                    <!-- Kotak Display Gambar/Preview (Dilebarkan ke Samping) -->
+                                    <div
+                                        class="w-[78%] aspect-[4/3] rounded-sm border-2 border-white/25 bg-black/40 flex items-center justify-center shadow-inner group-hover:border-white/50 transition-colors duration-300 mt-2 overflow-hidden"
+                                    >
+                                        <Image
+                                            src={icon1}
+                                            alt="Devil's Vows Thumbnail"
+                                            width={300}
+                                            height={300}
+                                            class="w-full h-full object-contain p-1 [image-rendering:pixelated]"
+                                        />
+                                    </div>
+
+                                    <!-- Game Title & Status -->
+                                    <div class="flex flex-col items-center mt-3 space-y-1">
+                                        <h3
+                                            class="text-xs sm:text-sm font-bold tracking-widest uppercase text-white drop-shadow"
+                                        >
+                                            Devil's Vows
+                                        </h3>
+                                        <span class="text-yellow-400 text-[9px] font-normal tracking-wide normal-case opacity-90">
+                                            (Under Development)
+                                        </span>
+                                    </div>
+
+                                    <!-- Game Short Description -->
+                                    <p
+                                        class="text-[10px] sm:text-[11px] text-white/75 leading-relaxed text-center max-w-[88%] mt-4 sm:mt-5"
+                                    >
+                                        Dark fantasy 8x8 grid tactical turn-based RPG featuring high-risk Vow mechanics.
+                                    </p>
+
+                                    <!-- Detail Button -->
+                                    <button
+                                        id="pixelgame-detail-btn"
+                                        class="project-detail-btn font-pixelmix text-[10px] font-bold text-white/90 hover:text-white border border-white/40 hover:border-white rounded-xs px-3 py-1 bg-black/70 hover:bg-black/90 transition-all duration-150 cursor-pointer mt-auto mb-5 z-30 uppercase tracking-wider relative pointer-events-auto"
+                                        style="font-family: 'Pixelmix', monospace !important;"
+                                        data-project="pixelgame"
+                                    >
+                                        Detail
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Node 01: ABS -->
                         <div
-                            class="project-hud-card relative p-5 flex flex-col justify-between select-none"
+                            class="project-item-card project-hud-card relative p-5 flex flex-col justify-between select-none"
                             tabindex="0"
                         >
                             <div class="space-y-4">
@@ -2017,7 +2101,7 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
 
                         <!-- Node 02: Red Strings -->
                         <div
-                            class="project-hud-card relative p-5 flex flex-col justify-between select-none"
+                            class="project-item-card project-hud-card relative p-5 flex flex-col justify-between select-none"
                             tabindex="0"
                         >
                             <div class="space-y-4">
@@ -2156,7 +2240,7 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
 
                         <!-- Node 03: Zunoi Cafe -->
                         <div
-                            class="project-hud-card relative p-5 flex flex-col justify-between select-none"
+                            class="project-item-card project-hud-card relative p-5 flex flex-col justify-between select-none"
                             tabindex="0"
                         >
                             <div class="space-y-4">
@@ -2294,12 +2378,37 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                         </div>
                     </div>
 
+                    <!-- Projects Pagination Controls -->
+                    <div id="projects-pagination" class="mt-10 flex items-center justify-center gap-3 relative z-10 font-mono select-none">
+                        <button
+                            id="projects-prev-btn"
+                            class="px-3.5 py-1.5 rounded-lg border border-black/15 dark:border-white/15 text-xs font-semibold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 cursor-pointer"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                            <span id="pagination-prev-label">Prev</span>
+                        </button>
+
+                        <div id="projects-page-numbers" class="flex items-center gap-2">
+                            <!-- Dynamic Page Number Buttons -->
+                        </div>
+
+                        <button
+                            id="projects-next-btn"
+                            class="px-3.5 py-1.5 rounded-lg border border-black/15 dark:border-white/15 text-xs font-semibold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 cursor-pointer"
+                        >
+                            <span id="pagination-next-label">Next</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                        </button>
+                    </div>
+
                     <!-- Hidden project mockups path helper element -->
                     <div
                         id="project-mockups-data"
                         data-abs={absMockup.src}
                         data-zunoicafe={zunoiCafeMockup.src}
                         data-redstrings={redStringsMockup.src}
+                        data-pixelcardbg={pixelCardBg.src}
+                        data-icon1={icon1.src}
                         class="hidden"
                     >
                     </div>
@@ -2703,9 +2812,17 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                             class="flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-4 mb-6"
                         >
                             <div class="space-y-1">
-                                <div class="flex items-center gap-2">
-                                    <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                                    <span class="font-mono text-[10px] font-bold uppercase tracking-widest text-black/50 dark:text-white/40">Project Specs</span>
+                                <div
+                                    id="modal-specs-wrapper"
+                                    class="flex items-center gap-2"
+                                >
+                                    <span
+                                        class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+                                    ></span>
+                                    <span
+                                        class="font-mono text-[10px] font-bold uppercase tracking-widest text-black/50 dark:text-white/40"
+                                        >Project Specs</span
+                                    >
                                 </div>
                                 <h3
                                     id="modal-project-title"
@@ -2738,13 +2855,18 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
 
                         <!-- Body Grid -->
                         <div
+                            id="project-modal-grid"
                             class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start"
                         >
                             <!-- Left Column (Image, Links, & Tech Stacks) - col-span-4 -->
-                            <div class="lg:col-span-4 space-y-5 lg:sticky lg:top-0">
+                            <div
+                                id="modal-left-col"
+                                class="lg:col-span-4 space-y-5 lg:sticky lg:top-0"
+                            >
                                 <!-- Image Preview Container -->
                                 <div class="space-y-2">
                                     <div
+                                        id="modal-image-box"
                                         class="relative w-full aspect-video rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/[0.03] dark:bg-white/[0.02] shadow-md group"
                                     >
                                         <img
@@ -2753,109 +2875,221 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                                             alt="Project Preview"
                                             class="w-full h-full object-cover object-top cursor-zoom-in hover:scale-[1.02] transition-transform duration-300"
                                         />
+                                        <!-- Skeleton Placeholder -->
+                                        <div
+                                            id="modal-skeleton-box"
+                                            class="hidden absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/10 dark:bg-white/[0.04] animate-pulse border border-dashed border-black/20 dark:border-white/20 rounded-xl p-3"
+                                        >
+                                            <div
+                                                class="w-8 h-8 rounded-lg bg-black/15 dark:bg-white/15 mb-1.5 flex items-center justify-center"
+                                            >
+                                                <svg
+                                                    class="w-4 h-4 text-black/40 dark:text-white/40"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                                    ></path>
+                                                </svg>
+                                            </div>
+                                            <span
+                                                class="font-pixelmix text-[10px] font-bold text-black/50 dark:text-white/50 tracking-wider uppercase"
+                                                >Preview Skeleton</span
+                                            >
+                                        </div>
+
                                         <!-- Overlay badge -->
                                         <span
+                                            id="modal-badge-web"
                                             class="absolute top-2.5 right-2.5 z-10 px-2.5 py-0.5 rounded-full font-mono text-[10px] font-bold tracking-wider uppercase bg-black/60 dark:bg-black/75 text-white backdrop-blur-md border border-white/20 shadow-sm pointer-events-none"
                                         >
                                             WEB
                                         </span>
                                     </div>
-                                    <p class="text-[11px] font-mono text-black/50 dark:text-white/45 text-center flex items-center justify-center gap-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zoom-in"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="14"/><line x1="8" x2="14" y1="11" y2="11"/></svg>
+                                    <p
+                                        id="modal-image-hint"
+                                        class="text-[11px] font-mono text-black/50 dark:text-white/45 text-center flex items-center justify-center gap-1"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="12"
+                                            height="12"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="lucide lucide-zoom-in"
+                                            ><circle cx="11" cy="11" r="8"
+                                            ></circle><line
+                                                x1="21"
+                                                x2="16.65"
+                                                y1="21"
+                                                y2="16.65"></line><line
+                                                x1="11"
+                                                x2="11"
+                                                y1="8"
+                                                y2="14"></line><line
+                                                x1="8"
+                                                x2="14"
+                                                y1="11"
+                                                y2="11"></line></svg
+                                        >
                                         Klik gambar untuk memperbesar
                                     </p>
                                 </div>
 
-                                <!-- Links Card -->
-                                <div class="p-4 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] space-y-3">
-                                    <h4
-                                        class="font-mono text-[11px] font-bold uppercase tracking-wider text-black/50 dark:text-white/40 flex items-center gap-2"
-                                    >
-                                        <span class="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/40 shrink-0"></span>
-                                        <span id="modal-title-links">Links</span>
-                                    </h4>
-                                    <div class="flex flex-wrap gap-2.5">
-                                        <a
-                                            id="modal-project-launch"
-                                            href="#"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="font-mono text-xs font-bold text-white bg-black dark:bg-white dark:text-black hover:opacity-90 border border-transparent px-3.5 py-2 transition-all duration-150 rounded-lg flex items-center gap-1.5 shadow-sm"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="13"
-                                                height="13"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="2.5"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                class="lucide lucide-external-link"
-                                                ><path d="M15 3h6v6"
-                                                ></path><path d="M10 14 21 3"
-                                                ></path><path
-                                                    d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
-                                                ></path></svg
-                                            >
-                                            Live Demo
-                                        </a>
-                                        <a
-                                            id="modal-project-source"
-                                            href="#"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="font-mono text-xs font-semibold text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 px-3.5 py-2 transition-all duration-150 rounded-lg flex items-center gap-1.5"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="13"
-                                                height="13"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="2.2"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                class="lucide lucide-github"
-                                                ><path
-                                                    d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
-                                                ></path><path
-                                                    d="M9 18c-4.51 2-5-2-7-2"
-                                                ></path></svg
-                                            >
-                                            GitHub
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <!-- Tech Stacks Card -->
-                                <div class="p-4 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] space-y-3">
-                                    <h4
-                                        class="font-mono text-[11px] font-bold uppercase tracking-wider text-black/50 dark:text-white/40 flex items-center gap-2"
-                                    >
-                                        <span class="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/40 shrink-0"></span>
-                                        <span id="modal-title-tech">Tech Stacks</span>
-                                    </h4>
+                                <!-- Links & Tech Wrapper -->
+                                <div
+                                    id="modal-links-tech-wrapper"
+                                    class="space-y-5"
+                                >
+                                    <!-- Links Card -->
                                     <div
-                                        id="modal-project-tech"
-                                        class="flex flex-wrap gap-1.5"
+                                        id="modal-links-box"
+                                        class="p-4 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] space-y-3"
                                     >
-                                        <!-- Dynamic Tech Tags -->
+                                        <h4
+                                            class="font-mono text-[11px] font-bold uppercase tracking-wider text-black/50 dark:text-white/40 flex items-center gap-2"
+                                        >
+                                            <span
+                                                class="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/40 shrink-0"
+                                            ></span>
+                                            <span id="modal-title-links"
+                                                >Links</span
+                                            >
+                                        </h4>
+                                        <div class="flex flex-wrap gap-2.5">
+                                            <a
+                                                id="modal-project-launch"
+                                                href="#"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="font-mono text-xs font-bold text-white bg-black dark:bg-white dark:text-black hover:opacity-90 border border-transparent px-3.5 py-2 transition-all duration-150 rounded-lg flex items-center gap-1.5 shadow-sm"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="13"
+                                                    height="13"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-width="2.5"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    class="lucide lucide-external-link"
+                                                    ><path d="M15 3h6v6"
+                                                    ></path><path
+                                                        d="M10 14 21 3"
+                                                    ></path><path
+                                                        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                                                    ></path></svg
+                                                >
+                                                Live Demo
+                                            </a>
+                                            <a
+                                                id="modal-project-source"
+                                                href="#"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="font-mono text-xs font-semibold text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 px-3.5 py-2 transition-all duration-150 rounded-lg flex items-center gap-1.5"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="13"
+                                                    height="13"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-width="2.2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    class="lucide lucide-github"
+                                                    ><path
+                                                        d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                                                    ></path><path
+                                                        d="M9 18c-4.51 2-5-2-7-2"
+                                                    ></path></svg
+                                                >
+                                                GitHub
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tech Stacks Card -->
+                                    <div
+                                        id="modal-tech-box"
+                                        class="p-4 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] space-y-3"
+                                    >
+                                        <h4
+                                            class="font-mono text-[11px] font-bold uppercase tracking-wider text-black/50 dark:text-white/40 flex items-center gap-2"
+                                        >
+                                            <span
+                                                class="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/40 shrink-0"
+                                            ></span>
+                                            <span id="modal-title-tech"
+                                                >Tech Stacks</span
+                                            >
+                                        </h4>
+                                        <div
+                                            id="modal-project-tech"
+                                            class="flex flex-wrap gap-1.5"
+                                        >
+                                            <!-- Dynamic Tech Tags -->
+                                        </div>
+                                    </div>
+
+                                    <!-- Genre Card (Only for Devil's Vows / Pixel Game) -->
+                                    <div
+                                        id="modal-genre-box"
+                                        class="p-4 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] space-y-3"
+                                    >
+                                        <h4
+                                            class="font-mono text-[11px] font-bold uppercase tracking-wider text-black/50 dark:text-white/40 flex items-center gap-2"
+                                        >
+                                            <span
+                                                class="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/40 shrink-0"
+                                            ></span>
+                                            <span id="modal-title-genre"
+                                                >Genre</span
+                                            >
+                                        </h4>
+                                        <div
+                                            id="modal-project-genre"
+                                            class="flex flex-wrap gap-1.5"
+                                        >
+                                            <!-- Dynamic Genre Tags -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Right Column (Project details) - col-span-8 -->
-                            <div class="lg:col-span-8 space-y-5">
+                            <div
+                                id="modal-right-col"
+                                class="lg:col-span-8 space-y-5"
+                            >
                                 <!-- Description Block -->
-                                <div class="p-5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] space-y-2">
+                                <div
+                                    id="modal-desc-box"
+                                    class="p-5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] space-y-2"
+                                >
                                     <h4
                                         class="font-mono text-[11px] font-bold uppercase tracking-wider text-black/50 dark:text-white/40 flex items-center gap-2"
                                     >
-                                        <span class="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/40 shrink-0"></span>
-                                        <span id="modal-title-desc">Description</span>
+                                        <span
+                                            class="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/40 shrink-0"
+                                        ></span>
+                                        <span id="modal-title-desc"
+                                            >Description</span
+                                        >
                                     </h4>
                                     <p
                                         id="modal-project-desc"
@@ -2866,11 +3100,16 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                                 </div>
 
                                 <!-- Roles Block -->
-                                <div class="p-5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] space-y-3">
+                                <div
+                                    id="modal-roles-box"
+                                    class="p-5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] space-y-3"
+                                >
                                     <h4
                                         class="font-mono text-[11px] font-bold uppercase tracking-wider text-black/50 dark:text-white/40 flex items-center gap-2"
                                     >
-                                        <span class="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/40 shrink-0"></span>
+                                        <span
+                                            class="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/40 shrink-0"
+                                        ></span>
                                         <span id="modal-title-role">Roles</span>
                                     </h4>
                                     <div>
@@ -2890,12 +3129,19 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                                 </div>
 
                                 <!-- Challenge Block -->
-                                <div class="p-5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] space-y-3">
+                                <div
+                                    id="modal-challenge-box"
+                                    class="p-5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] space-y-3"
+                                >
                                     <h4
                                         class="font-mono text-[11px] font-bold uppercase tracking-wider text-black/50 dark:text-white/40 flex items-center gap-2"
                                     >
-                                        <span class="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/40 shrink-0"></span>
-                                        <span id="modal-title-challenge">Tantangan & Solusi</span>
+                                        <span
+                                            class="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/40 shrink-0"
+                                        ></span>
+                                        <span id="modal-title-challenge"
+                                            >Tantangan & Solusi</span
+                                        >
                                     </h4>
                                     <ul
                                         id="modal-project-challenge"
@@ -2906,12 +3152,19 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                                 </div>
 
                                 <!-- Learning Block -->
-                                <div class="p-5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] space-y-2">
+                                <div
+                                    id="modal-learning-box"
+                                    class="p-5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] space-y-2"
+                                >
                                     <h4
                                         class="font-mono text-[11px] font-bold uppercase tracking-wider text-black/50 dark:text-white/40 flex items-center gap-2"
                                     >
-                                        <span class="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/40 shrink-0"></span>
-                                        <span id="modal-title-learning">Tujuan Pembelajaran</span>
+                                        <span
+                                            class="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/40 shrink-0"
+                                        ></span>
+                                        <span id="modal-title-learning"
+                                            >Tujuan Pembelajaran</span
+                                        >
                                     </h4>
                                     <p
                                         id="modal-project-learning"
@@ -4721,6 +4974,17 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                     hi: "यह परियोजना शिक्षार्थियों को Next.js और React का उपयोग करके आधुनिक फुल-स्टैक आर्किटेक्चर में महारत हासिल करने में सक्षम बनाती है, जो सर्वर API रूट्स की सुरक्षा को क्लाइंट कंपोनेंट्स की अन्तरक्रियाशीलता के साथ जोड़ती है। विशेष रूप से, शिक्षार्थी गेम मास्टर (Game Master) के रूप में कार्य करने, संदर्भ अनुकूलन और संरचित JSON आउटपुट पार्सिंग के लिए LangChain.js के माध्यम से जनरेटिव एआई (Mistral) को एकीकृत करेंगे। बैकएंड को प्रमाणीकरण, NoSQL डेटाबेस मॉडल के लिए फायरबेस और सुरक्षा नियमों के लिए फायरबेस पारिस्थितिकी तंत्र का उपयोग करके प्रबंधित किया जाता है। इसके अतिरिक्त, Vercel AI SDK का उपयोग करके वास्तविक समय में एआई प्रतिक्रियाओं, React Markdown और react-easy-crop के उपयोग से इमर्सिव उपयोगकर्ता अनुभव (UX) को अधिकतम किया गया है।",
                 },
             },
+            pixelgame: {
+                desc: {
+                    id: "Devil’s Vows adalah RPG Taktikal Turn-Based fantasi gelap di atas papan grid 8x8. Kendalikan tim berisi 5 unit melalui pertempuran presisi yang mengandalkan manajemen 3 AP, pergerakan taktis, dan Line-of-Sight.\n\nKuasai \"The Law of Binding\"—ikat prajuritmu pada syarat taktis berisiko tinggi (Vow) demi melepaskan pengganda damage raksasa. Namun waspadalah: melanggar sumpah akan memicu hukuman instan (Backlash) yang mematikan. Rekrut pahlawan unik dari 12 Ras dan 7 Kelas, kembangkan 6 Segel Kekuatan, dan capai Ascension untuk menguasai medan laga.",
+                    en: "Devil’s Vows is a dark fantasy tactical turn-based RPG set on an 8x8 grid. Command a customized squad of 5 units through tight grid combat driven by a 3 AP economy, strict Line-of-Sight, and positioning tactics.\n\nMaster \"The Law of Binding\"—bind your warriors to high-risk tactical constraints (Vows) to unleash screen-shattering damage multipliers. But beware: breaking a vow triggers instant, deadly Backlash. Recruit unique heroes across 12 Races and 7 Classes, harness the 6 Seals of Power, and ascend your party to dominate the battlefield.",
+                    zh: "《Devil’s Vows》是一款基于 8x8 网格棋盘的暗黑幻想战术回合制 RPG。指挥由 5 名单位组成的自定义小队，通过 3 AP 行动点经济、严格的视线 (Line-of-Sight) 和走位战术展开紧凑的网格战斗。\n\n掌握“誓约之法”(The Law of Binding)——将你的战士绑定到高风险的战术限制（誓约）上，以释放震撼全屏的伤害倍率。但要小心：违背誓约将引发致命的即时反噬 (Backlash)。招募来自 12 个种族和 7 个职业的独特英雄，驾驭 6 大力量印记，升华你的队伍以主宰战场。",
+                    ko: "Devil’s Vows는 8x8 그리드 맵을 배경으로 펼쳐지는 다크 판타지 턴제 전술 RPG입니다. 3 AP 시스템, 엄격한 시야각(Line-of-Sight) 및 위치 선정 전술을 활용하여 5명의 유닛으로 구성된 맞춤형 부대를 지휘하세요.\n\n\"속박의 법(The Law of Binding)\"을 마스터하세요—전사들에게 고위험 전술 제약(Vow)을 부여하여 가공할 피해 배율을 해제할 수 있습니다. 하지만 주의하세요: 맹세를 어기면 즉각적이고 치명적인 반발(Backlash)이 찾아옵니다. 12개 종족과 7개 직업의 독특한 영웅들을 영입하고 6개의 힘의 인장을 개화하여 전장을 지배하세요.",
+                    ja: "『Devil’s Vows』は、8x8のグリッド盤面を舞台にしたダークファンタジー戦術ターン制RPGです。3 APの行動力リソース、厳格な射線（Line-of-Sight）、位置取り戦術を駆使し、5体のユニットからなる部隊を指揮せよ。\n\n「束縛の法（The Law of Binding）」を極めよ——戦士たちにハイリスクな戦術的制約（誓約/Vow）を課すことで、圧倒的なダメージ倍率を解放せよ。だが注意せよ：誓約を破れば即座に致死的な反動（Backlash）が発動する。12の種族と7のクラスからユニークな英雄を勧誘し、6つの力の封印を解き明かし、部隊を昇華させて戦場を支配せよ。",
+                    ar: "Devil’s Vows هي لعبة RPG تكتيكية قائمة على الأدوار في عالم فانتزيا مظلمة على شبكة 8x8. قُد فرقة مخصصة مكونة من 5 وحدات عبر معارك شبكية دقيقة تعتمد على اقتصاد 3 AP ورؤية خط البصر (Line-of-Sight) وتكتيكات التموضع.\n\nأتقن \"قانون القيود\" (The Law of Binding) — اربط محاربك بقيود تكتيكية عالية المخاطر (Vows) لإطلاق مضاعفات ضرر هائلة. ولكن حذار: كسر القسم يطلق رد فعل عكسي قاتل ومباشر (Backlash). جند أبطالاً فريدين من بين 12 عرقاً و7 فئات، واستغل أختام القوة الستة، وقم بترقية فريقك للهيمنة على ساحة المعركة.",
+                    hi: "Devil’s Vows 8x8 ग्रिड पर आधारित एक डार्क फैंटेसी टैक्टिकल टर्न-बेस्ड RPG है। 3 AP इकोनॉमी, सख्त लाइन-ऑफ-साइट और पोजीशनिंग रणनीति के साथ 5 इकाइयों के अपने दस्ते को कमांड करें।\n\n\"द लॉ ऑफ बाइंडिंग\" में महारत हासिल करें—विनाशकारी क्षति गुणक जारी करने के लिए अपने योद्धाओं को उच्च जोखिम वाली सामरिक बाधाओं (Vows) से बांधें। लेकिन सावधान रहें: प्रतिज्ञा तोड़ने से घातक प्रतिक्रिया (Backlash) होती है। 12 जातियों और 7 वर्गों से अनूठे नायकों को भर्ती करें, शक्ति की 6 सील का उपयोग करें और युद्ध के मैदान पर हावी होने के लिए अपनी पार्टी को ऊंचा उठाएं।",
+                },
+            },
         };
 
         const projectsData: Record<
@@ -4797,6 +5061,18 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                     "Sinkronisasi pemesanan menu secara langsung antara perangkat seluler pelanggan dengan dasbor utama di kasir/barista tanpa adanya keterlambatan (delay). Solusinya dengan mengimplementasikan Laravel InertiaJS dikombinasikan dengan State Management Vue.",
                 learning:
                     "Memperdalam pemahaman tentang InertiaJS sebagai jembatan antara Laravel dan Vue 3, menggunakan SQLite sebagai database, dan menyusun UI responsif menggunakan ShadCN Vue dan TailwindCSS.",
+            },
+            pixelgame: {
+                title: "Devil's Vows",
+                tech: ["Unity", "Aseprite", "C#"],
+                genre: ["RPG", "Strategy", "Tactical", "Roguelite"],
+                description:
+                    'Devil’s Vows is a dark fantasy tactical turn-based RPG set on an 8x8 grid. Command a customized squad of 5 units through tight grid combat driven by a 3 AP economy, strict Line-of-Sight, and positioning tactics.\n\nMaster "The Law of Binding"—bind your warriors to high-risk tactical constraints (Vows) to unleash screen-shattering damage multipliers. But beware: breaking a vow triggers instant, deadly Backlash. Recruit unique heroes across 12 Races and 7 Classes, harness the 6 Seals of Power, and ascend your party to dominate the battlefield.',
+                launchUrl: "",
+                sourceUrl: "https://github.com/",
+                role: "Game Developer & Pixel Artist",
+                challenge: "",
+                learning: "",
             },
         };
 
@@ -4899,6 +5175,8 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
             abs: mockupsEl?.getAttribute("data-abs") || "",
             zunoicafe: mockupsEl?.getAttribute("data-zunoicafe") || "",
             redstrings: mockupsEl?.getAttribute("data-redstrings") || "",
+            pixelcardbg: mockupsEl?.getAttribute("data-pixelcardbg") || "",
+            icon1: mockupsEl?.getAttribute("data-icon1") || "",
         };
 
         const updateProjectsGrid = (lang: string) => {
@@ -4961,6 +5239,7 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
             else if (projectKey === "synthwave") translationKey = "redstrings";
             else if (projectKey === "chronostream")
                 translationKey = "zunoicafe";
+            else if (projectKey === "pixelgame") translationKey = "pixelgame";
 
             const data = projectsData[projectKey];
             if (!data) return;
@@ -4969,20 +5248,245 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
             activeImageSrc = imageSrc;
 
             // Populate title
-            if (modalTitle) modalTitle.textContent = data.title;
+            if (modalTitle) {
+                if (projectKey === "pixelgame") {
+                    modalTitle.innerHTML = `<span>${data.title}</span> <span class="text-yellow-500 dark:text-yellow-400 text-xs sm:text-sm font-normal tracking-normal ml-2 font-pixelmix inline-block">(Under Development)</span>`;
+                } else {
+                    modalTitle.textContent = data.title;
+                }
+            }
 
             // Populate image
             if (modalImage) {
                 modalImage.src = imageSrc || "";
             }
 
-            // Populate tech tags
+            // Pixel Game Specific UI Customizations vs Standard Projects
+            const modalContentEl = document.getElementById(
+                "project-modal-content",
+            );
+            const specsWrapper = document.getElementById("modal-specs-wrapper");
+            const badgeWeb = document.getElementById("modal-badge-web");
+            const leftCol = document.getElementById("modal-left-col");
+            const rightCol = document.getElementById("modal-right-col");
+            const imageBox = document.getElementById("modal-image-box");
+            const linksTechWrapper = document.getElementById(
+                "modal-links-tech-wrapper",
+            );
+            const skeletonBox = document.getElementById("modal-skeleton-box");
+            const imageHint = document.getElementById("modal-image-hint");
+
+            const linksBox = document.getElementById("modal-links-box");
+            const techBox = document.getElementById("modal-tech-box");
+            const descBox = document.getElementById("modal-desc-box");
+            const rolesBox = document.getElementById("modal-roles-box");
+            const challengeBox = document.getElementById("modal-challenge-box");
+            const learningBox = document.getElementById("modal-learning-box");
+
+            const genreBox = document.getElementById("modal-genre-box");
+            const modalGenre = document.getElementById("modal-project-genre");
+
+            if (projectKey === "pixelgame") {
+                // Perkecil modal (max-w-3xl lg:max-w-4xl)
+                if (modalContentEl) {
+                    modalContentEl.className =
+                        "relative w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl border border-black/15 dark:border-white/15 bg-[#EFEEE8]/95 dark:bg-[#0E0D0B]/95 backdrop-blur-2xl p-4 sm:p-6 text-left shadow-2xl overflow-y-auto max-h-[82vh] transition-all duration-300 rounded-2xl";
+                }
+
+                // 1. Hilangkan "Project specs"
+                if (specsWrapper) specsWrapper.style.display = "none";
+
+                // 2. Style pixel pada judul & close button
+                if (modalTitle) {
+                    modalTitle.style.fontFamily =
+                        "'Pixelmix', monospace, sans-serif";
+                    modalTitle.classList.remove("font-sans");
+                    modalTitle.classList.add("font-pixelmix");
+                }
+                if (closeBtn) {
+                    closeBtn.style.fontFamily =
+                        "'Pixelmix', monospace, sans-serif";
+                    closeBtn.classList.remove("font-mono");
+                    closeBtn.classList.add("font-pixelmix");
+                }
+
+                // 2a. Style pixel pada seluruh section header (Links, Tech Stacks, Genre, Description, etc.)
+                const sectionHeaders = document.querySelectorAll(
+                    "#project-modal-content h4",
+                );
+                sectionHeaders.forEach((header) => {
+                    header.classList.remove("font-mono");
+                    header.classList.add("font-pixelmix");
+                    (header as HTMLElement).style.fontFamily =
+                        "'Pixelmix', monospace, sans-serif";
+                });
+
+                // 2b. Style pixel pada description text
+                const descText = document.getElementById("modal-project-desc");
+                if (descText) {
+                    descText.classList.remove("font-sans");
+                    descText.classList.add("font-pixelmix");
+                    descText.style.fontFamily =
+                        "'Pixelmix', monospace, sans-serif";
+                }
+
+                // 2c. Style pixel pada link buttons (Live Demo & GitHub)
+                const linkButtons =
+                    document.querySelectorAll("#modal-links-box a");
+                linkButtons.forEach((btn) => {
+                    btn.classList.remove("font-mono");
+                    btn.classList.add("font-pixelmix");
+                    (btn as HTMLElement).style.fontFamily =
+                        "'Pixelmix', monospace, sans-serif";
+                });
+
+                // 3. Buat gambar thumbnail project melebar ke samping & gunakan icon1.png (Fit)
+                if (leftCol) leftCol.className = "lg:col-span-12 space-y-4";
+                if (imageBox)
+                    imageBox.className =
+                        "relative w-full h-44 sm:h-56 md:h-64 rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/80 shadow-md group flex items-center justify-center p-3";
+                if (modalImage) {
+                    modalImage.src = projectMockups.icon1 || "";
+                    modalImage.className = "w-full h-full object-contain [image-rendering:pixelated]";
+                    modalImage.style.display = "block";
+                }
+                if (imageHint) imageHint.style.display = "none";
+                if (skeletonBox) skeletonBox.style.display = "none";
+
+                // 4. Hilangkan tag web
+                if (badgeWeb) badgeWeb.style.display = "none";
+
+                // 5 & 6. Links, tech stacks, dan Genre di atas description, 3 kolom
+                if (linksTechWrapper)
+                    linksTechWrapper.className =
+                        "grid grid-cols-1 sm:grid-cols-3 gap-4 space-y-0";
+                if (rightCol) rightCol.className = "lg:col-span-12 space-y-4";
+
+                // Hilangkan border pada setiap informasi
+                if (linksBox)
+                    linksBox.className =
+                        "p-1 space-y-3 border-0 bg-transparent shadow-none";
+                if (techBox)
+                    techBox.className =
+                        "p-1 space-y-3 border-0 bg-transparent shadow-none";
+                if (descBox)
+                    descBox.className =
+                        "p-1 space-y-2 border-0 bg-transparent shadow-none";
+                if (genreBox) {
+                    genreBox.style.display = "block";
+                    genreBox.className =
+                        "p-1 space-y-3 border-0 bg-transparent shadow-none";
+                }
+
+                // Render genre tags
+                if (modalGenre && (data as any).genre) {
+                    modalGenre.innerHTML = "";
+                    (data as any).genre.forEach((tag: string) => {
+                        const span = document.createElement("span");
+                        span.className =
+                            "font-pixelmix text-xs font-bold text-black/90 dark:text-white/90 border border-black/15 dark:border-white/15 px-3 py-1 rounded-md bg-black/[0.06] dark:bg-white/[0.06]";
+                        span.style.fontFamily =
+                            "'Pixelmix', monospace, sans-serif";
+                        span.textContent = tag;
+                        modalGenre.appendChild(span);
+                    });
+                }
+
+                // Hilangkan roles, challenges & solutions, dan tujuan pembelajaran
+                if (rolesBox) rolesBox.style.display = "none";
+                if (challengeBox) challengeBox.style.display = "none";
+                if (learningBox) learningBox.style.display = "none";
+            } else {
+                // Restore standard modal layout & fonts for other projects
+                if (modalContentEl) {
+                    modalContentEl.className =
+                        "relative w-full max-w-4xl lg:max-w-5xl border border-black/15 dark:border-white/15 bg-[#EFEEE8]/95 dark:bg-[#0E0D0B]/95 backdrop-blur-2xl p-5 sm:p-8 text-left shadow-2xl overflow-y-auto max-h-[85vh] sm:max-h-[88vh] transition-all duration-300 rounded-2xl";
+                }
+
+                if (specsWrapper) specsWrapper.style.display = "flex";
+                if (modalTitle) {
+                    modalTitle.style.fontFamily = "";
+                    modalTitle.classList.remove("font-pixelmix");
+                    modalTitle.classList.add("font-sans");
+                }
+                if (closeBtn) {
+                    closeBtn.style.fontFamily = "";
+                    closeBtn.classList.remove("font-pixelmix");
+                    closeBtn.classList.add("font-mono");
+                }
+
+                // Restore section headers to font-mono
+                const sectionHeaders = document.querySelectorAll(
+                    "#project-modal-content h4",
+                );
+                sectionHeaders.forEach((header) => {
+                    header.classList.remove("font-pixelmix");
+                    header.classList.add("font-mono");
+                    (header as HTMLElement).style.fontFamily = "";
+                });
+
+                // Restore description to font-sans
+                const descText = document.getElementById("modal-project-desc");
+                if (descText) {
+                    descText.classList.remove("font-pixelmix");
+                    descText.classList.add("font-sans");
+                    descText.style.fontFamily = "";
+                }
+
+                // Restore link buttons to font-mono
+                const linkButtons =
+                    document.querySelectorAll("#modal-links-box a");
+                linkButtons.forEach((btn) => {
+                    btn.classList.remove("font-pixelmix");
+                    btn.classList.add("font-mono");
+                    (btn as HTMLElement).style.fontFamily = "";
+                });
+                if (leftCol)
+                    leftCol.className =
+                        "lg:col-span-4 space-y-5 lg:sticky lg:top-0";
+                if (imageBox)
+                    imageBox.className =
+                        "relative w-full aspect-video rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/[0.03] dark:bg-white/[0.02] shadow-md group";
+                if (modalImage) modalImage.style.display = "block";
+                if (imageHint) imageHint.style.display = "flex";
+                if (skeletonBox) skeletonBox.style.display = "none";
+                if (badgeWeb) badgeWeb.style.display = "inline-block";
+                if (linksTechWrapper) linksTechWrapper.className = "space-y-5";
+                if (rightCol) rightCol.className = "lg:col-span-8 space-y-5";
+                if (genreBox) genreBox.style.display = "none";
+
+                if (linksBox)
+                    linksBox.className =
+                        "p-4 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] space-y-3";
+                if (techBox)
+                    techBox.className =
+                        "p-4 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] space-y-3";
+                if (descBox)
+                    descBox.className =
+                        "p-5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] space-y-2";
+                if (rolesBox)
+                    rolesBox.className =
+                        "p-5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] space-y-3";
+
+                if (rolesBox) rolesBox.style.display = "block";
+                if (challengeBox) challengeBox.style.display = "block";
+                if (learningBox) learningBox.style.display = "block";
+            }
+
+            // 7. Populate tech tags with Pixelmix font when pixelgame
             if (modalTech) {
                 modalTech.innerHTML = "";
                 data.tech.forEach((tag) => {
                     const span = document.createElement("span");
-                    span.className =
-                        "font-sans text-xs font-medium text-black/80 dark:text-white/90 border border-black/10 dark:border-white/10 px-2.5 py-1 rounded-md bg-black/[0.04] dark:bg-white/[0.04]";
+                    if (projectKey === "pixelgame") {
+                        span.className =
+                            "font-pixelmix text-xs font-bold text-black/90 dark:text-white/90 border border-black/15 dark:border-white/15 px-3 py-1 rounded-md bg-black/[0.06] dark:bg-white/[0.06]";
+                        span.style.fontFamily =
+                            "'Pixelmix', monospace, sans-serif";
+                    } else {
+                        span.className =
+                            "font-sans text-xs font-medium text-black/80 dark:text-white/90 border border-black/10 dark:border-white/10 px-2.5 py-1 rounded-md bg-black/[0.04] dark:bg-white/[0.04]";
+                    }
                     span.textContent = tag;
                     modalTech.appendChild(span);
                 });
@@ -4993,20 +5497,42 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                     translationKey as keyof typeof projectTranslations
                 ];
 
-            // Populate description
+            // Populate description with neat paragraphs and line breaks
             if (modalDesc) {
-                modalDesc.textContent = trans
-                    ? trans.desc[lang as keyof typeof trans.desc] ||
-                      trans.desc.en
-                    : data.description;
+                const rawDesc =
+                    trans && trans.desc
+                        ? trans.desc[lang as keyof typeof trans.desc] ||
+                          trans.desc.en
+                        : data.description;
+
+                if (rawDesc && rawDesc.includes("\n\n")) {
+                    modalDesc.innerHTML = rawDesc
+                        .split("\n\n")
+                        .map(
+                            (para: string) =>
+                                `<p class="mb-3.5 last:mb-0 leading-relaxed">${para.replace(/\n/g, "<br />")}</p>`,
+                        )
+                        .join("");
+                } else if (rawDesc && rawDesc.includes("\n")) {
+                    modalDesc.innerHTML = rawDesc
+                        .split("\n")
+                        .map(
+                            (para: string) =>
+                                `<p class="mb-2.5 last:mb-0 leading-relaxed">${para}</p>`,
+                        )
+                        .join("");
+                } else {
+                    modalDesc.textContent = rawDesc;
+                }
             }
 
             // Populate role
             if (modalRole) {
-                modalRole.textContent = trans
-                    ? trans.role[lang as keyof typeof trans.role] ||
-                      trans.role.en
-                    : data.role;
+                modalRole.textContent =
+                    trans && trans.role
+                        ? trans.role[lang as keyof typeof trans.role] ||
+                          trans.role.en
+                        : data.role;
             }
 
             // Populate dynamic lists
@@ -5014,10 +5540,11 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
 
             // Populate learning
             if (modalLearning) {
-                modalLearning.textContent = trans
-                    ? trans.learning[lang as keyof typeof trans.learning] ||
-                      trans.learning.en
-                    : data.learning;
+                modalLearning.textContent =
+                    trans && trans.learning
+                        ? trans.learning[lang as keyof typeof trans.learning] ||
+                          trans.learning.en
+                        : data.learning;
             }
 
             // Populate URLs
@@ -5042,6 +5569,8 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
             if (modal && modalContent) {
                 const lenis = (window as any).lenis;
                 if (lenis) lenis.stop();
+                document.body.style.overflow = "hidden";
+                document.documentElement.style.overflow = "hidden";
                 modal.style.display = "flex";
                 modal.classList.remove("hidden");
                 gsap.killTweensOf([modal, modalContent]);
@@ -5078,6 +5607,8 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                         modal.classList.add("hidden");
                         activeProjectKey = null;
                         activeImageSrc = null;
+                        document.body.style.overflow = "";
+                        document.documentElement.style.overflow = "";
                         const lenis = (window as any).lenis;
                         if (lenis) lenis.start();
                     },
@@ -5087,7 +5618,8 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
 
         // Wire up buttons
         detailBtns.forEach((btn) => {
-            btn.addEventListener("click", () => {
+            btn.addEventListener("click", (e) => {
+                e.stopPropagation();
                 const projectKey = btn.getAttribute("data-project");
                 if (projectKey) {
                     let imgPath = null;
@@ -5097,10 +5629,22 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                         imgPath = projectMockups.redstrings;
                     else if (projectKey === "chronostream")
                         imgPath = projectMockups.zunoicafe;
+                    else if (projectKey === "pixelgame")
+                        imgPath = projectMockups.pixelcardbg;
                     openModal(projectKey, imgPath);
                 }
             });
         });
+
+        // Wire up Pixel Game Card directly
+        const pixelCardEl = document.getElementById("pixelgame-card");
+        const pixelBtnEl = document.getElementById("pixelgame-detail-btn");
+        const openPixelGame = (e?: Event) => {
+            if (e) e.stopPropagation();
+            openModal("pixelgame", projectMockups.pixelcardbg);
+        };
+        if (pixelCardEl) pixelCardEl.addEventListener("click", openPixelGame);
+        if (pixelBtnEl) pixelBtnEl.addEventListener("click", openPixelGame);
 
         // Wire up project card image clicks
         const cardImages = document.querySelectorAll(
@@ -5117,6 +5661,8 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
                         imgPath = projectMockups.redstrings;
                     else if (projectKey === "chronostream")
                         imgPath = projectMockups.zunoicafe;
+                    else if (projectKey === "pixelgame")
+                        imgPath = projectMockups.pixelcardbg;
                     openModal(projectKey, imgPath);
                 }
             });
@@ -5222,6 +5768,76 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
         const initialLang =
             preferredLang || navigator.language.split("-")[0].toLowerCase();
         updateProjectsGrid(initialLang);
+
+        // Projects Section Pagination (3 cards per page)
+        const initProjectsPagination = () => {
+            const cards = document.querySelectorAll(".project-item-card");
+            const itemsPerPage = 3;
+            const totalPages = Math.ceil(cards.length / itemsPerPage);
+            let currentPage = 1;
+
+            const prevBtn = document.getElementById("projects-prev-btn");
+            const nextBtn = document.getElementById("projects-next-btn");
+            const numbersContainer = document.getElementById("projects-page-numbers");
+
+            if (!cards.length || !numbersContainer) return;
+
+            const renderPage = (page: number) => {
+                currentPage = page;
+
+                cards.forEach((card, index) => {
+                    const cardEl = card as HTMLElement;
+                    const start = (page - 1) * itemsPerPage;
+                    const end = start + itemsPerPage;
+
+                    if (index >= start && index < end) {
+                        cardEl.style.display = "flex";
+                        gsap.killTweensOf(cardEl);
+                        gsap.fromTo(
+                            cardEl,
+                            { opacity: 0, y: 12 },
+                            { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }
+                        );
+                    } else {
+                        cardEl.style.display = "none";
+                    }
+                });
+
+                // Update Prev / Next buttons state
+                if (prevBtn) (prevBtn as HTMLButtonElement).disabled = currentPage === 1;
+                if (nextBtn) (nextBtn as HTMLButtonElement).disabled = currentPage === totalPages;
+
+                // Render page number buttons
+                numbersContainer.innerHTML = "";
+                for (let i = 1; i <= totalPages; i++) {
+                    const btn = document.createElement("button");
+                    btn.className =
+                        i === currentPage
+                            ? "w-8 h-8 rounded-lg font-bold text-xs bg-black text-white dark:bg-white dark:text-black shadow-sm transition-all cursor-pointer"
+                            : "w-8 h-8 rounded-lg font-semibold text-xs text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 hover:bg-black/5 dark:hover:bg-white/5 transition-all cursor-pointer";
+                    btn.textContent = i.toString();
+                    btn.addEventListener("click", () => renderPage(i));
+                    numbersContainer.appendChild(btn);
+                }
+            };
+
+            if (prevBtn) {
+                prevBtn.addEventListener("click", () => {
+                    if (currentPage > 1) renderPage(currentPage - 1);
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener("click", () => {
+                    if (currentPage < totalPages) renderPage(currentPage + 1);
+                });
+            }
+
+            // Initialize Page 1
+            renderPage(1);
+        };
+
+        initProjectsPagination();
         translateModalHeaders(initialLang);
 
         window.addEventListener("language-changed", (e: any) => {
@@ -5290,6 +5906,50 @@ import redStringsMockup from "../assets/red_strings_mockup.png";
 </script>
 
 <style is:global>
+    @font-face {
+        font-family: "Pixelfy";
+        src: url("/fonts/Pixelfy.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: "Pixelmix";
+        src: url("/fonts/pixelmix.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: "Pixelmix";
+        src: url("/fonts/pixelmix_bold.ttf") format("truetype");
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    .font-pixelmix,
+    .font-pixelmix *,
+    button.font-pixelmix,
+    .project-detail-btn {
+        font-family: "Pixelmix", monospace, sans-serif !important;
+    }
+
+    @keyframes pixel-float {
+        0%,
+        100% {
+            transform: translateX(-50%) translateY(-28px);
+        }
+        50% {
+            transform: translateX(-50%) translateY(-36px);
+        }
+    }
+
+    .group:hover .animate-pixel-float {
+        animation: pixel-float 2.2s ease-in-out infinite;
+    }
+
     /* Hide scrollbar utility */
     .scrollbar-none::-webkit-scrollbar {
         display: none;
