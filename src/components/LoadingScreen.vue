@@ -13,6 +13,24 @@ const translations = {
   zh: '加载中...'
 };
 
+const safeGetSessionStorage = (key: string): string | null => {
+  try {
+    return typeof window !== 'undefined' && window.sessionStorage ? sessionStorage.getItem(key) : null;
+  } catch (e) {
+    return null;
+  }
+};
+
+const safeSetSessionStorage = (key: string, value: string): void => {
+  try {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      sessionStorage.setItem(key, value);
+    }
+  } catch (e) {
+    // Ignore storage restriction errors
+  }
+};
+
 const systemLang = ref<'id' | 'en' | 'ja' | 'ko' | 'ar' | 'hi' | 'zh'>('en');
 const showLoader = ref(true);
 const canvasRef = ref<HTMLCanvasElement | null>(null);
@@ -20,6 +38,44 @@ const radialBlurRef = ref<HTMLDivElement | null>(null);
 const loaderContentRef = ref<HTMLDivElement | null>(null);
 
 let cleanup: (() => void) | null = null;
+let isDismissed = false;
+let mainTimer: ReturnType<typeof setTimeout> | null = null;
+let fallbackTimer: ReturnType<typeof setTimeout> | null = null;
+
+const dismissLoader = (instant = false) => {
+  if (isDismissed) return;
+  isDismissed = true;
+
+  if (mainTimer) clearTimeout(mainTimer);
+  if (fallbackTimer) clearTimeout(fallbackTimer);
+
+  const finish = () => {
+    showLoader.value = false;
+    safeSetSessionStorage('visited', 'true');
+    document.documentElement.classList.add('is-loaded');
+  };
+
+  if (instant || typeof window === 'undefined') {
+    finish();
+    return;
+  }
+
+  // Smooth slide-up animation using GSAP
+  try {
+    gsap.to('#loading-screen', {
+      yPercent: -100,
+      duration: 1.2,
+      ease: 'power4.inOut',
+      onComplete: finish
+    });
+  } catch (err) {
+    finish();
+  }
+};
+
+const handleUserSkip = () => {
+  dismissLoader(false);
+};
 
 onMounted(() => {
   const startTime = Date.now();
@@ -27,7 +83,7 @@ onMounted(() => {
   // 1. Detect if the user has already visited in this session or is a crawler/Lighthouse bot to skip the loader
   if (typeof window !== 'undefined') {
     const isBot = /Chrome-Lighthouse|Googlebot|Lighthouse|Bingbot|Slurp|DuckDuckBot|Baiduspider|YandexBot/i.test(navigator.userAgent);
-    if (sessionStorage.getItem('visited') === 'true' || isBot) {
+    if (safeGetSessionStorage('visited') === 'true' || isBot) {
       showLoader.value = false;
       document.documentElement.classList.add('is-loaded');
       return;
@@ -42,21 +98,23 @@ onMounted(() => {
     systemLang.value = 'en';
   }
 
-  // 3. Loading screen duration (slides up after 11.2 seconds, allowing the explosion of the globe to finish and leaving a 200ms empty pause first)
-  setTimeout(() => {
-    // 4. Slide up animation using GSAP
-    gsap.to('#loading-screen', {
-      yPercent: -100,
-      duration: 1.8,
-      ease: 'power4.inOut',
-      onComplete: () => {
-        showLoader.value = false;
-        sessionStorage.setItem('visited', 'true');
-        // Trigger the fade-in animation for the main content only after loader clears
-        document.documentElement.classList.add('is-loaded');
-      }
-    });
-  }, 11200);
+  // 3. Main loader timer (starts slide-up after 2.2 seconds)
+  mainTimer = setTimeout(() => {
+    dismissLoader(false);
+  }, 2200);
+
+  // 4. Hard failsafe timer (forces dismiss after 3.5 seconds regardless of any lag/error)
+  fallbackTimer = setTimeout(() => {
+    dismissLoader(true);
+  }, 3500);
+
+  // Handle tab visibility change (if tab was opened in background)
+  const handleVisibilityChange = () => {
+    if (document.visibilityState === 'visible' && Date.now() - startTime > 2200) {
+      dismissLoader(true);
+    }
+  };
+  document.addEventListener('visibilitychange', handleVisibilityChange);
 
   // 5. Canvas Particle Sphere
   const canvas = canvasRef.value;
@@ -121,10 +179,10 @@ onMounted(() => {
   const render = () => {
     const elapsedTime = Date.now() - startTime;
 
-    // Timing configurations
-    const T_accel = 10000;            // Acceleration phase: 10.0 seconds
-    const T_explosion_start = 10000;  // Explosion starts at 10.0 seconds
-    const T_explosion_duration = 1000;// Explosion lasts 1.0 second (fades completely during slide-up)
+    // Timing configurations for ~2.2s total duration
+    const T_accel = 1800;            // Acceleration phase: 1.8 seconds
+    const T_explosion_start = 1800;  // Explosion starts at 1.8 seconds
+    const T_explosion_duration = 400;// Explosion lasts 0.4 seconds
 
     // Calculate explosion progress (ease-out cubic progression)
     let rawExplosion = 0;
@@ -221,8 +279,6 @@ onMounted(() => {
       };
     });
 
-    // Depth sort omitted to reduce CPU rendering overhead and improve performance
-
     // Draw particles
     projected.forEach(p => {
       const depth = (p.z + 1.2) / 2.4; // Normalized depth
@@ -271,6 +327,7 @@ onMounted(() => {
 
   cleanup = () => {
     window.removeEventListener('resize', resize);
+    document.removeEventListener('visibilitychange', handleVisibilityChange);
     cancelAnimationFrame(animationFrameId);
   };
 });
@@ -284,7 +341,9 @@ onUnmounted(() => {
   <div 
     v-if="showLoader"
     id="loading-screen"
-    class="fixed inset-0 w-full h-full z-[9999] flex flex-col items-center justify-center bg-[#EFEEE8] dark:bg-[#0E0D0B] text-black dark:text-[#EFEEE8] transition-colors duration-300 font-sans overflow-hidden"
+    @click="handleUserSkip"
+    class="fixed inset-0 w-full h-full z-[9999] flex flex-col items-center justify-center bg-[#EFEEE8] dark:bg-[#0E0D0B] text-black dark:text-[#EFEEE8] transition-colors duration-300 font-sans overflow-hidden cursor-pointer select-none"
+    title="Click to skip"
   >
     <!-- Background Canvas Particle Sphere -->
     <canvas 
@@ -309,6 +368,9 @@ onUnmounted(() => {
       <!-- Loading Text -->
       <span class="text-[10px] md:text-xs font-bold tracking-widest uppercase text-black/50 dark:text-[#EFEEE8]/50">
         {{ translations[systemLang] }}
+      </span>
+      <span class="text-[9px] font-mono uppercase tracking-wider text-black/30 dark:text-[#EFEEE8]/30 mt-2 opacity-60">
+        (Click to skip)
       </span>
     </div>
   </div>

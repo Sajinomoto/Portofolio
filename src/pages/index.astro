@@ -5877,12 +5877,19 @@ import icon1 from "../assets/icon1.png";
     };
 
     const initWithLoaded = () => {
-        if (document.documentElement.classList.contains("is-loaded")) {
+        let initialized = false;
+        const doInit = () => {
+            if (initialized) return;
+            initialized = true;
             init();
+        };
+
+        if (document.documentElement.classList.contains("is-loaded")) {
+            doInit();
         } else {
             const observer = new MutationObserver(() => {
                 if (document.documentElement.classList.contains("is-loaded")) {
-                    init();
+                    doInit();
                     observer.disconnect();
                 }
             });
@@ -5890,6 +5897,11 @@ import icon1 from "../assets/icon1.png";
                 attributes: true,
                 attributeFilter: ["class"],
             });
+            // Safety fallback: Ensure page features initialize within 4 seconds regardless
+            setTimeout(() => {
+                doInit();
+                observer.disconnect();
+            }, 4000);
         }
     };
 

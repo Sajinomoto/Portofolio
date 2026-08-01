@@ -56,11 +56,15 @@ import geistSansUrl from "@fontsource-variable/geist/files/geist-latin-wght-norm
             }
 
             // Add is-loaded class if the loading screen has already run in this session
-            if (
-                typeof sessionStorage !== "undefined" &&
-                sessionStorage.getItem("visited") === "true"
-            ) {
-                document.documentElement.classList.add("is-loaded");
+            try {
+                if (
+                    typeof sessionStorage !== "undefined" &&
+                    sessionStorage.getItem("visited") === "true"
+                ) {
+                    document.documentElement.classList.add("is-loaded");
+                }
+            } catch (e) {
+                // Ignore storage restriction errors
             }
         </script>
     </head>
