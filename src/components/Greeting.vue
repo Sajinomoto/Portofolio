@@ -466,8 +466,20 @@ onMounted(() => {
     };
     window.addEventListener("language-changed", handleLanguageChange);
 
-    // Smooth loop for grid updates and timecode
-    const tickParallaxDecay = () => {
+    // Smooth loop for grid updates and timecode (capped at 30 FPS to save CPU/GPU)
+    const frameInterval = 1000 / 30;
+    let lastFrameTime = 0;
+
+    const tickParallaxDecay = (timestamp: number) => {
+        if (!isVisible) return;
+
+        const elapsed = timestamp - lastFrameTime;
+        if (elapsed < frameInterval) {
+            rafId = requestAnimationFrame(tickParallaxDecay);
+            return;
+        }
+        lastFrameTime = timestamp - (elapsed % frameInterval);
+
         if ((window as any)._draw3DGrid) {
             (window as any)._draw3DGrid();
         }
@@ -475,11 +487,10 @@ onMounted(() => {
         // Update timecode inside desktop animation loop
         updateTimecode();
 
-        if (!isVisible) return;
         rafId = requestAnimationFrame(tickParallaxDecay);
     };
 
-    // 6. Viewfinder ticking timecode update (60fps)
+    // 6. Viewfinder ticking timecode update (30 FPS frame counter)
     let frameCount = 0;
     let timecodeSeconds = 0;
     let timecodeMinutes = 0;
@@ -487,7 +498,7 @@ onMounted(() => {
 
     const updateTimecode = () => {
         frameCount++;
-        if (frameCount >= 60) {
+        if (frameCount >= 30) {
             frameCount = 0;
             timecodeSeconds++;
             if (timecodeSeconds >= 60) {

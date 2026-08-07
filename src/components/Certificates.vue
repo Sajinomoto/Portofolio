@@ -181,7 +181,7 @@ onUnmounted(() => {
     </div>
 
     <!-- Main Section Box -->
-    <div class="relative w-full border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 sm:p-6 transition-all duration-300 hover:border-black/20 dark:hover:border-white/20 select-none">
+    <div class="relative w-full border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] p-5 sm:p-6 transition-all duration-300 hover:border-black/20 dark:hover:border-white/20 select-none">
       
       <!-- Cyber Corner Brackets -->
       <div class="cb-tl absolute top-0 left-0 w-3.5 h-3.5 border-t-2 border-l-2 border-black/30 dark:border-white/30"></div>

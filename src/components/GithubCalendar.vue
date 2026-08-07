@@ -1,5 +1,5 @@
 <template>
-  <div ref="containerRef" class="relative w-full border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] backdrop-blur-sm p-5 sm:p-6 transition-all duration-300 hover:border-black/20 dark:hover:border-white/20 select-none font-mono">
+  <div ref="containerRef" class="relative w-full border border-black/10 dark:border-white/10 bg-black/[0.015] dark:bg-white/[0.015] p-5 sm:p-6 transition-all duration-300 hover:border-black/20 dark:hover:border-white/20 select-none font-mono">
     
     <!-- Cyber Corner Brackets (Animated via GSAP) -->
     <div class="cb-tl absolute top-0 left-0 w-3.5 h-3.5 border-t-2 border-l-2 border-black/30 dark:border-white/30"></div>
@@ -137,17 +137,17 @@
                     <div 
                       class="grid grid-rows-7 grid-flow-col gap-[3px] h-[88px] flex-grow"
                       :style="{ gridTemplateColumns: `repeat(${totalWeeks}, 1fr)` }"
+                      @mousemove="onCalendarPointerMove($event)"
+                      @mouseleave="hideTooltip"
                     >
                       <div
                         v-for="(day, index) in days"
                         :key="day.date + '-' + index"
-                        @mouseenter="showTooltip($event, day)"
-                        @mousemove="moveTooltip($event)"
-                        @mouseleave="hideTooltip"
+                        :data-index="index"
                         class="contrib-cell w-2.5 h-2.5 sm:w-[11px] sm:h-[11px] aspect-square flex items-center justify-center cursor-crosshair relative"
                       >
                         <div
-                          class="transition-all duration-150"
+                          class="transition-[transform,background-color] duration-150"
                           :class="[
                             day.level === 0
                               ? 'w-[3px] h-[3px] rounded-full bg-black/25 dark:bg-white/20 hover:bg-black/45 dark:hover:bg-white/40'
@@ -824,31 +824,7 @@ const selectGithubSubTab = (subTab, manual = false) => {
           );
           if (newPanel) {
             gsap.set(newPanel, { opacity: 0, x: direction });
-            
-            if (subTab === 'contributions') {
-              const statItems = newPanel.querySelectorAll('.stat-item');
-              const cells = newPanel.querySelectorAll('.contrib-cell');
-              if (statItems.length > 0) gsap.set(statItems, { y: 12, opacity: 0 });
-              if (cells.length > 0) gsap.set(cells, { scale: 0.2, opacity: 0 });
-              gsap.to(newPanel, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" });
-              if (statItems.length > 0) {
-                gsap.to(statItems, { y: 0, opacity: 1, duration: 0.5, stagger: 0.05, ease: "power2.out" });
-              }
-              if (cells.length > 0) {
-                gsap.to(cells, { scale: 1, opacity: 1, duration: 0.4, stagger: 0.005, ease: "power1.out", force3D: true, lazy: true });
-              }
-            } else if (subTab === 'stats') {
-              const cards = newPanel.querySelectorAll('.stat-card');
-              if (cards && cards.length > 0) {
-                gsap.set(cards, { y: 12, opacity: 0 });
-                gsap.to(newPanel, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" });
-                gsap.to(cards, { y: 0, opacity: 1, duration: 0.5, stagger: 0.05, ease: "power2.out" });
-              } else {
-                gsap.to(newPanel, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" });
-              }
-            } else {
-              gsap.to(newPanel, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" });
-            }
+            gsap.to(newPanel, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" });
           }
         });
       }
@@ -912,26 +888,7 @@ const selectSteamSubTab = (subTab, manual = false) => {
           );
           if (newPanel) {
             gsap.set(newPanel, { opacity: 0, x: subTab === 'recent' ? 15 : -15 });
-            
-            if (subTab === 'most_played') {
-              const steamCards = newPanel.querySelectorAll('.steam-card');
-              if (steamCards && steamCards.length > 0) {
-                gsap.set(steamCards, { y: 15, opacity: 0 });
-                gsap.to(newPanel, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" });
-                gsap.to(steamCards, {
-                  y: 0,
-                  opacity: 1,
-                  duration: 0.5,
-                  stagger: 0.1,
-                  ease: "power2.out",
-                  overwrite: "auto"
-                });
-              } else {
-                gsap.to(newPanel, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" });
-              }
-            } else {
-              gsap.to(newPanel, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" });
-            }
+            gsap.to(newPanel, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" });
           }
         });
       }
@@ -982,28 +939,45 @@ const getCellClass = (level) => {
   }
 };
 
-// Tooltip Handlers
-const showTooltip = (event, day) => {
-  if (!containerRef.value) return;
-  const rect = containerRef.value.getBoundingClientRect();
-  const dateLabel = formatDateLabel(day.date);
-  const commitsText = day.count === 0 ? 'No contributions' : `${day.count} contribution${day.count > 1 ? 's' : ''}`;
-  tooltipText.value = `${commitsText} on ${dateLabel}`;
-  
-  tooltipX.value = event.clientX - rect.left;
-  tooltipY.value = event.clientY - rect.top;
-  tooltipVisible.value = true;
+// Tooltip Handlers (delegated on the calendar grid, throttled to once per frame)
+let tooltipRafPending = false;
+let tooltipContainerRect = null;
+
+const invalidateTooltipRect = () => {
+  tooltipContainerRect = null;
 };
 
-const moveTooltip = (event) => {
-  if (!containerRef.value) return;
-  const rect = containerRef.value.getBoundingClientRect();
-  tooltipX.value = event.clientX - rect.left;
-  tooltipY.value = event.clientY - rect.top;
+const getTooltipContainerRect = () => {
+  if (!tooltipContainerRect && containerRef.value) {
+    tooltipContainerRect = containerRef.value.getBoundingClientRect();
+  }
+  return tooltipContainerRect;
+};
+
+const onCalendarPointerMove = (event) => {
+  const cell = event.target.closest('.contrib-cell');
+  if (!cell) return;
+  const day = days.value[Number(cell.dataset.index)];
+  if (!day) return;
+
+  if (tooltipRafPending) return;
+  tooltipRafPending = true;
+  requestAnimationFrame(() => {
+    tooltipRafPending = false;
+    const rect = getTooltipContainerRect();
+    if (!rect || !day) return;
+    const dateLabel = formatDateLabel(day.date);
+    const commitsText = day.count === 0 ? 'No contributions' : `${day.count} contribution${day.count > 1 ? 's' : ''}`;
+    tooltipText.value = `${commitsText} on ${dateLabel}`;
+    tooltipX.value = event.clientX - rect.left;
+    tooltipY.value = event.clientY - rect.top;
+    tooltipVisible.value = true;
+  });
 };
 
 const hideTooltip = () => {
   tooltipVisible.value = false;
+  tooltipRafPending = false;
 };
 
 // Decrypt text effect
@@ -1079,35 +1053,10 @@ const selectTab = (tab, manual = false) => {
   }
   
   nextTick(() => {
-    const container = containerRef.value;
-    if (!container) return;
-
     if (tab === "github") {
       decryptText(githubTitleText, "[GITHUB PROFILE]", 0.2);
-      
-      const statItems = container.querySelectorAll(".stat-item");
-      const cells = container.querySelectorAll(".contrib-cell");
-      
-      if (statItems && statItems.length > 0) {
-        gsap.set(statItems, { y: 0, opacity: 1, overwrite: "auto" });
-      }
-      
-      if (cells && cells.length > 0) {
-        gsap.set(cells, { scale: 1, opacity: 1, overwrite: "auto" });
-      }
     } else {
-      const steamHeader = container.querySelector(".steam-header-item");
-      const steamCards = container.querySelectorAll(".steam-card");
-      
       decryptText(steamTitleText, "[STEAM PROFILE]", 0.2);
-      
-      if (steamHeader) {
-        gsap.set(steamHeader, { y: 0, opacity: 1, overwrite: "auto" });
-      }
-      
-      if (steamCards && steamCards.length > 0) {
-        gsap.set(steamCards, { y: 0, opacity: 1, overwrite: "auto" });
-      }
     }
   });
 };
@@ -1125,19 +1074,6 @@ const initScrollAnimations = () => {
   // Set initial visible states for corner brackets
   if (cbTl && cbTr && cbBl && cbBr) {
     gsap.set([cbTl, cbTr, cbBl, cbBr], { x: 0, y: 0, opacity: 1 });
-  }
-
-  // Set initial visible states for active tab elements dynamically
-  if (activeTab.value === "github") {
-    const statItems = container.querySelectorAll('.stat-item');
-    const cells = container.querySelectorAll('.contrib-cell');
-    if (statItems.length > 0) gsap.set(statItems, { y: 0, opacity: 1 });
-    if (cells.length > 0) gsap.set(cells, { scale: 1, opacity: 1, force3D: true });
-  } else {
-    const steamHeader = container.querySelector('.steam-header-item');
-    const steamCards = container.querySelectorAll('.steam-card');
-    if (steamHeader) gsap.set(steamHeader, { y: 0, opacity: 1 });
-    if (steamCards.length > 0) gsap.set(steamCards, { y: 0, opacity: 1 });
   }
 
   // Decrypt titles immediately (fast)
@@ -1395,11 +1331,17 @@ onMounted(() => {
     hasBeenSeen.value = true;
     loadData();
   }
+
+  // Invalidate cached tooltip container rect when the page scrolls or resizes
+  window.addEventListener('scroll', invalidateTooltipRect, { passive: true });
+  window.addEventListener('resize', invalidateTooltipRect);
 });
 
 onUnmounted(() => {
   stopSteamSubTabAutoSlide();
   stopGithubSubTabAutoSlide();
+  window.removeEventListener('scroll', invalidateTooltipRect);
+  window.removeEventListener('resize', invalidateTooltipRect);
   if (scrollTriggerInstance) {
     scrollTriggerInstance.kill();
   }
@@ -1432,10 +1374,6 @@ onUnmounted(() => {
     background: rgba(255, 255, 255, 0.16);
 }
 
-.contrib-cell {
-    will-change: transform, opacity;
-    transform: translate3d(0, 0, 0);
-}
 .calendar-title, .steam-title {
     display: inline-block;
     contain: layout paint;

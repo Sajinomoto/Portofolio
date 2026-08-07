@@ -245,6 +245,8 @@ const onTouchEnd = () => {
 };
 
 let animationFrameId = 0;
+const frameInterval = 1000 / 30; // Cap decorative animation at 30 FPS to save CPU/GPU
+let lastFrameTime = 0;
 
 onMounted(() => {
     // Initial spawning coordinates relative to parent viewport
@@ -265,8 +267,16 @@ onMounted(() => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const tick = () => {
+    const tick = (timestamp: number) => {
         if (!isVisible.value) return;
+
+        const elapsed = timestamp - lastFrameTime;
+        if (elapsed < frameInterval) {
+            animationFrameId = requestAnimationFrame(tick);
+            return;
+        }
+        lastFrameTime = timestamp - (elapsed % frameInterval);
+
         const now = performance.now();
         const isDark = document.documentElement.classList.contains("dark");
         const { width: pWidth, height: pHeight } = getParentDimensions();
